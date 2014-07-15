@@ -10,7 +10,6 @@
 namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using System.Web.Mvc;
     using Fanex.Common;

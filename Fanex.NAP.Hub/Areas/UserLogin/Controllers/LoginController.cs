@@ -19,7 +19,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
     using Fanex.Common;
     using Fanex.Common.Extensions;
-    using Fanex.Logging;
 
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
