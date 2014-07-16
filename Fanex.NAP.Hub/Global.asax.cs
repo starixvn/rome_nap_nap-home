@@ -6,6 +6,7 @@
 // <history>
 //   <change who="Anders.Le" date="2012.8.6">Created</change>
 //   <change who="Edward.Nguyen" date="2012.8.14">Add GetRepositoryExecLog</change>
+//   <change who="Jason.Ly" date="2014.7.16">Add bundle configuration.</change>
 // </history>
 
 namespace Fanex.NAP.Hub
@@ -13,6 +14,7 @@ namespace Fanex.NAP.Hub
     using System;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
     using Fanex.Data.Configuration;
@@ -33,6 +35,7 @@ namespace Fanex.NAP.Hub
         /// <param name="filters">The filters.</param>
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             filters.Add(new HandleErrorAttribute());
         }
 
