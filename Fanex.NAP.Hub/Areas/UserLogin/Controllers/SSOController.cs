@@ -12,7 +12,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.Common;
@@ -20,7 +19,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
 
     /// <summary>
@@ -30,10 +28,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     {
         #region members
 
-        private readonly int _timeExipration = 30;
+        private const int TimeExpiration = 30;
+
         private IUserService _userService;
         private IMenuItemService _menuItemService;
-        private ICurrentSession _currentSession;
 
         #endregion
 
@@ -51,7 +49,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         {
             this._userService = userService ?? new UserService();
             this._menuItemService = menuItemService ?? new MenuItemService();
-            this._currentSession = currentSession ?? new CurrentSession();
+            this.CurrentSession = currentSession ?? new CurrentSession();
         }
 
         #endregion
@@ -73,49 +71,41 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
             string currentTime = this._userService.UserSSOGetTime();
 
-            var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
+            TimeSpan expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
-            if (expiration.TotalSeconds <= this._timeExipration)
+            if (expiration.TotalSeconds <= TimeExpiration)
             {
                 // do SSO check-in
                 var criteria = new UserSSOCheckInUserCriteria
-                        {
-                            UserId = Convert.ToInt32(userId),
-                            SiteId = SiteId,
-                            CheckOnUserId = Convert.ToInt32(onuserId),
-                            OnUserId = 0,
-                            IP = CurrentContext.IP,
-                            NetSessionId = Session.SessionID,
-                            LoginDate = DateTime.Now,
-                            BrowserName = CurrentContext.BrowserName,
-                            CountryCode = CurrentContext.CountryCode,
-                            Domain = CurrentContext.DomainName,
-                            Platform = CurrentContext.Platform
-                        };
+                {
+                    UserId = Convert.ToInt32(userId),
+                    SiteId = SiteId,
+                    CheckOnUserId = Convert.ToInt32(onuserId),
+                    OnUserId = 0,
+                    IP = CurrentContext.IP,
+                    NetSessionId = Session.SessionID,
+                    LoginDate = DateTime.Now,
+                    BrowserName = CurrentContext.BrowserName,
+                    CountryCode = CurrentContext.CountryCode,
+                    Domain = CurrentContext.DomainName,
+                    Platform = CurrentContext.Platform
+                };
 
                 this._userService.UserSSOCheckIn(ref criteria);
 
                 if (criteria.OnUserId != 0)
                 {
                     var user = this._userService.GetById(criteria.UserId) as User;
+                    int level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
 
-                    // saves user session
-                    this._currentSession.UserId = user.Id;
-                    this._currentSession.Username = user.Username;
-                    this._currentSession.OnUserId = criteria.OnUserId;
-                    this._currentSession.SessionId = Session.SessionID.ToString();
-                    this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
+                    SaveUserSession(user, criteria.OnUserId, level);
 
                     if (this.SiteId != 0)
                     {
-                        this._currentSession.MenuItemList = this._menuItemService.GetByUserAndSiteIncludeGroup(
-                                                    user.Id,
-                                                    SiteId,
-                                                    this.Environment,
-                                                    true) as IList<MenuItem>;
+                        CreateUserMenu(user.Id);
                     }
 
-                    this.CreateAuthInfo(user);
+                    CreateAuthInfo(user, criteria.OnUserId);
 
                     return this.Redirect(FormsAuthentication.DefaultUrl);
                 }
@@ -124,41 +114,17 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             return this.Redirect(FormsAuthentication.LoginUrl);
         }
 
-        #region utilities
-
         /// <summary>
-        /// Creates the authentication information.
+        /// Creates the user menu.
         /// </summary>
-        /// <param name="user">The user object.</param>
-        private void CreateAuthInfo(User user)
+        /// <param name="userId">The user ID.</param>
+        private void CreateUserMenu(int userId)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
-
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
-            var authTicket = new FormsAuthenticationTicket(
-                 1,
-                user.Username,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(20000),
-                false,
-                authInfo.ToXml(),
-                currentDomain.Path);
-
-            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
-            {
-                HttpOnly = true,
-                Path = currentDomain.Path,
-                Name = FormsAuthentication.FormsCookieName
-            };
-
-            Response.Cookies.Add(authCookie);
+            this.CurrentSession.MenuItemList = (IList<MenuItem>)this._menuItemService.GetByUserAndSiteIncludeGroup(
+                userId,
+                this.SiteId,
+                this.Environment,
+                true);
         }
-
-        #endregion
     }
 }

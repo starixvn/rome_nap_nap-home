@@ -22,10 +22,10 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using Fanex.Common.Extensions;
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Model.ValueObject;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
-    using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
 
     /// <summary>
@@ -41,7 +41,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         private IGroupService _groupService;
         private ISiteService _siteService;
         private IMenuItemService _menuItemService;
-        private ICurrentSession _currentSession;
         private IMaintenanceService _maintenanceService;
         private HashAlgorithm _hashAlgorithm;
 
@@ -66,7 +65,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             this._groupService = groupService ?? new GroupService();
             this._siteService = siteService ?? new SiteService();
             this._menuItemService = menuItemService ?? new MenuItemService();
-            this._currentSession = currentSession ?? new CurrentSession();
+            this.CurrentSession = currentSession ?? new CurrentSession();
             this._maintenanceService = maintenanceService ?? new MaintenanceService();
             this._hashAlgorithm = new SHA256Managed();
         }
@@ -104,7 +103,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
+            Downtime maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
 
             if (maintenanceInfo.IsDowntime)
             {
@@ -161,20 +160,17 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
                             this._userService.UserCheckIn(ref criteria);
 
-                            // saves user session
-                            this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
-                            this._currentSession.UserId = user.Id;
-                            this._currentSession.Username = username;
-                            this._currentSession.OnUserId = criteria.OnUserId;
-                            this._currentSession.SessionId = Session.SessionID.ToString();
+                            int level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
+
+                            SaveUserSession(user, criteria.OnUserId, level);
 
                             // current site is not NAP Hub
                             if (this.SiteId != 0)
                             {
-                                this.CreateUserMenu(user);
+                                CreateUserMenu(user.Id);
                             }
 
-                            this.CreateAuthInfo(user);
+                            CreateAuthInfo(user, criteria.OnUserId);
 
                             // if the user login directly, not through NAP Hub
                             if (this.EnableDirectLogin)
@@ -197,9 +193,9 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                                 }
 
                                 // user has access to one site
-                                var site = siteLevelList.Where(s => s.IsActive).First().Site;
+                                Site site = siteLevelList.Where(s => s.IsActive).First().Site;
 
-                                var listSiteUrl = this._siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
+                                List<SiteUrl> listSiteUrl = this._siteService.GetSiteUrlBySiteId(site.Id, this.Environment).Where(u => u.IsActive).ToList();
 
                                 if (listSiteUrl.Count() > 1)
                                 {
@@ -212,7 +208,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                         else
                         {
                             // user account was suspended on all sites
-                            if (siteLevelList.Count() > 0)
+                            if (siteLevelList.Any())
                             {
                                 ViewBag.Message = ViewResources.Your_account_was_suspended;
                             }
@@ -271,7 +267,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            var maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
+            Downtime maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
 
             if (maintenanceInfo.IsDowntime)
             {
@@ -281,7 +277,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
             // check if not nap hub
             if (this.SiteId != 0)
             {
-                var siteStatus = this._siteService.GetStatusById(this.SiteId);
+                bool siteStatus = this._siteService.GetStatusById(this.SiteId);
 
                 if (!siteStatus)
                 {
@@ -289,8 +285,11 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
                 }
             }
 
-            UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-            criteria.OnUserId = Convert.ToInt32(this._currentSession.OnUserId);
+            var criteria = new UserReCheckInUserCriteria()
+            {
+                OnUserId = Convert.ToInt32(this.CurrentSession.OnUserId)
+            };
+
             this._userService.ReUserCheckIn(ref criteria);
 
             return this.Json(criteria.IsKickedOut ? "1" : "0");
@@ -303,47 +302,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <summary>
         /// Creates the user menu.
         /// </summary>
-        /// <param name="user">The user object.</param>
-        private void CreateUserMenu(User user)
+        /// <param name="userId">The user ID.</param>
+        private void CreateUserMenu(int userId)
         {
-            this._currentSession.MenuItemList = (IList<MenuItem>)this._menuItemService.GetByUserAndSiteIncludeGroup(
-                                                                                    user.Id,
-                                                                                    SiteId,
-                                                                                    this.Environment,
-                                                                                    true);
-        }
-
-        /// <summary>
-        /// Creates the authentication information.
-        /// </summary>
-        /// <param name="user">The user object.</param>
-        private void CreateAuthInfo(User user)
-        {
-            var currentDomain = CurrentContext.GetCurrentDomain();
-
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
-            var authTicket = new FormsAuthenticationTicket(
-                 1,
-                user.Username,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(20000),
-                false,
-                authInfo.ToXml(),
-                currentDomain.Path);
-
-            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
-            {
-                HttpOnly = true,
-                Path = currentDomain.Path,
-                Name = FormsAuthentication.FormsCookieName
-            };
-
-            Response.Cookies.Add(authCookie);
+            this.CurrentSession.MenuItemList = (IList<MenuItem>)this._menuItemService.GetByUserAndSiteIncludeGroup(
+                userId,
+                this.SiteId,
+                this.Environment,
+                true);
         }
 
         /// <summary>
@@ -351,12 +317,14 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// </summary>
         private void DoSignOut()
         {
-            this._userService.UserLogOut(new LogOutUserCriteria
+            var criteria = new LogOutUserCriteria
             {
-                OnUserId = this._currentSession.OnUserId
-            });
+                OnUserId = this.CurrentSession.OnUserId
+            };
+
+            this._userService.UserLogOut(criteria);
             FormsAuthentication.SignOut();
-            this._currentSession.ClearAll();
+            this.CurrentSession.ClearAll();
         }
 
         /// <summary>
@@ -436,7 +404,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             if (Request.Cookies[LoginFormToken] != null)
             {
-                HttpCookie cookie = new HttpCookie(LoginFormToken);
+                var cookie = new HttpCookie(LoginFormToken);
 
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);

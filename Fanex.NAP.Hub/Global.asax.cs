@@ -94,13 +94,15 @@ namespace Fanex.NAP.Hub
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Session_End(object sender, EventArgs e)
         {
-            var _currentSession = new CurrentSession();
-            var _userService = new UserService();
-            var logOutUserCriteria = new LogOutUserCriteria();
+            var currentSession = new CurrentSession();
+            var userService = new UserService();
+            var logOutUserCriteria = new LogOutUserCriteria()
+            {
+                OnUserId = currentSession.OnUserId
+            };
 
-            logOutUserCriteria.OnUserId = _currentSession.OnUserId;
-            _userService.UserLogOut(logOutUserCriteria);
-            _currentSession.ClearAll();
+            userService.UserLogOut(logOutUserCriteria);
+            currentSession.ClearAll();
         }
 
         /// <summary>

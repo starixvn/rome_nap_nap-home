@@ -9,7 +9,6 @@
 
 namespace Fanex.NAP.Hub
 {
-    using System.Web;
     using System.Web.Optimization;
     using BundleTransformer.Core.Orderers;
     using BundleTransformer.Core.Transformers;
@@ -33,23 +32,6 @@ namespace Fanex.NAP.Hub
                 Transforms = { new StyleTransformer(), new CssMinify() },
                 Orderer = new NullOrderer()
             }.Include(virtualPaths));
-        }
-
-        /// <summary>
-        /// Gets relative path from absolute path.
-        /// </summary>
-        /// <param name="context">The context using to get the path.</param>
-        /// <param name="path">The absolute path.</param>
-        /// <returns>The relative path.</returns>
-        public static string RelativeFromAbsolutePath(this HttpContextBase context, string path)
-        {
-            HttpRequestBase request = context.Request;
-            string applicationPath = request.PhysicalApplicationPath;
-            string virtualDir = request.ApplicationPath;
-
-            virtualDir = virtualDir == "/" ? virtualDir : (virtualDir + "/");
-
-            return path.Replace(applicationPath, virtualDir).Replace(@"\", "/");
         }
     }
 }

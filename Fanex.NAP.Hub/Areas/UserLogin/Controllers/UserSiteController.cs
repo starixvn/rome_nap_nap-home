@@ -13,6 +13,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     using System.Web;
     using System.Web.Mvc;
     using Fanex.Common;
+    using Fanex.NAP.Core.Model.ValueObject;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Session;
@@ -25,7 +26,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         #region members
 
         private ISiteService _siteService;
-        private ICurrentSession _currentSession;
         private IUserService _userService;
 
         #endregion
@@ -40,8 +40,8 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         public UserSiteController(ISiteService siteService, ICurrentSession currentSession, IUserService userService)
         {
             this._siteService = siteService ?? new SiteService();
-            this._currentSession = currentSession ?? new CurrentSession();
             this._userService = userService ?? new UserService();
+            this.CurrentSession = currentSession ?? new CurrentSession();
         }
 
         #endregion
@@ -54,12 +54,12 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <returns>Return list site which user has permission.</returns>
         public ActionResult Site()
         {
-            if (HttpContext.User.Identity.IsAuthenticated && this._currentSession.UserId > 0)
+            if (HttpContext.User.Identity.IsAuthenticated && this.CurrentSession.UserId > 0)
             {
-                var siteUrlList = this._siteService.GetSiteUrlByUser(this._currentSession.UserId, this.Environment);
+                var siteUrlList = this._siteService.GetSiteUrlByUser(this.CurrentSession.UserId, this.Environment);
 
                 // for re-checkin
-                ViewBag.OnUserId = this._currentSession.OnUserId;
+                ViewBag.OnUserId = this.CurrentSession.OnUserId;
 
                 return this.View(siteUrlList);
             }
@@ -76,16 +76,15 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         public ActionResult Forward(string id)
         {
             int siteUrlId = Convert.ToInt32(id);
-            var siteUrl = this._siteService.GetSiteUrlById(siteUrlId);
-
+            SiteUrl siteUrl = this._siteService.GetSiteUrlById(siteUrlId);
             string time = this._userService.UserSSOGetTime();
 
             return new RedirectResult(
                 string.Format(
                     "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}",
                     siteUrl.Url.Trim(),
-                    Cryptography.CfsEnCrypt(this._currentSession.UserId.ToString()),
-                    Cryptography.CfsEnCrypt(this._currentSession.OnUserId.ToString()),
+                    Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
+                    Cryptography.CfsEnCrypt(this.CurrentSession.OnUserId.ToString()),
                     Cryptography.CfsEnCrypt(time)));
         }
 

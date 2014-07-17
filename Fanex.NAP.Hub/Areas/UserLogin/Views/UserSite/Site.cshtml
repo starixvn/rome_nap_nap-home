@@ -22,8 +22,7 @@
 </head>
 <body>
     <div id="header">
-        <div class="logo">
-            @ViewResources.NAP_Hub</div>
+        <div class="logo">@ViewResources.NAP_Hub</div>
         <div class="auth">
             @ViewResources.Howdy, @HttpContext.Current.User.Identity.Name
             <span class="sep">|</span>
@@ -45,7 +44,7 @@
                 {
                     <a href="javascript:;" class="url-toggle">
                         <ul class="urls">
-                            @foreach (var siteUrl in item.Value)
+                            @foreach (SiteUrl siteUrl in item.Value)
                             {
                                 string url = Url.Action("Forward", new { id = siteUrl.SiteUrlId });
                             
