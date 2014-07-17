@@ -209,8 +209,6 @@
     <Content Include="Areas\UserLogin\themes\img\password.png" />
     <Content Include="Areas\UserLogin\themes\img\title-bg.jpg" />
     <Content Include="Areas\UserLogin\themes\img\username.png" />
-    <Content Include="Areas\UserLogin\themes\img\warn.png" />
-    <Content Include="Areas\UserLogin\themes\img\welcome-napadmin.png" />
     <Content Include="Areas\UserLogin\themes\img\welcome.png" />
     <Content Include="Areas\UserLogin\themes\select-site.less" />
     <Content Include="favicon.ico" />
