@@ -11,7 +11,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.Common;
@@ -26,33 +25,22 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
     /// </summary>
     public class SSOController : BaseController
     {
-        #region members
-
         private const int TimeExpiration = 30;
 
         private IUserService _userService;
         private IMenuItemService _menuItemService;
-
-        #endregion
-
-        #region ctors
 
         public SSOController()
             : this(null, null, null)
         {
         }
 
-        public SSOController(
-            IUserService userService,
-            IMenuItemService menuItemService,
-            ICurrentSession currentSession)
+        public SSOController(IUserService userService, IMenuItemService menuItemService, ICurrentSession currentSession)
         {
             this._userService = userService ?? new UserService();
             this._menuItemService = menuItemService ?? new MenuItemService();
             this.CurrentSession = currentSession ?? new CurrentSession();
         }
-
-        #endregion
 
         /// <summary>
         /// Indexes the specified user identifier.
@@ -63,7 +51,6 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// <returns>Return to site.</returns>
         [AllowAnonymous]
         [HttpGet]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public ActionResult Index(string userId, string onuserId, string time)
         {
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));

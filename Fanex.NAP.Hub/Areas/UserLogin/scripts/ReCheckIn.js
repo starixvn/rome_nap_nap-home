@@ -17,7 +17,7 @@ var Recheckin = (function ($) {
 		reCheckin: function () {
 
 			$.ajax({
-				url: Recheckin.root + "UserLogin/Login/ReCheckLogin",
+				url: Recheckin.root + "UserLogin/Login/RecheckLogin",
 				type: "POST",
 				dataType: "json",
 				success: function (result) {

@@ -265,7 +265,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         /// </summary>
         /// <returns>Return status of login user.</returns>
         [HttpPost]
-        public ActionResult ReCheckLogin()
+        public ActionResult RecheckLogin()
         {
             Downtime maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
 
@@ -387,7 +387,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
 
             if (!string.IsNullOrWhiteSpace(input))
             {
-                var hashData = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+                byte[] hashData = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLower();
             }

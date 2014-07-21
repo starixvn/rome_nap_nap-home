@@ -143,7 +143,7 @@ namespace Fanex.NAP.Hub.Areas.UserLogin.Controllers
         }
 
         /// <summary>
-        /// Creates the user menu.
+        /// Save user session.
         /// </summary>
         /// <param name="user">The user object.</param>
         /// <param name="onlineUserId">The online user ID.</param>
