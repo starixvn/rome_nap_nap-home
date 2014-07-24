@@ -1,11 +1,13 @@
-@import "helpers.less";
+@import "variables.less";
+@import "mixins.less";
 
 /********************************************************/
 /*                     Common CSS                       */
 /********************************************************/
 body {
     padding-top: 40px;
-    background: url(Images/pattern-bg.jpg);
+    font-size: @font-size;
+    font-family: @font-family;
 
     &.has-search {
         padding-top: 90px;
@@ -16,7 +18,7 @@ body {
 /*              Customize navigation bar                */
 /********************************************************/
 .custom-navbar {
-    .bg_linear_gradient(@nav_stop1 1px, @nav_stop2 1px, @nav_stop3 100%, @nav_direction);
+    .bg_linear_gradient(@nav-stop1 1px, @nav-stop2 1px, @nav-stop3 100%, @nav-direction);
     min-height: 40px;
 
     .container-fluid {
@@ -32,8 +34,8 @@ body {
         .navbar-nav {
             .user-info {
                 .info-bar {
-                    background: url(Images/user.png) no-repeat 8px center @user_info_bg;
-                    border: 1px solid @user_info_border;
+                    background: url(Images/user.png) no-repeat 8px center @user-info-bg;
+                    border: 1px solid @user-info-border;
                     color: @white;
                     margin: 5px 30px;
                     padding: 0 10px 3px 28px;
@@ -42,14 +44,15 @@ body {
                     .border_radius();
 
                     .account-name {
-                        color: #FECC35;
-                        font-weight: bold;
+                        color: #fecc35;
+                        margin-right: 5px;
+                        text-shadow: 0 0 0.03em #000;
                     }
                 }
 
                 .user-dropdown {
                     background-color: @white;
-                    border: solid 1px @sub_menu_border;
+                    border: solid 1px @sub-menu-border;
                     position: absolute;
                     visibility: hidden;
                     padding: 2px 0px;
@@ -63,16 +66,16 @@ body {
 
                         a {
                             display: block;
-                            color: @sub_menu_text;
+                            color: @sub-menu-text;
                             font-size: 0.9em;
                         }
 
                         &:hover{
-                            background-color:@sub_menu_bg_hover;
+                            background-color:@sub-menu-bg-hover;
 
                             a {
                                 text-decoration: none;
-                                color:@sub_menu_text_hover;
+                                color:@sub-menu-text-hover;
                             }
                         }
                     }
@@ -104,6 +107,12 @@ body {
         border-bottom: 1px solid #dfdedb;
         position: relative;
         margin: 0;
+        min-height: 45px;
+        .arrow-down;
+
+        &:before, &:after {
+            left: 11px;
+        }
 
         .title {
             font-size: 16px;
@@ -124,11 +133,47 @@ body {
                 color: #898989;
                 .border_radius(2px);
             }
-
-            .custom-height {
-                height: 26px;
-                line-height: 14px;
-            }
         }
+    }
+}
+/********************************************************/
+/*                         Button                       */
+/********************************************************/
+
+.button-green {
+    border: 1px solid #729446;
+    padding: 5px 10px;
+    color: #fff;
+    height: 26px;
+    line-height: 14px;
+    .border_radius(2px);
+    .box_shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
+    .bg_linear_gradient(#8daf60, #a1c46b);
+}
+
+/********************************************************/
+/*                         Icon                         */
+/********************************************************/
+.arrow-down {
+    &:before {
+        border-top: 8px solid #ccc;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        content: "";
+        right: 10px;
+        position: absolute;
+        bottom: -9px;
+        z-index: 0;
+    }
+
+    &:after {
+        border-top: 8px solid #fff;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        content: "";
+        right: 10px;
+        position: absolute;
+        bottom: -8px;
+        z-index: 1;
     }
 }

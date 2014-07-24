@@ -204,6 +204,7 @@
     <Content Include="Content\Theme\Images\pattern-bg.jpg" />
     <Content Include="Content\Theme\Images\search.png" />
     <Content Include="Content\Theme\Images\logo.png" />
+    <Content Include="Content\Theme\Images\sprite.png" />
     <Content Include="Content\Theme\Images\user.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
@@ -258,7 +259,8 @@
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Theme\style.less" />
-    <Content Include="Content\Theme\helpers.less" />
+    <Content Include="Content\Theme\variables.less" />
+    <Content Include="Content\Theme\mixins.less" />
     <None Include="Scripts\HeadJs\head.min.js.map" />
     <Content Include="Web.ConnectionStrings.config" />
   </ItemGroup>
