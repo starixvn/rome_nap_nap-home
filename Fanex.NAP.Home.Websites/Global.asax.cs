@@ -1,0 +1,132 @@
+﻿namespace Fanex.NAP.Home.Websites
+{
+    using System;
+    using System.Data.SqlClient;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Optimization;
+    using System.Web.Routing;
+    using System.Web.Security;
+    using Fanex.Data.Configuration;
+    using Fanex.Logging;
+    using Fanex.NAP.Core.Criteria.User;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Web.Auth;
+    using Fanex.NAP.Core.Web.Session;
+
+    /// <summary>
+    /// MVC application configuration.
+    /// </summary>
+    [System.Runtime.InteropServices.GuidAttribute("A695642F-3A07-4718-AAEC-AB470117E10B")]
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        /// <summary>
+        /// Sets all needed configuration when the application starts.
+        /// </summary>
+        protected void Application_Start()
+        {
+            DbSettingProviderManager.Current.Start();
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        /// <summary>
+        /// Handles the Error event of the Application.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError().GetBaseException();
+            SqlException sqlEx = ex as SqlException;
+            string exceptionFormat = "{0}\r\nType: {1}" +
+                                     "\r\nSource: {2}" +
+                                     "\r\nDomain: {3}" +
+                                     "\r\nReferrer: {4}" +
+                                     "\r\nIP: {5}" +
+                                     "\r\nUserAgent: {6}" +
+                                     "\r\nForm Variable: {7}" +
+                                     "\r\nQueryString: {8}" +
+                                     "\r\nTargetSite: {9}" +
+                                     "\r\nStackTrace: {10}";
+
+            if (!Request.IsLocal)
+            {
+                string message = string.Format(
+                                            exceptionFormat,
+                                            ex.Message,
+                                            ex.GetType().ToString(),
+                                            ex.Source,
+                                            HttpContext.Current.Request.Headers["Host"],
+                                            HttpContext.Current.Request.UrlReferrer,
+                                            HttpContext.Current.Request.UserHostAddress,
+                                            HttpContext.Current.Request.UserAgent,
+                                            Request.Form.ToString(),
+                                            Request.QueryString.ToString(),
+                                            ex.TargetSite,
+                                            ex.StackTrace);
+
+                // Get additional exception data for SqlException.
+                if (sqlEx != null)
+                {
+                    message += string.Format(
+                                          "\r\nProcedure: {0}\r\nLine Number: {1}\r\nServer: {2}",
+                                          sqlEx.Procedure,
+                                          sqlEx.LineNumber,
+                                          sqlEx.Server);
+                }
+
+                LogService.Error(message);
+            }
+        }
+
+        /// <summary>
+        /// Handles the AuthenticateRequest event of the Application control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.User != null)
+            {
+                if (HttpContext.Current.User.Identity is FormsIdentity
+                    && HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    HttpCookie httpCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+
+                    if (httpCookie != null)
+                    {
+                        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(httpCookie.Value);
+
+                        if (ticket == null || ticket.Expired || string.IsNullOrEmpty(ticket.UserData))
+                        {
+                            return;
+                        }
+
+                        var identity = new FormsIdentity(ticket);
+                        var udata = AuthInfo.CreateUserData(ticket.UserData);
+
+                        Context.User = new NapPrincipal(identity, udata);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Handles the End event of the Session control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        protected void Session_End(object sender, EventArgs e)
+        {
+            var currentSession = new CurrentSession();
+            var userService = new UserService();
+            var logOutUserCriteria = new LogOutUserCriteria();
+
+            logOutUserCriteria.OnUserId = currentSession.OnUserId;
+            userService.UserLogOut(logOutUserCriteria);
+            currentSession.ClearAll();
+        }
+    }
+}

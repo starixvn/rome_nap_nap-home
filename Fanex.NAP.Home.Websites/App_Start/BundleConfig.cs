@@ -1,0 +1,70 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="BundleConfig.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Jason.Ly" date="2014.7.22">Created</change>
+// </history>
+
+namespace Fanex.NAP.Home.Websites
+{
+    using System.Web.Optimization;
+
+    /// <summary>
+    /// Bundle Configuration.
+    /// </summary>
+    public static class BundleConfig
+    {
+        /// <summary>
+        /// Registers the bundles.
+        /// </summary>
+        /// <param name="bundles">The bundle collections.</param>
+        public static void RegisterBundles(BundleCollection bundles)
+        {
+            RegisterLoginBundles(bundles);
+            RegisterCommonBundles(bundles);
+        }
+
+        /// <summary>
+        /// Registers the login bundles.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        public static void RegisterLoginBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/styles/login",
+                "~/Areas/User/Resources/Login/login.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/login").Include(
+                "~/Scripts/CryptoJs/CryptoJS.js",
+                "~/Areas/User/Resources/Login/login.js"));
+        }
+
+        /// <summary>
+        /// Registers the common bundles.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        public static void RegisterCommonBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/styles/common",
+                "~/Content/Bootstrap/CSS/bootstrap.css",
+                "~/Content/Bootstrap/CSS/bootstrap-theme.css",
+                "~/Content/MessageBox/msgbox-0.0.1.css",
+                "~/Content/Theme/style.less");
+
+            bundles.Add(new ScriptBundle("~/scripts/html5hacks").Include(
+                "~/Scripts/Modernizr/modernizr.30715.min.js",
+                "~/Scripts/RespondJs/respond.min.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/common").Include(
+                "~/Scripts/jQuery/jquery-1.11.1.min.js",
+                "~/Scripts/jQuery/jquery.blockUI.2.66.min.js",
+                "~/Scripts/Bootstrap/bootstrap.js",
+                "~/Scripts/MessageBox/msgbox-0.0.1.js",
+                "~/Scripts/Others/namespace.js",
+                "~/Areas/User/Resources/Login/recheckIn.js"));
+        }
+    }
+}
