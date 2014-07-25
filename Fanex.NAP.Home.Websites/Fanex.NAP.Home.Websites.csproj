@@ -181,6 +181,8 @@
   <ItemGroup>
     <Content Include="App_Data\NAPCoreSpNames.xml" />
     <Content Include="App_Data\NAPHomeSPNames.xml" />
+    <Content Include="Areas\Sites\Resources\SearchSites\search-sites.js" />
+    <Content Include="Areas\Sites\Resources\UserSites\user-sites.js" />
     <Content Include="Areas\User\Resources\Login\Images\bg.png" />
     <Content Include="Areas\User\Resources\Login\Images\down.png" />
     <Content Include="Areas\User\Resources\Login\Images\lock.png" />
@@ -190,7 +192,6 @@
     <Content Include="Areas\User\Resources\Login\login.js" />
     <Content Include="Areas\User\Resources\Login\recheckIn.js" />
     <Content Include="Areas\User\Resources\UserInfo\change-password.js" />
-    <Content Include="Areas\User\Resources\UserInfo\user-profile.js" />
     <Content Include="Content\Bootstrap\CSS\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap\CSS\bootstrap.css" />
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.svg" />
@@ -201,12 +202,14 @@
     <Content Include="Content\MessageBox\Images\info.png" />
     <Content Include="Content\MessageBox\Images\question.png" />
     <Content Include="Content\MessageBox\msgbox-0.0.1.css" />
+    <Content Include="Content\Theme\Images\loading.gif" />
     <Content Include="Content\Theme\Images\pattern-bg.jpg" />
     <Content Include="Content\Theme\Images\search.png" />
     <Content Include="Content\Theme\Images\logo.png" />
     <Content Include="Content\Theme\Images\sprite.png" />
     <Content Include="Content\Theme\Images\user.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\CryptoJs\CryptoJS.js" />
     <Content Include="Scripts\HeadJs\head.min.js" />
@@ -231,9 +234,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Sites\Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
@@ -250,6 +251,7 @@
     <Content Include="Areas\Sites\Views\Web.config" />
     <Content Include="Areas\Sites\Views\UserSites\Index.cshtml" />
     <Content Include="Areas\Sites\Views\Shared\_SitesLayout.cshtml" />
+    <Content Include="Areas\Sites\Views\SearchSites\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

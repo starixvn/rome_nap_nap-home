@@ -1,12 +1,21 @@
 ﻿@{
+    string functionName = ViewBag.SearchedFunctionName != null ? (string)ViewBag.SearchedFunctionName : string.Empty;
+    int pageIndex = ViewBag.CurrentPageIndex != null ? (int)ViewBag.CurrentPageIndex : 0;
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row title-bar">
-    <span class="title">@ViewLang.Products</span>
-    <div class="search-bar pull-right">
-        <input type="text" class="search" placeholder="@ViewLang.SearchPlaceholder" />
-        <button type="button" class="button-green custom-height">@ViewLang.Search</button>
+@section SearchBar
+{
+    <div class="title-bar">
+        <div class="title-content">
+            <span class="title">@ViewLang.Products</span>
+            <div class="search-bar pull-right">
+                <input type="text" id="txtSearchedFunctionName" class="search" placeholder="@ViewLang.SearchPlaceholder" value="@functionName" />
+                <input type="hidden" id="hdnCurrentPageIndex" class="search" value="@pageIndex" />
+                <button type="button" id="btnSearch" class="button-green custom-height">@ViewLang.Search</button>
+            </div>
+            <span class="icon-arrow-down"></span>
+        </div>
     </div>
-    <span class="icon-arrow-down"></span>
-</div>
+}
 @RenderBody()

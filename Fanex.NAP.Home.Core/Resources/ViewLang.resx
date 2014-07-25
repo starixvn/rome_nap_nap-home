@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccessDeniedError" xml:space="preserve">
+    <value>Access denied!</value>
+  </data>
+  <data name="AccessDeniedMessage" xml:space="preserve">
+    <value>You are not authorized to access this link.</value>
+  </data>
   <data name="Index" xml:space="preserve">
     <value>Index</value>
+  </data>
+  <data name="InternalError" xml:space="preserve">
+    <value>Internal error!</value>
+  </data>
+  <data name="InternalErrorMessage" xml:space="preserve">
+    <value>Sorry, an error occurred while processing your request, please notify the administrators.</value>
+  </data>
+  <data name="NotFoundError" xml:space="preserve">
+    <value>Not found!</value>
+  </data>
+  <data name="NotFoundMessage" xml:space="preserve">
+    <value>The resource cannot be found.</value>
   </data>
   <data name="Products" xml:space="preserve">
     <value>Products</value>
@@ -128,5 +146,8 @@
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Please input function name</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Search Results</value>
   </data>
 </root>

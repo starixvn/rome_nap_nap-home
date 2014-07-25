@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SearchSitesController.cs" />
     <Compile Include="Controllers\UserSitesController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SitesAreaRegistration.cs" />

@@ -1,88 +1,58 @@
-﻿/* File Created: April 3, 2014 */
-/* global Namespace, CryptoJS, common, validator, passedData */
+﻿/* File Created: July 24, 2014 */
+/* global Namespace, CryptoJS */
 'use strict';
 
 $(document).ready(function () {
-    var changePassword = new Fanex.TGRS.ChangePassword();
+    var changePassword = new Fanex.NAP.Home.ChangePassword();
 
     changePassword.Initialize();
 });
 
-Namespace.Register("Fanex.TGRS.ChangePassword");
-Fanex.TGRS.ChangePassword = function () {
+Namespace.Register("Fanex.NAP.Home.ChangePassword");
+Fanex.NAP.Home.ChangePassword = function () {
     var $this = this;
     var domElements = {
-        divMessage: null,
-        divForm: null,
+        frmMainForm: null,
+        txtOldUserPwd: null,
+        txtUserPwd: null,
+        txtConfirmUserPwd: null,
+        frmHiddenForm: null,
         hdnToken: null,
-        txtOldPassword: null,
         hdnOldPassword: null,
-        txtNewPassword: null,
         hdnNewPassword: null,
-        txtConfirmPassword: null,
-        hdnConfirmPassword: null,
-        btnSave: null,
-        btnCancel: null
+        hdnConfirmPassword: null
     };
 
     var cacheDOM = function () {
-        domElements.divForm = $('#divChangePassword');
-        domElements.divMessage = $('#divErrorSuccessMsg');
-        domElements.hdnToken = $('#hdnToken');
-        domElements.txtOldPassword = $('#txtOldPassword');
-        domElements.hdnOldPassword = $('#hdnOldPassword');
-        domElements.txtNewPassword = $('#txtNewPassword');
-        domElements.hdnNewPassword = $('#hdnNewPassword');
-        domElements.txtConfirmPassword = $('#txtConfirmPassword');
-        domElements.hdnConfirmPassword = $('#hdnConfirmPassword');
-        domElements.btnSave = $('#btnSave');
-        domElements.btnCancel = $('#btnCancel');
+        domElements.frmMainForm = $('#mainForm');
+        domElements.txtOldUserPwd = $('#OldUserPwd');
+        domElements.txtUserPwd = $('#UserPwd');
+        domElements.txtConfirmUserPwd = $('#ConfirmUserPwd');
+        domElements.frmHiddenForm = $('#hiddenForm');
+        domElements.hdnToken = $('#token');
+        domElements.hdnOldPassword = $('#oldPassword');
+        domElements.hdnNewPassword = $('#newPassword');
+        domElements.hdnConfirmPassword = $('#confirmPassword');
     };
 
     var handleEvents = function () {
-        if (passedData.IsSuccess) {
-            common.ShowInlineSuccessMsg(domElements.divMessage, passedData.ChangedPasswordSuccessfully);
-        } else if (passedData.ErrorMessage && passedData.ErrorMessage.length > 0) {
-            common.ShowInlineErrorMsg(domElements.divMessage, passedData.ErrorMessage);
-        }
+        domElements.frmMainForm.on('submit', function () {
+            if ($(this).valid()) {
+                var encryptPass = '';
+                var token = domElements.hdnToken.val();
 
-        domElements.btnSave.click(function () {
-            var encryptPass = '';
-            var token = domElements.hdnToken.val();
+                encryptPass = CryptoJS.CfsEnCode(domElements.txtOldUserPwd.val());
+                domElements.hdnOldPassword.val(CryptoJS.SHA256(encryptPass + token));
+                encryptPass = CryptoJS.CfsEnCode(domElements.txtUserPwd.val());
+                domElements.hdnNewPassword.val(encryptPass);
+                encryptPass = CryptoJS.CfsEnCode(domElements.txtConfirmUserPwd.val());
+                domElements.hdnConfirmPassword.val(encryptPass);
 
-            if (!validator.ValidateForm(domElements.divForm, 'w')) {
-                return false;
-            } else if (!validateMatchedPasswords()) {
+                domElements.frmHiddenForm.submit();
+
                 return false;
             }
-
-            encryptPass = CryptoJS.CfsEnCode(domElements.txtOldPassword.val());
-            domElements.hdnOldPassword.val(CryptoJS.SHA256(encryptPass + token));
-            console.log(encryptPass);
-            encryptPass = CryptoJS.CfsEnCode(domElements.txtNewPassword.val());
-            domElements.hdnNewPassword.val(encryptPass);
-
-            encryptPass = CryptoJS.CfsEnCode(domElements.txtConfirmPassword.val());
-            domElements.hdnConfirmPassword.val(encryptPass);
         });
-
-        domElements.btnCancel.click(function () {
-            common.NavigateToRoot('', 0);
-
-            return false;
-        });
-    };
-
-    var validateMatchedPasswords = function () {
-        var errorMsg = domElements.txtConfirmPassword.attr('data-val-not-match');
-        console.log(domElements.txtNewPassword);
-        if (domElements.txtNewPassword.val() !== domElements.txtConfirmPassword.val()) {
-            validator.ShowError(domElements.txtConfirmPassword, errorMsg, 'w');
-
-            return false;
-        } else {
-            return true;
-        }
     };
 
     $this.Initialize = function () {

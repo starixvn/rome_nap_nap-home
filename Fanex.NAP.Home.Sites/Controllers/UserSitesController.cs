@@ -13,15 +13,15 @@ namespace Fanex.NAP.Home.Sites.Controllers
     using Fanex.NAP.Core.Web.Attribute;
 
     /// <summary>
-    /// Base controller.
+    /// User sites controller.
     /// </summary>
     [NapSuperAuth]
     public class UserSitesController : Controller
     {
         /// <summary>
-        /// Redirect to Login page.
+        /// Redirect to Sites page.
         /// </summary>
-        /// <returns>Return login page.</returns>
+        /// <returns>Return Sites page.</returns>
         [HttpGet]
         public ActionResult Index()
         {

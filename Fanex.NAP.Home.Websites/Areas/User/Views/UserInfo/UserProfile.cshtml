@@ -42,18 +42,19 @@
     <div class="form-group">
         <div class="col-sm-offset-3 col-md-9 col-sm-9 col-xs-12">
             <input type="submit" value="@ViewResources.Save" />
-            <button class="cancel-button" onclick="NAP.navigateToRoot('', 0); return false;">@ViewResources.Cancel</button>
+            <input type="button" value="@ViewResources.Cancel" onclick="common.NavigateToRoot(''); return false;" />
         </div>
     </div>
     
     @Html.HiddenFor(m => m.GroupId)
 }
 @section Foot {
+    @Scripts.Render("~/scripts/profile")
     @if (success)
     {
         <script type="text/javascript">
             $(function () {
-                //NAP.headlineMsgBox.showInfo('@ViewResources.Your_changes_were_saved!', { closeBtn: false });
+                common.ShowInfoMessage('@ViewResources.Your_changes_were_saved!');
             });
         </script>
     }

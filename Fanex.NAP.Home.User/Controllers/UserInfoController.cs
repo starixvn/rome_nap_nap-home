@@ -41,6 +41,8 @@ namespace Fanex.NAP.Home.User.Controllers
         {
             _userService = userService ?? new UserService { ServiceContext = new ServiceContext() };
             _hashAlgorithm = new SHA256Managed();
+
+            ViewBag.HasSearchBar = false;
         }
 
         public string FormToken
@@ -84,7 +86,14 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpPost]
         public ActionResult ChangePassword(UpdatePasswordCustCriteria criteria, string token)
         {
+            // The password values are encoded at client side by calling CryptoJS.CfsEnCode.
+            // The result of this action is the encrypted strings which totally break the password valiadtion rules.
+            // They also cannot be decoded to the original ones since CryptoJS.CfsEnCode is one-way encryption algorithm.
+            // Because of those reasons, so we will validate the form at client side only and not check the model state here.
             ////if (ModelState.IsValid)
+
+            ModelState.Clear();
+
             if (CheckValidToken(token))
             {
                 IUser user = _userService.GetById(CurrentSession.UserId);
@@ -100,14 +109,10 @@ namespace Fanex.NAP.Home.User.Controllers
                     {
                         ViewBag.Success = true;
                     }
-                    else if (result != null && result.IsSuccessful == false)
-                    {
-                        ViewBag.Success = true;
-                    }
                 }
                 else
                 {
-                    ViewBag.Message = ViewResources.Wrong_password;
+                    ModelState.AddModelError("OldUserPwd", ViewResources.Wrong_password);
                 }
             }
 

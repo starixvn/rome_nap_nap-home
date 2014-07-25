@@ -24,6 +24,7 @@ namespace Fanex.NAP.Home.Websites
         {
             RegisterLoginBundles(bundles);
             RegisterCommonBundles(bundles);
+            RegisterUserBundles(bundles);
         }
 
         /// <summary>
@@ -64,7 +65,25 @@ namespace Fanex.NAP.Home.Websites
                 "~/Scripts/Bootstrap/bootstrap.js",
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",
+                "~/Scripts/common.js",
                 "~/Areas/User/Resources/Login/recheckIn.js"));
+        }
+
+        /// <summary>
+        /// Bundles the JavaScript files for User area.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        public static void RegisterUserBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/scripts/profile").Include(
+                "~/Scripts/jQuery/jquery.validate.min.js",
+                "~/Scripts/jQuery/jquery.validate.unobtrusive.min.js"));
+
+            bundles.Add(new ScriptBundle("~/scripts/changePassword").Include(
+                "~/Scripts/CryptoJs/CryptoJS.js",
+                "~/Scripts/jQuery/jquery.validate.min.js",
+                "~/Scripts/jQuery/jquery.validate.unobtrusive.min.js",
+                "~/Areas/User/Resources/UserInfo/change-password.js"));
         }
     }
 }
