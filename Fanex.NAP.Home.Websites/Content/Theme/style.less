@@ -362,7 +362,7 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 /*                         Button                       */
 /********************************************************/
-.button-green {
+.button {
     border: 1px solid #729446;
     padding: 5px 10px;
     color: #fff;
@@ -370,7 +370,22 @@ a, a:hover, a:active, a:focus {
     line-height: 14px;
     .border-radius(2px);
     .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
+}
+
+.button-green {
+    .button;
     .bg-linear-gradient(#8daf60, #a1c46b);
+
+    &:hover {
+        .bg-linear-gradient(#abd172, #8daf60);
+        .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+    }
+}
+
+.button-disabled {
+    .button;
+    .bg-linear-gradient(#b2b2b2, #cbcbcb);
+    border-color: #aeaeae;
 }
 
 /********************************************************/

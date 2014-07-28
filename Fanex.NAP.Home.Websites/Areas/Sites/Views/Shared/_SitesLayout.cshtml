@@ -12,13 +12,15 @@
             <div class="search-bar pull-right">
                 <input type="text" id="txtSearchedFunctionName" class="search" placeholder="@ViewLang.SearchPlaceholder" value="@functionName" />
                 <input type="hidden" id="hdnCurrentPageIndex" class="search" value="@pageIndex" />
-                <button type="button" id="btnSearch" class="button-green custom-height">@ViewLang.Search</button>
+                <button type="button" id="btnSearch" class="button-green">@ViewLang.Search</button>
             </div>
             <span class="icon-arrow-down"></span>
         </div>
     </div>
 }
+
 @RenderBody()
+
 @section Foot {
     @RenderSection("Foot", false)
 }
