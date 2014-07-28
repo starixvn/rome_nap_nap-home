@@ -42,8 +42,9 @@
         </div>
       </div>
     </nav>
-    @RenderSection("SearchBar", false)
-    @RenderSection("Headline", false)
+    <div class="title-bar">
+        @RenderSection("Headline", false)
+    </div>
     <div class="container-fluid content">
         @RenderBody()
     </div>

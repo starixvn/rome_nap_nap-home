@@ -4,19 +4,17 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section SearchBar
+@section Headline
 {
-    <div class="container-fluid title-bar">
-        <div class="title-content">
-            <ul class="breadcrumb title">
-                <li><a href="#">Home</a></li>
-                <li>@ViewLang.Products</li>
-            </ul>
-            <div class="search-bar pull-right">
-                <input type="text" id="txtSearchedFunctionName" class="search" placeholder="@ViewLang.SearchPlaceholder" value="@functionName" />
-                <input type="hidden" id="hdnCurrentPageIndex" class="search" value="@pageIndex" />
-                <button type="button" id="btnSearch" class="button-green">@ViewLang.Search</button>
-            </div>
+    <div class="title-content">
+        <ul class="breadcrumb title">
+            <li><a href="@Url.Content("~/")">Home</a></li>
+            <li>@ViewLang.Products</li>
+        </ul>
+        <div class="search-bar pull-right">
+            <input type="text" id="txtSearchedFunctionName" class="search" placeholder="@ViewLang.SearchPlaceholder" value="@functionName" />
+            <input type="hidden" id="hdnCurrentPageIndex" class="search" value="@pageIndex" />
+            <button type="button" id="btnSearch" class="button-green">@ViewLang.Search</button>
         </div>
     </div>
 }
