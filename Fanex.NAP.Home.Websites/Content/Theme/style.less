@@ -146,7 +146,6 @@ a, a:hover, a:active, a:focus {
     }
 
     .title-content {
-        color: #227fbb;
         font-weight: normal;
         border-bottom: 1px solid #dfdedb;
         position: relative;
@@ -158,9 +157,25 @@ a, a:hover, a:active, a:focus {
         }
 
         .title {
-            font-size: 16px;
+            font-size: @font-size + 3;
             float: left;
-            margin-top: 15px;
+            margin: 15px 0 0;
+            padding: 0;
+            color: #767676;
+            background: none;
+
+            a {
+                color: #2f56c6;
+
+                &:hover {
+                    text-decoration: none;
+                    color: #f25f51;
+                }
+            }
+
+            li + li:before {
+                color: #767676;
+            }
         }
 
         .search-bar {
@@ -180,18 +195,29 @@ a, a:hover, a:active, a:focus {
     }
 }
 
+.title-txt {
+    font-size: @font-size + 3;
+    color: #227fbb;
+    margin: 15px 30px;
+}
+
 /********************************************************/
 /*                      Content                         */
 /********************************************************/
 .content {
+    bottom: 0;
+    left: 0;
     padding: 0 30px;
+    position: absolute;
+    right: 0;
+    top: 115px;
 
     .description {
         background-color: #5c7194;
         color: #fff;
         height: 203px;
         padding: 0;
-        margin: 43px 0 0;
+        margin: 23px 0 20px;
         border: 2px solid #fff;
         position: relative;
         cursor: pointer;
@@ -372,12 +398,24 @@ a, a:hover, a:active, a:focus {
     .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
 }
 
-.button-green {
+.button-blue {
     .button;
-    .bg-linear-gradient(#8daf60, #a1c46b);
-
+    .bg-linear-gradient(#486cb8, #5a7dc1);
+    border-color: #3c5b9b;
+    
     &:hover {
-        .bg-linear-gradient(#abd172, #8daf60);
+        .bg-linear-gradient(#6891e8, #486cb8);
+        .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+    }
+}
+
+.button-red {
+    .button;
+    .bg-linear-gradient(#b65f51, #dd7d6d);
+    border-color: #893a2e;
+    
+    &:hover {
+        .bg-linear-gradient(#ea8473, #b65f51);
         .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
     }
 }
@@ -386,6 +424,16 @@ a, a:hover, a:active, a:focus {
     .button;
     .bg-linear-gradient(#b2b2b2, #cbcbcb);
     border-color: #aeaeae;
+}
+
+.button-green {
+    .button;
+    .bg-linear-gradient(#8daf60, #a1c46b);
+
+    &:hover {
+        .bg-linear-gradient(#abd172, #8daf60);
+        .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+    }
 }
 
 /********************************************************/
@@ -479,7 +527,7 @@ a, a:hover, a:active, a:focus {
 }
 
 // icon for search page
-.icon-favorite-large {
+.icon-favorite-medium {
     .icon;
     background-position: -11px -83px;
     height: 19px;
@@ -488,6 +536,19 @@ a, a:hover, a:active, a:focus {
 
     &:hover {
         background-position: -29px -83px;
+    }
+}
+
+.icon-back {
+    .icon;
+    background-position: -100px -40px;
+    height: 16px;
+    margin: 4px 10px;
+    width: 16px;
+    float: right;
+
+    &:hover {
+        background-position: -100px -17px;
     }
 }
 
@@ -532,9 +593,26 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 /*                    Custom Form                       */
 /********************************************************/
-.custom-form {
-    background-color: #EDECEA;
-    border: 1px solid #CECCCD;
-    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.1);
+.form-custom {
+    background-color: @form-bg;
+    border: 1px solid @form-border;
+    .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
     padding: 20px;
+    margin-top: 15px;
+
+    label {
+        font-weight: normal;
+        line-height: 25px;
+    }
+
+    .form-control {
+        border-radius: 2px;
+        font-size: @font-size;
+        height: 30px;
+        padding: 4px 5px;
+    }
+
+    .lbl-field {
+        text-align: right;
+    }
 }
