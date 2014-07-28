@@ -25,6 +25,7 @@ namespace Fanex.NAP.Home.Websites
             RegisterLoginBundles(bundles);
             RegisterCommonBundles(bundles);
             RegisterUserBundles(bundles);
+            HomeBundles(bundles);
         }
 
         /// <summary>
@@ -84,6 +85,16 @@ namespace Fanex.NAP.Home.Websites
                 "~/Scripts/jQuery/jquery.validate.min.js",
                 "~/Scripts/jQuery/jquery.validate.unobtrusive.min.js",
                 "~/Areas/User/Resources/UserInfo/change-password.js"));
+        }
+
+        /// <summary>
+        /// Bundles the JavaScript files for home page.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        public static void HomeBundles(BundleCollection bundles)
+        {
+            bundles.Add(new ScriptBundle("~/scripts/homeJs").Include(
+                "~/Areas/Sites/Resources/UserSites/user-sites.js"));
         }
     }
 }

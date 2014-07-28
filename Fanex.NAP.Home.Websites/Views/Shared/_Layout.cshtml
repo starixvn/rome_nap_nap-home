@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>@ViewResources.Home &mdash; @ViewBag.Title</title>
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:700' rel='stylesheet'
+        type='text/css'>
     @Styles.Render("~/styles/common")
     @Scripts.Render("~/scripts/html5hacks")
     @RenderSection("Head", false)
@@ -22,18 +24,13 @@
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#divMenuContent">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand logo" href="@Url.Content("~/")"></a>
+          <a class="navbar-brand logo" href="@Url.Content("~/")">NAP <span>Portal</span></a>
         </div>
         <!-- Collect the nav links and other content for toggling -->
         <div class="collapse navbar-collapse" id="divMenuContent">
           <ul class="nav navbar-nav navbar-right">
             <li class="user-info">
+                <a href="favorite.html" class="icon-favourite-large"></a>
                 <a class="info-bar" href="#">@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></a>
                 <ul class="user-dropdown">
                     <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>

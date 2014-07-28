@@ -1,5 +1,5 @@
 
-.bg_linear_gradient (@color_stop1, @color_stop2) {
+.bg-linear-gradient (@color_stop1, @color_stop2) {
     background: @color_stop1;
     background: linear-gradient(@color_stop1, @color_stop2) @color_stop1;
     background: -ms-linear-gradient(@color_stop1, @color_stop2) @color_stop1;
@@ -7,7 +7,7 @@
     background: -webkit-linear-gradient(@color_stop1, @color_stop2) @color_stop1;
 }
 
-.bg_linear_gradient (@color_stop1, @color_stop2, @color_stop3, @direction) {
+.bg-linear-gradient (@color_stop1, @color_stop2, @color_stop3, @direction) {
     background: @color_stop2;
     background: linear-gradient(@direction, @color_stop1, @color_stop2, @color_stop3) @color_stop2;
     background: -ms-linear-gradient(@direction, @color_stop1, @color_stop2, @color_stop3) @color_stop2;
@@ -15,14 +15,14 @@
     background: -webkit-linear-gradient(@direction, @color_stop1, @color_stop2, @color_stop3) @color_stop2;
 }
 
-.border_radius (@value: 3px) {
+.border-radius (@value: 3px) {
     border-radius: @value;
     -ms-border-radius: @value;
     -moz-border-radius: @value;
     -webkit-border-radius: @value;
 }
 
-.box_shadow (@value: 0 0 1px rgba(0,0,0,0.5)) {
+.box-shadow (@value: 0 0 1px rgba(0,0,0,0.5)) {
     box-shadow: @value;
     -ms-box-shadow: @value;
     -moz-box-shadow: @value;

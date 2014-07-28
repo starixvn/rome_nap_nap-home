@@ -14,34 +14,64 @@ body {
     }
 }
 
+.sublayer {
+    position: absolute;
+    background-color: #fff;
+    min-width: 200px;
+    display: none;
+    font-size: @font-size - 1;
+    padding: 10px;
+    .border-radius(2px);
+    .box-shadow(0 0 2px #aaa);
+}
+
 /********************************************************/
 /*              Customize navigation bar                */
 /********************************************************/
 .custom-navbar {
-    .bg_linear_gradient(@nav-stop1 1px, @nav-stop2 1px, @nav-stop3 100%, @nav-direction);
+    .bg-linear-gradient(@nav-stop1 1px, @nav-stop2 1px, @nav-stop3 100%, @nav-direction);
     min-height: 40px;
 
     .container-fluid {
         .navbar-brand {
             &.logo {
-                background: url(Images/logo.png) no-repeat;
+                font-family: @font-Segoe-UI;
                 height: 29px;
-                width: 60px;
-                margin: 5px 0 0 15px;
+                margin: 0;
+                font-size: @font-size + 9;
+                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+                outline: none;
+                text-transform: uppercase;
+                color: #fff;
+                font-weight: bold;
+                padding: 10px 15px;
+
+                span {
+                    color: #c9d9f2;
+                }
+
+                &:hover {
+                    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 6px #8fb5c8, 0 0 30px rgba(143, 181, 200, 0.7);
+                }
             }
         }
 
         .navbar-nav {
             .user-info {
+                .icon-favourite-large {
+                    padding: 0;
+                    margin: 10px 15px 0 0;
+                }
+
                 .info-bar {
                     background: url(Images/user.png) no-repeat 8px center @user-info-bg;
                     border: 1px solid @user-info-border;
                     color: @white;
-                    margin: 5px 30px;
+                    margin: 6px 30px;
                     padding: 0 10px 3px 28px;
                     cursor: pointer;
                     line-height: 22px;
-                    .border_radius();
+                    .border-radius();
 
                     .account-name {
                         color: #fecc35;
@@ -87,7 +117,7 @@ body {
                         right: 30px;
                         visibility: visible;
                         opacity: 1;
-                        .box_shadow(0 1px 2px 1px rgba(0,0,0,0.25));
+                        .box-shadow(0 1px 2px 1px rgba(0,0,0,0.25));
                     }
                 }
             }
@@ -104,7 +134,12 @@ body {
     width: 100%;
     padding: 10px 30px 15px 30px;
     background-color: @white;
+    z-index: 20;
     .arrow-down;
+
+    &:before, &:after {
+        left: 40px;
+    }
 
     .title-content {
         color: #227fbb;
@@ -135,7 +170,7 @@ body {
                 padding: 5px 5px 5px 32px;
                 margin-right: 5px;
                 color: #898989;
-                .border_radius(2px);
+                .border-radius(2px);
             }
         }
     }
@@ -146,6 +181,178 @@ body {
 /********************************************************/
 .content {
     padding: 0 30px;
+
+    .description {
+        background-color: #5c7194;
+        color: #fff;
+        height: 203px;
+        padding: 0;
+        margin: 43px 0 0;
+        border: 2px solid #fff;
+        position: relative;
+        cursor: pointer;
+        transition: border 0.1s linear;
+        .border-radius(3px);
+        .box-shadow(0 0 1px #aaa);
+
+        &:hover {
+            border: 1px solid #afafaf;
+            .box-shadow(0 0 2px #aaa);
+
+            .shadow { 
+                bottom: -18px;
+            }
+        }
+            
+        .bg-img {
+            bottom: 44px;
+            position: absolute;
+            height: 158px;
+            right: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        .link {
+            bottom: 55px;
+            color: #005996;
+            left: 10px;
+            margin: 0;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 5;
+
+            li {
+                margin: 0;
+                padding: 0;
+                line-height: @line-height + 7;
+
+                a {
+                    color: #fff;
+                    padding: 5px 7px;
+                    .border-radius(3px);
+
+                    &:hover {
+                        background-color: #57667f;
+                    }
+                }
+            }
+        }
+
+        .text-title {
+            background-color: #e8e7e6;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 7;
+
+            > a {
+                color: #2f56c6;
+                font-family: @font-BenchNine;
+                font-size: @font-size + 5;
+                display: inline-block;
+                margin: 9px 10px;
+                text-transform: uppercase;
+                text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.8);
+
+                &:hover {
+                    color: #f25f51;
+                }
+            }
+
+            .favorite {
+                position: relative;
+                float: right;
+                padding: 9px 7px;
+                border-left: 1px solid #fafafa;
+
+                .function {
+                    .sublayer;
+                    padding: 10px;
+                    bottom: 33px;
+                    right: 5px;
+                    color: @text-color;
+                    .arrow-down;
+
+                    &:before {
+                        bottom: -9px;
+                        right: 10px;
+                    }
+
+                    &:after {
+                        bottom: -8px;
+                        right: 10px;
+                    }
+
+                    li {
+                        padding: 0 10px;
+                    }
+
+                    a {
+                        white-space: nowrap;
+                        padding: 4px 0;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+
+                    .expand {
+                        color: #E94B35;
+                    }
+
+                    .sub-function {
+                        color: @text-color;
+                    }
+                }
+            }
+
+            .url-site {
+                position: relative;
+                float: right;
+                padding: 9px 7px;
+                border-left: 1px solid #fafafa;
+
+                .list-url {
+                    .sublayer;
+                    bottom: 33px;
+                    right: 0;
+                    min-width: 285px;
+                    .arrow-down;
+
+                    &:before {
+                        bottom: -9px;
+                        right: 10px;
+                    }
+
+                    &:after {
+                        bottom: -8px;
+                        right: 10px;
+                    }
+
+                    a {
+                        color: #227fbb;
+                        font-size: 13px;
+                        font-style: normal;
+                    }
+                }
+            }
+        }
+
+        .shadow {
+            position: absolute;
+            bottom: -19px;
+            left: 0;
+            right: 0;
+
+            .margin-auto {
+                margin: auto;
+            }
+        }
+
+    }
 }
 
 /********************************************************/
@@ -157,22 +364,120 @@ body {
     color: #fff;
     height: 26px;
     line-height: 14px;
-    .border_radius(2px);
-    .box_shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
-    .bg_linear_gradient(#8daf60, #a1c46b);
+    .border-radius(2px);
+    .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
+    .bg-linear-gradient(#8daf60, #a1c46b);
 }
 
 /********************************************************/
 /*                         Icon                         */
 /********************************************************/
+.icon {
+    background: url(images/sprite.png) no-repeat;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.icon-favourite-large {
+    .icon;
+    background-position: -28px -61px;
+    height: 19px;
+    width: 19px;
+    float: left;
+
+    &:hover {
+        background-position: -9px -61px;
+    }
+}
+
+.info-more {
+    .icon;
+    background-position: -168px -16px ;
+    height: 7px;
+    width: 7px;
+}
+
+.icon-favourite {
+    .icon;
+    background-position: -33px -115px;
+    width: 13px;
+    height: 15px;
+    margin-right: 3px;
+    position: relative;
+    top: 2px;
+}
+
+.icon-noneFavourite {
+    .icon-favourite;
+    background-position: -14px -115px;
+}
+
+.function {
+    .icon-favourite:hover {
+        background-position: -71px -115px;
+    }
+
+    .icon-noneFavourite:hover {
+        background-position: -52px -115px;
+    }
+}
+
+.icon-function, .icon-arrow-site {
+    .icon;
+    height: 23px;
+    width: 23px;
+        margin-top: 2px;
+        float: right;
+}
+
+.icon-function { 
+    background-position: -27px -37px;
+
+    &:hover, &.active {
+        background-position: -27px -15px;
+    }
+}
+
+.icon-arrow-site {
+    background-position: -8px -37px;
+
+    &:hover, &.active {
+        background-position: -8px -15px;
+    }
+}
+
+.icon-collapse {
+    .icon;
+    background-position: -69px -17px;
+    height: 9px;
+    width: 9px;
+    margin-right: 5px;
+}
+
+.icon-expand {
+    .icon-collapse;
+    background-position: -56px -17px;
+}
+
+// icon for search page
+.icon-favorite-large {
+    .icon;
+    background-position: -11px -83px;
+    height: 19px;
+    width: 19px;
+    margin: -6px 15px;
+
+    &:hover {
+        background-position: -29px -83px;
+    }
+}
+
 .arrow-down {
     &:before {
         border-top: 8px solid #ccc;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         content: "";
-        //right: 10px;
-        left: 40px;
         position: absolute;
         bottom: 8px; //-9px;
         z-index: 0;
@@ -183,8 +488,6 @@ body {
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
         content: "";
-        //right: 10px;
-        left: 40px;
         position: absolute;
         bottom: 9px; //-8px;
         z-index: 1;
