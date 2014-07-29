@@ -26,6 +26,7 @@ namespace Fanex.NAP.Home.Websites
             RegisterCommonBundles(bundles);
             RegisterUserBundles(bundles);
             HomeBundles(bundles);
+            SearchSiteBundles(bundles);
         }
 
         /// <summary>
@@ -95,6 +96,17 @@ namespace Fanex.NAP.Home.Websites
         {
             bundles.Add(new ScriptBundle("~/scripts/homeJs").Include(
                 "~/Areas/Sites/Resources/UserSites/user-sites.js"));
+        }
+
+        /// <summary>
+        /// Registers the search site bundles.
+        /// </summary>
+        /// <param name="bundles">The bundle collection.</param>
+        public static void SearchSiteBundles(BundleCollection bundles)
+        {
+            bundles.AddAndInclude(
+                "~/styles/searchSite",
+                "~/Areas/Sites/Resources/SearchSites/search-site.less");
         }
     }
 }

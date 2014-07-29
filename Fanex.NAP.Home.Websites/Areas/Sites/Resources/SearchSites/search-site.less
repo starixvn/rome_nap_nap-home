@@ -1,0 +1,56 @@
+@import "../../../../Content/Theme/variables.less";
+
+.search-total {
+    padding: 0;
+    margin: 10px 0;
+}
+
+.number {
+    color: @number-color;
+}
+
+.search-result {
+    padding-left: 30px;
+    width: 480px;
+
+    .search-item {
+        padding: 0 35px 10px 10px;
+        position: relative;
+
+        &:hover {
+            background: @search-item-bg;
+
+            h4 a {
+                color: @search-item-title-color-hover;
+            }
+        }
+        
+        h4 {
+            margin-bottom: 5px;
+
+            a {
+                color: @search-item-title-color;
+                font-weight: normal;
+                font-size: @font-size + 1;
+            }
+        }
+
+        .desc-item {
+            a {
+                color: @path-color;
+
+                &:hover {
+                    color: @path-color-hover;
+                }
+            }
+
+            ul {
+                margin: 0 5px 3px;
+
+                li {
+                    padding: 0 2px 0;
+                }
+            }
+        }
+    }
+}
