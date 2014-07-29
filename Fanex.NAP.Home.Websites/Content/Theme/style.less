@@ -23,6 +23,7 @@ body {
 
 a, a:hover, a:active, a:focus {
     outline: none;
+    text-decoration: none;
 }
 
 /********************************************************/
@@ -149,7 +150,7 @@ a, a:hover, a:active, a:focus {
         font-weight: normal;
         position: relative;
         margin: 0;
-        min-height: 45px;
+        height: 52px;
         border-bottom: 1px solid #dfdedb;
         .arrow-down();
 
@@ -451,6 +452,65 @@ a, a:hover, a:active, a:focus {
     select.input-validation-error {
         border: solid 1px @msg-err-border !important;
         background-color: @msg-err-bg + #444 !important;
+    }
+}
+
+/********************************************************/
+/*                        Paging                        */
+/********************************************************/
+.paging {
+    margin: 15px 0;
+
+    li {
+        padding: 0;
+    }
+
+    .prev, .next, .link, .current {
+        height: 26px;
+        line-height: 14px;
+        padding: 4px 10px;
+        border: 1px solid #999;
+        color: lighten(@text-color, 5%);
+        font-size: @font-size + 1;
+        .border-radius(2px);
+        .box-shadow(0 1px 0 rgba(255, 255, 255, 0.4) inset);
+        text-shadow: 0px 1px 1px #fff;
+    }
+
+    .prev, .next {
+        font-size: @font-size + 2;
+        padding: 3px 13px;
+        .bg-linear-gradient(#ababab, #e3e3e3);
+
+        &:hover {
+            color: lighten(@text-color, 10%);
+            text-shadow: 0px 1px 1px #fff;
+            .bg-linear-gradient(#e3e3e3, #ababab);
+            .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+        }
+
+        &.disabled, &.disabled:hover {
+            .box-shadow(none);
+            background: #eee;
+            color: lighten(@text-color, 20%);
+            border-color: #ccc;
+            text-shadow: none;
+        }
+    }
+
+    .link {
+        .bg-linear-gradient(#ababab, #e3e3e3);
+
+        &:hover {
+            .bg-linear-gradient(#e3e3e3, #ababab);
+            .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+        }
+    }
+
+    .current {
+        color: @white;
+        text-shadow: none;
+        .bg-linear-gradient(#808080, #c0c0c0);
     }
 }
 
