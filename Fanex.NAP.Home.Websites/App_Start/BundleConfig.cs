@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="BundleConfig.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -25,8 +25,7 @@ namespace Fanex.NAP.Home.Websites
             RegisterLoginBundles(bundles);
             RegisterCommonBundles(bundles);
             RegisterUserBundles(bundles);
-            HomeBundles(bundles);
-            SearchSiteBundles(bundles);
+            RegisterUserSitesBundles(bundles);
         }
 
         /// <summary>
@@ -89,24 +88,16 @@ namespace Fanex.NAP.Home.Websites
         }
 
         /// <summary>
-        /// Bundles the JavaScript files for home page.
+        /// Bundles the JavaScript files for User Sites area.
         /// </summary>
         /// <param name="bundles">The bundle collection.</param>
-        public static void HomeBundles(BundleCollection bundles)
+        public static void RegisterUserSitesBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/scripts/homeJs").Include(
+            bundles.Add(new ScriptBundle("~/scripts/userSites").Include(
                 "~/Areas/Sites/Resources/UserSites/user-sites.js"));
-        }
-
-        /// <summary>
-        /// Registers the search site bundles.
-        /// </summary>
-        /// <param name="bundles">The bundle collection.</param>
-        public static void SearchSiteBundles(BundleCollection bundles)
-        {
             bundles.AddAndInclude(
-                "~/styles/searchSite",
-                "~/Areas/Sites/Resources/SearchSites/search-site.less");
+                "~/styles/userSites",
+                "~/Areas/Sites/Resources/UserSites/user-sites.less");
         }
     }
 }

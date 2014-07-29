@@ -1,447 +1,63 @@
-﻿@{
+﻿@using Fanex.NAP.Home.Sites.ViewModels.UserSites
+@model IEnumerable<UserSiteItem>
+@{
     ViewBag.Title = @ViewLang.Products;
     Layout = "~/Areas/Sites/Views/Shared/_SitesLayout.cshtml";
 }
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/acc.jpg" class="bg-img img-responsive"
-            title="NAP Accounting Report" alt="NAP Accounting Report" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP Accounting Report</a>
-            <div class="favorite">
-                <span class="icon-function" title="Function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/set.jpg" class="bg-img img-responsive"
-            title="NAP Settlement" alt="NAP Settlement" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP Settlement</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/spec.jpg" class="bg-img img-responsive"
-            title="NAP Special Delete" alt="NAP Special Delete" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP Special Delete</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/nonefavourite/admin.jpg" class="bg-img img-responsive"
-            title="NAP Admin" alt="NAP Admin" />
-        <div class="text-title">
-            <a href="#" class="">NAP Admin</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/msite.jpg" class="bg-img img-responsive"
-            title="mSite" alt="mSite" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">mSite</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/LA.jpg" class="bg-img img-responsive"
-            title="NAP Live Chart" alt="NAP Live Chart" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP Live Chart</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/DW.jpg" class="bg-img img-responsive"
-            title="NAP DW" alt="NAP DW" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP DW</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/crm.jpg" class="bg-img img-responsive"
-            title="NAP CRM" alt="NAP CRM" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP CRM</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/CM.jpg" class="bg-img img-responsive"
-            title="NAP Customer Management" alt="NAP Customer Management" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP Customer Management</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/favourite/default.jpg" class="bg-img img-responsive"
-            title="NAP Customer Management" alt="NAP Customer Management" />
-        <ul class="list-unstyled link">
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Virtual Soccer Win Loss</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Match Win</a></li>
-            <li><a href="#"><span class="icon-favourite"></span>Daily Win Loss</a></li>
-        </ul>
-        <div class="text-title">
-            <a href="#" class="">NAP Customer Management</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-<div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="description">
-        <img src="~/content/theme/images/nonefavourite/default.jpg" class="bg-img img-responsive"
-            title="NAP Customer Management" alt="NAP Customer Management" />
-        <div class="text-title">
-            <a href="#" class="">NAP Customer Management</a>
-            <div class="favorite">
-                <span class="icon-function"></span>
-                <ul class="list-unstyled function">
-                    <li class="expand"><span class="icon-expand"></span>Main Report
-                        <ul class="list-unstyled sub-function">
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                            <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                        </ul>
-                    </li>
-                    <li><span class="icon-collapse"></span>Balance</li>
-                </ul>
-            </div>
-            <div class="url-site">
-                <span class="icon-arrow-site"></span>
-                <ul class="list-url list-unstyled">
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                    <li><a href="#">http://10.19.10.22:8080/naphome/search.html</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="shadow">
-            <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
-        </div>
-    </div>
-</div>
-@section Foot {
-    @Scripts.Render("~/scripts/homeJs")
+@section Head
+{
+        @Styles.Render("~/styles/userSites")
 }
+@{
+    string thumnailUrlTemplate = "~/Areas/Sites/Resources/UserSites/Images/{0}/{1}";
 
+    foreach (var site in Model)
+    {
+        string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
+
+        <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="description">
+            <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
+            <ul class="list-unstyled link">
+            @foreach (var favorite in site.Favorites)
+            {
+                <li><a href="@Url.Content(favorite.Url)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
+            }
+            </ul>
+            <div class="text-title">
+                <a href="@Url.Content(site.Domains[0])" target="_blank">@site.SiteName</a>
+                <div class="favorite">
+                    <span class="icon-function" title="Function"></span>
+                    <ul class="list-unstyled function">
+                        <li class="expand"><span class="icon-expand"></span>Main Report
+                            <ul class="list-unstyled sub-function">
+                                <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
+                                <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
+                                <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
+                                <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
+                                <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
+                            </ul>
+                        </li>
+                        <li><span class="icon-collapse"></span>Balance</li>
+                    </ul>
+                </div>
+                <div class="url-site">
+                    <span class="icon-arrow-site"></span>
+                    <ul class="list-url list-unstyled">
+                    @foreach (var domain in site.Domains)
+                    {
+                        <li><a href="Url.Content(@domain)">@domain</a></li>
+                    }
+                    </ul>
+                </div>
+            </div>
+            <div class="shadow">
+                <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
+            </div>
+        </div>
+    </div>
+    }
+}
+@section Foot {
+    @Scripts.Render("~/scripts/userSites")
+}

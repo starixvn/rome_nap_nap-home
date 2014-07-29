@@ -9,9 +9,12 @@
 
 namespace Fanex.NAP.Home.Sites.Controllers
 {
+    using System.Collections.Generic;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Home.Core.Helpers;
+    using Fanex.NAP.Home.Sites.Services;
+    using Fanex.NAP.Home.Sites.ViewModels.UserSites;
 
     /// <summary>
     /// User sites controller.
@@ -19,8 +22,16 @@ namespace Fanex.NAP.Home.Sites.Controllers
     [NapSuperAuth]
     public class UserSitesController : BaseController
     {
-        public UserSitesController()
+        private IUserSitesService _service;
+
+        public UserSitesController() :
+            this(null)
         {
+        }
+
+        public UserSitesController(IUserSitesService service)
+        {
+            this._service = service ?? new UserSitesService();
             ViewBag.IsHomePage = true;
         }
 
@@ -31,7 +42,9 @@ namespace Fanex.NAP.Home.Sites.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View("~/Areas/Sites/Views/UserSites/Index.cshtml");
+            IEnumerable<UserSiteItem> sites = this._service.GetUserSites();
+
+            return View("~/Areas/Sites/Views/UserSites/Index.cshtml", sites);
         }
     }
 }

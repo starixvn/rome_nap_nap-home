@@ -30,8 +30,30 @@
 }
 
 .transition (@value: all .2s ease-in-out) {
-	transition: @value;
-	-moz-transition: @value;
-	-webkit-transition: @value;
-	-o-transition: @value;
+    transition: @value;
+    -moz-transition: @value;
+    -webkit-transition: @value;
+    -o-transition: @value;
+}
+
+.arrow-down() {
+    &:before {
+        border-top: 8px solid #ccc;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -9px;
+        z-index: 0;
+    }
+
+    &:after {
+        border-top: 8px solid #fff;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        z-index: 1;
+    }
 }
