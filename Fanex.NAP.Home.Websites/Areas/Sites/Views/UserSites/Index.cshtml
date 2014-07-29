@@ -16,46 +16,34 @@
         string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
 
         <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="description">
-            <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
-            <ul class="list-unstyled link">
-            @foreach (var favorite in site.Favorites)
-            {
-                <li><a href="@Url.Content(favorite.Link)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
-            }
-            </ul>
-            <div class="text-title">
-                <a href="@Url.Content(site.Domains[0])" target="_blank">@site.SiteName</a>
-                <div class="favorite">
-                    <span class="icon-function" title="Function"></span>
-                    <ul class="list-unstyled function">
-                        <li class="expand"><span class="icon-expand"></span>Main Report
-                            <ul class="list-unstyled sub-function">
-                                <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                                <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                                <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                                <li><span class="icon-favourite"></span><a href="#">Sub Menu 1</a></li>
-                                <li><span class="icon-noneFavourite"></span><a href="#">Sub Menu 1</a></li>
-                            </ul>
-                        </li>
-                        <li><span class="icon-collapse"></span>Balance</li>
-                    </ul>
+            <div class="description">
+                <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
+                <ul class="list-unstyled link">
+                @foreach (var favorite in site.Favorites)
+                {
+                    <li><a href="@Url.Content(favorite.Link)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
+                }
+                </ul>
+                <div class="text-title">
+                    <a href="@Url.Content(site.Domains[0])" target="_blank">@site.SiteName</a>
+                    <div class="favorite">
+                        <span class="icon-function" title="Function"></span>
+                    </div>
+                    <div class="url-site">
+                        <span class="icon-arrow-site"></span>
+                        <ul class="list-url list-unstyled">
+                        @foreach (var domain in site.Domains)
+                        {
+                            <li><a href="Url.Content(@domain)">@domain</a></li>
+                        }
+                        </ul>
+                    </div>
                 </div>
-                <div class="url-site">
-                    <span class="icon-arrow-site"></span>
-                    <ul class="list-url list-unstyled">
-                    @foreach (var domain in site.Domains)
-                    {
-                        <li><a href="Url.Content(@domain)">@domain</a></li>
-                    }
-                    </ul>
+                <div class="shadow">
+                    <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
                 </div>
-            </div>
-            <div class="shadow">
-                <img src="~/content/theme/images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
             </div>
         </div>
-    </div>
     }
 }
 @section Foot {

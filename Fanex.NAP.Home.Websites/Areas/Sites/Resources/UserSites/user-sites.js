@@ -1,53 +1,91 @@
-﻿/* File Created: July 28, 2014 */
-$(function () {
-    var urlSite = $('.url-site'),
-        favorite = $('.favorite');
+﻿/* File Created: July 29, 2014 */
+/* global Namespace */
+'use strict';
 
-    urlSite.click(function (event) {
-        var $this = $(this),
-            URL = $this.children('.list-url'),
-            icon_site = $this.children('.icon-arrow-site');
+$(document).ready(function () {
+    var userSites = new Fanex.NAP.Home.Sites.UserSites();
 
-        if (URL.is(':hidden')) {
-            hideUrlFunction();
-            icon_site.addClass('active');
-            URL.show();
-        } else {
-            icon_site.removeClass('active');
-            URL.hide();
-        }
-        event.stopPropagation();
-    });
-
-    favorite.click(function (event) {
-        var $this = $(this),
-            favoriteList = $this.children('.function'),
-            icon_current_function = $this.children('.icon-function');
-
-        if (favoriteList.is(':hidden')) {
-            hideUrlFunction();
-            icon_current_function.addClass('active');
-            favoriteList.show();
-        } else {
-            icon_current_function.removeClass('active');
-            favoriteList.hide();
-        }
-        event.stopPropagation();
-    });
-
-    $('body').click(function () {
-        hideUrlFunction();
-    });
+    userSites.Initialize();
 });
 
-function hideUrlFunction() {
-    var listUrl = $('.list-url'),
-        icon_arrow_site = $('.icon-arrow-site'),
-        icon_function = $('.icon-function'),
-        functionList = $('.function');
+Namespace.Register("Fanex.NAP.Home.Sites.UserSites");
+Fanex.NAP.Home.Sites.UserSites = function () {
+    var $this = this;
 
-    listUrl.hide();
-    icon_arrow_site.removeClass('active');
-    functionList.hide();
-    icon_function.removeClass('active');
-}
+    var domElements = {
+        divSiteUrls: null,
+        divFuntions: null
+    };
+
+    // Cache DOM elements.
+    var cacheDOMElements = function () {
+        domElements.divFuntions = $('div.favorite');
+        domElements.divSiteUrls = $('div.url-site');
+    };
+
+    // Handle events of elements.
+    var handleEvents = function () {
+        domElements.divSiteUrls.on('click.nap-home-menu', function () {
+            var $button = $(this);
+            var $icon = $button.find('span');
+            var $menu = $button.find('ul');
+
+            if ($menu.is(':hidden')) {
+                hideMenus();
+                $button.addClass('active');
+                $icon.addClass('active');
+                $menu.show();
+            } else {
+                $button.removeClass('active');
+                $icon.removeClass('active');
+                $menu.hide();
+            }
+
+            return false;
+        });
+
+        // Hide menus when clicking on page.
+        $('html').on('click.nap-home-menu', function (event) {
+            if (!$(event.target).hasClass('expand menu-node')) {
+                hideMenus();
+            }
+        });
+    };
+
+    // Hide all menus.
+    var hideMenus = function () {
+        // Hide URL menu.
+        domElements.divSiteUrls.filter('.active').each(function () {
+            var $button = $(this);
+            var $icon = $button.find('span');
+            var $menu = $button.find('ul');
+
+            $button.removeClass('active');
+            $icon.removeClass('active');
+            $menu.hide();
+        });
+
+        // Hide function menu.
+        domElements.divFuntions.filter('.active').each(function () {
+            var $button = $(this);
+            var $tile = $button.closest('div.description');
+            var $icon = $button.find('span');
+            var $menu = $button.find('ul');
+
+            $button.removeClass('active');
+            $icon.removeClass('active');
+
+            if ($menu) {
+                $menu.hide();
+            }
+
+            $tile.trigger('close.nap-home-menu');
+        });
+    };
+
+    // Intialize page.
+    $this.Initialize = function () {
+        cacheDOMElements();
+        handleEvents();
+    };
+};

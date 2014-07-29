@@ -182,6 +182,7 @@
     <Content Include="App_Data\NAPCoreSpNames.xml" />
     <Content Include="App_Data\NAPHomeSPNames.xml" />
     <Content Include="Areas\Sites\Resources\SearchSites\search-sites.js" />
+    <Content Include="Areas\Sites\Resources\UserSites\user-sites.js" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\accounting.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\admin.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\cms.jpg" />
@@ -202,7 +203,6 @@
     <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\msite.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\settlement.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\special-delete.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\user-sites.js" />
     <Content Include="Areas\User\Resources\Login\Images\bg.png" />
     <Content Include="Areas\User\Resources\Login\Images\down.png" />
     <Content Include="Areas\User\Resources\Login\Images\lock.png" />
@@ -284,6 +284,7 @@
       <DependentUpon>SiteThumbnails.xml</DependentUpon>
     </Content>
     <Content Include="Areas\Sites\Resources\SearchSites\search-site.less" />
+    <Content Include="Areas\Sites\Views\UserSites\FunctionList.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

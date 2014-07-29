@@ -120,6 +120,7 @@
     <Compile Include="SitesAreaRegistration.cs" />
     <Compile Include="ViewModels\UserSites\UserSiteFunctionItem.cs" />
     <Compile Include="ViewModels\UserSites\UserSiteItem.cs" />
+    <Compile Include="ViewModels\UserSites\UserSitesFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

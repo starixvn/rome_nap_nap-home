@@ -9,6 +9,7 @@
 
 namespace Fanex.NAP.Home.Core.Helpers
 {
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -22,5 +23,16 @@ namespace Fanex.NAP.Home.Core.Helpers
         }
 
         protected IDynamicRepository Repository { get; set; }
+
+        /// <summary>
+        /// Temperate function to skip FXCop warning.
+        /// </summary>
+        /// <param name="filter">Filter condition.</param>
+        /// <returns>Returns fake object.</returns>
+        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "Temperately using.")]
+        protected object QueryData(object filter)
+        {
+            return null;
+        }
     }
 }
