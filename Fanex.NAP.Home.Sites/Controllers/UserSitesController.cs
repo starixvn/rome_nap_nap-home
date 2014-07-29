@@ -11,13 +11,19 @@ namespace Fanex.NAP.Home.Sites.Controllers
 {
     using System.Web.Mvc;
     using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.Home.Core.Helpers;
 
     /// <summary>
     /// User sites controller.
     /// </summary>
     [NapSuperAuth]
-    public class UserSitesController : Controller
+    public class UserSitesController : BaseController
     {
+        public UserSitesController()
+        {
+            ViewBag.IsHomePage = true;
+        }
+
         /// <summary>
         /// Redirect to Sites page.
         /// </summary>

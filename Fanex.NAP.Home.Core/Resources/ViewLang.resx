@@ -123,6 +123,12 @@
   <data name="AccessDeniedMessage" xml:space="preserve">
     <value>You are not authorized to access this link.</value>
   </data>
+  <data name="FavoriteFunctions" xml:space="preserve">
+    <value>Favorite Functions</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="Index" xml:space="preserve">
     <value>Index</value>
   </data>

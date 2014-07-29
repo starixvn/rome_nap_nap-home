@@ -1,5 +1,6 @@
 ﻿@{
     bool hasSearchBar = ViewBag.HasSearchBar != null ? ViewBag.HasSearchBar : true;
+    bool isHomePage = ViewBag.IsHomePage ?? false;
 }
 <!DOCTYPE html>
 <!--[if (IE 7)]><html lang="en" class="ie7 oldie"><![endif]-->
@@ -13,8 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <title>@ViewResources.Home &mdash; @ViewBag.Title</title>
-    <link href='http://fonts.googleapis.com/css?family=BenchNine:700' rel='stylesheet'
-        type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=BenchNine:700' rel='stylesheet' type='text/css' />
     @Styles.Render("~/styles/common")
     @Scripts.Render("~/scripts/html5hacks")
     @RenderSection("Head", false)
@@ -29,21 +29,34 @@
         <!-- Collect the nav links and other content for toggling -->
         <div class="collapse navbar-collapse" id="divMenuContent">
           <ul class="nav navbar-nav navbar-right">
-            <li class="user-info">
-                <a href="favorite.html" class="icon-favourite-large"></a>
-                <a class="info-bar" href="#">@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></a>
-                <ul class="user-dropdown">
-                    <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>
-                    <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
-                    <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "User" }, new { })</li>
-                </ul>
+            <li>
+                <a href="@Url.Content("~/Sites/FavoriteFunctions")" class="icon-favourite-large"></a>
+            </li>
+            <li>
+                <div class="user-info">
+                    <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
+                    <ul class="user-dropdown">
+                        <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>
+                        <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
+                        <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "User" }, new { })</li>
+                    </ul>
+                </div>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <div class="title-bar">
-        @RenderSection("Headline", false)
+        <div class="title-content">
+            <ul class="breadcrumb title">
+                @if (!isHomePage)
+                {
+                <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
+                }
+                <li>@ViewBag.Title</li>
+            </ul>
+            @RenderSection("SearchBar", false)
+        </div>
     </div>
     <div class="container-fluid content">
         @RenderBody()

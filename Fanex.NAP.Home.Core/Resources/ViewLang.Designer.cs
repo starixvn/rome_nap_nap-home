@@ -79,6 +79,24 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Favorite Functions.
+        /// </summary>
+        public static string FavoriteFunctions {
+            get {
+                return ResourceManager.GetString("FavoriteFunctions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index.
         /// </summary>
         public static string Index {

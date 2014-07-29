@@ -272,6 +272,7 @@
     <Content Include="Areas\Sites\Views\UserSites\Index.cshtml" />
     <Content Include="Areas\Sites\Views\Shared\_SitesLayout.cshtml" />
     <Content Include="Areas\Sites\Views\SearchSites\Index.cshtml" />
+    <Content Include="Areas\Sites\Views\FavoriteFunctions\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

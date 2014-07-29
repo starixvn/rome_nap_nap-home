@@ -142,28 +142,7 @@ namespace Fanex.NAP.Home.User.Controllers
                         if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
                         {
                             // check-in user
-                            var criteria = new UserCheckInUserCriteria
-                            {
-                                UserId = user.Id,
-                                SiteId = this.SiteId,
-                                NetSessionId = Session.SessionID,
-                                Ip = CurrentContext.IP,
-                                LoginDate = DateTime.Now,
-                                BrowserName = CurrentContext.BrowserName,
-                                CountryCode = CurrentContext.CountryCode,
-                                Domain = CurrentContext.DomainName,
-                                Platform = CurrentContext.Platform
-                            };
-
-                            this._userService.UserCheckIn(ref criteria);
-
-                            // saves user session
-                            this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
-                            this._currentSession.UserId = user.Id;
-                            this._currentSession.Username = username;
-                            this._currentSession.OnUserId = criteria.OnUserId;
-                            this._currentSession.SessionId = Session.SessionID.ToString();
-
+                            this.CheckInUser(user);
                             this.CreateAuthInfo(user);
 
                             // Check if the login user can access Home or not.
@@ -265,6 +244,36 @@ namespace Fanex.NAP.Home.User.Controllers
         #endregion Recheck in
 
         #region Helpers
+
+        /// <summary>
+        /// Checks in an user.
+        /// </summary>
+        /// <param name="user">The user information.</param>
+        private void CheckInUser(User user)
+        {
+            // check-in user
+            var criteria = new UserCheckInUserCriteria
+            {
+                UserId = user.Id,
+                SiteId = this.SiteId,
+                NetSessionId = Session.SessionID,
+                Ip = CurrentContext.IP,
+                LoginDate = DateTime.Now,
+                BrowserName = CurrentContext.BrowserName,
+                CountryCode = CurrentContext.CountryCode,
+                Domain = CurrentContext.DomainName,
+                Platform = CurrentContext.Platform
+            };
+
+            this._userService.UserCheckIn(ref criteria);
+
+            // saves user session
+            this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
+            this._currentSession.UserId = user.Id;
+            this._currentSession.Username = user.Username;
+            this._currentSession.OnUserId = criteria.OnUserId;
+            this._currentSession.SessionId = Session.SessionID.ToString();
+        }
 
         /// <summary>
         /// Creates the authentication information.
