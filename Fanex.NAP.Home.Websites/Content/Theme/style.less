@@ -5,13 +5,9 @@
 /*                     Common CSS                       */
 /********************************************************/
 body {
-    padding-top: 40px;
+    padding-top: 125px;
     font-size: @font-size;
     font-family: @font-family;
-
-    &.has-search {
-        padding-top: 115px;
-    }
 }
 
 .sublayer {
@@ -145,7 +141,7 @@ a, a:hover, a:active, a:focus {
     position: fixed;
     top: 40px;
     width: 100%;
-    padding: 10px 30px 40px;
+    padding: 10px 30px 30px;
     background-color: @white;
     z-index: 20;
 
@@ -362,19 +358,6 @@ a, a:hover, a:active, a:focus {
     }
 }
 
-.icon-back {
-    .icon;
-    background-position: -100px -40px;
-    height: 16px;
-    margin: 4px 10px;
-    width: 16px;
-    float: right;
-
-    &:hover {
-        background-position: -100px -17px;
-    }
-}
-
 /********************************************************/
 /*                      Block UI                        */
 /********************************************************/
@@ -468,5 +451,21 @@ a, a:hover, a:active, a:focus {
     select.input-validation-error {
         border: solid 1px @msg-err-border !important;
         background-color: @msg-err-bg + #444 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-custom {
+        .lbl-field {
+            text-align: left;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .form-custom {
+        &.user-profile, &.change-password {
+            width: 420px;
+        }
     }
 }

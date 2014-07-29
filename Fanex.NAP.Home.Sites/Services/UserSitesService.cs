@@ -24,7 +24,7 @@ namespace Fanex.NAP.Home.Sites.Services
         /// Gets accessible sites of an user.
         /// </summary>
         /// <returns>List of sites that the user can access.</returns>
-        public IEnumerable<UserSiteItem> GetUserSites()
+        public IEnumerable<UserSiteItem> QuerytUserSites()
         {
             return GetSites();
         }
@@ -81,7 +81,7 @@ namespace Fanex.NAP.Home.Sites.Services
                         FunctionId = 0,
                         FunctionName = fav,
                         IsFavorite = true,
-                        Url = "http://10.18.200.209:8007/nap-sc-pro-long-link"
+                        Link = "http://10.18.200.209:8007/nap-sc-pro-long-link"
                     });
             }
 

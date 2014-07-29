@@ -25,7 +25,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 
         public string FunctionName { get; set; }
 
-        public string Url { get; set; }
+        public string Link { get; set; }
 
         public bool IsFavorite { get; set; }
 

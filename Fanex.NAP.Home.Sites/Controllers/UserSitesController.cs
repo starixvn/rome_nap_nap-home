@@ -42,7 +42,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<UserSiteItem> sites = this._service.GetUserSites();
+            IEnumerable<UserSiteItem> sites = this._service.QuerytUserSites();
 
             return View("~/Areas/Sites/Views/UserSites/Index.cshtml", sites);
         }

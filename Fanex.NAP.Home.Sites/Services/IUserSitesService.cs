@@ -18,6 +18,6 @@ namespace Fanex.NAP.Home.Sites.Services
         /// Gets accessible sites of an user.
         /// </summary>
         /// <returns>List of sites that the user can access.</returns>
-        IEnumerable<UserSiteItem> GetUserSites();
+        IEnumerable<UserSiteItem> QuerytUserSites();
     }
 }

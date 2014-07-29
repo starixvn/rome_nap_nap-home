@@ -144,9 +144,6 @@
   <data name="NotFoundMessage" xml:space="preserve">
     <value>The resource cannot be found.</value>
   </data>
-  <data name="Products" xml:space="preserve">
-    <value>Products</value>
-  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
@@ -155,5 +152,8 @@
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
+  </data>
+  <data name="Sites" xml:space="preserve">
+    <value>Sites</value>
   </data>
 </root>

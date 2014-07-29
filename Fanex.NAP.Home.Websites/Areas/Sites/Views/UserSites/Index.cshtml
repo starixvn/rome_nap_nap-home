@@ -1,7 +1,7 @@
 ﻿@using Fanex.NAP.Home.Sites.ViewModels.UserSites
 @model IEnumerable<UserSiteItem>
 @{
-    ViewBag.Title = @ViewLang.Products;
+    ViewBag.Title = @ViewLang.Sites;
     Layout = "~/Areas/Sites/Views/Shared/_SitesLayout.cshtml";
 }
 @section Head
@@ -21,7 +21,7 @@
             <ul class="list-unstyled link">
             @foreach (var favorite in site.Favorites)
             {
-                <li><a href="@Url.Content(favorite.Url)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
+                <li><a href="@Url.Content(favorite.Link)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
             }
             </ul>
             <div class="text-title">

@@ -98,6 +98,10 @@ namespace Fanex.NAP.Home.Websites
             bundles.AddAndInclude(
                 "~/styles/userSites",
                 "~/Areas/Sites/Resources/UserSites/user-sites.less");
+
+            bundles.AddAndInclude(
+                "~/styles/searchSite",
+                "~/Areas/Sites/Resources/SearchSites/search-site.less");
         }
     }
 }
