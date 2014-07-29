@@ -32,15 +32,13 @@
             <li>
                 <a href="@Url.Content("~/Sites/FavoriteFunctions")" class="icon-favourite-large"></a>
             </li>
-            <li>
-                <div class="user-info">
-                    <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
-                    <ul class="user-dropdown">
-                        <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>
-                        <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
-                        <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "User" }, new { })</li>
-                    </ul>
-                </div>
+            <li class="user-info">
+                <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
+                <ul class="user-dropdown">
+                    <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>
+                    <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
+                    <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "User" }, new { })</li>
+                </ul>
             </li>
           </ul>
         </div>
