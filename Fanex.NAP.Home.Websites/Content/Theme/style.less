@@ -69,8 +69,6 @@ a, a:hover, a:active, a:focus {
             }
 
             .user-info {
-                margin: 10px 0 0;
-
                 .info-bar {
                     background: url(Images/user.png) no-repeat 8px center @user-info-bg;
                     border: 1px solid @user-info-border;
@@ -78,6 +76,8 @@ a, a:hover, a:active, a:focus {
                     padding: 4px 10px 4px 30px;
                     cursor: pointer;
                     text-decoration: none;
+                    display: block;
+                    margin-top: 5px;
                     .border-radius();
 
                     .account-name {
@@ -126,7 +126,7 @@ a, a:hover, a:active, a:focus {
 
                 &:hover {
                     .user-dropdown {
-                        top: 22px;
+                        top: 33px;
                         left: 0;
                         visibility: visible;
                         opacity: 1;
