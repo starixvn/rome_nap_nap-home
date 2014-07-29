@@ -612,4 +612,57 @@ a, a:hover, a:active, a:focus {
     .lbl-field {
         text-align: right;
     }
+
+    .msg-box {
+        padding: 10px 30px;
+        line-height: 1.6em;
+        color: @msg-text;
+        .border-radius;
+        .box-shadow(1px 1px 3px rgba(0, 0, 0, 0.6));
+    }
+
+    .err {
+        background-color: @msg-err-bg;
+        border: solid 1px @msg-err-border;
+    }
+    .warn {
+        background-color: @msg-warn-bg;
+        border: solid 1px @msg-warn-border;
+    }
+    .info {
+        background-color: @msg-info-bg;
+        border: solid 1px @msg-info-border;
+    }
+
+    .validation-summary-valid.success, .validation-summary-errors {
+        ul {
+            .msg-box;
+            margin: 0 0 10px;
+            list-style-type: circle;
+            .transition;
+        }
+    }
+
+    .validation-summary-valid.success {
+        ul {
+            .info;
+
+            .msec {
+                vertical-align: baseline;
+            }
+        }
+    }
+
+    .validation-summary-errors {
+        ul {
+            .err;
+        }
+    }
+
+    input[type=text].input-validation-error,
+    input[type=password].input-validation-error,
+    select.input-validation-error {
+        border: solid 1px @msg-err-border !important;
+        background-color: @msg-err-bg + #444 !important;
+    }
 }
