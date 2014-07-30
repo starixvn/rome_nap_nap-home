@@ -16,7 +16,7 @@
     <div class="col-sm-12 search-result">
         @foreach (SearchedFunctionItem function in Model)
         {
-            <div class="row search-item">
+            <div class="col-sm-12 col-md-6 search-item">
                 <h4>
                     @HighlightWordsInLink(searchedFunctionName, function.FunctionName, function.Link)
                     <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
@@ -42,11 +42,11 @@
             NumericPagerItemWrapperFormatString = "<li>{0}</li>",
             CurrentPagerItemWrapperFormatString = "<li><span class=\"current\">{0}</span></li>",
             CurrentPageNumberFormatString = "{0}",
-            NavigationPagerItemWrapperFormatString = "<li><span class=\"action\">{0}</li>",
-            PrevPageText = "‹ Prev",
-            NextPageText = "Next ›",
-            FirstPageText = "« First",
-            LastPageText = "Last »"
+            NavigationPagerItemWrapperFormatString = "<li><span class=\"btn-page\">{0}</li>",
+            PrevPageText = "‹",
+            NextPageText =  "›",
+            FirstPageText = "«",
+            LastPageText = "»"
         }, new { @class = "list-unstyled" })
     </div>
 }

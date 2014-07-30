@@ -472,8 +472,12 @@ a, a:hover, a:active, a:focus {
 /*                        Paging                        */
 /********************************************************/
 .paging {
-    margin: 20px 0;
+    margin-top: 20px;
     padding: 0 10px;
+
+    ul {
+        margin: 0;
+    }
 
     li {
         padding: 0;
@@ -481,55 +485,55 @@ a, a:hover, a:active, a:focus {
         margin-right: 5px;
     }
 
-    .action a, .link, .current {
-        height: 26px;
-        line-height: 14px;
-        padding: 4px 10px;
-        border: 1px solid #999;
-        color: lighten(@text-color, 5%);
-        font-size: @font-size + 1;
-        .border-radius(2px);
-        .box-shadow(0 1px 0 rgba(255, 255, 255, 0.4) inset);
-        text-shadow: 0px 1px 1px #fff;
-    }
-
-    .action {
+    .btn-page {
         a {
-            color: lighten(@text-color, 5%);
-            font-size: @font-size + 2;
+            color: @page-button-color;
+            float: left;
             padding: 3px 13px;
-            .bg-linear-gradient(#ababab, #e3e3e3);
+            height: 24px;
+            line-height: 14px;
+            padding: 3px 0;
+            border: 1px solid @page-button-border;
+            color: @white;
+            font-size: @font-size + 4;
+            text-shadow: 0px 1px 1px @page-button-color-shadow;
+            text-align: center;
+            width: 25px;
+            .border-radius(2px);
+            .bg-linear-gradient(@page-button-bg-top, @page-button-bg-bottom);
+            .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
 
             &:hover {
-                .bg-linear-gradient(#e3e3e3, #ababab);
-                .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
-                color: lighten(@text-color, 10%);
-                text-shadow: 0px 1px 1px #fff;
+                .bg-linear-gradient(@page-button-bg-top-hover, @page-button-bg-bottom-hover);
+                .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
             }
         }
 
         a[disabled='disabled'] {
             .box-shadow(none);
-            background: #eee;
-            color: lighten(@text-color, 20%);
-            border-color: #ccc;
+            background: @page-button-bg-disabled;
+            color: @page-button-color-disabled;
+            border-color: @page-button-border-disabled;
             text-shadow: none;
         }
     }
 
     .link {
-        .bg-linear-gradient(#ababab, #e3e3e3);
+        float: left;
+        font-size: @font-size + 2;
+        color: @page-link-color;
+        margin: 1px 5px;
 
         &:hover {
-            .bg-linear-gradient(#e3e3e3, #ababab);
-            .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+            color: @page-link-color-hover;
         }
     }
 
     .current {
-        color: @white;
-        text-shadow: none;
-        .bg-linear-gradient(#808080, #c0c0c0);
+        .link;
+        color: @page-link-color-hover;
+        font-weight: bold;
+        text-decoration: underline;
     }
 }
 
