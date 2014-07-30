@@ -142,7 +142,7 @@ a, a:hover, a:active, a:focus {
     position: fixed;
     top: 40px;
     width: 100%;
-    padding: 10px 30px 30px;
+    padding: 10px 30px 22px;
     background-color: @white;
     z-index: 20;
 
@@ -356,7 +356,7 @@ a, a:hover, a:active, a:focus {
     margin: -6px 15px;
 
     &:hover {
-        background-position: -70px -83px;
+        background-position: -69px -83px;
     }
 }
 
@@ -370,6 +370,13 @@ a, a:hover, a:active, a:focus {
     &:hover {
         background-position: -51px -83px;
     }
+}
+
+.icon-site {
+    .icon;
+    background-position: -78px -43px;
+    height: 13px;
+    width: 18px;
 }
 
 /********************************************************/
@@ -489,16 +496,15 @@ a, a:hover, a:active, a:focus {
         a {
             color: @page-button-color;
             float: left;
-            padding: 3px 13px;
-            height: 24px;
+            height: 20px;
             line-height: 14px;
-            padding: 3px 0;
+            padding: 1px 0;
             border: 1px solid @page-button-border;
             color: @white;
-            font-size: @font-size + 4;
+            font-size: @font-size + 3;
             text-shadow: 0px 1px 1px @page-button-color-shadow;
             text-align: center;
-            width: 25px;
+            width: 20px;
             .border-radius(2px);
             .bg-linear-gradient(@page-button-bg-top, @page-button-bg-bottom);
             .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
@@ -520,9 +526,9 @@ a, a:hover, a:active, a:focus {
 
     .link {
         float: left;
-        font-size: @font-size + 2;
+        font-size: @font-size + 1;
         color: @page-link-color;
-        margin: 1px 5px;
+        margin: 1px 3px;
 
         &:hover {
             color: @page-link-color-hover;
