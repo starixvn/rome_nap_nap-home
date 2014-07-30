@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="UpdatingFavoriteFunctionFilter.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SearchedFunctionItem.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,17 +7,23 @@
 //   <change who="Jason.Ly" date="2014.7.29">Create</change>
 // </history>
 
-namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
+namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
 {
     /// <summary>
-    /// Mark or unmark a function is favorite.
+    /// View model demonstrates an searched function in Search Results page.
     /// </summary>
-    public class UpdatingFavoriteFunctionFilter
+    public class SearchedFunctionItem
     {
         public int SiteId { get; set; }
 
-        public int UserId { get; set; }
-
         public int FunctionId { get; set; }
+
+        public string FunctionName { get; set; }
+
+        public string Link { get; set; }
+
+        public string Path { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

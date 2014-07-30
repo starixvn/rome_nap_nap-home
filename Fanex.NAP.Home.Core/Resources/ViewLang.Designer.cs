@@ -79,11 +79,29 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Domains.
+        /// </summary>
+        public static string Domains {
+            get {
+                return ResourceManager.GetString("Domains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorite Functions.
         /// </summary>
         public static string FavoriteFunctions {
             get {
                 return ResourceManager.GetString("FavoriteFunctions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Function List.
+        /// </summary>
+        public static string FunctionList {
+            get {
+                return ResourceManager.GetString("FunctionList", resourceCulture);
             }
         }
         
@@ -124,6 +142,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click to mark this function as your favorite..
+        /// </summary>
+        public static string MarkingFavoriteInstruction {
+            get {
+                return ResourceManager.GetString("MarkingFavoriteInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not found!.
         /// </summary>
         public static string NotFoundError {
@@ -138,6 +165,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         public static string NotFoundMessage {
             get {
                 return ResourceManager.GetString("NotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path.
+        /// </summary>
+        public static string Path {
+            get {
+                return ResourceManager.GetString("Path", resourceCulture);
             }
         }
         
@@ -160,6 +196,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are {0} results matched..
+        /// </summary>
+        public static string SearchResult {
+            get {
+                return ResourceManager.GetString("SearchResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Results.
         /// </summary>
         public static string SearchResults {
@@ -174,6 +219,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         public static string Sites {
             get {
                 return ResourceManager.GetString("Sites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no data..
+        /// </summary>
+        public static string ThereIsNoData {
+            get {
+                return ResourceManager.GetString("ThereIsNoData", resourceCulture);
             }
         }
     }

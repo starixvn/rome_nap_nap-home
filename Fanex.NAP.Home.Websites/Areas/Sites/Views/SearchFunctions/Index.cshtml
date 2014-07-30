@@ -1,0 +1,58 @@
+﻿@using System.Text.RegularExpressions
+@using Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
+@model PagerList<SearchedFunctionItem>
+@{
+    string searchedFunctionName = (string)ViewBag.SearchedFunctionName;
+    ViewBag.Title = @ViewLang.SearchResults;
+    Layout = "~/Areas/Sites/Views/Shared/_SitesLayout.cshtml";
+}
+@section Head
+{
+    @Styles.Render("~/styles/searchFunctions")
+}
+@if (Model != null && Model.Any())
+{
+    <div class="col-sm-12 search-total">@Html.Raw(string.Format(ViewLang.SearchResult, "<span class=\"number\">" + Model.TotalItemCount + "</span>"))</div>
+    <div class="col-sm-12 search-result">
+        @foreach (SearchedFunctionItem function in Model)
+        {
+            <div class="row search-item">
+                <h4>
+                    @HighlightWordsInLink(searchedFunctionName, function.FunctionName, function.Link)
+                    <span class="@(@function.IsFavorite ? "icon-favorite-medium" : "icon-favorite-medium")"></span>
+                </h4>
+                <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>@ViewLang.ThereIsNoData</p>
+}
+
+<div class="col-sm-12 paging">
+    <ul class="list-unstyled list-inline">
+        <li><span class="prev disabled"><span>« <span class="txt">Prev</span></span></li>
+        @*<li><a href="#" class="prev">« <span class="txt">Prev</span></a></li>*@
+        <li><span href="#" class="current">1</span></li>
+        <li><a href="#" class="link">2</a></li>
+        <li><a href="#" class="link">3</a></li>
+        <li><a href="#" class="next"><span class="txt">Next</span> »</a></li>
+        @*<li><span href="#" class="next disabled"><span class="txt">Next</span> »</span></li>*@
+    </ul>
+</div>
+@section Foot 
+{
+    @Scripts.Render("~/scripts/searchFunctions")
+}
+@helper HighlightWordsInLink(string keyword, string text, string link)
+{
+    var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
+    string result = formatter.Replace(text, delegate(Match match)
+    {
+        return string.Format("<b>{0}</b>", match.Value);
+    });
+
+    <a href="@link">@Html.Raw(result)</a>
+}

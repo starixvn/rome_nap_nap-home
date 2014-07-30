@@ -92,84 +92,62 @@
             }
         }
 
-        .favorite {
+        .menu-button {
             position: relative;
             float: right;
             padding: 9px 7px;
             border-left: 1px solid #fafafa;
+        }
 
-            .function {
-                .sublayer;
-                padding: 10px;
-                bottom: 33px;
+        .menu-wrapper {
+            bottom: 43px;
+            color: @text-color;
+            .sublayer;
+            .arrow-down();
+
+            &:before {
+                bottom: -9px;
+                right: 10px;
+            }
+
+            &:after {
+                bottom: -8px;
+                right: 10px;
+            }
+
+            &.function-menu-wrapper {
                 right: 5px;
-                color: @text-color;
-                .arrow-down();
+            }
 
-                &:before {
-                    bottom: -9px;
-                    right: 10px;
-                }
+            &.domain-menu-wrapper {
+                right: 42px;
+            }
 
-                &:after {
-                    bottom: -8px;
-                    right: 10px;
-                }
+            .menu-content {
+                margin-bottom: 0;
+                max-height: 150px;
+                overflow-x: auto;
 
-                li {
-                    padding: 0 10px;
-                }
-
-                a {
-                    white-space: nowrap;
-                    padding: 4px 0;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-
-                .expand {
+                .function-group {
                     color: @function-expand-color;
+                    padding-top: 2px;
                 }
 
                 .sub-function {
                     color: @text-color;
                 }
             }
-        }
 
-        .url-site {
-            position: relative;
-            float: right;
-            padding: 9px 7px;
-            border-left: 1px solid @thumb-title-border;
+            li {
+                padding: 0 10px;
+            }
 
-            .list-url {
-                .sublayer;
-                bottom: 33px;
-                right: 0;
-                min-width: 285px;
-                .arrow-down();
+            a {
+                white-space: nowrap;
+                padding: 4px 0;
 
-                &:before {
-                    bottom: -9px;
-                    right: 10px;
-                }
-
-                &:after {
-                    bottom: -8px;
-                    right: 10px;
-                }
-
-                a {
-                    color: @thumb-title-color;
-                    font-size: 13px;
-                    font-style: normal;
-
-                    &:hover {
-                        text-decoration: underline;
-                    }
+                &:hover {
+                    text-decoration: underline;
                 }
             }
         }

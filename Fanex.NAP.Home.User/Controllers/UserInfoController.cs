@@ -41,8 +41,6 @@ namespace Fanex.NAP.Home.User.Controllers
         {
             _userService = userService ?? new UserService { ServiceContext = new ServiceContext() };
             _hashAlgorithm = new SHA256Managed();
-
-            ViewBag.HasSearchBar = false;
         }
 
         public string FormToken

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="FavoriteFunctionsFilter.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="UpdatingFavoriteFunctionFilter.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
@@ -7,17 +7,19 @@
 //   <change who="Jason.Ly" date="2014.7.29">Create</change>
 // </history>
 
-namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
+namespace Fanex.NAP.Home.Sites.ViewModels.Common
 {
     /// <summary>
-    /// Query top favorite functions belong to a site of an user..
+    /// Mark or unmark a function is favorite.
     /// </summary>
-    public class FavoriteFunctionsFilter
+    public class UpdatingFavoriteFunctionFilter
     {
         public int SiteId { get; set; }
 
         public int UserId { get; set; }
 
-        public string Environment { get; set; }
+        public int FunctionId { get; set; }
+
+        public bool IsMarked { get; set; }
     }
 }

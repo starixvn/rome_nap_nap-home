@@ -1,5 +1,4 @@
 ﻿@{
-    bool hasSearchBar = ViewBag.HasSearchBar != null ? ViewBag.HasSearchBar : true;
     bool isHomePage = ViewBag.IsHomePage ?? false;
 }
 <!DOCTYPE html>
@@ -19,7 +18,7 @@
     @Scripts.Render("~/scripts/html5hacks")
     @RenderSection("Head", false)
 </head>
-<body @(hasSearchBar ? "class=has-search" : string.Empty)>
+<body>
     <nav class="navbar navbar-default navbar-fixed-top custom-navbar" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -47,7 +46,7 @@
             <ul class="breadcrumb title">
                 @if (!isHomePage)
                 {
-                <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
+                    <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
                 }
                 <li>@ViewBag.Title</li>
             </ul>

@@ -1,5 +1,5 @@
 ﻿/* File Created: July 29, 2014 */
-/* global Namespace */
+/* global Namespace, common */
 'use strict';
 
 $(document).ready(function () {
@@ -13,28 +13,35 @@ Fanex.NAP.Home.Sites.UserSites = function () {
     var $this = this;
 
     var domElements = {
-        divSiteUrls: null,
-        divFuntions: null
+        divDomainButtons: null,
+        divFuntionButtons: null
     };
+    var urls = {
+        FunctionList: common.ResolveRootUrl('Sites/UserSites/FunctionList'),
+        TopFavoriteFunctions: common.ResolveRootUrl('Sites/UserSites/TopFavoriteFunctions'),
+        UpdatingFavoriteFunction: common.ResolveRootUrl('Sites/UserSites/UpdatingFavoriteFunction')
+    };
+    var favoriteUpdated = false;
 
     // Cache DOM elements.
     var cacheDOMElements = function () {
-        domElements.divFuntions = $('div.favorite');
-        domElements.divSiteUrls = $('div.url-site');
+        domElements.divFuntionButtons = $('div.function-button');
+        domElements.divDomainButtons = $('div.domain-button');
     };
 
     // Handle events of elements.
     var handleEvents = function () {
-        domElements.divSiteUrls.on('click.nap-home-menu', function () {
+        // Click on Domains icon.
+        domElements.divDomainButtons.on('click.nap-home', function () {
             var $button = $(this);
-            var $icon = $button.find('span');
-            var $menu = $button.find('ul');
+            var $icon = $button.children('span');
+            var $menu = $button.next();
 
             if ($menu.is(':hidden')) {
                 hideMenus();
                 $button.addClass('active');
                 $icon.addClass('active');
-                $menu.show();
+                $menu.show().children().niceScroll();
             } else {
                 $button.removeClass('active');
                 $icon.removeClass('active');
@@ -44,9 +51,75 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             return false;
         });
 
+        // Click on Function icon.
+        domElements.divFuntionButtons.on('click.nap-home', function () {
+            var $button = $(this);
+            var $tile = $button.closest('div.description');
+            var $icon = $button.children('span');
+            var $menu = $button.next();
+            var siteId = $tile.attr('data-site-id');
+
+            if ($menu.is(':hidden')) {
+                favoriteUpdated = false;
+                getFunctionsOfSite($menu, siteId);
+
+                hideMenus();
+                $button.addClass('active');
+                $icon.addClass('active');
+            } else {
+                $button.removeClass('active');
+                $icon.removeClass('active');
+                $tile.trigger('reload.nap-home');
+                $menu.hide();
+            }
+
+            return false;
+        });
+
+        // Collapse/expand function tree.
+        $('div.function-menu-wrapper').on('click.nap-home', 'span.group-node', function () {
+            var $groupNode = $(this);
+
+            $groupNode.next().slideToggle();
+            $groupNode.children('span').toggleClass('icon-expand').toggleClass('icon-collapse');
+            $groupNode.closest('ul.menu-content').getNiceScroll().resize();
+
+            return false;
+        });
+
+        // Mark/unmark favorite function.
+        $('div.function-menu-wrapper').on('click.nap-home', 'span.icon-star', function () {
+            var $starIcon = $(this);
+            var $tile = $starIcon.closest('div.description');
+            var siteId = $tile.attr('data-site-id');
+            var functionId = $starIcon.attr('data-function-id');
+            var isMarked = $starIcon.hasClass('icon-noneFavourite');
+
+            favoriteUpdated = true;
+            $starIcon.toggleClass('icon-favourite').toggleClass('icon-noneFavourite');
+            markUnmarkFavoriteFunction({
+                SiteId: siteId,
+                FunctionId: functionId,
+                IsMarked: isMarked
+            });
+        });
+
+        // Reload tiles.
+        $('div.description').on('reload.nap-home', function () {
+            var $tile = $(this);
+            var $bgImage = null;
+            var siteId = $tile.attr('data-site-id');
+
+            if (favoriteUpdated) {
+                favoriteUpdated = false;
+                $bgImage = $tile.children('img.bg-img');
+                getTopFavoriteFunctions($bgImage, siteId);
+            }
+        });
+
         // Hide menus when clicking on page.
-        $('html').on('click.nap-home-menu', function (event) {
-            if (!$(event.target).hasClass('expand menu-node')) {
+        $('html').on('click.nap-home', function (event) {
+            if ($(event.target).closest('.menu-wrapper').length === 0) {
                 hideMenus();
             }
         });
@@ -55,10 +128,10 @@ Fanex.NAP.Home.Sites.UserSites = function () {
     // Hide all menus.
     var hideMenus = function () {
         // Hide URL menu.
-        domElements.divSiteUrls.filter('.active').each(function () {
+        domElements.divDomainButtons.filter('.active').each(function () {
             var $button = $(this);
-            var $icon = $button.find('span');
-            var $menu = $button.find('ul');
+            var $icon = $button.children('span');
+            var $menu = $button.next();
 
             $button.removeClass('active');
             $icon.removeClass('active');
@@ -66,20 +139,110 @@ Fanex.NAP.Home.Sites.UserSites = function () {
         });
 
         // Hide function menu.
-        domElements.divFuntions.filter('.active').each(function () {
+        domElements.divFuntionButtons.filter('.active').each(function () {
             var $button = $(this);
             var $tile = $button.closest('div.description');
-            var $icon = $button.find('span');
-            var $menu = $button.find('ul');
+            var $icon = $button.children('span');
+            var $menu = $button.next();
 
             $button.removeClass('active');
             $icon.removeClass('active');
+            $tile.trigger('reload.nap-home');
+            $menu.hide();
+        });
+    };
 
-            if ($menu) {
-                $menu.hide();
+    // Get Function menu content.
+    var getFunctionsOfSite = function ($menu, siteId) {
+        $menu.html('');
+        common.DisableInput();
+        $.ajax({
+            type: 'POST',
+            url: urls.FunctionList,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
+            data: JSON.stringify({ SiteId: siteId }),
+            success: function (functionList) {
+                var $menuContent = null;
+
+                if (functionList && functionList !== '') {
+                    $menu.html(functionList).show();
+                    $menuContent = $menu.children('ul.menu-content');
+                    $menuContent.find('span.icon-star').tooltip({
+                        placement: 'left'
+                    });
+
+                    if ($menuContent.length > 0 && $menuContent.getNiceScroll().length === 0) {
+                        $menuContent.niceScroll();
+                    }
+                }
+            },
+            error: function (xhr) {
+                common.HandleAjaxError(xhr);
+            },
+            complete: function () {
+                common.EnableInput();
             }
+        });
+    };
 
-            $tile.trigger('close.nap-home-menu');
+    // Get Top Favorite Functions.
+    var getTopFavoriteFunctions = function ($bgImage, siteId) {
+        var bgImageUrl = $bgImage.attr('src');
+
+        common.DisableInput();
+        $.ajax({
+            type: 'POST',
+            url: urls.TopFavoriteFunctions,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'html',
+            data: JSON.stringify({ SiteId: siteId }),
+            success: function (favorites) {
+                $bgImage.next().remove(); // Remove old favorite list.
+
+                if (favorites && favorites !== '') {
+                    $bgImage.after(favorites); // Append new favorite list.
+
+                    if (bgImageUrl.indexOf('NonFavorite') > -1) {
+                        bgImageUrl = bgImageUrl.replace('NonFavorite', 'Favorite');
+                        $bgImage.attr('src', bgImageUrl);
+                    }
+                } else if (bgImageUrl.indexOf('Favorite') > -1) {
+                    bgImageUrl = bgImageUrl.replace('Favorite', 'NonFavorite');
+                    $bgImage.attr('src', bgImageUrl);
+                }
+            },
+            error: function (xhr) {
+                common.HandleAjaxError(xhr);
+            },
+            complete: function () {
+                common.EnableInput();
+            }
+        });
+    };
+
+    // Get Top Favorite Functions.
+    var markUnmarkFavoriteFunction = function (parameters) {
+        common.DisableInput();
+        $.ajax({
+            type: 'POST',
+            url: urls.UpdatingFavoriteFunction,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(parameters),
+            success: function (result) {
+                if (result.Code === 0) {
+                    common.ShowInfoMessage(result.Message);
+                } else {
+                    common.ShowErrorMessage(result.Message);
+                }
+            },
+            error: function (xhr) {
+                common.HandleAjaxError(xhr);
+            },
+            complete: function () {
+                common.EnableInput();
+            }
         });
     };
 

@@ -63,6 +63,7 @@ namespace Fanex.NAP.Home.Websites
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
                 "~/Scripts/jQuery/jquery-1.11.1.min.js",
                 "~/Scripts/jQuery/jquery.blockUI.2.66.min.js",
+                "~/Scripts/jQuery/jquery.nicescroll.min.js",
                 "~/Scripts/Bootstrap/bootstrap.js",
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",
@@ -99,9 +100,11 @@ namespace Fanex.NAP.Home.Websites
                 "~/styles/userSites",
                 "~/Areas/Sites/Resources/UserSites/user-sites.less");
 
+            bundles.Add(new ScriptBundle("~/scripts/searchFunctions").Include(
+                "~/Areas/Sites/Resources/SearchFunctions/search-functions.js"));
             bundles.AddAndInclude(
-                "~/styles/searchSite",
-                "~/Areas/Sites/Resources/SearchSites/search-site.less");
+                "~/styles/searchFunctions",
+                "~/Areas/Sites/Resources/SearchFunctions/search-functions.less");
         }
     }
 }

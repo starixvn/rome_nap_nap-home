@@ -1,0 +1,11 @@
+﻿@using Fanex.NAP.Home.Sites.ViewModels.UserSites
+@model IEnumerable<UserSiteFunctionItem>
+@if (Model != null && Model.Any())
+{
+    <ul class="list-unstyled link">
+        @foreach (var favorite in Model)
+        {
+            <li><a href="@Url.Content(favorite.Link)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
+        }
+    </ul>
+}
