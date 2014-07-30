@@ -2,3 +2,8 @@
     ViewBag.Title = @ViewLang.FavoriteFunctions;
     Layout = "~/Areas/Sites/Views/Shared/_SitesLayout.cshtml";
 }
+
+@section Head
+{
+    @Styles.Render("~/styles/favoriteFunctions")
+}

@@ -291,6 +291,7 @@
     <Content Include="Areas\Sites\Resources\SearchFunctions\search-functions.less" />
     <Content Include="Areas\Sites\Views\UserSites\FunctionList.cshtml" />
     <Content Include="Areas\Sites\Views\UserSites\TopFavoriteFunctions.cshtml" />
+    <None Include="Areas\Sites\Resources\FavoriteFunctions\favorite-functions.less" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

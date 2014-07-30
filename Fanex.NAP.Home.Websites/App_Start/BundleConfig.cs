@@ -105,6 +105,10 @@ namespace Fanex.NAP.Home.Websites
             bundles.AddAndInclude(
                 "~/styles/searchFunctions",
                 "~/Areas/Sites/Resources/SearchFunctions/search-functions.less");
+
+            bundles.AddAndInclude(
+                "~/styles/favoriteFunctions",
+                "~/Areas/Sites/Resources/FavoriteFunctions/favorite-functions.less");
         }
     }
 }

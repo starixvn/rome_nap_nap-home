@@ -300,7 +300,7 @@ a, a:hover, a:active, a:focus {
     background-position: -14px -115px;
 }
 
-.function {
+.sub-function {
     .icon-favourite:hover {
         background-position: -71px -115px;
     }
@@ -350,13 +350,25 @@ a, a:hover, a:active, a:focus {
 // icon for search page
 .icon-favorite-medium {
     .icon;
+    background-position: -29px -83px;
+    height: 19px;
+    width: 19px;
+    margin: -6px 15px;
+
+    &:hover {
+        background-position: -70px -83px;
+    }
+}
+
+.icon-noneFavorite-medium {
+    .icon;
     background-position: -11px -83px;
     height: 19px;
     width: 19px;
     margin: -6px 15px;
 
     &:hover {
-        background-position: -29px -83px;
+        background-position: -51px -83px;
     }
 }
 
@@ -460,7 +472,8 @@ a, a:hover, a:active, a:focus {
 /*                        Paging                        */
 /********************************************************/
 .paging {
-    margin: 15px 0;
+    margin: 20px 0;
+    padding: 0 10px;
 
     li {
         padding: 0;
