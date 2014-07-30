@@ -41,7 +41,11 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                 hideMenus();
                 $button.addClass('active');
                 $icon.addClass('active');
-                $menu.show().children().niceScroll();
+                $menu.show().children().niceScroll({
+                    cursorcolor: "#8C8C8C",
+                    cursorwidth: '7px',
+                    cursorborderradius: '3px'
+                });
             } else {
                 $button.removeClass('active');
                 $icon.removeClass('active');
