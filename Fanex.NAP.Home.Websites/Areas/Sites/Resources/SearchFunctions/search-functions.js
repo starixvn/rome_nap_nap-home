@@ -13,22 +13,31 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
     var $this = this;
 
     var domElements = {
-        divDomainButtons: null,
-        divFuntionButtons: null
+        spanStarIcons: null
     };
     var urls = {
         MarkFavoriteFunction: common.ResolveRootUrl('Sites/SearchFunctions/MarkFavoriteFunction')
     };
-    var favoriteUpdated = false;
 
     // Cache DOM elements.
     var cacheDOMElements = function () {
-        domElements.divFuntionButtons = $('div.function-button');
-        domElements.divDomainButtons = $('div.domain-button');
+        domElements.spanStarIcons = $('span.icon-star');
     };
 
     // Handle events of elements.
     var handleEvents = function () {
+        domElements.spanStarIcons.tooltip();
+        domElements.spanStarIcons.on('click.nap-home', function () {
+            var $icon = $(this);
+            var siteId = $icon.attr('data-site-id');
+            var functionId = $icon.attr('data-function-id');
+
+            markUnmarkFavoriteFunction({
+                SiteId: siteId,
+                FunctionId: functionId,
+                IsMarked: true
+            });
+        });
     };
 
     // Get Top Favorite Functions.

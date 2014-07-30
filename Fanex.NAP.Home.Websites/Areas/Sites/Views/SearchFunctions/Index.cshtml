@@ -19,7 +19,13 @@
             <div class="row search-item">
                 <h4>
                     @HighlightWordsInLink(searchedFunctionName, function.FunctionName, function.Link)
-                    <span class="@(@function.IsFavorite ? "icon-favorite-medium" : "icon-favorite-medium")"></span>
+                    <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-favorite-medium")"
+                          title="@ViewLang.MarkingFavoriteInstruction"
+                          data-site-id="@function.SiteId"
+                          data-function-id="@function.FunctionId"
+                          data-toggle="tooltip"
+                          data-placement="right">
+                    </span>
                 </h4>
                 <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
             </div>
@@ -40,7 +46,7 @@
             PrevPageText = "‹ Prev",
             NextPageText = "Next ›",
             FirstPageText = "« First",
-            LastPageText = "Last »",
+            LastPageText = "Last »"
         }, new { @class = "list-unstyled" })
     </div>
 }
