@@ -32,14 +32,16 @@
             ShowFirstLast = true,
             ContainerTagName ="ul",
             CssClass = "link",
-            PageNumberFormatString = "<a class=\"link\">{0}</a>",
+            PageNumberFormatString = "<a class=\"link\" href=\"#\">{0}</a>",
             NumericPagerItemWrapperFormatString = "<li>{0}</li>",
             CurrentPagerItemWrapperFormatString = "<li><span class=\"current\">{0}</span></li>",
             CurrentPageNumberFormatString = "{0}",
-            NavigationPagerItemWrapperFormatString = "<li><span class=\"butt\"><span>{0}</span></li>",
-            PrevPageText = "« Prev",
-            NextPageText = "Next »",
-        }, new { @class = "list-unstyled list-inline" })
+            NavigationPagerItemWrapperFormatString = "<li><span class=\"action\">{0}</li>",
+            PrevPageText = "‹ Prev",
+            NextPageText = "Next ›",
+            FirstPageText = "« First",
+            LastPageText = "Last »",
+        }, new { @class = "list-unstyled" })
     </div>
 }
 else
