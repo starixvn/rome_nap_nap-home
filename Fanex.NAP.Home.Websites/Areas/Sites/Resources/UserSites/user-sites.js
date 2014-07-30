@@ -81,7 +81,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             var $groupNode = $(this);
 
             $groupNode.next().slideToggle();
-            $groupNode.children('span').toggleClass('icon-expand').toggleClass('icon-collapse');
+            $groupNode.toggleClass('expand-node').children('span').toggleClass('icon-expand').toggleClass('icon-collapse');
             $groupNode.closest('ul.menu-content').getNiceScroll().resize();
 
             return false;

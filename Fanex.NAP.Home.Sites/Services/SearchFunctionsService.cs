@@ -26,6 +26,7 @@ namespace Fanex.NAP.Home.Sites.Services
         public IEnumerable<SearchedFunctionItem> SearchFunctions(SearchingFunctionFilter filter)
         {
             this.QueryData(filter);
+            filter.TotalItems = 50;
 
             return GetFunctions();
         }

@@ -25,29 +25,33 @@
             </div>
         }
     </div>
+    <div class="col-sm-12 paging">
+        @Html.Pager(Model, new PagerOptions()
+        {
+            PageIndexParameterName = "pageIndex",
+            ShowFirstLast = true,
+            ContainerTagName ="ul",
+            CssClass = "link",
+            PageNumberFormatString = "<a class=\"link\">{0}</a>",
+            NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+            CurrentPagerItemWrapperFormatString = "<li><span class=\"current\">{0}</span></li>",
+            CurrentPageNumberFormatString = "{0}",
+            NavigationPagerItemWrapperFormatString = "<li><span class=\"prev\"><span>{0}</span></li>",
+            PrevPageText = "« Prev",
+            NextPageText = "» Next",
+        }, new { @class = "list-unstyled list-inline" })
+    </div>
 }
 else
 {
     <p>@ViewLang.ThereIsNoData</p>
 }
-
-<div class="col-sm-12 paging">
-    <ul class="list-unstyled list-inline">
-        <li><span class="prev disabled"><span>« <span class="txt">Prev</span></span></li>
-        @*<li><a href="#" class="prev">« <span class="txt">Prev</span></a></li>*@
-        <li><span href="#" class="current">1</span></li>
-        <li><a href="#" class="link">2</a></li>
-        <li><a href="#" class="link">3</a></li>
-        <li><a href="#" class="next"><span class="txt">Next</span> »</a></li>
-        @*<li><span href="#" class="next disabled"><span class="txt">Next</span> »</span></li>*@
-    </ul>
-</div>
 @section Foot 
 {
     @Scripts.Render("~/scripts/searchFunctions")
 }
 @helper HighlightWordsInLink(string keyword, string text, string link)
-{
+    {
     var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
     string result = formatter.Replace(text, delegate(Match match)
     {

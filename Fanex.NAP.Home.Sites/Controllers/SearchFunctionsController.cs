@@ -49,7 +49,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             ViewBag.CurrentPageIndex = filter.PageIndex;
             filter.PageSize = AppSettings.SearchPageSize;
             searchedFunctions = this._service.SearchFunctions(filter);
-            pagedFunctions = new PagerList<SearchedFunctionItem>(filter.PageIndex, filter.PageSize, filter.TotalItems, searchedFunctions);
+            pagedFunctions = new PagerList<SearchedFunctionItem>(filter.PageIndex + 1, filter.PageSize, filter.TotalItems, searchedFunctions);
 
             return View(pagedFunctions);
         }
