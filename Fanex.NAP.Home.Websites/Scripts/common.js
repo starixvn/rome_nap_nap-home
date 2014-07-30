@@ -131,6 +131,10 @@ Fanex.NAP.Home.Common = function () {
         if ($.fn.niceScroll) {
             $('html').niceScroll({
                 autohidemode: false,
+                cursorcolor: "#8C8C8C",
+                cursorwidth: '10px',
+                background: '#eee',
+                cursorborderradius: '3px',
                 zindex: 1031
             });
         }

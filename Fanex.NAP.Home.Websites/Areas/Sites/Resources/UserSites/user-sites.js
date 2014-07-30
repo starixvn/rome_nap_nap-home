@@ -173,7 +173,11 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                     });
 
                     if ($menuContent.length > 0 && $menuContent.getNiceScroll().length === 0) {
-                        $menuContent.niceScroll();
+                        $menuContent.niceScroll({
+                            cursorcolor: "#8C8C8C",
+                            cursorwidth: '7px',
+                            cursorborderradius: '3px'
+                        });
                     }
                 }
             },
