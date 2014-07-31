@@ -347,7 +347,7 @@ a, a:hover, a:active, a:focus {
     background-position: -56px -17px;
 }
 
-// icon for search page
+// icons for search page
 .icon-favorite-medium {
     .icon;
     background-position: -29px -83px;
@@ -474,6 +474,21 @@ a, a:hover, a:active, a:focus {
         background-color: @msg-err-bg + #444 !important;
     }
 }
+@media (max-width: 768px) {
+    .form-custom {
+        .lbl-field {
+            text-align: left;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .form-custom {
+        &.user-profile, &.change-password {
+            width: 420px;
+        }
+    }
+}
 
 /********************************************************/
 /*                        Paging                        */
@@ -554,21 +569,5 @@ a, a:hover, a:active, a:focus {
 
    &.right .tooltip-arrow {
         border-right-color: #f8b03e;
-    }
-}
-
-@media (max-width: 768px) {
-    .form-custom {
-        .lbl-field {
-            text-align: left;
-        }
-    }
-}
-
-@media (min-width: 1200px) {
-    .form-custom {
-        &.user-profile, &.change-password {
-            width: 420px;
-        }
     }
 }
