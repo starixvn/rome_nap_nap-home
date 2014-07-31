@@ -226,6 +226,7 @@
     <Content Include="Content\MessageBox\Images\info.png" />
     <Content Include="Content\MessageBox\Images\question.png" />
     <Content Include="Content\MessageBox\msgbox-0.0.1.css" />
+    <Content Include="Content\Theme\Images\favicon.ico" />
     <Content Include="Content\Theme\Images\loading.gif" />
     <Content Include="Content\Theme\Images\pattern-bg.jpg" />
     <Content Include="Content\Theme\Images\search.png" />

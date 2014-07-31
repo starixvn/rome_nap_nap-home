@@ -12,31 +12,36 @@
 }
 @if (Model != null && Model.Any())
 {
-    <div class="col-sm-12 search-total">@Html.Raw(string.Format(ViewLang.SearchResult, "<span class=\"number\">" + Model.TotalItemCount + "</span>"))</div>
-    <div class="col-sm-12 search-result">
-        @foreach (SearchedFunctionItem function in Model)
-        {
-            <div class="col-sm-12 col-md-6 search-item">
-                <h4>
-                    @HighlightWordsInLink(searchedFunctionName, function.FunctionName, function.Link)
-                    <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
+    <div class="col-sm-12 result">
+        <div class="row search-total">
+            <div class="col-sm-12 total">
+                @Html.Raw(string.Format(ViewLang.SearchResult, "<span class=\"number\">" + Model.TotalItemCount + "</span>"))
+            </div>
+        </div>
+        <div class="row search-result">
+            @foreach (SearchedFunctionItem function in Model)
+            {
+                <div class="col-sm-12 col-md-6 search-item">
+                    <h4>
+                        @HighlightWordsInLink(searchedFunctionName, function.FunctionName, function.Link)
+                        <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
                           title="@ViewLang.MarkingFavoriteInstruction"
                           data-site-id="@function.SiteId"
                           data-function-id="@function.FunctionId"
                           data-toggle="tooltip"
-                          data-placement="right">
-                    </span>
-                </h4>
-                <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
-            </div>
-        }
-    </div>
-    <div class="col-sm-12 paging">
-        @Html.Pager(Model, new PagerOptions()
+                          data-placement="right"></span>
+                    </h4>
+                    <div class="desc-item clearfix">
+                        <span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
+                </div>
+            }
+        </div>
+        <div class="row paging fixed">
+            @Html.Pager(Model, new PagerOptions()
         {
             PageIndexParameterName = "pageIndex",
             ShowFirstLast = true,
-            ContainerTagName ="ul",
+            ContainerTagName = "ul",
             CssClass = "link",
             PageNumberFormatString = "<a class='link' href='#'>{0}</a>",
             NumericPagerItemWrapperFormatString = "<li>{0}</li>",
@@ -44,11 +49,13 @@
             CurrentPageNumberFormatString = "{0}",
             NavigationPagerItemWrapperFormatString = "<li><span class=\"btn-page\">{0}</span></li>",
             PrevPageText = "‹",
-            NextPageText =  "›",
+            NextPageText = "›",
             FirstPageText = "«",
             LastPageText = "»"
         }, new { @class = "list-unstyled" })
+        </div>
     </div>
+    
 }
 else
 {
@@ -60,11 +67,11 @@ else
 }
 @helper HighlightWordsInLink(string keyword, string text, string link)
     {
-    var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
-    string result = formatter.Replace(text, delegate(Match match)
-    {
-        return string.Format("<b>{0}</b>", match.Value);
-    });
+        var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
+        string result = formatter.Replace(text, delegate(Match match)
+        {
+            return string.Format("<b>{0}</b>", match.Value);
+        });
 
     <a href="@link">@Html.Raw(result)</a>
 }

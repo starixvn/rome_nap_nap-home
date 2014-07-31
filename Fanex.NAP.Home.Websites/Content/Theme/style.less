@@ -495,7 +495,18 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 .paging {
     margin: 20px 0;
-    padding: 0 10px;
+    padding: 0;
+
+    &.fixed {
+        background-color: @white;
+        border-top: 1px solid @border-color;
+        bottom: 0;
+        left: 45px;
+        margin: 0 -5px;
+        padding: 10px 0;
+        position: fixed;
+        right: 0;
+    }
 
     ul {
         margin: 0;
@@ -543,7 +554,7 @@ a, a:hover, a:active, a:focus {
         float: left;
         font-size: @font-size + 1;
         color: @page-link-color;
-        margin: 1px 3px;
+        margin: 0 3px;
 
         &:hover {
             color: @page-link-color-hover;
