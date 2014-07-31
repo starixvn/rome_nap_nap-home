@@ -142,6 +142,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Marked as your favorite!.
+        /// </summary>
+        public static string MarkedAsYourFavorite {
+            get {
+                return ResourceManager.GetString("MarkedAsYourFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click to mark this function as your favorite..
         /// </summary>
         public static string MarkingFavoriteInstruction {
@@ -228,6 +237,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         public static string ThereIsNoData {
             get {
                 return ResourceManager.GetString("ThereIsNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unmarked successfully!.
+        /// </summary>
+        public static string UnmarkedSuccessfully {
+            get {
+                return ResourceManager.GetString("UnmarkedSuccessfully", resourceCulture);
             }
         }
     }

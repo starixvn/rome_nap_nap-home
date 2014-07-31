@@ -206,7 +206,8 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             dataType: 'html',
             data: JSON.stringify({ SiteId: siteId }),
             success: function (favorites) {
-                $bgImage.next().remove(); // Remove old favorite list.
+                
+                $bgImage.next('.link').remove(); // Remove old favorite list.
 
                 if (favorites && favorites !== '') {
                     $bgImage.after(favorites); // Append new favorite list.
@@ -215,7 +216,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                         bgImageUrl = bgImageUrl.replace('NonFavorite', 'Favorite');
                         $bgImage.attr('src', bgImageUrl);
                     }
-                } else if (bgImageUrl.indexOf('Favorite') > -1) {
+                } else if (bgImageUrl.indexOf('NonFavorite') < 0 && bgImageUrl.indexOf('Favorite') > -1) {
                     bgImageUrl = bgImageUrl.replace('Favorite', 'NonFavorite');
                     $bgImage.attr('src', bgImageUrl);
                 }

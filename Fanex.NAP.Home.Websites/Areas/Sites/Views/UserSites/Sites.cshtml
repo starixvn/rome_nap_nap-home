@@ -20,22 +20,25 @@
                 <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
                 @Html.Partial("TopFavoriteFunctions", site.Favorites)
                 <div class="text-title">
-                    <a href="@Url.Content(site.Domains[0])" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
+                    <a href="@Url.Content(site.DefaultLink ?? "#")" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
                     <div class="menu-button function-button">
                         <span class="icon-function" title="@ViewLang.FunctionList"></span>
                     </div>
                     <div class="menu-wrapper function-menu-wrapper"></div>
                     <div class="menu-button domain-button">
-                        <span class="icon-arrow-site" title="@ViewLang.Domains"></span>
+                        <span class="icon-arrow-site @(site.Domains.Count == 0 ? "disabled" : string.Empty)" title="@ViewLang.Domains"></span>
                     </div>
-                    <div class="menu-wrapper domain-menu-wrapper">
-                        <ul class="menu-content list-unstyled">
-                            @foreach (var domain in site.Domains)
-                            {
-                                <li><a href="Url.Content(@domain)">@domain</a></li>
-                            }
-                        </ul>
-                    </div>
+                    @if (site.Domains.Count > 0)
+                    {
+                        <div class="menu-wrapper domain-menu-wrapper">
+                            <ul class="menu-content list-unstyled">
+                                @foreach (var domain in site.Domains)
+                                {
+                                    <li><a href="Url.Content(@domain)">@domain</a></li>
+                                }
+                            </ul>
+                        </div>
+                    }
                 </div>
                 <div class="shadow">
                     <img src="~/Content/Theme/Images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />

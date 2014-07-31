@@ -11,6 +11,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Services;
@@ -20,6 +21,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
     /// <summary>
     /// Search sites controller.
     /// </summary>
+    [NapSuperAuth]
     public class SearchFunctionsController : BaseController
     {
         private ISearchFunctionsService _service;

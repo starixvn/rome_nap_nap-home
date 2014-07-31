@@ -10,11 +10,13 @@
 namespace Fanex.NAP.Home.Sites.Controllers
 {
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Home.Core.Helpers;
 
     /// <summary>
     /// Favorite functions controller.
     /// </summary>
+    [NapSuperAuth]
     public class FavoriteFunctionsController : BaseController
     {
         /// <summary>

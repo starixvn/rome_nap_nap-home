@@ -75,7 +75,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
 
             filter.UserId = this.CurrentSession.UserId;
             filter.Environment = this.Environment;
-            filter.Top = 5; // Should get from app settings.
+            filter.Top = AppSettings.TopFavorites;
             functions = this._service.LoadTopFavoriteFunctionsOfSite(filter);
 
             return PartialView(functions);

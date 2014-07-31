@@ -18,6 +18,7 @@ namespace Fanex.NAP.Home.Core.Helpers
     public static class AppSettings
     {
         private static int? searchPageSize;
+        private static int? topFavorites;
 
         public static int SearchPageSize
         {
@@ -29,6 +30,19 @@ namespace Fanex.NAP.Home.Core.Helpers
                 }
 
                 return searchPageSize.Value;
+            }
+        }
+
+        public static int TopFavorites
+        {
+            get
+            {
+                if (topFavorites == null)
+                {
+                    topFavorites = Converter.ToInt(GetValue("TopFavorites"));
+                }
+
+                return topFavorites.Value;
             }
         }
 

@@ -9,10 +9,15 @@
 
 namespace Fanex.NAP.Home.Sites.Services
 {
+    using System;
+    using System.Collections;
     using System.Diagnostics.CodeAnalysis;
+    using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Home.Core.Resources;
+    using Fanex.NAP.Home.Sites.Criteria.Common;
     using Fanex.NAP.Home.Sites.ViewModels.Common;
 
     /// <summary>
@@ -35,22 +40,30 @@ namespace Fanex.NAP.Home.Sites.Services
         /// <returns>Returns if the update process is successful or not.</returns>
         public ICommandResult UpdateFavoriteFunction(UpdatingFavoriteFunctionFilter filter)
         {
-            ICommandResult result = new CommandResult
+            var criteria = new UpdateMarkedMenuCriteria
             {
-                Code = 0,
-                Message = filter.IsMarked ? "Marked as your favorite" : "Unmarked successfully"
+                SiteId = filter.SiteId,
+                MenuItemId = filter.FunctionId,
+                IsMarked = filter.IsMarked,
+                UserId = filter.UserId
             };
+            CommandResult result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                Hashtable param = criteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+
+                result = GetCommandResult(param);
+            }
+
+            if (result != null && result.Code == 0)
+            {
+                result.Message = filter.IsMarked ? ViewLang.MarkedAsYourFavorite : ViewLang.UnmarkedSuccessfully;
+            }
 
             return result;
-
-            ////using (var db = new ObjectDb(criteria.GetSettingKey()))
-            ////{
-            ////    var param = criteria.GetSpParams();
-
-            ////    db.ExecuteNonQuery(param);
-
-            ////    return GetCommandResult(param);
-            ////}
         }
 
         /// <summary>
@@ -62,6 +75,23 @@ namespace Fanex.NAP.Home.Sites.Services
         protected object QueryData(object filter)
         {
             return null;
+        }
+
+        /// <summary>
+        /// Gets the command result.
+        /// </summary>
+        /// <param name="hash">The hash table.</param>
+        /// <returns>CommandResult object contains error code and error message.</returns>
+        private CommandResult GetCommandResult(Hashtable hash)
+        {
+            var errCode = hash["errcode"];
+            var errMsg = hash["errmsg"];
+
+            return new CommandResult
+            {
+                Code = (errCode is DBNull) ? 0 : Convert.ToInt32(errCode),
+                Message = (errMsg is DBNull) ? string.Empty : Convert.ToString(errMsg)
+            };
         }
     }
 }

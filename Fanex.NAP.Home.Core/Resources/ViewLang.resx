@@ -144,6 +144,9 @@
   <data name="InternalErrorMessage" xml:space="preserve">
     <value>Sorry, an error occurred while processing your request, please notify the administrators.</value>
   </data>
+  <data name="MarkedAsYourFavorite" xml:space="preserve">
+    <value>Marked as your favorite!</value>
+  </data>
   <data name="MarkingFavoriteInstruction" xml:space="preserve">
     <value>Click to mark this function as your favorite.</value>
   </data>
@@ -173,5 +176,8 @@
   </data>
   <data name="ThereIsNoData" xml:space="preserve">
     <value>There is no data.</value>
+  </data>
+  <data name="UnmarkedSuccessfully" xml:space="preserve">
+    <value>Unmarked successfully!</value>
   </data>
 </root>

@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-  <Function Name="TeamManagement">
+  <Function Name="Common">
+    <Setting Key="NAP_Home_UpdateMarkedMenu" SpName="NAP_Home_UpdateMarkedMenu" DbName="DBNAP.bodb_NAP.bodbAdminNet" />
+  </Function>
+  <Function Name="UserSites">
+    <Setting Key="NAP_Home_GetUserSites" SpName="NAP_Home_GetUserSites" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Mapping DataField="URL" ObjectProperty="Link" />
+    </Setting>
+    <Setting Key="NAP_Home_GetTopMarkedMenus" SpName="NAP_Home_GetTopMarkedMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Mapping DataField="URL" ObjectProperty="Link" />
+    </Setting>
+    <Setting Key="NAP_Home_GetMenusBySiteUserId" SpName="NAP_Home_GetMenusBySiteUserId" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Mapping DataField="URL" ObjectProperty="Link" />
+    </Setting>
+  </Function>
+  <Function Name="SearchFunctions">
+    <Setting Key="NAP_Home_SearchMenus" SpName="NAP_Home_SearchMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Mapping DataField="URL" ObjectProperty="Link" />
+    </Setting>
   </Function>
 </Functions>

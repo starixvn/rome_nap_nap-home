@@ -10,6 +10,8 @@
 namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 {
     using System.Collections.Generic;
+    using Fanex.NAP.Home.Sites.Configurations;
+    using Fanex.NAP.Home.Sites.Models.UserSites;
 
     /// <summary>
     /// View model for accessible site of an user.
@@ -22,9 +24,29 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
             this.Favorites = new List<UserSiteFunctionItem>();
         }
 
+        public UserSiteItem(SiteInfo site, List<string> domains, List<UserSiteFunctionItem> favorites)
+        {
+            if (site != null)
+            {
+                this.SiteId = site.SiteId;
+                this.SiteName = site.SiteName;
+                this.Thumbnail = SiteThumbnailsManager.GetImageName(site.SiteId);
+                this.Domains = domains ?? new List<string>();
+                this.Favorites = favorites ?? new List<UserSiteFunctionItem>();
+
+                if (this.Domains.Count > 0)
+                {
+                    this.DefaultLink = this.Domains[0];
+                    this.Domains.RemoveAt(0);
+                }
+            }
+        }
+
         public int SiteId { get; set; }
 
         public string SiteName { get; set; }
+
+        public string DefaultLink { get; set; }
 
         public string Thumbnail { get; set; }
 

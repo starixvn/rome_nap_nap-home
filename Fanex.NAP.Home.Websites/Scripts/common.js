@@ -88,9 +88,9 @@ Fanex.NAP.Home.Common = function () {
             useAnimation: false
         });
 
-        messages.AccessDeniedError = $('#AccessDeniedError').val();
-        messages.InternalError = $('#InternalError').val();
-        messages.NotFoundError = $('#NotFoundError').val();
+        messages.AccessDeniedError = appSettings.AccessDeniedError;
+        messages.InternalError = appSettings.NotFoundError;
+        messages.NotFoundError = appSettings.NotFoundError;
 
         cachedValues.RootURL = appSettings.RootUrl;
 
