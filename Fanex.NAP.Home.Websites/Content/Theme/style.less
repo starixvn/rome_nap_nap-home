@@ -287,26 +287,25 @@ a, a:hover, a:active, a:focus {
 
 .icon-favourite {
     .icon;
-    background-position: -33px -115px;
-    width: 13px;
+    background-position: -29px -115px;
+    width: 20px;
     height: 15px;
-    margin-right: 3px;
     position: relative;
     top: 2px;
 }
 
 .icon-noneFavourite {
     .icon-favourite;
-    background-position: -14px -115px;
+    background-position: -10px -115px;
 }
 
 .sub-function {
     .icon-favourite:hover {
-        background-position: -71px -115px;
+        background-position: -67px -115px;
     }
 
     .icon-noneFavourite:hover {
-        background-position: -52px -115px;
+        background-position: -48px -115px;
     }
 }
 
@@ -558,7 +557,7 @@ a, a:hover, a:active, a:focus {
         }
     }
 
-    .link {
+    .link a, .current {
         float: left;
         font-size: @font-size + 1;
         color: @page-link-color;
@@ -570,7 +569,6 @@ a, a:hover, a:active, a:focus {
     }
 
     .current {
-        .link;
         color: @page-link-color-hover;
         font-weight: bold;
         text-decoration: underline;
