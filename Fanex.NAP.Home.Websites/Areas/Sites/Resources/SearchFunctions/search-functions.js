@@ -16,7 +16,7 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
         spanStarIcons: null
     };
     var urls = {
-        MarkFavoriteFunction: common.ResolveRootUrl('Sites/SearchFunctions/MarkFavoriteFunction')
+        UpdatingFavoriteFunction: common.ResolveRootUrl('Sites/SearchFunctions/UpdatingFavoriteFunction')
     };
 
     // Cache DOM elements.
@@ -31,11 +31,12 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
             var $icon = $(this);
             var siteId = $icon.attr('data-site-id');
             var functionId = $icon.attr('data-function-id');
+            var isMarked = $icon.hasClass('icon-noneFavorite-medium');
 
             markUnmarkFavoriteFunction({
                 SiteId: siteId,
                 FunctionId: functionId,
-                IsMarked: true
+                IsMarked: isMarked
             }, $icon);
         });
     };
@@ -45,7 +46,7 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
         common.DisableInput();
         $.ajax({
             type: 'POST',
-            url: urls.MarkFavoriteFunction,
+            url: urls.UpdatingFavoriteFunction,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             data: JSON.stringify(parameters),

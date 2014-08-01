@@ -12,17 +12,15 @@ namespace Fanex.NAP.Home.Sites.Controllers
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Services;
-    using Fanex.NAP.Home.Sites.ViewModels.Common;
     using Fanex.NAP.Home.Sites.ViewModels.SearchFunctions;
 
     /// <summary>
     /// Search sites controller.
     /// </summary>
     [NapSuperAuth]
-    public class SearchFunctionsController : BaseController
+    public class SearchFunctionsController : SiteBaseController
     {
         private ISearchFunctionsService _service;
 
@@ -53,25 +51,9 @@ namespace Fanex.NAP.Home.Sites.Controllers
             filter.UserId = this.CurrentSession.UserId;
             filter.Environment = this.Environment;
             searchedFunctions = this._service.SearchFunctions(filter);
-            pagedFunctions = new PagerList<SearchedFunctionItem>(filter.PageIndex + 1, filter.PageSize, filter.TotalItemCount, searchedFunctions);
+            pagedFunctions = new PagerList<SearchedFunctionItem>(filter.PageIndex, filter.PageSize, filter.TotalItemCount, searchedFunctions);
 
             return View(pagedFunctions);
-        }
-
-        /// <summary>
-        /// Marks or unmarks a function is favorite or not.
-        /// </summary>
-        /// <param name="filter">Filter objects that is used to identify which function will be marked or unmarked.</param>
-        /// <returns>JSON data indicate the updating process is successful or not.</returns>
-        [HttpPost]
-        public JsonResult MarkFavoriteFunction(UpdatingFavoriteFunctionFilter filter)
-        {
-            ICommandResult result = null;
-
-            filter.UserId = this.CurrentSession.UserId;
-            result = this._service.UpdateFavoriteFunction(filter);
-
-            return Json(result);
         }
     }
 }

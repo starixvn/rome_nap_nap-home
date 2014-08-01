@@ -29,12 +29,15 @@ namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
                 this.FunctionId = Converter.ToInt(menuInfo.MenuItemId);
                 this.FunctionName = menuInfo.MenuItemName;
                 this.Link = menuInfo.Link;
+                this.SiteLink = menuInfo.SiteLink;
                 this.Path = menuInfo.Path;
                 this.IsFavorite = Converter.ToBool(menuInfo.IsMarked);
             }
         }
 
         public int SiteId { get; set; }
+
+        public string SiteLink { get; set; }
 
         public int FunctionId { get; set; }
 

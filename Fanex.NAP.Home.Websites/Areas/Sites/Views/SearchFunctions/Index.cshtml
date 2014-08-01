@@ -23,39 +23,37 @@
             {
                 <div class="col-sm-12 col-md-6 search-item">
                     <h4>
-                        @HighlightWordsInLink(searchedFunctionName, function.FunctionName, function.Link)
+                        @HighlightWordsInLink(searchedFunctionName, function)
                         <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
-                          title="@ViewLang.MarkingFavoriteInstruction"
-                          data-site-id="@function.SiteId"
-                          data-function-id="@function.FunctionId"
-                          data-toggle="tooltip"
-                          data-placement="right"></span>
+                              title="@ViewLang.MarkingFavoriteInstruction"
+                              data-site-id="@function.SiteId"
+                              data-function-id="@function.FunctionId"
+                              data-toggle="tooltip"
+                              data-placement="right"></span>
                     </h4>
-                    <div class="desc-item clearfix">
-                        <span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
+                    <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
                 </div>
             }
         </div>
         <div class="row paging fixed">
             @Html.Pager(Model, new PagerOptions()
-        {
-            PageIndexParameterName = "pageIndex",
-            ShowFirstLast = true,
-            ContainerTagName = "ul",
-            CssClass = "link",
-            PageNumberFormatString = "<a class='link' href='#'>{0}</a>",
-            NumericPagerItemWrapperFormatString = "<li>{0}</li>",
-            CurrentPagerItemWrapperFormatString = "<li><span class=\"current\">{0}</span></li>",
-            CurrentPageNumberFormatString = "{0}",
-            NavigationPagerItemWrapperFormatString = "<li><span class=\"btn-page\">{0}</span></li>",
-            PrevPageText = "‹",
-            NextPageText = "›",
-            FirstPageText = "«",
-            LastPageText = "»"
-        }, new { @class = "list-unstyled" })
+            {
+                PageIndexParameterName = "pageIndex",
+                ShowFirstLast = true,
+                ContainerTagName = "ul",
+                CssClass = "link",
+                PageNumberFormatString = "<a class='link' href='#'>{0}</a>",
+                NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                CurrentPagerItemWrapperFormatString = "<li><span class=\"current\">{0}</span></li>",
+                CurrentPageNumberFormatString = "{0}",
+                NavigationPagerItemWrapperFormatString = "<li><span class=\"btn-page\">{0}</span></li>",
+                PrevPageText = "‹",
+                NextPageText = "›",
+                FirstPageText = "«",
+                LastPageText = "»"
+            }, new { @class = "list-unstyled" })
         </div>
     </div>
-    
 }
 else
 {
@@ -65,13 +63,13 @@ else
 {
     @Scripts.Render("~/scripts/searchFunctions")
 }
-@helper HighlightWordsInLink(string keyword, string text, string link)
+@helper HighlightWordsInLink(string keyword, SearchedFunctionItem function)
+{
+    var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
+    string result = formatter.Replace(function.FunctionName, delegate(Match match)
     {
-        var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
-        string result = formatter.Replace(text, delegate(Match match)
-        {
-            return string.Format("<b>{0}</b>", match.Value);
-        });
+        return string.Format("<b>{0}</b>", match.Value);
+    });
 
-    <a href="@link">@Html.Raw(result)</a>
+    <a href="@Url.Action("Forward", new { siteLink = function.SiteLink, functionLink = function.Link})" target="_blank">@Html.Raw(result)</a>
 }

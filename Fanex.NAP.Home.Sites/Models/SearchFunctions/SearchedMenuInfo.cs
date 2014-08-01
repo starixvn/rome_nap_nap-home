@@ -22,6 +22,8 @@ namespace Fanex.NAP.Home.Sites.Models.SearchFunctions
 
         public string Link { get; set; }
 
+        public string SiteLink { get; set; }
+
         public bool? IsMarked { get; set; }
 
         public string Path { get; set; }

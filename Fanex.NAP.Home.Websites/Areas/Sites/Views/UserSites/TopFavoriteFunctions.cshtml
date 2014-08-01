@@ -2,10 +2,20 @@
 @model IEnumerable<UserSiteFunctionItem>
 @if (Model != null && Model.Any())
 {
+    Dictionary<int, string> defaulLinks = null;
+    string siteLink = string.Empty;
+
+    if (ViewBag.DefaultLinks != null)
+    {
+        defaulLinks = ViewBag.DefaultLinks as Dictionary<int, string>;
+        siteLink = defaulLinks[Model.ElementAt(0).SiteId];
+    }
+
     <ul class="list-unstyled link">
         @foreach (var favorite in Model)
         {
-            <li><a href="@Url.Content(favorite.Link)"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
+            string link = Url.Action("Forward", new { siteLink = siteLink, functionLink = favorite.Link });
+            <li><a href="@link" target="_blank"><span class="icon-favourite"></span>@favorite.FunctionName</a></li>
         }
     </ul>
 }

@@ -113,6 +113,7 @@
     <Compile Include="Configurations\SiteThumbnailsManager.cs" />
     <Compile Include="Controllers\FavoriteFunctionsController.cs" />
     <Compile Include="Controllers\SearchFunctionsController.cs" />
+    <Compile Include="Controllers\SiteBaseController.cs" />
     <Compile Include="Controllers\UserSitesController.cs" />
     <Compile Include="Criteria\Common\UpdateMarkedMenuCriteria.cs" />
     <Compile Include="Criteria\SearchFunctions\SearchMenusCriteria.cs" />

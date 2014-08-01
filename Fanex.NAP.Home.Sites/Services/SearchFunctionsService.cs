@@ -33,7 +33,7 @@ namespace Fanex.NAP.Home.Sites.Services
                 Environment = filter.Environment,
                 MenuItemName = filter.FunctionName,
                 PageSize = filter.PageSize,
-                PageIndex = filter.PageIndex
+                PageIndex = filter.PageIndex - 1
             };
             IEnumerable<SearchedFunctionItem> searchedFunctions = null;
             IEnumerable<SearchedMenuInfo> menus = this.Repository.Fetch<SearchedMenuInfo>(criteria);

@@ -20,7 +20,7 @@
                 <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
                 @Html.Partial("TopFavoriteFunctions", site.Favorites)
                 <div class="text-title">
-                    <a href="@Url.Content(site.DefaultLink ?? "#")" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
+                    <a href="@Url.Action("Forward", new { siteLink = site.DefaultLink })" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
                     <div class="menu-button function-button">
                         <span class="icon-function" title="@ViewLang.FunctionList"></span>
                     </div>
@@ -34,7 +34,7 @@
                             <ul class="menu-content list-unstyled">
                                 @foreach (var domain in site.Domains)
                                 {
-                                    <li><a href="Url.Content(@domain)">@domain</a></li>
+                                    <li><a href="@Url.Action("Forward", new { siteLink = domain })" target="_blank">@domain</a></li>
                                 }
                             </ul>
                         </div>

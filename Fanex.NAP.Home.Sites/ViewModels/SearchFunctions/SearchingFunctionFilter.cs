@@ -14,11 +14,6 @@ namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
     /// </summary>
     public class SearchingFunctionFilter
     {
-        public SearchingFunctionFilter()
-        {
-            this.PageSize = 10;
-        }
-
         public int PageSize { get; set; }
 
         public int PageIndex { get; set; }

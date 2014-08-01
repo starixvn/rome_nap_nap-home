@@ -110,6 +110,7 @@
     <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Helpers\BaseController.cs" />
     <Compile Include="Helpers\PagerList.cs" />
+    <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ViewLang.Designer.cs">

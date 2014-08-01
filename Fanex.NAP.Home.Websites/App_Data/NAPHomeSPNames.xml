@@ -17,6 +17,7 @@
   <Function Name="SearchFunctions">
     <Setting Key="NAP_Home_SearchMenus" SpName="NAP_Home_SearchMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
       <Mapping DataField="URL" ObjectProperty="Link" />
+      <Mapping DataField="SiteURL" ObjectProperty="SiteLink" />
     </Setting>
   </Function>
 </Functions>
