@@ -23,8 +23,12 @@ namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
 
         public int PageIndex { get; set; }
 
-        public int TotalItems { get; set; }
+        public int TotalItemCount { get; set; }
 
         public string FunctionName { get; set; }
+
+        public int UserId { get; set; }
+
+        public string Environment { get; set; }
     }
 }

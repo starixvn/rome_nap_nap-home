@@ -20,6 +20,8 @@ namespace Fanex.NAP.Home.Sites.Criteria.SearchFunctions
 
         public string MenuItemName { get; set; }
 
+        public string Environment { get; set; }
+
         public int PageSize { get; set; }
 
         public int PageIndex { get; set; }

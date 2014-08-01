@@ -36,12 +36,12 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
                 SiteId: siteId,
                 FunctionId: functionId,
                 IsMarked: true
-            });
+            }, $icon);
         });
     };
 
     // Get Top Favorite Functions.
-    var markUnmarkFavoriteFunction = function (parameters) {
+    var markUnmarkFavoriteFunction = function (parameters, $icon) {
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -52,6 +52,7 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
             success: function (result) {
                 if (result.Code === 0) {
                     common.ShowInfoMessage(result.Message);
+                    $icon.toggleClass('icon-favorite-medium').toggleClass('icon-noneFavorite-medium');
                 } else {
                     common.ShowErrorMessage(result.Message);
                 }

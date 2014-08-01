@@ -9,11 +9,31 @@
 
 namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
 {
+    using Fanex.Common;
+    using Fanex.NAP.Home.Sites.Models.SearchFunctions;
+
     /// <summary>
     /// View model demonstrates an searched function in Search Results page.
     /// </summary>
     public class SearchedFunctionItem
     {
+        public SearchedFunctionItem()
+        {
+        }
+
+        public SearchedFunctionItem(SearchedMenuInfo menuInfo)
+        {
+            if (menuInfo != null)
+            {
+                this.SiteId = Converter.ToInt(menuInfo.SiteId);
+                this.FunctionId = Converter.ToInt(menuInfo.MenuItemId);
+                this.FunctionName = menuInfo.MenuItemName;
+                this.Link = menuInfo.Link;
+                this.Path = menuInfo.Path;
+                this.IsFavorite = Converter.ToBool(menuInfo.IsMarked);
+            }
+        }
+
         public int SiteId { get; set; }
 
         public int FunctionId { get; set; }

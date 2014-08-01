@@ -123,7 +123,7 @@ Fanex.NAP.Home.Common = function () {
                     var pageIndex = domElements.hdnCurrentPageIndex.val();
                     var functionName = domElements.txtSearchedFunctionName.val();
 
-                    $this.NavigateToRoot(cachedValues.SearchSitesUrl.format(functionName, pageIndex));
+                    $this.NavigateToRoot(cachedValues.SearchSitesUrl.format($.trim(functionName), pageIndex));
                 }
             });
         }

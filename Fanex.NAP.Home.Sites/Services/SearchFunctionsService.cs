@@ -10,7 +10,9 @@
 namespace Fanex.NAP.Home.Sites.Services
 {
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using Fanex.NAP.Home.Sites.Criteria.SearchFunctions;
+    using Fanex.NAP.Home.Sites.Models.SearchFunctions;
     using Fanex.NAP.Home.Sites.ViewModels.SearchFunctions;
 
     /// <summary>
@@ -25,112 +27,21 @@ namespace Fanex.NAP.Home.Sites.Services
         /// <returns>List of satisfied functions.</returns>
         public IEnumerable<SearchedFunctionItem> SearchFunctions(SearchingFunctionFilter filter)
         {
-            this.QueryData(filter);
-            filter.TotalItems = 50;
-
-            return GetFunctions();
-        }
-
-        /// <summary>
-        /// Creates sample date for User Site page.
-        /// </summary>
-        /// <returns>Sample data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Temperately using.")]
-        private List<SearchedFunctionItem> GetFunctions()
-        {
-            List<SearchedFunctionItem> functions = new List<SearchedFunctionItem>();
-
-            functions.Add(new SearchedFunctionItem
+            var criteria = new SearchMenusCriteria
             {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Reporting Services",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Reporting Services"
-            });
+                UserId = filter.UserId,
+                Environment = filter.Environment,
+                MenuItemName = filter.FunctionName,
+                PageSize = filter.PageSize,
+                PageIndex = filter.PageIndex
+            };
+            IEnumerable<SearchedFunctionItem> searchedFunctions = null;
+            IEnumerable<SearchedMenuInfo> menus = this.Repository.Fetch<SearchedMenuInfo>(criteria);
 
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Settlement Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Settlement Report"
-            });
+            searchedFunctions = menus.Select(obj => new SearchedFunctionItem(obj));
+            filter.TotalItemCount = criteria.TotalItemCount;
 
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Margin Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Margin Report"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Credit Term",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Credit Term"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Win Loss Win Loss Loss Win Summary",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Win Loss Summary"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Mix Parlay Win Loss Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Mix Parlay Win Loss Report"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Trader Performance Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Trader Performance Report"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Daily Win Loss (2h)(old) Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Daily Win Loss (2h)(old) Report"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Daily Win Loss (2h) Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Daily Win Loss (2h) Report"
-            });
-
-            functions.Add(new SearchedFunctionItem
-            {
-                SiteId = 1,
-                FunctionId = 1,
-                FunctionName = "Daily Win Loss (2a) Report",
-                Link = "http://10.18.200.209:8007/nap-sc-pro-long-link",
-                Path = "Reports » Fraud & Risk » Daily Win Loss (2a) Report"
-            });
-
-            return functions;
+            return searchedFunctions;
         }
     }
 }
