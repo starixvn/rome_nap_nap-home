@@ -20,4 +20,10 @@
       <Mapping DataField="SiteURL" ObjectProperty="SiteLink" />
     </Setting>
   </Function>
+  <Function Name="FavoriteFunctions">
+    <Setting Key="NAP_Home_GetMarkedMenus" SpName="NAP_Home_GetMarkedMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Mapping DataField="URL" ObjectProperty="Link" />
+      <Mapping DataField="SiteURL" ObjectProperty="SiteLink" />
+    </Setting>
+  </Function>
 </Functions>

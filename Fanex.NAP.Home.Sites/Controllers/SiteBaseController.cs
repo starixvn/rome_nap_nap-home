@@ -69,12 +69,12 @@ namespace Fanex.NAP.Home.Sites.Controllers
 
             return new RedirectResult(
                 string.Format(
-                    "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl={4}",
+                    "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl=~{4}",
                     siteLink.Trim(),
                     Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
                     Cryptography.CfsEnCrypt(this.CurrentSession.OnUserId.ToString()),
                     Cryptography.CfsEnCrypt(time),
-                    Cryptography.CfsEnCrypt(functionLink)));
+                    functionLink));
         }
     }
 }

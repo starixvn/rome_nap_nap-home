@@ -31,6 +31,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
                 this.SiteId = menu.SiteId;
                 this.Link = menu.Link;
                 this.IsFavorite = menu.IsMarked;
+                this.DisplayOrder = menu.DisplayOrder;
                 this.Children = new List<UserSiteFunctionItem>();
             }
         }
@@ -56,6 +57,8 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
         public string Link { get; set; }
 
         public bool IsFavorite { get; set; }
+
+        public int DisplayOrder { get; set; }
 
         public List<UserSiteFunctionItem> Children { get; set; }
     }

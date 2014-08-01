@@ -21,9 +21,10 @@
         <div class="row search-result">
             @foreach (SearchedFunctionItem function in Model)
             {
+                string link = Url.Action("Forward", new { siteLink = function.SiteLink, functionLink = function.Link });
                 <div class="col-sm-12 col-md-6 search-item">
                     <h4>
-                        @HighlightWordsInLink(searchedFunctionName, function)
+                        @HighlightWordsInLink(searchedFunctionName, function.FunctionName, link)
                         <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
                               title="@ViewLang.MarkingFavoriteInstruction"
                               data-site-id="@function.SiteId"
@@ -31,7 +32,7 @@
                               data-toggle="tooltip"
                               data-placement="right"></span>
                     </h4>
-                    <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@function.Link">@function.Path</a></div>
+                    <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@link" target="_blank">@function.Path</a></div>
                 </div>
             }
         </div>
@@ -61,13 +62,13 @@ else
 {
     @Scripts.Render("~/scripts/searchFunctions")
 }
-@helper HighlightWordsInLink(string keyword, SearchedFunctionItem function)
+@helper HighlightWordsInLink(string keyword, string text, string link)
 {
     var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
-    string result = formatter.Replace(function.FunctionName, delegate(Match match)
+    string result = formatter.Replace(text, delegate(Match match)
     {
         return string.Format("<b>{0}</b>", match.Value);
     });
 
-    <a href="@Url.Action("Forward", new { siteLink = function.SiteLink, functionLink = function.Link})" target="_blank">@Html.Raw(result)</a>
+    <a href="@link" target="_blank">@Html.Raw(result)</a>
 }

@@ -157,6 +157,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Criteria\FavoriteFunctions\" />
+    <Folder Include="Models\FavoriteFunctions\" />
     <Folder Include="ViewModels\FavoriteFunctions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

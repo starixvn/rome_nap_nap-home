@@ -155,6 +155,8 @@ namespace Fanex.NAP.Home.Sites.Services
                 }
             }
 
+            functions = functions.OrderBy(obj => obj.DisplayOrder).ToList();
+
             return functions;
         }
     }
