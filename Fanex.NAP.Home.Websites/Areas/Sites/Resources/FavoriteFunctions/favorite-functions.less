@@ -1,39 +1,32 @@
 @import "../../../../Content/Theme/variables.less";
 
-
-
 .list-favorite {
     margin-bottom: 40px;
 
     .site {
         line-height: @line-height + 6;
-        border-top: 1px solid @border-color;
-        padding: 15px 0;
-
-        &:first-child {
-            border-top: none;
-        }
+        padding: 5px 15px 5px 0;
 
         .title {
-            font-size: @font-size + 1;
-            color: #464646;
-            font-weight: bold;
-            padding: 0;
-        }
+            margin: 7px 0;
 
-        .icon-site {
-            margin: 5px 5px 0 0;
-            float: left;
+            a {
+                color: @search-item-title-color;
+                font-size: @font-size;
+
+                &:hover {
+                    color: @search-item-title-color-hover;
+                }
+            }
         }
 
         .function-list {
-            color: #636363;
-
             a {
-                color: #2f56c6;
+                color: @path-color;
+                font-size: @font-size - 1;
 
                 &:hover {
-                    color: #E94B35;
+                    color: @path-color-hover;
                 }
             }
         }
@@ -45,12 +38,13 @@
 
     &.fixed {
         left: 30px;
+        right: 30px;
     }
 }
 
 @media (min-width: 1300px) {
-    .site {
-        width: 65%;
+    .list-favorite {
+        width: 70%;
     }
 }
 

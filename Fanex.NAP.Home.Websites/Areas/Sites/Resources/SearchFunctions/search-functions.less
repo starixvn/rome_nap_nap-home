@@ -20,6 +20,7 @@
 
     .search-item {
         padding: 0 35px 7px 10px;
+        margin-bottom: 10px;
         position: relative;
 
         &:hover {
@@ -36,11 +37,13 @@
             a {
                 color: @search-item-title-color;
                 font-weight: normal;
-                font-size: @font-size + 1;
+                font-size: @font-size;
             }
         }
 
         .desc-item {
+            font-size: @font-size - 1;
+
             a {
                 color: @path-color;
                 margin-left: 5px;

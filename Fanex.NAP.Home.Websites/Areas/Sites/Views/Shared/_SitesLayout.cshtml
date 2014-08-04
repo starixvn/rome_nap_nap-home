@@ -10,7 +10,7 @@
 }
 @section SearchBar
 {
-    <div class="search-bar pull-right">
+    <div class="search-bar">
         <input type="text" id="txtSearchedFunctionName" class="search" placeholder="@ViewLang.SearchPlaceholder" value="@functionName" />
         <input type="hidden" id="hdnCurrentPageIndex" class="search" value="@pageIndex" />
         <button type="button" id="btnSearch" class="@(functionName.Length >= 2 ? "button-green" : "button-disabled")">@ViewLang.Search</button>

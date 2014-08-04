@@ -203,7 +203,12 @@ a, a:hover, a:active, a:focus {
 /*                      Content                         */
 /********************************************************/
 .content {
+    bottom: 0;
+    left: 0;
     padding: 0 30px;
+    position: absolute;
+    right: 0;
+    top: 120px;
 }
 
 /********************************************************/
@@ -360,7 +365,7 @@ a, a:hover, a:active, a:focus {
     background-position: -29px -83px;
     height: 19px;
     width: 19px;
-    margin: -6px 15px;
+    margin: -6px 5px;
 
     &:hover {
         background-position: -69px -83px;
@@ -372,7 +377,7 @@ a, a:hover, a:active, a:focus {
     background-position: -11px -83px;
     height: 19px;
     width: 19px;
-    margin: -6px 15px;
+    margin: -6px 5px;
 
     &:hover {
         background-position: -51px -83px;
@@ -481,7 +486,27 @@ a, a:hover, a:active, a:focus {
         background-color: @msg-err-bg + #444 !important;
     }
 }
+
+@media (max-width: 530px) {
+    .title-bar .title-content {
+        height: 72px;
+
+        .title, .search-bar {
+            float: none;
+        }
+    }
+
+    .content {
+        position: absolute;
+        top: 149px;
+    }
+}
+
 @media (max-width: 768px) {
+    .title-bar .title-content .search-bar .search {
+        width: 200px;
+    }
+
     .form-custom {
         .lbl-field {
             text-align: left;
@@ -512,7 +537,7 @@ a, a:hover, a:active, a:focus {
         margin: 0 -5px;
         padding: 10px 0;
         position: fixed;
-        right: 0;
+        right: 45px;
     }
 
     ul {
