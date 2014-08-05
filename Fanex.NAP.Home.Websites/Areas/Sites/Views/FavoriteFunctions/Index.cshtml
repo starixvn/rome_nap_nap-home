@@ -21,13 +21,13 @@
                 @Html.Raw("<div class=\"col-sm-4\">")
             }
 
-            if ((counter != 0) && (counter + 3 + site.FavoriteFunctions.Count() > AppSettings.FavoriteLinesOfColumn))
+            if ((counter != 0) && (counter + 2 + site.FavoriteFunctions.Count() > AppSettings.FavoriteLinesOfColumn))
             {
                 @Html.Raw("</div><div class=\"col-sm-4\">")
                 counter = 0;
             }
 
-            counter += 3;
+            counter += 2;
 
             <div class="row site">
                 <h4 class="title"><a href="@Url.Action("Forward", new { siteLink = site.SiteLink })" target="_blank">@site.SiteName</a></h4>
