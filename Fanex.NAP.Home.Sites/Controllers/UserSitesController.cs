@@ -62,13 +62,16 @@ namespace Fanex.NAP.Home.Sites.Controllers
             IEnumerable<UserSiteItem> sites = this._service.LoadUserSites(filter);
             Dictionary<int, string> defaultLinks = new Dictionary<int, string>();
 
-            foreach (UserSiteItem site in sites)
+            if (sites != null)
             {
-                defaultLinks.Add(site.SiteId, site.DefaultLink);
-            }
+                foreach (UserSiteItem site in sites)
+                {
+                    defaultLinks.Add(site.SiteId, site.DefaultLink);
+                }
 
-            SessionManager.Set<Dictionary<int, string>>(CachedDefaultSiteLinks, defaultLinks);
-            ViewBag.DefaultLinks = defaultLinks;
+                SessionManager.Set<Dictionary<int, string>>(CachedDefaultSiteLinks, defaultLinks);
+                ViewBag.DefaultLinks = defaultLinks;
+            }
 
             return View(sites);
         }

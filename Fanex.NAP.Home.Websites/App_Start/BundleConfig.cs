@@ -106,6 +106,8 @@ namespace Fanex.NAP.Home.Websites
                 "~/styles/searchFunctions",
                 "~/Areas/Sites/Resources/SearchFunctions/search-functions.less");
 
+            bundles.Add(new ScriptBundle("~/scripts/favoriteFunctions").Include(
+                "~/Areas/Sites/Resources/FavoriteFunctions/favorite-functions.js"));
             bundles.AddAndInclude(
                 "~/styles/favoriteFunctions",
                 "~/Areas/Sites/Resources/FavoriteFunctions/favorite-functions.less");

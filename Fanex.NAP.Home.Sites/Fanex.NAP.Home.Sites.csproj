@@ -116,10 +116,12 @@
     <Compile Include="Controllers\SiteBaseController.cs" />
     <Compile Include="Controllers\UserSitesController.cs" />
     <Compile Include="Criteria\Common\UpdateMarkedMenuCriteria.cs" />
+    <Compile Include="Criteria\FavoriteFunctions\GetMarkedMenusCriteria.cs" />
     <Compile Include="Criteria\SearchFunctions\SearchMenusCriteria.cs" />
     <Compile Include="Criteria\UserSites\GetMenusBySiteUserIdCriteria.cs" />
     <Compile Include="Criteria\UserSites\GetTopMarkedMenusCriteria.cs" />
     <Compile Include="Criteria\UserSites\GetUserSitesCriteria.cs" />
+    <Compile Include="Models\FavoriteFunctions\MarkedMenuInfo.cs" />
     <Compile Include="Models\UserSites\SiteUrlInfo.cs" />
     <Compile Include="Models\SearchFunctions\SearchedMenuInfo.cs" />
     <Compile Include="Models\UserSites\MenuInfo.cs" />
@@ -129,6 +131,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IUserSitesRepository.cs" />
     <Compile Include="Repositories\UserSitesRepository.cs" />
+    <Compile Include="Services\FavoriteFunctionsService.cs" />
+    <Compile Include="Services\IFavoriteFunctionsService.cs" />
     <Compile Include="Services\ISearchFunctionsService.cs" />
     <Compile Include="Services\ISiteBaseService.cs" />
     <Compile Include="Services\SearchFunctionsService.cs" />
@@ -136,6 +140,9 @@
     <Compile Include="Services\IUserSitesService.cs" />
     <Compile Include="Services\UserSitesService.cs" />
     <Compile Include="SitesAreaRegistration.cs" />
+    <Compile Include="ViewModels\FavoriteFunctions\GettingFavoriteFunctionsFilter.cs" />
+    <Compile Include="ViewModels\FavoriteFunctions\FavoriteFunctionItem.cs" />
+    <Compile Include="ViewModels\FavoriteFunctions\SiteItem.cs" />
     <Compile Include="ViewModels\SearchFunctions\SearchedFunctionItem.cs" />
     <Compile Include="ViewModels\SearchFunctions\SearchingFunctionFilter.cs" />
     <Compile Include="ViewModels\UserSites\TopFavoriteFunctionsFilter.cs" />
@@ -156,11 +163,7 @@
       <Name>Fanex.NAP.Home.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Criteria\FavoriteFunctions\" />
-    <Folder Include="Models\FavoriteFunctions\" />
-    <Folder Include="ViewModels\FavoriteFunctions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

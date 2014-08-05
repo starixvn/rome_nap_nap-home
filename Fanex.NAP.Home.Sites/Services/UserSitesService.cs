@@ -45,8 +45,13 @@ namespace Fanex.NAP.Home.Sites.Services
                 UserId = filter.UserId,
                 Environment = filter.Environment
             };
-            UserSiteInfo siteData = this._repository.GetUserSites(criteria);
             IEnumerable<UserSiteItem> result = null;
+            UserSiteInfo siteData = null;
+
+            if (criteria.IsValid())
+            {
+                siteData = this._repository.GetUserSites(criteria);
+            }
 
             if (siteData != null)
             {
@@ -73,7 +78,10 @@ namespace Fanex.NAP.Home.Sites.Services
                 TopSelect = filter.Top
             };
 
-            menus = this.Repository.Fetch<TopMarkedMenuInfo>(criteria);
+            if (criteria.IsValid())
+            {
+                menus = this.Repository.Fetch<TopMarkedMenuInfo>(criteria);
+            }
 
             if (menus != null && menus.Any())
             {
@@ -99,7 +107,10 @@ namespace Fanex.NAP.Home.Sites.Services
                 Environment = filter.Environment
             };
 
-            menus = this.Repository.Fetch<MenuInfo>(criteria);
+            if (criteria.IsValid())
+            {
+                menus = this.Repository.Fetch<MenuInfo>(criteria);
+            }
 
             if (menus != null && menus.Any())
             {

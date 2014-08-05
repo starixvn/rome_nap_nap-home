@@ -28,7 +28,7 @@ Fanex.NAP.Home.Common = function () {
 
         // For _Layout.cshtml.
         divMsgBox: null,
-        divPopup: null
+        lnkFavoriteFunctions: null
     };
     var cachedValues = {
         RootURL: '',
@@ -77,7 +77,7 @@ Fanex.NAP.Home.Common = function () {
 
     $this.Initialize = function () {
         domElements.txtSearchedFunctionName = $('#txtSearchedFunctionName');
-        domElements.divPopup = $('#divPopup');
+        domElements.lnkFavoriteFunctions = $('#lnkFavoriteFunctions');
         domElements.divMsgBox = $.msgbox({
             message: '',
             type: 'err',
@@ -93,6 +93,8 @@ Fanex.NAP.Home.Common = function () {
         messages.NotFoundError = appSettings.NotFoundError;
 
         cachedValues.RootURL = appSettings.RootUrl;
+
+        domElements.lnkFavoriteFunctions.tooltip();
 
         if (domElements.txtSearchedFunctionName.length > 0) {
             domElements.hdnCurrentPageIndex = $('#hdnCurrentPageIndex');

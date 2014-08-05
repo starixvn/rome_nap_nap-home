@@ -35,11 +35,19 @@ namespace Fanex.NAP.Home.Sites.Services
                 PageSize = filter.PageSize,
                 PageIndex = filter.PageIndex - 1
             };
-            IEnumerable<SearchedFunctionItem> searchedFunctions = null;
-            IEnumerable<SearchedMenuInfo> menus = this.Repository.Fetch<SearchedMenuInfo>(criteria);
+            IEnumerable<SearchedFunctionItem> searchedFunctions = new List<SearchedFunctionItem>();
+            IEnumerable<SearchedMenuInfo> menus = null;
 
-            searchedFunctions = menus.Select(obj => new SearchedFunctionItem(obj));
-            filter.TotalItemCount = criteria.TotalItemCount;
+            if (criteria.IsValid())
+            {
+                menus = this.Repository.Fetch<SearchedMenuInfo>(criteria);
+                filter.TotalItemCount = criteria.TotalItemCount;
+            }
+
+            if (menus != null && menus.Any())
+            {
+                searchedFunctions = menus.Select(obj => new SearchedFunctionItem(obj));
+            }
 
             return searchedFunctions;
         }

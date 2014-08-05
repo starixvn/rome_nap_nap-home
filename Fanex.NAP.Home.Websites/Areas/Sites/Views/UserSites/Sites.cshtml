@@ -11,40 +11,43 @@
 @{
     string thumnailUrlTemplate = "~/Areas/Sites/Resources/UserSites/Images/{0}/{1}";
 
-    foreach (var site in Model)
+    if (Model != null && Model.Any())
     {
-        string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
+        foreach (var site in Model)
+        {
+            string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
 
-        <div class="col-xs-12 col-sm-6 col-md-4">
-            <div class="description" data-site-id="@site.SiteId">
-                <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
-                @Html.Partial("TopFavoriteFunctions", site.Favorites)
-                <div class="text-title">
-                    <a href="@Url.Action("Forward", new { siteLink = site.DefaultLink })" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
-                    <div class="menu-button function-button">
-                        <span class="icon-function" title="@ViewLang.FunctionList"></span>
-                    </div>
-                    <div class="menu-wrapper function-menu-wrapper"></div>
-                    <div class="menu-button domain-button">
-                        <span class="icon-arrow-site @(site.Domains.Count == 0 ? "disabled" : string.Empty)" title="@ViewLang.Domains"></span>
-                    </div>
-                    @if (site.Domains.Count > 0)
-                    {
-                        <div class="menu-wrapper domain-menu-wrapper">
-                            <ul class="menu-content list-unstyled">
-                                @foreach (var domain in site.Domains)
-                                {
-                                    <li><a href="@Url.Action("Forward", new { siteLink = domain })" target="_blank">@domain</a></li>
-                                }
-                            </ul>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="description" data-site-id="@site.SiteId">
+                    <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
+                    @Html.Partial("TopFavoriteFunctions", site.Favorites)
+                    <div class="text-title">
+                        <a href="@Url.Action("Forward", new { siteLink = site.DefaultLink })" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
+                        <div class="menu-button function-button">
+                            <span class="icon-function" title="@ViewLang.FunctionList"></span>
                         </div>
-                    }
-                </div>
-                <div class="shadow">
-                    <img src="~/Content/Theme/Images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
+                        <div class="menu-wrapper function-menu-wrapper"></div>
+                        <div class="menu-button domain-button">
+                            <span class="icon-arrow-site @(site.Domains.Count == 0 ? "disabled" : string.Empty)" title="@ViewLang.Domains"></span>
+                        </div>
+                        @if (site.Domains.Count > 0)
+                        {
+                            <div class="menu-wrapper domain-menu-wrapper">
+                                <ul class="menu-content list-unstyled">
+                                    @foreach (var domain in site.Domains)
+                                    {
+                                        <li><a href="@Url.Action("Forward", new { siteLink = domain })" target="_blank">@domain</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                    <div class="shadow">
+                        <img src="~/Content/Theme/Images/shadow.png" title="shadow" alt="shadow" class="img-responsive margin-auto" />
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     }
 }
 @section Foot 

@@ -43,7 +43,7 @@ a, a:hover, a:active, a:focus {
                 text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
                 outline: none;
                 text-transform: uppercase;
-                color: #fff;
+                color: @white;
                 font-weight: bold;
                 padding: 9px 15px;
 
@@ -605,6 +605,7 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 .tooltip  {
     .tooltip-inner {
+        min-width: 120px;
         background: #f8b03e;
         padding: 4px;
     }
@@ -615,5 +616,9 @@ a, a:hover, a:active, a:focus {
 
     &.right .tooltip-arrow {
         border-right-color: #f8b03e;
+    }
+
+    &.bottom .tooltip-arrow {
+        border-bottom-color: #f8b03e;
     }
 }

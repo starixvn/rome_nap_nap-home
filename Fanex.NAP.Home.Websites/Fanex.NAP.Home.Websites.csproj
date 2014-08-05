@@ -185,6 +185,7 @@
   <ItemGroup>
     <Content Include="App_Data\NAPCoreSpNames.xml" />
     <Content Include="App_Data\NAPHomeSPNames.xml" />
+    <Content Include="Areas\Sites\Resources\FavoriteFunctions\favorite-functions.js" />
     <Content Include="Areas\Sites\Resources\SearchFunctions\search-functions.js" />
     <Content Include="Areas\Sites\Resources\UserSites\user-sites.js" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\accounting.jpg" />
@@ -278,7 +279,6 @@
     <Content Include="Areas\Sites\Views\UserSites\Sites.cshtml" />
     <Content Include="Areas\Sites\Views\Shared\_SitesLayout.cshtml" />
     <Content Include="Areas\Sites\Views\SearchFunctions\Index.cshtml" />
-    <Content Include="Areas\Sites\Views\FavoriteFunctions\Index.cshtml" />
     <Content Include="Areas\Sites\Resources\UserSites\user-sites.less" />
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.local.xml">
       <DependentUpon>SiteThumbnails.xml</DependentUpon>
@@ -296,6 +296,7 @@
     <Content Include="Areas\User\Views\Error\Index.cshtml" />
     <Content Include="Areas\User\Views\Error\NotFound.cshtml" />
     <Content Include="Areas\Sites\Resources\FavoriteFunctions\favorite-functions.less" />
+    <Content Include="Areas\Sites\Views\FavoriteFunctions\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

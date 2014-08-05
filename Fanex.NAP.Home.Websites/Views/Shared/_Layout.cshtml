@@ -28,7 +28,12 @@
         <div class="collapse navbar-collapse" id="divMenuContent">
           <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="@Url.Content("~/Sites/FavoriteFunctions")" class="icon-favourite-large"></a>
+                <a href="@Url.Content("~/Sites/FavoriteFunctions?PageIndex=1")"
+                   id="lnkFavoriteFunctions"
+                   class="icon-favourite-large"
+                   title="@ViewLang.FavoriteFunctions"
+                   data-toggle="tooltip"
+                   data-placement="bottom"></a>
             </li>
             <li class="user-info">
                 <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
