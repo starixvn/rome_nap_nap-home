@@ -31,5 +31,13 @@ namespace Fanex.NAP.Home.Core.Helpers
         public int PageSize { get; set; }
 
         public int TotalItemCount { get; set; }
+
+        public bool HasPagers
+        {
+            get
+            {
+                return this.TotalItemCount > this.PageSize;
+            }
+        }
     }
 }

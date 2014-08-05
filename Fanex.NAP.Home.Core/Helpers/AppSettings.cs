@@ -19,6 +19,8 @@ namespace Fanex.NAP.Home.Core.Helpers
     {
         private static int? searchPageSize;
         private static int? topFavorites;
+        private static int? favoritePageSize;
+        private static int? favoriteLinesOfColumn;
 
         public static int SearchPageSize
         {
@@ -43,6 +45,32 @@ namespace Fanex.NAP.Home.Core.Helpers
                 }
 
                 return topFavorites.Value;
+            }
+        }
+
+        public static int FavoritePageSize
+        {
+            get
+            {
+                if (favoritePageSize == null)
+                {
+                    favoritePageSize = Converter.ToInt(GetValue("FavoritePageSize"));
+                }
+
+                return favoritePageSize.Value;
+            }
+        }
+
+        public static int FavoriteLinesOfColumn
+        {
+            get
+            {
+                if (favoriteLinesOfColumn == null)
+                {
+                    favoriteLinesOfColumn = Converter.ToInt(GetValue("FavoriteLinesOfColumn"));
+                }
+
+                return favoriteLinesOfColumn.Value;
             }
         }
 

@@ -45,7 +45,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             IEnumerable<SiteItem> favorites = null;
             PagerList<SiteItem> pagedFavorites = null;
 
-            filter.PageSize = AppSettings.SearchPageSize;
+            filter.PageSize = AppSettings.FavoritePageSize;
             filter.UserId = this.CurrentSession.UserId;
             filter.Environment = this.Environment;
             favorites = this._service.LoadMarkedFunctions(filter);

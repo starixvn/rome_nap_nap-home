@@ -52,7 +52,7 @@ Fanex.NAP.Home.Sites.FavoriteFunctions = function () {
             success: function (result) {
                 if (result.Code === 0) {
                     common.ShowInfoMessage(result.Message);
-                    $icon.toggleClass('icon-favorite-medium').toggleClass('icon-noneFavorite-medium');
+                    $icon.parent('li').remove();
                 } else {
                     common.ShowErrorMessage(result.Message);
                 }

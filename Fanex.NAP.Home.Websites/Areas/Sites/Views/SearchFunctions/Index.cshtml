@@ -32,11 +32,11 @@
                               data-toggle="tooltip"
                               data-placement="right"></span>
                     </h4>
-                    <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@link" target="_blank">@function.Path</a></div>
+                    <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@link" target="_blank" title="@function.Path">@function.Path.Truncate(65)</a></div>
                 </div>
             }
         </div>
-        <div class="row paging fixed">
+        <div class="row paging fixed @(Model.HasPagers ? string.Empty : "hide")">
             @Html.Pager(Model, new PagerOptions()
             {
                 PageIndexParameterName = "pageIndex",

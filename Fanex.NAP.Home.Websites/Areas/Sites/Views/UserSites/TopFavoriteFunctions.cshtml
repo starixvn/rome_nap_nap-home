@@ -15,7 +15,7 @@
         @foreach (var favorite in Model)
         {
             string link = Url.Action("Forward", new { siteLink = siteLink, functionLink = favorite.Link });
-            <li><a href="@link" target="_blank" title="@favorite.FunctionName"><span class="icon-favourite"></span>@favorite.FunctionName.Truncate(53)</a></li>
+            <li><a href="@link" target="_blank" title="@favorite.FunctionName"><span class="icon-favourite"></span>@favorite.FunctionName.Truncate(35)</a></li>
         }
     </ul>
 }
