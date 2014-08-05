@@ -15,6 +15,10 @@
         @FunctionTree(Model, siteLink)
     </ul>
 }
+else
+{
+    <p class="no-function">@ViewLang.ThereIsNoData</p>
+}
 
 @helper FunctionTree (IEnumerable<UserSiteFunctionItem> functions, string siteLink)
 {
@@ -35,7 +39,7 @@
             {
                 <li>
                     <span class="icon-star @(function.IsFavorite ? "icon-favourite" : "icon-noneFavourite")"
-                          title="@ViewLang.MarkingFavoriteInstruction"
+                          title="@(function.IsFavorite ? ViewLang.UnmarkingFavoriteInstruction : ViewLang.MarkingFavoriteInstruction)"
                           data-function-id="@function.FunctionId">
                     </span>
                     <a href="@Url.Action("Forward", new {siteLink = siteLink, functionLink = function.Link})"

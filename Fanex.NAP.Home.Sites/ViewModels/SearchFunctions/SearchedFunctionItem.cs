@@ -30,12 +30,15 @@ namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
                 this.FunctionName = menuInfo.MenuItemName;
                 this.Link = menuInfo.Link;
                 this.SiteLink = menuInfo.SiteLink;
+                this.SiteName = menuInfo.SiteName;
                 this.Path = menuInfo.Path;
                 this.IsFavorite = Converter.ToBool(menuInfo.IsMarked);
             }
         }
 
         public int SiteId { get; set; }
+
+        public string SiteName { get; set; }
 
         public string SiteLink { get; set; }
 

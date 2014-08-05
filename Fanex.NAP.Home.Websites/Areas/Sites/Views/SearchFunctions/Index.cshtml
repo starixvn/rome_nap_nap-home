@@ -26,13 +26,19 @@
                     <h4>
                         @HighlightWordsInLink(searchedFunctionName, function.FunctionName, link)
                         <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
-                              title="@ViewLang.MarkingFavoriteInstruction"
+                              title="@(function.IsFavorite ? ViewLang.UnmarkingFavoriteInstruction : ViewLang.MarkingFavoriteInstruction)"
                               data-site-id="@function.SiteId"
                               data-function-id="@function.FunctionId"
                               data-toggle="tooltip"
                               data-placement="right"></span>
                     </h4>
-                    <div class="desc-item clearfix"><span class="pull-left">@ViewLang.Path:</span> <a href="@link" target="_blank" title="@function.Path">@function.Path.Truncate(65)</a></div>
+                    <div class="desc-item clearfix">
+                        <span class="pull-left">@ViewLang.Path: </span>
+                        <a href="@link" target="_blank" title="@function.Path">
+                            <span class="site-name">@function.SiteName</span>
+                            <span> » @function.Path.Truncate(65 - function.SiteName.Length - 3)</span>
+                        </a>
+                    </div>
                 </div>
             }
         </div>

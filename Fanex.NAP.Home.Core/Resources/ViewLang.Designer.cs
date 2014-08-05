@@ -248,5 +248,14 @@ namespace Fanex.NAP.Home.Core.Resources {
                 return ResourceManager.GetString("UnmarkedSuccessfully", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click to unmark this function as your favorite..
+        /// </summary>
+        public static string UnmarkingFavoriteInstruction {
+            get {
+                return ResourceManager.GetString("UnmarkingFavoriteInstruction", resourceCulture);
+            }
+        }
     }
 }

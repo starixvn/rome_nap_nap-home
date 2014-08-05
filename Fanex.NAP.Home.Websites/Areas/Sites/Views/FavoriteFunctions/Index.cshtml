@@ -21,7 +21,7 @@
                 @Html.Raw("<div class=\"col-sm-4\">")
             }
 
-            if ((counter != 0) && (counter + 2 + site.FavoriteFunctions.Count() > AppSettings.FavoriteLinesOfColumn))
+            if ((counter != 0) && (counter > AppSettings.FavoriteLinesOfColumn))
             {
                 @Html.Raw("</div><div class=\"col-sm-4\">")
                 counter = 0;
@@ -38,7 +38,12 @@
 
                         <li>
                             <a href="@Url.Action("Forward", new { siteLink = site.SiteLink, functionLink = favorite.Link })" target="_blank" title="@favorite.Path">@favorite.Path.Truncate(40)</a>
-                            <span class="icon-favorite-medium" data-site-id="@site.SiteId" data-function-id="@favorite.FunctionId"></span>
+                            <span class="icon-favorite-medium"
+                                  title="@ViewLang.UnmarkingFavoriteInstruction"
+                                  data-toggle="tooltip"
+                                  data-placement="right"
+                                  data-site-id="@site.SiteId"
+                                  data-function-id="@favorite.FunctionId"></span>
                         </li>
                     }
                 </ul>

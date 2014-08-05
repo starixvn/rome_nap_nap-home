@@ -21,7 +21,6 @@ Fanex.NAP.Home.Sites.UserSites = function () {
         TopFavoriteFunctions: common.ResolveRootUrl('Sites/UserSites/TopFavoriteFunctions'),
         UpdatingFavoriteFunction: common.ResolveRootUrl('Sites/UserSites/UpdatingFavoriteFunction')
     };
-    var favoriteUpdated = false;
 
     // Cache DOM elements.
     var cacheDOMElements = function () {
@@ -64,7 +63,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             var siteId = $tile.attr('data-site-id');
 
             if ($menu.is(':hidden')) {
-                favoriteUpdated = false;
+                $tile.data('favoriteUpdated', false);
                 getFunctionsOfSite($menu, siteId);
 
                 hideMenus();
@@ -99,7 +98,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             var functionId = $starIcon.attr('data-function-id');
             var isMarked = $starIcon.hasClass('icon-noneFavourite');
 
-            favoriteUpdated = true;
+            $tile.data('favoriteUpdated', true);
             $starIcon.toggleClass('icon-favourite').toggleClass('icon-noneFavourite');
             markUnmarkFavoriteFunction({
                 SiteId: siteId,
@@ -114,8 +113,8 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             var $bgImage = null;
             var siteId = $tile.attr('data-site-id');
 
-            if (favoriteUpdated) {
-                favoriteUpdated = false;
+            if ($tile.data('favoriteUpdated')) {
+                $tile.data('favoriteUpdated', false);
                 $bgImage = $tile.children('img.bg-img');
                 getTopFavoriteFunctions($bgImage, siteId);
             }
@@ -206,7 +205,6 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             dataType: 'html',
             data: JSON.stringify({ SiteId: siteId }),
             success: function (favorites) {
-                
                 $bgImage.next('.link').remove(); // Remove old favorite list.
 
                 if (favorites && favorites !== '') {

@@ -35,15 +35,19 @@ Fanex.NAP.Home.Common = function () {
     };
 
     $this.HandleAjaxError = function (xhr) {
-        var message = messages.InternalError;
+        var message = '';
 
-        if (xhr.status === 403) {
-            message = messages.AccessDeniedError;
-        } else if (xhr.status === 404) {
-            message = messages.NotFoundError;
+        if (xhr.status !== 0) {
+            if (xhr.status === 403) {
+                message = messages.AccessDeniedError;
+            } else if (xhr.status === 404) {
+                message = messages.NotFoundError;
+            } else {
+                message = messages.InternalError;
+            }
+
+            $this.ShowErrorMessage(message);
         }
-
-        $this.ShowErrorMessage(message);
     };
 
     $this.ShowErrorMessage = function (message) {
@@ -87,7 +91,7 @@ Fanex.NAP.Home.Common = function () {
         });
 
         messages.AccessDeniedError = appSettings.AccessDeniedError;
-        messages.InternalError = appSettings.NotFoundError;
+        messages.InternalError = appSettings.InternalError;
         messages.NotFoundError = appSettings.NotFoundError;
 
         cachedValues.RootURL = appSettings.RootUrl;

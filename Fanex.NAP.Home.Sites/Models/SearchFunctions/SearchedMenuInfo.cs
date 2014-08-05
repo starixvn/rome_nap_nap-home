@@ -20,6 +20,8 @@ namespace Fanex.NAP.Home.Sites.Models.SearchFunctions
 
         public int? SiteId { get; set; }
 
+        public string SiteName { get; set; }
+
         public string Link { get; set; }
 
         public string SiteLink { get; set; }

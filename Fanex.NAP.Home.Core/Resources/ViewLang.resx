@@ -180,4 +180,7 @@
   <data name="UnmarkedSuccessfully" xml:space="preserve">
     <value>Unmarked successfully!</value>
   </data>
+  <data name="UnmarkingFavoriteInstruction" xml:space="preserve">
+    <value>Click to unmark this function as your favorite.</value>
+  </data>
 </root>
