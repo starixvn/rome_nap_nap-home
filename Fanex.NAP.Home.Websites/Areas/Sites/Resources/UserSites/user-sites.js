@@ -1,5 +1,5 @@
 ﻿/* File Created: July 29, 2014 */
-/* global Namespace, common */
+/* global Namespace, common, instructions */
 'use strict';
 
 $(document).ready(function () {
@@ -98,13 +98,11 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             var functionId = $starIcon.attr('data-function-id');
             var isMarked = $starIcon.hasClass('icon-noneFavourite');
 
-            $tile.data('favoriteUpdated', true);
-            $starIcon.toggleClass('icon-favourite').toggleClass('icon-noneFavourite');
             markUnmarkFavoriteFunction({
                 SiteId: siteId,
                 FunctionId: functionId,
                 IsMarked: isMarked
-            });
+            }, $tile, $starIcon);
         });
 
         // Reload tiles.
@@ -229,7 +227,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
     };
 
     // Get Top Favorite Functions.
-    var markUnmarkFavoriteFunction = function (parameters) {
+    var markUnmarkFavoriteFunction = function (parameters, $tile, $starIcon) {
         common.DisableInput();
         $.ajax({
             type: 'POST',
@@ -238,7 +236,16 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             dataType: 'json',
             data: JSON.stringify(parameters),
             success: function (result) {
+                var instructionMessage = '';
+
                 if (result.Code === 0) {
+                    $tile.data('favoriteUpdated', true);
+                    $starIcon.toggleClass('icon-favourite').toggleClass('icon-noneFavourite');
+                    instructionMessage = $starIcon.hasClass('icon-noneFavourite') ?
+                                         instructions.MarkingFavoriteInstruction :
+                                         instructions.UnmarkingFavoriteInstruction;
+                    $starIcon.attr('title', instructionMessage);
+                    $starIcon.attr('data-original-title', instructionMessage);
                     common.ShowInfoMessage(result.Message);
                 } else {
                     common.ShowErrorMessage(result.Message);

@@ -187,6 +187,8 @@
     <Content Include="App_Data\NAPHomeSPNames.xml" />
     <Content Include="Areas\Sites\Resources\FavoriteFunctions\favorite-functions.js" />
     <Content Include="Areas\Sites\Resources\SearchFunctions\search-functions.js" />
+    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\tgrs.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\tgrs.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\user-sites.js" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\accounting.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\admin.jpg" />

@@ -1,5 +1,5 @@
 ﻿/* File Created: July 28, 2014 */
-/* global Namespace, common */
+/* global Namespace, common, instructions */
 'use strict';
 
 $(document).ready(function () {
@@ -51,9 +51,16 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
             dataType: 'json',
             data: JSON.stringify(parameters),
             success: function (result) {
+                var instructionMessage = '';
+
                 if (result.Code === 0) {
-                    common.ShowInfoMessage(result.Message);
                     $icon.toggleClass('icon-favorite-medium').toggleClass('icon-noneFavorite-medium');
+                    instructionMessage = $icon.hasClass('icon-noneFavorite-medium') ?
+                                         instructions.MarkingFavoriteInstruction :
+                                         instructions.UnmarkingFavoriteInstruction;
+                    $icon.attr('title', instructionMessage);
+                    $icon.attr('data-original-title', instructionMessage);
+                    common.ShowInfoMessage(result.Message);
                 } else {
                     common.ShowErrorMessage(result.Message);
                 }

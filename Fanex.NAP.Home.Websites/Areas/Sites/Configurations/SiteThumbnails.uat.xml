@@ -10,4 +10,5 @@
   <Site name="NAP Live Charts" siteId="77" imageName="live-charts.jpg" />
   <Site name="NAP Customer Relationship Management" siteId="83" imageName="crm.jpg" />
   <Site name="NAP Customer Management" siteId="84" imageName="cms.jpg" />
+  <Site name="NAP TGRS" siteId="85" imageName="tgrs.jpg" />
 </SiteThumbnails>
