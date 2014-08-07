@@ -67,6 +67,7 @@ namespace Fanex.NAP.Home.Websites
                 "~/Scripts/Bootstrap/bootstrap.js",
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",
+                "~/Scripts/Resources/viewLang.js",
                 "~/Scripts/common.js",
                 "~/Areas/User/Resources/Login/recheckIn.js"));
         }

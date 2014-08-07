@@ -1,5 +1,5 @@
 ﻿/* File Created: July 29, 2014 */
-/* global Namespace, common, instructions */
+/* global Namespace, common, viewLang */
 'use strict';
 
 $(document).ready(function () {
@@ -242,8 +242,8 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                     $tile.data('favoriteUpdated', true);
                     $starIcon.toggleClass('icon-favourite').toggleClass('icon-noneFavourite');
                     instructionMessage = $starIcon.hasClass('icon-noneFavourite') ?
-                                         instructions.MarkingFavoriteInstruction :
-                                         instructions.UnmarkingFavoriteInstruction;
+                                         viewLang.MarkingFavoriteInstruction :
+                                         viewLang.UnmarkingFavoriteInstruction;
                     $starIcon.attr('title', instructionMessage);
                     $starIcon.attr('data-original-title', instructionMessage);
                     common.ShowInfoMessage(result.Message);

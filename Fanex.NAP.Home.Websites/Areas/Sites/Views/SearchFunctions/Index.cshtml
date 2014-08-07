@@ -67,12 +67,6 @@ else
 @section Foot 
 {
     @Scripts.Render("~/scripts/searchFunctions")
-    <script type="text/javascript">
-        var instructions = {
-            MarkingFavoriteInstruction: '@ViewLang.MarkingFavoriteInstruction',
-            UnmarkingFavoriteInstruction: '@ViewLang.UnmarkingFavoriteInstruction'
-        };
-    </script>
 }
 @helper HighlightWordsInLink(string keyword, string text, string link)
 {

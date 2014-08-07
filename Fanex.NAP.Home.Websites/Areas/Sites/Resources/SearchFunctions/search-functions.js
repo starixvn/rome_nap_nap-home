@@ -1,5 +1,5 @@
 ﻿/* File Created: July 28, 2014 */
-/* global Namespace, common, instructions */
+/* global Namespace, common, viewLang */
 'use strict';
 
 $(document).ready(function () {
@@ -56,8 +56,8 @@ Fanex.NAP.Home.Sites.SearchFunctions = function () {
                 if (result.Code === 0) {
                     $icon.toggleClass('icon-favorite-medium').toggleClass('icon-noneFavorite-medium');
                     instructionMessage = $icon.hasClass('icon-noneFavorite-medium') ?
-                                         instructions.MarkingFavoriteInstruction :
-                                         instructions.UnmarkingFavoriteInstruction;
+                                         viewLang.MarkingFavoriteInstruction :
+                                         viewLang.UnmarkingFavoriteInstruction;
                     $icon.attr('title', instructionMessage);
                     $icon.attr('data-original-title', instructionMessage);
                     common.ShowInfoMessage(result.Message);

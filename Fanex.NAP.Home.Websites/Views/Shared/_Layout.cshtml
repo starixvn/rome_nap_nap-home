@@ -60,10 +60,7 @@
     <script type="text/javascript">
         var appSettings = {
             RootUrl: '@Url.Content("~/")',
-            AllowReCheckIn: '@(ViewBag.IsReCheckin != null && ViewBag.IsReCheckin)' === 'True',
-            NotFoundError: '@ViewLang.NotFoundError',
-            InternalError: '@ViewLang.InternalError',
-            AccessDeniedError: '@ViewLang.AccessDeniedError'
+            AllowReCheckIn: '@(ViewBag.IsReCheckin != null && ViewBag.IsReCheckin)' === 'True'
         };
     </script>
     @Scripts.Render("~/scripts/common")

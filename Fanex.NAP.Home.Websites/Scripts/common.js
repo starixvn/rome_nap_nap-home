@@ -1,5 +1,5 @@
 ﻿/* File Created: July 25, 2014 */
-/* global Namespace, appSettings */
+/* global Namespace, appSettings, viewLang */
 'use strict';
 
 /* jshint freeze: false */
@@ -90,9 +90,9 @@ Fanex.NAP.Home.Common = function () {
             useAnimation: false
         });
 
-        messages.AccessDeniedError = appSettings.AccessDeniedError;
-        messages.InternalError = appSettings.InternalError;
-        messages.NotFoundError = appSettings.NotFoundError;
+        messages.AccessDeniedError = viewLang.AccessDeniedError;
+        messages.InternalError = viewLang.InternalError;
+        messages.NotFoundError = viewLang.NotFoundError;
 
         cachedValues.RootURL = appSettings.RootUrl;
 
