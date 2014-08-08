@@ -37,14 +37,18 @@ else
             }
             else
             {
+                string linkParameters = string.Format(
+                                                   "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                   function.SiteId,
+                                                   siteLink,
+                                                   function.FunctionId,
+                                                   function.Link);
                 <li>
                     <span class="icon-star @(function.IsFavorite ? "icon-favourite" : "icon-noneFavourite")"
                           title="@(function.IsFavorite ? ViewLang.UnmarkingFavoriteInstruction : ViewLang.MarkingFavoriteInstruction)"
                           data-function-id="@function.FunctionId">
                     </span>
-                    <a href="@Url.Action("Forward", new {siteLink = siteLink, functionLink = function.Link})"
-                       title="@function.FunctionName"
-                       target="_blank">@function.FunctionName.Truncate(30)</a>
+                    <a href="#" title="@function.FunctionName" data-strict-link="@linkParameters">@function.FunctionName.Truncate(30)</a>
                 </li>
             }
         }

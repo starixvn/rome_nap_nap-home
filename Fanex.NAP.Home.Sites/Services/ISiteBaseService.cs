@@ -20,5 +20,19 @@ namespace Fanex.NAP.Home.Sites.Services
         /// <param name="filter">The filter contains function's information.</param>
         /// <returns>Returns if the update process is successful or not.</returns>
         ICommandResult UpdateFavoriteFunction(UpdatingFavoriteFunctionFilter filter);
+
+        /// <summary>
+        /// Checks if an user has permission on a function or not.
+        /// </summary>
+        /// <param name="filter">The filter contains function's information.</param>
+        /// <returns>Returns if can access the function or not.</returns>
+        ICommandResult CheckUserPermissionOnFunction(ForwardFilter filter);
+
+        /// <summary>
+        /// Checks if an user has permission on a site or not.
+        /// </summary>
+        /// <param name="filter">The filter contains site's information.</param>
+        /// <returns>Returns if can access the site or not.</returns>
+        ICommandResult CheckUserPermissionOnSite(ForwardFilter filter);
     }
 }

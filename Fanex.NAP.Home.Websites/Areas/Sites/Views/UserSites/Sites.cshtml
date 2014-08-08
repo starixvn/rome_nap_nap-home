@@ -16,13 +16,14 @@
         foreach (var site in Model)
         {
             string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
-
+            string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
+            
             <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="description" data-site-id="@site.SiteId">
+                <div class="description" data-site-id="@site.SiteId" data-strict-link="@defaultLinkParameters">
                     <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
                     @Html.Partial("TopFavoriteFunctions", site.Favorites)
                     <div class="text-title">
-                        <a href="@Url.Action("Forward", new { siteLink = site.DefaultLink })" target="_blank" title="@site.SiteName">@site.SiteName.Truncate(30)</a>
+                        <a href="#" title="@site.SiteName" data-strict-link="@defaultLinkParameters">@site.SiteName.Truncate(30)</a>
                         <div class="menu-button function-button">
                             <span class="icon-function" title="@ViewLang.FunctionList"></span>
                         </div>
@@ -36,7 +37,9 @@
                                 <ul class="menu-content list-unstyled">
                                     @foreach (var domain in site.Domains)
                                     {
-                                        <li><a href="@Url.Action("Forward", new { siteLink = domain })" target="_blank">@domain</a></li>
+                                        <li>
+                                            <a href="#" data-strict-link="@string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, domain)">@domain</a>
+                                        </li>
                                     }
                                 </ul>
                             </div>

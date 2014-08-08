@@ -13,6 +13,7 @@ viewLang = {
 	Index : "Index",
 	InternalError : "Internal error!",
 	InternalErrorMessage : "Sorry, an error occurred while processing your request, please notify the administrators.",
+	InvalidLink : "Invalid link!",
 	MarkedAsYourFavorite : "Marked as your favorite!",
 	MarkingFavoriteInstruction : "Click to mark this function as your favorite.",
 	NotFoundError : "Not found!",

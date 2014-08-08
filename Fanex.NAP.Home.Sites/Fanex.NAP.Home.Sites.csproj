@@ -115,6 +115,8 @@
     <Compile Include="Controllers\SearchFunctionsController.cs" />
     <Compile Include="Controllers\SiteBaseController.cs" />
     <Compile Include="Controllers\UserSitesController.cs" />
+    <Compile Include="Criteria\Common\CheckPermissionByMenuUserIdCriteria.cs" />
+    <Compile Include="Criteria\Common\CheckUserPermissionBySiteCriteria.cs" />
     <Compile Include="Criteria\Common\UpdateMarkedMenuCriteria.cs" />
     <Compile Include="Criteria\FavoriteFunctions\GetMarkedMenusCriteria.cs" />
     <Compile Include="Criteria\SearchFunctions\SearchMenusCriteria.cs" />
@@ -140,6 +142,8 @@
     <Compile Include="Services\IUserSitesService.cs" />
     <Compile Include="Services\UserSitesService.cs" />
     <Compile Include="SitesAreaRegistration.cs" />
+    <Compile Include="ViewModels\Common\ForwardFilter.cs" />
+    <Compile Include="ViewModels\Common\ForwardResult.cs" />
     <Compile Include="ViewModels\FavoriteFunctions\GettingFavoriteFunctionsFilter.cs" />
     <Compile Include="ViewModels\FavoriteFunctions\FavoriteFunctionItem.cs" />
     <Compile Include="ViewModels\FavoriteFunctions\SiteItem.cs" />

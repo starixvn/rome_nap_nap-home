@@ -14,8 +14,13 @@
     <ul class="list-unstyled link">
         @foreach (var favorite in Model)
         {
-            string link = Url.Action("Forward", new { siteLink = siteLink, functionLink = favorite.Link });
-            <li><a href="@link" target="_blank" title="@favorite.FunctionName"><span class="icon-favourite"></span>@favorite.FunctionName.Truncate(35)</a></li>
+            string linkParameters = string.Format(
+                                               "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                               favorite.SiteId,
+                                               siteLink,
+                                               favorite.FunctionId,
+                                               favorite.Link);
+            <li><a href="#" data-strict-link="@linkParameters" title="@favorite.FunctionName"><span class="icon-favourite"></span>@favorite.FunctionName.Truncate(35)</a></li>
         }
     </ul>
 }

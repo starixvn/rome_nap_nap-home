@@ -11,7 +11,6 @@ namespace Fanex.NAP.Home.Sites.Services
 {
     using System;
     using System.Collections;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.Data;
     using Fanex.Data.Repository;
     using Fanex.NAP.Core.Web.Attribute;
@@ -67,14 +66,58 @@ namespace Fanex.NAP.Home.Sites.Services
         }
 
         /// <summary>
-        /// Temperate function to skip FXCop warning.
+        /// Checks if an user has permission on a function or not.
         /// </summary>
-        /// <param name="filter">Filter condition.</param>
-        /// <returns>Returns fake object.</returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "Temperately using.")]
-        protected object QueryData(object filter)
+        /// <param name="filter">The filter contains function's information.</param>
+        /// <returns>Returns if can access the function or not.</returns>
+        public ICommandResult CheckUserPermissionOnFunction(ForwardFilter filter)
         {
-            return null;
+            var criteria = new CheckPermissionByMenuUserIdCriteria
+            {
+                SiteId = filter.SiteId,
+                MenuId = filter.FunctionId.Value,
+                UserId = filter.UserId,
+                Environment = filter.Environment
+            };
+            CommandResult result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                Hashtable param = criteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+
+                result = GetCommandResult(param);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Checks if an user has permission on a site or not.
+        /// </summary>
+        /// <param name="filter">The filter contains site's information.</param>
+        /// <returns>Returns if can access the site or not.</returns>
+        public ICommandResult CheckUserPermissionOnSite(ForwardFilter filter)
+        {
+            var criteria = new CheckUserPermissionBySiteCriteria
+            {
+                SiteId = filter.SiteId,
+                UserId = filter.UserId,
+                Environment = filter.Environment
+            };
+            CommandResult result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                Hashtable param = criteria.GetSpParams();
+
+                db.ExecuteNonQuery(param);
+
+                result = GetCommandResult(param);
+            }
+
+            return result;
         }
 
         /// <summary>

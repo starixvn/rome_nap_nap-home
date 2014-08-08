@@ -45,7 +45,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.Common
         {
             return (this.UserId > 0) &&
                    (this.SiteId > 0) &&
-                   (MenuItemId > 0);
+                   (this.MenuItemId > 0);
         }
     }
 }

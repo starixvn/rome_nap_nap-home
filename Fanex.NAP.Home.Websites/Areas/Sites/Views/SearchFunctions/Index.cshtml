@@ -21,10 +21,15 @@
         <div class="row search-result">
             @foreach (SearchedFunctionItem function in Model)
             {
-                string link = Url.Action("Forward", new { siteLink = function.SiteLink, functionLink = function.Link });
+                string linkParameters = string.Format(
+                                                   "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                   function.SiteId,
+                                                   function.SiteLink,
+                                                   function.FunctionId,
+                                                   function.Link);
                 <div class="col-sm-12 col-md-6 search-item">
                     <h4>
-                        @HighlightWordsInLink(searchedFunctionName, function.FunctionName, link)
+                        @HighlightWordsInLink(searchedFunctionName, function.FunctionName, linkParameters)
                         <span class="icon-star @(@function.IsFavorite ? "icon-favorite-medium" : "icon-noneFavorite-medium")"
                               title="@(function.IsFavorite ? ViewLang.UnmarkingFavoriteInstruction : ViewLang.MarkingFavoriteInstruction)"
                               data-site-id="@function.SiteId"
@@ -34,7 +39,7 @@
                     </h4>
                     <div class="desc-item clearfix">
                         <span class="pull-left">@ViewLang.Path: </span>
-                        <a href="@link" target="_blank" title="@function.Path">
+                        <a href="#" title="@function.Path" data-strict-link="@linkParameters">
                             <span class="site-name">@function.SiteName</span>
                             <span> » @function.Path.Truncate(65 - function.SiteName.Length - 3)</span>
                         </a>
@@ -68,7 +73,7 @@ else
 {
     @Scripts.Render("~/scripts/searchFunctions")
 }
-@helper HighlightWordsInLink(string keyword, string text, string link)
+@helper HighlightWordsInLink(string keyword, string text, string linkParameters)
 {
     var formatter = new Regex(keyword, RegexOptions.IgnoreCase);
     string result = formatter.Replace(text, delegate(Match match)
@@ -76,5 +81,5 @@ else
         return string.Format("<b>{0}</b>", match.Value);
     });
 
-    <a href="@link" target="_blank">@Html.Raw(result)</a>
+    <a href="#" data-strict-link="@linkParameters">@Html.Raw(result)</a>
 }

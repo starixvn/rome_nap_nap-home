@@ -31,7 +31,8 @@ Fanex.NAP.Home.Common = function () {
     };
     var cachedValues = {
         RootURL: '',
-        SearchSitesUrl: 'Sites/SearchFunctions?FunctionName={0}&PageIndex={1}'
+        SearchSitesUrl: 'Sites/SearchFunctions?FunctionName={0}&PageIndex={1}',
+        ForwardUrl: 'Sites/SiteBase/Forward'
     };
 
     $this.HandleAjaxError = function (xhr) {
@@ -76,6 +77,10 @@ Fanex.NAP.Home.Common = function () {
 
     $this.NavigateToRoot = function (url) {
         window.location.replace($this.ResolveRootUrl(url));
+    };
+
+    $this.OpenNewTab = function (url) {
+        window.open(url, '_blank');
     };
 
     $this.Initialize = function () {
@@ -140,6 +145,52 @@ Fanex.NAP.Home.Common = function () {
                 zindex: 1031
             });
         }
+
+        $('body').on('click', '[data-strict-link]', function (event) {
+            var $link = $(this);
+            var $menuWrapper = $(event.target).closest('div.menu-wrapper');
+            var parameters = null;
+
+            if ($(event.target).attr('data-strict-link') || $menuWrapper.length === 0) {
+                try {
+                    parameters = $.parseJSON($link.attr('data-strict-link'));
+
+                    if (parameters) {
+                        forward(parameters, $link);
+                    }
+                } catch (error) {
+                    $this.ShowErrorMessage(viewLang.InvalidLink);
+                }
+
+                return false;
+            }
+        });
+    };
+
+    // Check permission and forward to a specific link.
+    var forward = function (parameters) {
+        $this.DisableInput();
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: $this.ResolveRootUrl(cachedValues.ForwardUrl),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(parameters),
+            success: function (forwardResult) {
+                if (forwardResult.ErrorCode === 0) {
+                    $this.OpenNewTab(forwardResult.Link);
+                } else {
+                    $this.ShowErrorMessage(forwardResult.ErrorMessage);
+                }
+            },
+            error: function (xhr) {
+                $this.HandleAjaxError(xhr);
+            },
+            complete: function () {
+                $this.EnableInput();
+            }
+        });
     };
 };
 

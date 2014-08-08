@@ -23,6 +23,8 @@ namespace Fanex.NAP.Home.Sites.Controllers
     /// </summary>
     public class SiteBaseController : BaseController
     {
+        private const string ForwardLink = "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl=~{4}";
+
         private ISiteBaseService _siteService;
         private IUserService _userService;
 
@@ -54,27 +56,45 @@ namespace Fanex.NAP.Home.Sites.Controllers
         }
 
         /// <summary>
-        /// Forwards the specified site.
+        /// Forwards the specified site or function.
         /// </summary>
-        /// <param name="siteLink">The URL of site.</param>
-        /// <param name="functionLink">The redirected URL after SSO.</param>
-        /// <returns>Return to selected site.</returns>
-        [HttpGet]
-        public ActionResult Forward(string siteLink, string functionLink = null)
+        /// <param name="filter">The object contains the links of site and function that need to redirect to.</param>
+        /// <returns>Return the URL of selected site or function.</returns>
+        [HttpPost]
+        public JsonResult Forward(ForwardFilter filter)
         {
             string time = this._userService.UserSSOGetTime();
+            ICommandResult checkPermissionResult = null;
+            ForwardResult forwardResult = null;
 
-            siteLink = siteLink ?? string.Empty;
-            functionLink = functionLink ?? string.Empty;
+            filter.UserId = this.CurrentSession.UserId;
+            filter.Environment = this.Environment;
+            filter.SiteLink = filter.SiteLink ?? string.Empty;
+            filter.FunctionLink = filter.FunctionLink ?? string.Empty;
 
-            return new RedirectResult(
-                string.Format(
-                    "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl=~{4}",
-                    siteLink.Trim(),
-                    Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
-                    Cryptography.CfsEnCrypt(this.CurrentSession.OnUserId.ToString()),
-                    Cryptography.CfsEnCrypt(time),
-                    functionLink));
+            if (filter.FunctionId.HasValue)
+            {
+                checkPermissionResult = this._siteService.CheckUserPermissionOnFunction(filter);
+            }
+            else
+            {
+                checkPermissionResult = this._siteService.CheckUserPermissionOnSite(filter);
+            }
+
+            forwardResult = new ForwardResult(checkPermissionResult);
+
+            if (checkPermissionResult.IsSuccessful)
+            {
+                forwardResult.Link = string.Format(
+                                         ForwardLink,
+                                         filter.SiteLink.Trim(),
+                                         Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
+                                         Cryptography.CfsEnCrypt(this.CurrentSession.OnUserId.ToString()),
+                                         Cryptography.CfsEnCrypt(time),
+                                         filter.FunctionLink);
+            }
+
+            return Json(forwardResult);
         }
     }
 }
