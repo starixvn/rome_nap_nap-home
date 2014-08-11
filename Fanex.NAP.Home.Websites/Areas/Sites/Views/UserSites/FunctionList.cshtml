@@ -46,6 +46,8 @@ else
                 <li>
                     <span class="icon-star @(function.IsFavorite ? "icon-favourite" : "icon-noneFavourite")"
                           title="@(function.IsFavorite ? ViewLang.UnmarkingFavoriteInstruction : ViewLang.MarkingFavoriteInstruction)"
+                          data-placement="top"
+                          data-container="body"
                           data-function-id="@function.FunctionId">
                     </span>
                     <a href="#" title="@function.FunctionName" data-strict-link="@linkParameters">@function.FunctionName.Truncate(30)</a>

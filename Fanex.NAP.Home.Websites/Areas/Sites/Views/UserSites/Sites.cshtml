@@ -19,7 +19,7 @@
             string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
             
             <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="description" data-site-id="@site.SiteId" data-strict-link="@defaultLinkParameters">
+                <div class="description" data-site-id="@site.SiteId" data-link-tile="@defaultLinkParameters">
                     <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
                     @Html.Partial("TopFavoriteFunctions", site.Favorites)
                     <div class="text-title">

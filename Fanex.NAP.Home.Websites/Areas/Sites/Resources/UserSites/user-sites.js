@@ -13,6 +13,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
     var $this = this;
 
     var domElements = {
+        divDiscriptions: null,
         divDomainButtons: null,
         divFuntionButtons: null
     };
@@ -24,6 +25,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
 
     // Cache DOM elements.
     var cacheDOMElements = function () {
+        domElements.divDiscriptions = $('div.description');
         domElements.divFuntionButtons = $('div.function-button');
         domElements.divDomainButtons = $('div.domain-button');
     };
@@ -79,6 +81,41 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             return false;
         });
 
+        // Reload tiles.
+        domElements.divDiscriptions.on('reload.nap-home', function () {
+            var $tile = $(this);
+            var $bgImage = null;
+            var siteId = $tile.attr('data-site-id');
+
+            if ($tile.data('favoriteUpdated')) {
+                $tile.data('favoriteUpdated', false);
+                $bgImage = $tile.children('img.bg-img');
+                getTopFavoriteFunctions($bgImage, siteId);
+            }
+        });
+
+        // Redirect to site when clicking on tiles.
+        domElements.divDiscriptions.on('click.nap-home', function (event) {
+            var $tile = $(this);
+            var $target = $(event.target);
+            var parameters = null;
+
+            if ($target.hasClass('description') ||
+                $target.hasClass('bg-img') ||
+                $target.hasClass('text-title') ||
+                ($target.is('li') && $target.parent().is('ul.link'))) {
+                try {
+                    parameters = $.parseJSON($tile.attr('data-link-tile'));
+
+                    if (parameters) {
+                        common.Forward(parameters);
+                    }
+                } catch (error) {
+                    $this.ShowErrorMessage(viewLang.InvalidLink);
+                }
+            }
+        });
+
         // Collapse/expand function tree.
         $('div.function-menu-wrapper').on('click.nap-home', 'span.group-node', function () {
             var $groupNode = $(this);
@@ -103,19 +140,6 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                 FunctionId: functionId,
                 IsMarked: isMarked
             }, $tile, $starIcon);
-        });
-
-        // Reload tiles.
-        $('div.description').on('reload.nap-home', function () {
-            var $tile = $(this);
-            var $bgImage = null;
-            var siteId = $tile.attr('data-site-id');
-
-            if ($tile.data('favoriteUpdated')) {
-                $tile.data('favoriteUpdated', false);
-                $bgImage = $tile.children('img.bg-img');
-                getTopFavoriteFunctions($bgImage, siteId);
-            }
         });
 
         // Hide menus when clicking on page.
@@ -169,9 +193,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                 if (functionList && functionList !== '') {
                     $menu.html(functionList).show();
                     $menuContent = $menu.children('ul.menu-content');
-                    $menuContent.find('span.icon-star').tooltip({
-                        placement: 'left'
-                    });
+                    $menuContent.find('span.icon-star').tooltip();
 
                     if ($menuContent.length > 0 && $menuContent.getNiceScroll().length === 0) {
                         $menuContent.niceScroll({

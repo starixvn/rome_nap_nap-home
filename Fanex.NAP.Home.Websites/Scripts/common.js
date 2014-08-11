@@ -83,6 +83,32 @@ Fanex.NAP.Home.Common = function () {
         window.open(url, '_blank');
     };
 
+    // Check permission and forward to a specific link.
+    $this.Forward = function (parameters) {
+        $this.DisableInput();
+        $.ajax({
+            type: 'POST',
+            async: false,
+            url: $this.ResolveRootUrl(cachedValues.ForwardUrl),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(parameters),
+            success: function (forwardResult) {
+                if (forwardResult.ErrorCode === 0) {
+                    $this.OpenNewTab(forwardResult.Link);
+                } else {
+                    $this.ShowErrorMessage(forwardResult.ErrorMessage);
+                }
+            },
+            error: function (xhr) {
+                $this.HandleAjaxError(xhr);
+            },
+            complete: function () {
+                $this.EnableInput();
+            }
+        });
+    };
+
     $this.Initialize = function () {
         domElements.txtSearchedFunctionName = $('#txtSearchedFunctionName');
         domElements.divMsgBox = $.msgbox({
@@ -146,47 +172,18 @@ Fanex.NAP.Home.Common = function () {
             });
         }
 
-        $('body').on('click', '[data-strict-link]', function (event) {
+        $('body').on('click.nap-home', '[data-strict-link]', function () {
             var $link = $(this);
-            var $menuWrapper = $(event.target).closest('div.menu-wrapper');
             var parameters = null;
 
-            if ($(event.target).attr('data-strict-link') || $menuWrapper.length === 0) {
-                try {
-                    parameters = $.parseJSON($link.attr('data-strict-link'));
+            try {
+                parameters = $.parseJSON($link.attr('data-strict-link'));
 
-                    if (parameters) {
-                        forward(parameters, $link);
-                    }
-                } catch (error) {
-                    $this.ShowErrorMessage(viewLang.InvalidLink);
+                if (parameters) {
+                    $this.Forward(parameters);
                 }
-            }
-        });
-    };
-
-    // Check permission and forward to a specific link.
-    var forward = function (parameters) {
-        $this.DisableInput();
-        $.ajax({
-            type: 'POST',
-            async: false,
-            url: $this.ResolveRootUrl(cachedValues.ForwardUrl),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify(parameters),
-            success: function (forwardResult) {
-                if (forwardResult.ErrorCode === 0) {
-                    $this.OpenNewTab(forwardResult.Link);
-                } else {
-                    $this.ShowErrorMessage(forwardResult.ErrorMessage);
-                }
-            },
-            error: function (xhr) {
-                $this.HandleAjaxError(xhr);
-            },
-            complete: function () {
-                $this.EnableInput();
+            } catch (error) {
+                $this.ShowErrorMessage(viewLang.InvalidLink);
             }
         });
     };

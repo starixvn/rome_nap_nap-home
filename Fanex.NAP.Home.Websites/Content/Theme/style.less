@@ -606,6 +606,7 @@ a, a:hover, a:active, a:focus {
 .tooltip  {
     .tooltip-inner {
         background: #f8b03e;
+        min-width: 252px;
         padding: 4px;
     }
 
@@ -615,6 +616,10 @@ a, a:hover, a:active, a:focus {
 
     &.right .tooltip-arrow {
         border-right-color: #f8b03e;
+    }
+
+    &.top .tooltip-arrow {
+        border-top-color: #f8b03e;
     }
 
     &.bottom .tooltip-arrow {
