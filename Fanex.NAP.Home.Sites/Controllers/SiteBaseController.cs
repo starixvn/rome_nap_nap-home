@@ -23,7 +23,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
     /// </summary>
     public class SiteBaseController : BaseController
     {
-        private const string ForwardLink = "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl=~{4}";
+        private const string ForwardLink = "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl={4}";
 
         private ISiteBaseService _siteService;
         private IUserService _userService;
@@ -70,7 +70,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             filter.UserId = this.CurrentSession.UserId;
             filter.Environment = this.Environment;
             filter.SiteLink = filter.SiteLink ?? string.Empty;
-            filter.FunctionLink = filter.FunctionLink ?? string.Empty;
+            filter.FunctionLink = string.IsNullOrEmpty(filter.FunctionLink) ? string.Empty : "~" + filter.FunctionLink;
 
             if (filter.FunctionId.HasValue)
             {
