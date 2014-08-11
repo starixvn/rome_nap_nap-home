@@ -20,7 +20,12 @@
                                                siteLink,
                                                favorite.FunctionId,
                                                favorite.Link);
-            <li><a href="#" data-strict-link="@linkParameters" title="@favorite.FunctionName"><span class="icon-favourite"></span>@favorite.FunctionName.Truncate(35)</a></li>
+            <li data-truncate-parent="true">
+                <a href="#" data-strict-link="@linkParameters">
+                    <span class="icon-favourite"></span>
+                    <span  title="@favorite.FunctionName" data-truncate-offset="30">@favorite.FunctionName</span>
+                </a>
+            </li>
         }
     </ul>
 }

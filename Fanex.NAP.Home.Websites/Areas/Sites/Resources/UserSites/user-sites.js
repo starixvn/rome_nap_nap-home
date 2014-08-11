@@ -1,5 +1,5 @@
 ﻿/* File Created: July 29, 2014 */
-/* global Namespace, common, viewLang */
+/* global _, Namespace, common, viewLang */
 'use strict';
 
 $(document).ready(function () {
@@ -111,7 +111,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                         common.Forward(parameters);
                     }
                 } catch (error) {
-                    $this.ShowErrorMessage(viewLang.InvalidLink);
+                    common.ShowErrorMessage(viewLang.InvalidLink);
                 }
             }
         });
@@ -142,11 +142,33 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             }, $tile, $starIcon);
         });
 
+        // Truncate when the window is resizing.
+        $(window).on('resize', _.debounce(truncateTileTexts, 100));
+        truncateTileTexts();
+
         // Hide menus when clicking on page.
         $('html').on('click.nap-home', function (event) {
             if ($(event.target).closest('.menu-wrapper').length === 0) {
                 hideMenus();
             }
+        });
+    };
+
+    // Truncate sites' names and top favorites' names.
+    var truncateTileTexts = function () {
+        $('[data-truncate-offset]').each(function () {
+            var $link = $(this);
+            var $parent = $link.closest('[data-truncate-parent]');
+            var text = $link.attr('title');
+            var offset = parseInt($link.attr('data-truncate-offset'));
+            var width = $parent.width() - offset;
+            var noOfChars = parseInt(width / 6);
+
+            if (text.length > noOfChars) {
+                text = text.substring(0, noOfChars - 3) + '...';
+            }
+
+            $link.text(text);
         });
     };
 

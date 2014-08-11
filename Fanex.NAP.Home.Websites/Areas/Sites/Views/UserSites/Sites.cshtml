@@ -22,8 +22,8 @@
                 <div class="description" data-site-id="@site.SiteId" data-link-tile="@defaultLinkParameters">
                     <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
                     @Html.Partial("TopFavoriteFunctions", site.Favorites)
-                    <div class="text-title">
-                        <a href="#" title="@site.SiteName" data-strict-link="@defaultLinkParameters">@site.SiteName.Truncate(30)</a>
+                    <div class="text-title" data-truncate-parent="true">
+                        <a href="#" title="@site.SiteName" data-strict-link="@defaultLinkParameters" data-truncate-offset="120">@site.SiteName</a>
                         <div class="menu-button function-button">
                             <span class="icon-function" title="@ViewLang.FunctionList"></span>
                         </div>
