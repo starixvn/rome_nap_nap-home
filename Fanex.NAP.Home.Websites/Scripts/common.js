@@ -161,8 +161,6 @@ Fanex.NAP.Home.Common = function () {
                 } catch (error) {
                     $this.ShowErrorMessage(viewLang.InvalidLink);
                 }
-
-                return false;
             }
         });
     };
