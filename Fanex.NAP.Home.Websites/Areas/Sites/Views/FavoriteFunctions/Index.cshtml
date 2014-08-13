@@ -31,7 +31,8 @@
 
             <div class="row site">
                 <h4 class="title">
-                    <a href="#" data-strict-link="@string.Format("{{\"SiteId\": {0}, \"SiteLink\": \"{1}\"}}", site.SiteId, site.SiteLink)">@site.SiteName</a>
+                    <a href="javascript:void(0);"
+                       data-strict-link="@string.Format("{{\"SiteId\": {0}, \"SiteLink\": \"{1}\"}}", site.SiteId, site.SiteLink.Trim())">@site.SiteName</a>
                 </h4>
                 <ul class="function-list list-unstyled">
                     @foreach (FavoriteFunctionItem favorite in site.FavoriteFunctions)
@@ -39,13 +40,13 @@
                         string linkParameters = string.Format(
                                                    "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
                                                    site.SiteId,
-                                                   site.SiteLink,
+                                                   site.SiteLink.Trim(),
                                                    favorite.FunctionId,
-                                                   favorite.Link);
+                                                   favorite.Link.Trim());
                         counter++;
 
                         <li>
-                            <a href="#" title="@favorite.Path" data-strict-link="@linkParameters">@favorite.Path.Truncate(40)</a>
+                            <a href="javascript:void(0);" title="@favorite.Path" data-strict-link="@linkParameters">@favorite.Path.Truncate(40)</a>
                             <span class="icon-favorite-medium"
                                   title="@ViewLang.UnmarkingFavoriteInstruction"
                                   data-toggle="tooltip"

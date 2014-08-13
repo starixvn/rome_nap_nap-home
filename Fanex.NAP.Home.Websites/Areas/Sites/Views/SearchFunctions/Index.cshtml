@@ -24,9 +24,9 @@
                 string linkParameters = string.Format(
                                                    "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
                                                    function.SiteId,
-                                                   function.SiteLink,
+                                                   function.SiteLink.Trim(),
                                                    function.FunctionId,
-                                                   function.Link);
+                                                   function.Link.Trim());
                 <div class="col-sm-12 col-md-6 search-item">
                     <h4>
                         @HighlightWordsInLink(searchedFunctionName, function.FunctionName, linkParameters)
@@ -39,7 +39,7 @@
                     </h4>
                     <div class="desc-item clearfix">
                         <span class="pull-left">@ViewLang.Path: </span>
-                        <a href="#" title="@function.Path" data-strict-link="@linkParameters">
+                        <a href="javascript:void(0);" title="@function.Path" data-strict-link="@linkParameters">
                             <span class="site-name">@function.SiteName</span>
                             <span> » @function.Path.Truncate(65 - function.SiteName.Length - 3)</span>
                         </a>
@@ -81,5 +81,5 @@ else
         return string.Format("<b>{0}</b>", match.Value);
     });
 
-    <a href="#" data-strict-link="@linkParameters">@Html.Raw(result)</a>
+    <a href="javascript:void(0);" data-strict-link="@linkParameters">@Html.Raw(result)</a>
 }

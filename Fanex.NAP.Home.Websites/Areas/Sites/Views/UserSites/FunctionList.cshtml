@@ -40,9 +40,9 @@ else
                 string linkParameters = string.Format(
                                                    "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
                                                    function.SiteId,
-                                                   siteLink,
+                                                   siteLink.Trim(),
                                                    function.FunctionId,
-                                                   function.Link);
+                                                   function.Link.Trim());
                 <li>
                     <span class="icon-star @(function.IsFavorite ? "icon-favourite" : "icon-noneFavourite")"
                           title="@(function.IsFavorite ? ViewLang.UnmarkingFavoriteInstruction : ViewLang.MarkingFavoriteInstruction)"
@@ -50,7 +50,7 @@ else
                           data-container="body"
                           data-function-id="@function.FunctionId">
                     </span>
-                    <a href="#" title="@function.FunctionName" data-strict-link="@linkParameters">@function.FunctionName.Truncate(30)</a>
+                    <a href="javascript:void(0);" title="@function.FunctionName" data-strict-link="@linkParameters">@function.FunctionName.Truncate(30)</a>
                 </li>
             }
         }

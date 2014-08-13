@@ -103,6 +103,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             if ($target.hasClass('description') ||
                 $target.hasClass('bg-img') ||
                 $target.hasClass('text-title') ||
+                $target.is('ul.link') ||
                 ($target.is('li') && $target.parent().is('ul.link'))) {
                 try {
                     parameters = $.parseJSON($tile.attr('data-link-tile'));

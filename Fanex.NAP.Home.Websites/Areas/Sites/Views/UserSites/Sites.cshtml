@@ -16,14 +16,17 @@
         foreach (var site in Model)
         {
             string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
-            string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
+            string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink.Trim());
             
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="description" data-site-id="@site.SiteId" data-link-tile="@defaultLinkParameters">
                     <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
                     @Html.Partial("TopFavoriteFunctions", site.Favorites)
                     <div class="text-title" data-truncate-parent="true">
-                        <a href="#" title="@site.SiteName" data-strict-link="@defaultLinkParameters" data-truncate-offset="120">@site.SiteName</a>
+                        <a href="javascript:void(0);"
+                           title="@site.SiteName"
+                           data-strict-link="@defaultLinkParameters"
+                           data-truncate-offset="120">@site.SiteName</a>
                         <div class="menu-button function-button">
                             <span class="icon-function" title="@ViewLang.FunctionList"></span>
                         </div>
@@ -38,7 +41,8 @@
                                     @foreach (var domain in site.Domains)
                                     {
                                         <li>
-                                            <a href="#" data-strict-link="@string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, domain)">@domain</a>
+                                            <a href="javascript:void(0);"
+                                               data-strict-link="@string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, domain.Trim())">@domain</a>
                                         </li>
                                     }
                                 </ul>
