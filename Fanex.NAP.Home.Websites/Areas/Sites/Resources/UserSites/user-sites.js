@@ -99,6 +99,7 @@ Fanex.NAP.Home.Sites.UserSites = function () {
             var $tile = $(this);
             var $target = $(event.target);
             var parameters = null;
+            var invalid = false;
 
             if ($target.hasClass('description') ||
                 $target.hasClass('bg-img') ||
@@ -108,8 +109,14 @@ Fanex.NAP.Home.Sites.UserSites = function () {
                 try {
                     parameters = $.parseJSON($tile.attr('data-link-tile'));
 
-                    if (parameters) {
+                    for (var key in parameters) {
+                        invalid = invalid || !parameters[key];
+                    }
+
+                    if (parameters && !invalid) {
                         common.Forward(parameters);
+                    } else {
+                        common.ShowErrorMessage(viewLang.InvalidLink);
                     }
                 } catch (error) {
                     common.ShowErrorMessage(viewLang.InvalidLink);

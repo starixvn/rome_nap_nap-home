@@ -10,6 +10,7 @@
 namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
 {
     using Fanex.Common;
+    using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Models.SearchFunctions;
 
     /// <summary>
@@ -28,8 +29,8 @@ namespace Fanex.NAP.Home.Sites.ViewModels.SearchFunctions
                 this.SiteId = Converter.ToInt(menuInfo.SiteId);
                 this.FunctionId = Converter.ToInt(menuInfo.MenuItemId);
                 this.FunctionName = menuInfo.MenuItemName;
-                this.Link = menuInfo.Link;
-                this.SiteLink = menuInfo.SiteLink;
+                this.Link = StringExtensions.TrimOrEmpty(menuInfo.Link);
+                this.SiteLink = StringExtensions.TrimOrEmpty(menuInfo.SiteLink);
                 this.SiteName = menuInfo.SiteName;
                 this.Path = menuInfo.Path;
                 this.IsFavorite = Converter.ToBool(menuInfo.IsMarked);

@@ -11,6 +11,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.FavoriteFunctions
 {
     using System.Collections.Generic;
     using Fanex.Common;
+    using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Models.FavoriteFunctions;
 
     /// <summary>
@@ -29,7 +30,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.FavoriteFunctions
             {
                 this.SiteId = Converter.ToInt(siteInfo.SiteId);
                 this.SiteName = siteInfo.SiteName;
-                this.SiteLink = siteInfo.SiteLink;
+                this.SiteLink = StringExtensions.TrimOrEmpty(siteInfo.SiteLink);
             }
 
             this.FavoriteFunctions = favorites ?? new List<FavoriteFunctionItem>();

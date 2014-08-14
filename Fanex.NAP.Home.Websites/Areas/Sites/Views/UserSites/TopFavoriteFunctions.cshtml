@@ -17,9 +17,9 @@
             string linkParameters = string.Format(
                                                "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
                                                favorite.SiteId,
-                                               siteLink.Trim(),
+                                               siteLink,
                                                favorite.FunctionId,
-                                               favorite.Link.Trim());
+                                               favorite.Link);
             <li data-truncate-parent="true">
                 <a href="javascript:void(0);" data-strict-link="@linkParameters">
                     <span class="icon-favourite"></span>

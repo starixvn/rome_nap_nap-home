@@ -85,6 +85,7 @@ Fanex.NAP.Home.Common = function () {
 
     // Check permission and forward to a specific link.
     $this.Forward = function (parameters) {
+        $this.CloseMsgBox();
         $this.DisableInput();
         $.ajax({
             type: 'POST',
@@ -175,12 +176,19 @@ Fanex.NAP.Home.Common = function () {
         $('body').on('click.nap-home', '[data-strict-link]', function () {
             var $link = $(this);
             var parameters = null;
+            var invalid = false;
 
             try {
                 parameters = $.parseJSON($link.attr('data-strict-link'));
 
-                if (parameters) {
+                for (var key in parameters) {
+                    invalid = invalid || !parameters[key];
+                }
+
+                if (parameters && !invalid) {
                     $this.Forward(parameters);
+                } else {
+                    common.ShowErrorMessage(viewLang.InvalidLink);
                 }
             } catch (error) {
                 $this.ShowErrorMessage(viewLang.InvalidLink);

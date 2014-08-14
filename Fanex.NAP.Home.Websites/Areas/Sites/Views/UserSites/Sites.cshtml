@@ -16,7 +16,7 @@
         foreach (var site in Model)
         {
             string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
-            string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink.Trim());
+            string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
             
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="description" data-site-id="@site.SiteId" data-link-tile="@defaultLinkParameters">
@@ -42,7 +42,7 @@
                                     {
                                         <li>
                                             <a href="javascript:void(0);"
-                                               data-strict-link="@string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, domain.Trim())">@domain</a>
+                                               data-strict-link="@string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, domain)">@domain</a>
                                         </li>
                                     }
                                 </ul>

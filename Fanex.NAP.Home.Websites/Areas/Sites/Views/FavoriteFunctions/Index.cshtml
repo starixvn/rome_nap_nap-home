@@ -32,7 +32,7 @@
             <div class="row site">
                 <h4 class="title">
                     <a href="javascript:void(0);"
-                       data-strict-link="@string.Format("{{\"SiteId\": {0}, \"SiteLink\": \"{1}\"}}", site.SiteId, site.SiteLink.Trim())">@site.SiteName</a>
+                       data-strict-link="@string.Format("{{\"SiteId\": {0}, \"SiteLink\": \"{1}\"}}", site.SiteId, site.SiteLink)">@site.SiteName</a>
                 </h4>
                 <ul class="function-list list-unstyled">
                     @foreach (FavoriteFunctionItem favorite in site.FavoriteFunctions)
@@ -40,9 +40,9 @@
                         string linkParameters = string.Format(
                                                    "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
                                                    site.SiteId,
-                                                   site.SiteLink.Trim(),
+                                                   site.SiteLink,
                                                    favorite.FunctionId,
-                                                   favorite.Link.Trim());
+                                                   favorite.Link);
                         counter++;
 
                         <li>

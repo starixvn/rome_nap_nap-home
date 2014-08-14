@@ -10,6 +10,7 @@
 namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 {
     using System.Collections.Generic;
+    using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Models.UserSites;
 
     /// <summary>
@@ -29,7 +30,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
                 this.FunctionId = menu.MenuItemId;
                 this.FunctionName = menu.MenuItemName;
                 this.SiteId = menu.SiteId;
-                this.Link = menu.Link;
+                this.Link = StringExtensions.TrimOrEmpty(menu.Link);
                 this.IsFavorite = menu.IsMarked;
                 this.DisplayOrder = menu.DisplayOrder;
                 this.Children = new List<UserSiteFunctionItem>();
@@ -43,7 +44,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
                 this.FunctionId = menu.MenuItemId;
                 this.FunctionName = menu.MenuItemName;
                 this.SiteId = menu.SiteId;
-                this.Link = menu.Link;
+                this.Link = StringExtensions.TrimOrEmpty(menu.Link);
                 this.IsFavorite = true;
             }
         }

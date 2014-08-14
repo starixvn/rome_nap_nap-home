@@ -30,5 +30,22 @@ namespace Fanex.NAP.Home.Core.Helpers
 
             return value;
         }
+
+        /// <summary>
+        /// Trims a string if it is not null or returns an empty string.
+        /// </summary>
+        /// <param name="value">The value that needs to be trimmed.</param>
+        /// <returns>The trimmed string.</returns>
+        public static string TrimOrEmpty(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return value.Trim();
+            }
+        }
     }
 }

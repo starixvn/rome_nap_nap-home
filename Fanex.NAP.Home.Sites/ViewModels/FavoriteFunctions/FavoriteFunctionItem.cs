@@ -10,6 +10,7 @@
 namespace Fanex.NAP.Home.Sites.ViewModels.FavoriteFunctions
 {
     using Fanex.Common;
+    using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Models.FavoriteFunctions;
 
     /// <summary>
@@ -26,7 +27,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.FavoriteFunctions
             if (menu != null)
             {
                 this.FunctionId = Converter.ToInt(menu.MenuItemId);
-                this.Link = menu.Link;
+                this.Link = StringExtensions.TrimOrEmpty(menu.Link);
                 this.Path = menu.Path;
             }
         }

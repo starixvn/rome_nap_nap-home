@@ -24,9 +24,9 @@
                 string linkParameters = string.Format(
                                                    "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
                                                    function.SiteId,
-                                                   function.SiteLink.Trim(),
+                                                   function.SiteLink,
                                                    function.FunctionId,
-                                                   function.Link.Trim());
+                                                   function.Link);
                 <div class="col-sm-12 col-md-6 search-item">
                     <h4>
                         @HighlightWordsInLink(searchedFunctionName, function.FunctionName, linkParameters)

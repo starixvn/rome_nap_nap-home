@@ -10,6 +10,8 @@
 namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Configurations;
     using Fanex.NAP.Home.Sites.Models.UserSites;
 
@@ -36,8 +38,9 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 
                 if (this.Domains.Count > 0)
                 {
-                    this.DefaultLink = this.Domains[0];
+                    this.DefaultLink = StringExtensions.TrimOrEmpty(this.Domains[0]);
                     this.Domains.RemoveAt(0);
+                    this.Domains = this.Domains.Select(domain => StringExtensions.TrimOrEmpty(domain)).ToList();
                 }
             }
         }
