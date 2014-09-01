@@ -1,30 +1,30 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="GetMarkedMenusCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="CheckUserPermissionBySiteCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Jason.Ly" date="2014.8.4">Created</change>
+//   <change who="Jason.Ly" date="2014.8.8">Created</change>
 // </history>
 
-namespace Fanex.NAP.Home.Sites.Criteria.FavoriteFunctions
+namespace Fanex.NAP.Home.Sites.Criteria.UserSites
 {
-    using Fanex.Data.Repository;
+    using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// The criteria that are used to get all marked menus.
+    /// Check user's permission on site.
     /// </summary>
-    public class GetMarkedMenusCriteria : CriteriaBase
+    public class CheckUserPermissionBySiteCriteria : CriteriaBase
     {
         public int UserId { get; set; }
 
+        public int SiteId { get; set; }
+
         public string Environment { get; set; }
 
-        public int PageSize { get; set; }
+        public string ErrMsg { get; set; }
 
-        public int PageIndex { get; set; }
-
-        public int TotalItemCount { get; set; }
+        public int ErrCode { get; set; }
 
         /// <summary>
         /// Gets the setting key.
@@ -32,7 +32,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.FavoriteFunctions
         /// <returns>The setting key.</returns>
         public override string GetSettingKey()
         {
-            return "NAP_Home_GetMarkedMenus";
+            return "NAP_Home_CheckUserPermissionBySite";
         }
 
         /// <summary>
@@ -42,6 +42,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.FavoriteFunctions
         public override bool IsValid()
         {
             return (this.UserId > 0) &&
+                   (this.SiteId > 0) &&
                    !string.IsNullOrEmpty(this.Environment);
         }
     }

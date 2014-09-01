@@ -1,30 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Common">
-    <Setting Key="NAP_Home_UpdateMarkedMenu" SpName="NAP_Home_UpdateMarkedMenu" DbName="DBNAP.bodb_NAP.bodbAdminNet" />
     <Setting Key="NAP_Home_CheckPermissionByMenuUserId" SpName="NAP_Home_CheckPermissionByMenuUserId" DbName="DBNAP.bodb_NAP.bodbAdminNet" />
     <Setting Key="NAP_Home_CheckUserPermissionBySite" SpName="NAP_Home_CheckUserPermissionBySite" DbName="DBNAP.bodb_NAP.bodbAdminNet" />
   </Function>
   <Function Name="UserSites">
-    <Setting Key="NAP_Home_GetUserSites" SpName="NAP_Home_GetUserSites" DbName="DBNAP.bodb_NAP.bodbAdminNet">
-      <Mapping DataField="URL" ObjectProperty="Link" />
-    </Setting>
-    <Setting Key="NAP_Home_GetTopMarkedMenus" SpName="NAP_Home_GetTopMarkedMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
-      <Mapping DataField="URL" ObjectProperty="Link" />
-    </Setting>
-    <Setting Key="NAP_Home_GetMenusBySiteUserId" SpName="NAP_Home_GetMenusBySiteUserId" DbName="DBNAP.bodb_NAP.bodbAdminNet">
-      <Mapping DataField="URL" ObjectProperty="Link" />
-    </Setting>
-  </Function>
-  <Function Name="SearchFunctions">
-    <Setting Key="NAP_Home_SearchMenus" SpName="NAP_Home_SearchMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
-      <Mapping DataField="URL" ObjectProperty="Link" />
-      <Mapping DataField="SiteURL" ObjectProperty="SiteLink" />
-    </Setting>
-  </Function>
-  <Function Name="FavoriteFunctions">
-    <Setting Key="NAP_Home_GetMarkedMenus" SpName="NAP_Home_GetMarkedMenus" DbName="DBNAP.bodb_NAP.bodbAdminNet">
-      <Mapping DataField="URL" ObjectProperty="Link" />
+    <Setting Key="NAP_Home_MainPage" SpName="NAP_Home_MainPage" DbName="DBNAP.bodb_NAP.bodbAdminNet">
+      <Mapping DataField="MenuURL" ObjectProperty="MenuLink" />
       <Mapping DataField="SiteURL" ObjectProperty="SiteLink" />
     </Setting>
   </Function>

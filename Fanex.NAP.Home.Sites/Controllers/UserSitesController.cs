@@ -5,37 +5,43 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Jason.Ly" date="2014.7.22">Create</change>
+//   <change who="Jason.Ly" date="2014.9.1">Modify code for change requests.</change>
 // </history>
 
 namespace Fanex.NAP.Home.Sites.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Services;
     using Fanex.NAP.Home.Sites.ViewModels.UserSites;
+    using Fanex.Security;
 
     /// <summary>
     /// User sites controller.
     /// </summary>
     [NapSuperAuth]
-    public class UserSitesController : SiteBaseController
+    public class UserSitesController : BaseController
     {
         private const string CachedDefaultSiteLinks = "Fanex.NAP.Home.DefaultSiteLinks";
+        private const string ForwardLink = "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl={4}";
 
-        private IUserSitesService _service;
+        private IUserSitesService _siteService;
+        private IUserService _userService;
 
         public UserSitesController() :
-            this(null)
+            this(null, null)
         {
         }
 
-        public UserSitesController(IUserSitesService service)
+        public UserSitesController(IUserSitesService siteService, IUserService userService)
         {
-            this._service = service ?? new UserSitesService();
-            ViewBag.DefaultLinks = SessionManager.Get<Dictionary<int, string>>(CachedDefaultSiteLinks);
-            ViewBag.IsHomePage = true;
+            this._siteService = siteService ?? new UserSitesService();
+            this._userService = userService ?? new UserService();
         }
 
         /// <summary>
@@ -50,65 +56,62 @@ namespace Fanex.NAP.Home.Sites.Controllers
         /// <summary>
         /// Redirect to Sites page.
         /// </summary>
+        /// <param name="searchFunction">Searched function name.</param>
         /// <returns>Return Sites page.</returns>
         [HttpGet]
-        public ActionResult Sites()
+        public ActionResult Sites(string searchFunction = null)
         {
-            var filter = new UserSitesFilter
+            var filter = new SearchFunctionsFilter
             {
                 UserId = this.CurrentSession.UserId,
+                SearchedFunctionName = searchFunction ?? string.Empty,
                 Environment = this.Environment
             };
-            IEnumerable<UserSiteItem> sites = this._service.LoadUserSites(filter);
-            Dictionary<int, string> defaultLinks = new Dictionary<int, string>();
-
-            if (sites != null)
-            {
-                foreach (UserSiteItem site in sites)
-                {
-                    defaultLinks.Add(site.SiteId, site.DefaultLink);
-                }
-
-                SessionManager.Set<Dictionary<int, string>>(CachedDefaultSiteLinks, defaultLinks);
-                ViewBag.DefaultLinks = defaultLinks;
-            }
+            IEnumerable<SiteItem> sites = this._siteService.LoadUserSitesAndFunctions(filter);
 
             return View(sites);
         }
 
         /// <summary>
-        /// Gets the partial view of top favorite functions of a site.
+        /// Forwards the specified site or function.
         /// </summary>
-        /// <param name="filter">The filter contains necessary conditions to query data.</param>
-        /// <returns>Returns top favorite functions.</returns>
+        /// <param name="filter">The object contains the links of site and function that need to redirect to.</param>
+        /// <returns>Return the URL of selected site or function.</returns>
         [HttpPost]
-        public PartialViewResult TopFavoriteFunctions(TopFavoriteFunctionsFilter filter)
+        public JsonResult Forward(ForwardFilter filter)
         {
-            IEnumerable<UserSiteFunctionItem> functions = null;
+            string time = this._userService.UserSSOGetTime();
+            ICommandResult checkPermissionResult = null;
+            ForwardResult forwardResult = null;
 
             filter.UserId = this.CurrentSession.UserId;
             filter.Environment = this.Environment;
-            filter.Top = AppSettings.TopFavorites;
-            functions = this._service.LoadTopFavoriteFunctionsOfSite(filter);
+            filter.SiteLink = filter.SiteLink ?? string.Empty;
+            filter.FunctionLink = string.IsNullOrEmpty(filter.FunctionLink) ? string.Empty : "~" + filter.FunctionLink;
 
-            return PartialView(functions);
-        }
+            if (filter.FunctionId.HasValue)
+            {
+                checkPermissionResult = this._siteService.CheckUserPermissionOnFunction(filter);
+            }
+            else
+            {
+                checkPermissionResult = this._siteService.CheckUserPermissionOnSite(filter);
+            }
 
-        /// <summary>
-        /// Gets the partial view of user's accessible functions which organized into tree view.
-        /// </summary>
-        /// <param name="filter">The filter contains necessary conditions to query data.</param>
-        /// <returns>Returns function list.</returns>
-        [HttpPost]
-        public PartialViewResult FunctionList(UserSiteFunctionsFilter filter)
-        {
-            IEnumerable<UserSiteFunctionItem> functions = null;
+            forwardResult = new ForwardResult(checkPermissionResult);
 
-            filter.UserId = this.CurrentSession.UserId;
-            filter.Environment = this.Environment;
-            functions = this._service.LoadAccessibleFunctionsOfSite(filter);
+            if (checkPermissionResult.IsSuccessful)
+            {
+                forwardResult.Link = string.Format(
+                                         ForwardLink,
+                                         filter.SiteLink.Trim(),
+                                         Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
+                                         Cryptography.CfsEnCrypt(this.CurrentSession.OnUserId.ToString()),
+                                         Cryptography.CfsEnCrypt(time),
+                                         filter.FunctionLink);
+            }
 
-            return PartialView(functions);
+            return Json(forwardResult);
         }
     }
 }

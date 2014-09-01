@@ -1,19 +1,21 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="UserSitesFilter.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="SearchFunctionsFilter.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Jason.Ly" date="2014.7.29">Create</change>
+//   <change who="Jason.Ly" date="2014.9.1">Create</change>
 // </history>
 
 namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 {
     /// <summary>
-    /// Query available sites of user.
+    /// The filter object that is used to query sites and functions by function name.
     /// </summary>
-    public class UserSitesFilter
+    public class SearchFunctionsFilter
     {
+        public string SearchedFunctionName { get; set; }
+
         public int UserId { get; set; }
 
         public string Environment { get; set; }

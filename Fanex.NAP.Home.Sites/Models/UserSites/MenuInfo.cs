@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Jason.Ly" date="2014.7.31">Created</change>
+//   <change who="Jason.Ly" date="2014.9.1">Created</change>
 // </history>
 
 namespace Fanex.NAP.Home.Sites.Models.UserSites
@@ -14,20 +14,16 @@ namespace Fanex.NAP.Home.Sites.Models.UserSites
     /// </summary>
     public class MenuInfo
     {
-        public byte SiteId { get; set; }
+        public int? SiteId { get; set; }
 
-        public int MenuItemId { get; set; }
+        public int? MenuItemId { get; set; }
 
         public string MenuItemName { get; set; }
 
-        public short? ParentId { get; set; }
+        public int? ParentId { get; set; }
 
-        public string ParentName { get; set; }
+        public string MenuLink { get; set; }
 
-        public string Link { get; set; }
-
-        public short DisplayOrder { get; set; }
-
-        public bool IsMarked { get; set; }
+        public short? DisplayOrder { get; set; }
     }
 }

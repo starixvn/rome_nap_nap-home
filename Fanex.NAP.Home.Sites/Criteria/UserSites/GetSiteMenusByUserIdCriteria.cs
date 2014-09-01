@@ -1,32 +1,26 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="CheckPermissionByMenuUserIdCriteria.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="GetSiteMenusByUserIdCriteria.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
-//   <change who="Jason.Ly" date="2014.8.8">Created</change>
+//   <change who="Jason.Ly" date="2014.9.1">Created</change>
 // </history>
 
-namespace Fanex.NAP.Home.Sites.Criteria.Common
+namespace Fanex.NAP.Home.Sites.Criteria.UserSites
 {
     using Fanex.NAP.Framework.Data;
 
     /// <summary>
-    /// The criteria that are used to check if an user has permission on a specific menu or not.
+    /// Get list of sites and menus that an user can access.
     /// </summary>
-    public class CheckPermissionByMenuUserIdCriteria : CriteriaBase
+    public class GetSiteMenusByUserIdCriteria : CriteriaBase
     {
         public int UserId { get; set; }
 
-        public int SiteId { get; set; }
-
-        public int MenuId { get; set; }
-
         public string Environment { get; set; }
 
-        public string ErrMsg { get; set; }
-
-        public int ErrCode { get; set; }
+        public string MenuItemName { get; set; }
 
         /// <summary>
         /// Gets the setting key.
@@ -34,7 +28,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.Common
         /// <returns>The setting key.</returns>
         public override string GetSettingKey()
         {
-            return "NAP_Home_CheckPermissionByMenuUserId";
+            return "NAP_Home_MainPage";
         }
 
         /// <summary>
@@ -44,8 +38,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.Common
         public override bool IsValid()
         {
             return (this.UserId > 0) &&
-                   (this.SiteId > 0) &&
-                   (this.MenuId > 0) &&
+                   !string.IsNullOrEmpty(this.MenuItemName) &&
                    !string.IsNullOrEmpty(this.Environment);
         }
     }

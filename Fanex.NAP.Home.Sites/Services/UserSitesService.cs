@@ -5,12 +5,19 @@
 // --------------------------------------------------------------------------
 // <history>
 //   <change who="Jason.Ly" date="2014.7.29">Create</change>
+//   <change who="Jason.Ly" date="2014.9.1">
+//      Call new SP (NAP_Home_MainPage), group function by first level parent functions.
+//      Move CheckUserPermissionOnFunction and CheckUserPermissionOnSite from SiteBaseService.
+//   </change>
 // </history>
 
 namespace Fanex.NAP.Home.Sites.Services
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using Fanex.Common;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Sites.Criteria.UserSites;
     using Fanex.NAP.Home.Sites.Models.UserSites;
     using Fanex.NAP.Home.Sites.Repositories;
@@ -19,7 +26,7 @@ namespace Fanex.NAP.Home.Sites.Services
     /// <summary>
     /// User sites service.
     /// </summary>
-    public class UserSitesService : SiteBaseService, IUserSitesService
+    public class UserSitesService : IUserSitesService
     {
         private IUserSitesRepository _repository;
 
@@ -34,23 +41,24 @@ namespace Fanex.NAP.Home.Sites.Services
         }
 
         /// <summary>
-        /// Gets accessible sites of an user.
+        /// Gets accessible sites and functions of an user.
         /// </summary>
         /// <param name="filter">The filter object contains User ID and the Environment indicator.</param>
-        /// <returns>List of sites that the user can access.</returns>
-        public IEnumerable<UserSiteItem> LoadUserSites(UserSitesFilter filter)
+        /// <returns>List of sites and sites' functions that the user can access.</returns>
+        public IEnumerable<SiteItem> LoadUserSitesAndFunctions(SearchFunctionsFilter filter)
         {
-            var criteria = new GetUserSitesCriteria
+            var criteria = new GetSiteMenusByUserIdCriteria
             {
                 UserId = filter.UserId,
+                MenuItemName = filter.SearchedFunctionName,
                 Environment = filter.Environment
             };
-            IEnumerable<UserSiteItem> result = null;
-            UserSiteInfo siteData = null;
+            IEnumerable<SiteItem> result = null;
+            SitesInfo siteData = null;
 
             if (criteria.IsValid())
             {
-                siteData = this._repository.GetUserSites(criteria);
+                siteData = this._repository.GetSitesAndMenus(criteria);
             }
 
             if (siteData != null)
@@ -62,83 +70,72 @@ namespace Fanex.NAP.Home.Sites.Services
         }
 
         /// <summary>
-        /// Gets the top favorite functions of a site.
+        /// Checks if an user has permission on a function or not.
         /// </summary>
-        /// <param name="filter">The filter contains necessary conditions to query data.</param>
-        /// <returns>List of favorite functions belongs to a site. The number of items is not greater than the passed Top value.</returns>
-        public IEnumerable<UserSiteFunctionItem> LoadTopFavoriteFunctionsOfSite(TopFavoriteFunctionsFilter filter)
+        /// <param name="filter">The filter contains function's information.</param>
+        /// <returns>Returns if can access the function or not.</returns>
+        public ICommandResult CheckUserPermissionOnFunction(ForwardFilter filter)
         {
-            IEnumerable<UserSiteFunctionItem> favorites = null;
-            IEnumerable<TopMarkedMenuInfo> menus = null;
-            var criteria = new GetTopMarkedMenusCriteria
+            var criteria = new CheckPermissionByMenuUserIdCriteria
             {
-                SiteIds = filter.SiteId.ToString(),
+                SiteId = filter.SiteId,
+                MenuId = filter.FunctionId.Value,
                 UserId = filter.UserId,
-                Environment = filter.Environment,
-                TopSelect = filter.Top
+                Environment = filter.Environment
             };
+            ICommandResult result = this._repository.CheckUserPermissionOnFunction(criteria);
 
-            if (criteria.IsValid())
-            {
-                menus = this.Repository.Fetch<TopMarkedMenuInfo>(criteria);
-            }
-
-            if (menus != null && menus.Any())
-            {
-                favorites = menus.Select(obj => new UserSiteFunctionItem(obj));
-            }
-
-            return favorites;
+            return result;
         }
 
         /// <summary>
-        /// Gets the list of functions of a site which logged in user can access.
+        /// Checks if an user has permission on a site or not.
         /// </summary>
-        /// <param name="filter">The filter contains necessary conditions to query data.</param>
-        /// <returns>List of user's accessible functions of a site which are organized into hierarchical structure.</returns>
-        public IEnumerable<UserSiteFunctionItem> LoadAccessibleFunctionsOfSite(UserSiteFunctionsFilter filter)
+        /// <param name="filter">The filter contains site's information.</param>
+        /// <returns>Returns if can access the site or not.</returns>
+        public ICommandResult CheckUserPermissionOnSite(ForwardFilter filter)
         {
-            IEnumerable<UserSiteFunctionItem> functions = null;
-            IEnumerable<MenuInfo> menus = null;
-            var criteria = new GetMenusBySiteUserIdCriteria
+            var criteria = new CheckUserPermissionBySiteCriteria
             {
                 SiteId = filter.SiteId,
                 UserId = filter.UserId,
                 Environment = filter.Environment
             };
+            ICommandResult result = this._repository.CheckUserPermissionOnSite(criteria);
 
-            if (criteria.IsValid())
-            {
-                menus = this.Repository.Fetch<MenuInfo>(criteria);
-            }
-
-            if (menus != null && menus.Any())
-            {
-                functions = RestructureFunctions(menus);
-            }
-
-            return functions;
+            return result;
         }
 
         /// <summary>
-        /// Groups the user sites data.
+        /// Groups the user sites and functions data.
         /// </summary>
         /// <param name="siteData">The site data.</param>
         /// <returns>Data are grouped by sites.</returns>
-        private IEnumerable<UserSiteItem> GroupUserSitesData(UserSiteInfo siteData)
+        private IEnumerable<SiteItem> GroupUserSitesData(SitesInfo siteData)
         {
-            List<UserSiteItem> sites = new List<UserSiteItem>();
-            List<UserSiteFunctionItem> favorites = null;
-            List<string> domains = null;
+            List<SiteItem> sites = new List<SiteItem>();
 
-            if (siteData.Sites != null && siteData.Sites.Any())
+            if (siteData.SiteUrlList != null && siteData.SiteUrlList.Any())
             {
-                foreach (SiteInfo site in siteData.Sites)
+                IEnumerable<IGrouping<int?, SiteUrlInfo>> siteUrlGroups = siteData.SiteUrlList.GroupBy(site => site.SiteId);
+                SiteUrlInfo siteInfo = null;
+                List<string> siteLinks = null;
+                List<MenuInfo> siteMenus = null;
+                List<FunctionGroup> functionGroups = null;
+
+                foreach (IGrouping<int?, SiteUrlInfo> siteUrlGroup in siteUrlGroups)
                 {
-                    domains = siteData.SiteUrls.Where<SiteUrlInfo>(obj => obj.SiteId == site.SiteId).Select(obj => obj.Link).ToList();
-                    favorites = siteData.TopMarkedMenus.Where<TopMarkedMenuInfo>(obj => obj.SiteId == site.SiteId)
-                                                       .Select(obj => new UserSiteFunctionItem(obj)).ToList();
-                    sites.Add(new UserSiteItem(site, domains, favorites));
+                    siteInfo = siteUrlGroup.ElementAt(0);
+                    siteLinks = siteUrlGroup.OrderBy(link => link.IsDefault).Select(link => link.SiteLink).ToList();
+                    functionGroups = null;
+
+                    if (siteData.MenuList != null && siteData.MenuList.Any(menu => menu.SiteId == siteUrlGroup.Key))
+                    {
+                        siteMenus = siteData.MenuList.Where(menu => menu.SiteId == siteUrlGroup.Key).ToList();
+                        functionGroups = ConvertFunctionList(siteMenus);
+                    }
+
+                    sites.Add(new SiteItem(siteInfo, siteLinks, functionGroups));
                 }
             }
 
@@ -146,29 +143,85 @@ namespace Fanex.NAP.Home.Sites.Services
         }
 
         /// <summary>
+        /// Re-structures the functions into hierarchy and removes middle level functions.
+        /// </summary>
+        /// <param name="menus">List of menus queried from database.</param>
+        /// <returns>List of FunctionGroup objects.</returns>
+        private List<FunctionGroup> ConvertFunctionList(List<MenuInfo> menus)
+        {
+            List<FunctionGroup> functionGroups = null;
+
+            if (menus != null && menus.Any())
+            {
+                List<FunctionTreeNode> functionTree = RestructureFunctions(menus);
+                FunctionGroup functionGroup = null;
+                List<FunctionItem> functionList = null;
+
+                functionGroups = new List<FunctionGroup>();
+
+                foreach (FunctionTreeNode node in functionTree)
+                {
+                    functionGroup = new FunctionGroup(node as FunctionItem);
+
+                    if (node.ChildFunctionNodeList != null && node.ChildFunctionNodeList.Count > 0)
+                    {
+                        GetLeafNodeFunctions(node.ChildFunctionNodeList, ref functionList);
+                        functionGroup.FunctionList = functionList;
+                    }
+
+                    functionGroups.Add(functionGroup);
+                }
+            }
+
+            return functionGroups;
+        }
+
+        /// <summary>
         /// Restructures the menu data into function tree.
         /// </summary>
         /// <param name="menus">The menus data.</param>
         /// <param name="parentId">Parent ID.</param>
-        /// <returns>List of UserSiteFunctionItem indicates the function tree.</returns>
-        private IEnumerable<UserSiteFunctionItem> RestructureFunctions(IEnumerable<MenuInfo> menus, int parentId = 0)
+        /// <returns>List of FunctionTreeNode indicates the function tree.</returns>
+        private List<FunctionTreeNode> RestructureFunctions(List<MenuInfo> menus, int parentId = 0)
         {
-            var functions = new List<UserSiteFunctionItem>();
-            UserSiteFunctionItem function = null;
+            var functionNodes = new List<FunctionTreeNode>();
+            FunctionTreeNode functionNode = null;
 
             foreach (MenuInfo menu in menus)
             {
                 if ((menu.ParentId == null && parentId == 0) || (menu.ParentId == parentId))
                 {
-                    function = new UserSiteFunctionItem(menu);
-                    function.Children.AddRange(RestructureFunctions(menus, menu.MenuItemId));
-                    functions.Add(function);
+                    functionNode = new FunctionTreeNode(menu);
+                    functionNode.ChildFunctionNodeList.AddRange(RestructureFunctions(menus, Converter.ToInt(menu.MenuItemId)));
+                    functionNodes.Add(functionNode);
                 }
             }
 
-            functions = functions.OrderBy(obj => obj.DisplayOrder).ToList();
+            functionNodes = functionNodes.OrderBy(obj => obj.DisplayOrder).ToList();
 
-            return functions;
+            return functionNodes;
+        }
+
+        /// <summary>
+        /// Removes the middle level functions and gets the leaf functions only.
+        /// </summary>
+        /// <param name="functionNodes">List of FunctionTreeNode objects represents the function tree.</param>
+        /// <param name="functionList">List of child functions.</param>
+        private void GetLeafNodeFunctions(List<FunctionTreeNode> functionNodes, ref List<FunctionItem> functionList)
+        {
+            functionList = functionList ?? new List<FunctionItem>();
+
+            foreach (FunctionTreeNode node in functionNodes)
+            {
+                if (node.ChildFunctionNodeList != null && node.ChildFunctionNodeList.Count > 0)
+                {
+                    GetLeafNodeFunctions(node.ChildFunctionNodeList, ref functionList);
+                }
+                else
+                {
+                    functionList.Add(node as FunctionItem);
+                }
+            }
         }
     }
 }

@@ -10,29 +10,30 @@
 namespace Fanex.NAP.Home.Sites.Services
 {
     using System.Collections.Generic;
+    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Sites.ViewModels.UserSites;
 
-    public interface IUserSitesService : ISiteBaseService
+    public interface IUserSitesService
     {
         /// <summary>
-        /// Gets accessible sites of an user.
+        /// Gets accessible sites and functions of an user.
         /// </summary>
         /// <param name="filter">The filter object contains User ID and the Environment indicator.</param>
-        /// <returns>List of sites that the user can access.</returns>
-        IEnumerable<UserSiteItem> LoadUserSites(UserSitesFilter filter);
+        /// <returns>List of sites and sites' functions that the user can access.</returns>
+        IEnumerable<SiteItem> LoadUserSitesAndFunctions(SearchFunctionsFilter filter);
 
         /// <summary>
-        /// Gets the top favorite functions of a site.
+        /// Checks if an user has permission on a function or not.
         /// </summary>
-        /// <param name="filter">The filter contains necessary conditions to query data.</param>
-        /// <returns>List of favorite functions belongs to a site. The number of items is not greater than the passed Top value.</returns>
-        IEnumerable<UserSiteFunctionItem> LoadTopFavoriteFunctionsOfSite(TopFavoriteFunctionsFilter filter);
+        /// <param name="filter">The filter contains function's information.</param>
+        /// <returns>Returns if can access the function or not.</returns>
+        ICommandResult CheckUserPermissionOnFunction(ForwardFilter filter);
 
         /// <summary>
-        /// Gets the list of functions of a site which logged in user can access.
+        /// Checks if an user has permission on a site or not.
         /// </summary>
-        /// <param name="filter">The filter contains necessary conditions to query data.</param>
-        /// <returns>List of user's accessible functions of a site which are organized into hierarchical structure.</returns>
-        IEnumerable<UserSiteFunctionItem> LoadAccessibleFunctionsOfSite(UserSiteFunctionsFilter filter);
+        /// <param name="filter">The filter contains site's information.</param>
+        /// <returns>Returns if can access the site or not.</returns>
+        ICommandResult CheckUserPermissionOnSite(ForwardFilter filter);
     }
 }
