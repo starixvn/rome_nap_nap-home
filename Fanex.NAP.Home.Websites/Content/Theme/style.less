@@ -4,10 +4,12 @@
 /********************************************************/
 /*                     Common CSS                       */
 /********************************************************/
+
 body {
-    padding-top: 125px;
+	padding-top: 40px;
     font-size: @font-size;
     font-family: @font-family;
+	background: url(Images/patern.jpg) repeat;
 }
 
 .sublayer {
@@ -25,10 +27,20 @@ a, a:hover, a:active, a:focus {
     outline: none;
     text-decoration: none;
 }
+/* Icon */
+.icon-search {
+	background: url(Images/sprite.png) -15px 0 no-repeat;
+	height: 15px;
+	width: 15px;
+	display: inline-block;
+}
 
 /********************************************************/
 /*              Customize navigation bar                */
 /********************************************************/
+.container-fluid {
+	padding: 0 40px;
+}
 .custom-navbar {
     .bg-linear-gradient(@nav-stop1 1px, @nav-stop2 1px, @nav-stop3 100%, @nav-direction);
     min-height: 40px;
@@ -36,16 +48,16 @@ a, a:hover, a:active, a:focus {
     .container-fluid {
         .navbar-brand {
             &.logo {
-                font-family: @font-Segoe-UI;
+                font-family: @font-Agency-FB;
                 height: 29px;
                 margin: 0;
-                font-size: @font-size + 12;
+                font-size: @font-size + 23;
                 text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
                 outline: none;
                 text-transform: uppercase;
                 color: @white;
                 font-weight: bold;
-                padding: 8px 15px;
+                padding: 12px 15px;
 
                 span {
                     color: #c9d9f2;
@@ -74,7 +86,7 @@ a, a:hover, a:active, a:focus {
                     cursor: pointer;
                     text-decoration: none;
                     display: block;
-                    margin-top: 6px;
+                    margin-top: 9px;
                     .border-radius();
 
                     .account-name {
@@ -132,6 +144,24 @@ a, a:hover, a:active, a:focus {
                 }
             }
         }
+		.form-search {
+			.search-bar {
+				position: relative;
+				.txtSearch {
+					height: 30px;
+					border: none;
+					box-shadow: inset 0 0 3px 3px #eee;
+					width: 468px;
+					border-radius: 3px;
+				}
+				.icon-search {
+					position: absolute;
+					top: 8px;
+					right: 5px;
+					cursor: pointer;
+				}
+			}
+		}
     }
 }
 
@@ -139,20 +169,12 @@ a, a:hover, a:active, a:focus {
 /*                     Search CSS                       */
 /********************************************************/
 .title-bar {
-    position: fixed;
-    top: 40px;
-    width: 100%;
-    padding: 10px 30px 22px;
-    background-color: @white;
-    z-index: 20;
-
+	
     .title-content {
         font-weight: normal;
         position: relative;
         margin: 0;
         height: 52px;
-        border-bottom: 1px solid #dfdedb;
-        .arrow-down();
 
         &:before, &:after {
             left: 10px;
@@ -198,17 +220,82 @@ a, a:hover, a:active, a:focus {
         }
     }
 }
+/********************************************************/
+/*                     Breadcrumb CSS                       */
+/********************************************************/
+.breadcrumb-bar {
+	background: transparent;
+	font-size: 14px;
+	padding: 15px 30px;
+}
 
 /********************************************************/
 /*                      Content                         */
 /********************************************************/
+.content .thumnail:last-child {
+	border-right: 1px solid @thumb-border;
+}
 .content {
     bottom: 0;
     left: 0;
-    padding: 0 30px;
+    padding: 0 46px;
     position: absolute;
     right: 0;
-    top: 120px;
+    top: 90px;
+	.thumnail {
+		height: 400px;
+		padding: 0;
+		border-radius: 3px;
+		border: 1px solid @thumb-border;
+		border-right: none;
+		background: #fff;
+		margin-bottom: 10px;
+		.title-bar {
+			 .bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);
+			 padding: 5px;
+			 font-family: @thumb-title-font-family;
+			 font-size: @font-size + 1;
+			 color: @thumb-title-color;
+		}
+		.image {
+			height: 60px;
+		}
+		&:last-child {	
+			border-right: 1px solid @thumb-border;
+		}
+		&:nth-child(4n) {
+			border-right: 1px solid @thumb-border;
+		}
+		.thumnail-content {
+			height: 308px;
+			.feature {
+				font-family: @feature-font-family;
+				font-size: @font-size - 1;
+				padding: 0 8px;
+				h6 {
+					font-weight: bold;
+					border-bottom: 1px dashed @funtion-border-color;
+					margin: 0;
+					padding: 10px 0;
+				}
+				.function {
+					margin-bottom: 0;
+					li {
+						padding: 5px 0 5px 15px;
+						border-bottom: 1px dashed @funtion-border-color;
+
+						a {
+							color: @function-color;
+							&:hover {
+								color: @funtion-hover-color;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
 }
 
 /********************************************************/
@@ -495,142 +582,8 @@ a, a:hover, a:active, a:focus {
     }
 }
 
-@media (max-width: 530px) {
-    .title-bar .title-content {
-        height: 72px;
-
-        .title, .search-bar {
-            float: none;
-        }
-    }
-
-    .content {
-        position: absolute;
-        top: 149px;
-    }
-}
-
-@media (max-width: 768px) {
-    .title-bar .title-content .search-bar .search {
-        width: 200px;
-    }
-
-    .form-custom {
-        .lbl-field {
-            text-align: left;
-        }
-    }
-}
-
-@media (min-width: 1200px) {
-    .form-custom {
-        &.user-profile, &.change-password {
-            width: 420px;
-        }
-    }
-}
-
-/********************************************************/
-/*                        Paging                        */
-/********************************************************/
-.paging {
-    margin: 20px 0;
-    padding: 0;
-
-    &.fixed {
-        background-color: @white;
-        border-top: 1px solid @border-color;
-        bottom: 0;
-        left: 45px;
-        margin: 0 -5px;
-        padding: 10px 0;
-        position: fixed;
-        right: 45px;
-    }
-
-    ul {
-        margin: 0;
-    }
-
-    li {
-        padding: 0;
-        float: left;
-        margin-right: 5px;
-    }
-
-    .btn-page {
-        a {
-            color: @page-button-color;
-            float: left;
-            height: 20px;
-            line-height: 14px;
-            padding: 1px 0;
-            border: 1px solid @page-button-border;
-            color: @white;
-            font-size: @font-size + 3;
-            text-shadow: 0px 1px 1px @page-button-color-shadow;
-            text-align: center;
-            width: 20px;
-            .border-radius(2px);
-            .bg-linear-gradient(@page-button-bg-top, @page-button-bg-bottom);
-            .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
-
-            &:hover {
-                .bg-linear-gradient(@page-button-bg-top-hover, @page-button-bg-bottom-hover);
-                .box-shadow(0 1px 1px rgba(255, 255, 255, 0.25) inset);
-            }
-        }
-
-        a[disabled='disabled'] {
-            .box-shadow(none);
-            background: @page-button-bg-disabled;
-            color: @page-button-color-disabled;
-            border-color: @page-button-border-disabled;
-            text-shadow: none;
-        }
-    }
-
-    .link a, .current {
-        float: left;
-        font-size: @font-size + 1;
-        color: @page-link-color;
-        margin: 0 3px;
-
-        &:hover {
-            color: @page-link-color-hover;
-        }
-    }
-
-    .current {
-        color: @page-link-color-hover;
-        font-weight: bold;
-        text-decoration: underline;
-    }
-}
-
-/********************************************************/
-/*                        Tooltip                       */
-/********************************************************/
-.tooltip  {
-    .tooltip-inner {
-        background: #f8b03e;
-        min-width: 252px;
-        padding: 4px;
-    }
-
-    &.left .tooltip-arrow {
-        border-left-color: #f8b03e;
-    }
-
-    &.right .tooltip-arrow {
-        border-right-color: #f8b03e;
-    }
-
-    &.top .tooltip-arrow {
-        border-top-color: #f8b03e;
-    }
-
-    &.bottom .tooltip-arrow {
-        border-bottom-color: #f8b03e;
-    }
+@media(max-width: 1024px) {
+	.container-fluid {
+		width: 1024px;
+	}
 }

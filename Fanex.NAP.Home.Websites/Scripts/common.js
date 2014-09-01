@@ -171,6 +171,14 @@ Fanex.NAP.Home.Common = function () {
                 cursorborderradius: '3px',
                 zindex: 1031
             });
+            $('.thumnail-content').niceScroll({
+                autohidemode: false,
+                cursorcolor: "#ccc",
+                cursorwidth: '8px',
+                background: '#fff',
+                cursorborderradius: '3px',
+                zindex: 1031
+            });
         }
 
         $('body').on('click.nap-home', '[data-strict-link]', function () {

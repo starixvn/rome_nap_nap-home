@@ -2,61 +2,171 @@
 @model IEnumerable<UserSiteItem>
 @{
     ViewBag.Title = @ViewLang.Sites;
-    Layout = "~/Areas/Sites/Views/Shared/_SitesLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head
 {
     @Styles.Render("~/styles/userSites")
 }
-@{
-    string thumnailUrlTemplate = "~/Areas/Sites/Resources/UserSites/Images/{0}/{1}";
-
-    if (Model != null && Model.Any())
-    {
-        foreach (var site in Model)
-        {
-            string thumnailUrl = string.Format(thumnailUrlTemplate, site.Favorites.Count > 0 ? "Favorite" : "NonFavorite", site.Thumbnail);
-            string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
-            
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="description" data-site-id="@site.SiteId" data-link-tile="@defaultLinkParameters">
-                    <img src="@Url.Content(thumnailUrl)" class="bg-img img-responsive" title="@site.SiteName" alt="@site.SiteName" />
-                    @Html.Partial("TopFavoriteFunctions", site.Favorites)
-                    <div class="text-title" data-truncate-parent="true">
-                        <a href="javascript:void(0);"
-                           title="@site.SiteName"
-                           data-strict-link="@defaultLinkParameters"
-                           data-truncate-offset="120">@site.SiteName</a>
-                        <div class="menu-button function-button">
-                            <span class="icon-function" title="@ViewLang.FunctionList"></span>
-                        </div>
-                        <div class="menu-wrapper function-menu-wrapper"></div>
-                        <div class="menu-button domain-button">
-                            <span class="icon-arrow-site @(site.Domains.Count == 0 ? "disabled" : string.Empty)" title="@ViewLang.Domains"></span>
-                        </div>
-                        @if (site.Domains.Count > 0)
-                        {
-                            <div class="menu-wrapper domain-menu-wrapper">
-                                <ul class="menu-content list-unstyled">
-                                    @foreach (var domain in site.Domains)
-                                    {
-                                        <li>
-                                            <a href="javascript:void(0);"
-                                               data-strict-link="@string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, domain)">@domain</a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        }
-                    </div>
-                    <div class="shadow">
-                        <img src="~/Content/Theme/Images/shadow.png" alt="shadow" class="img-responsive margin-auto" />
-                    </div>
-                </div>
+<div>
+    <div class="col-xs-3 thumnail">
+        <div class="title-bar">Nap Accounting Report</div>
+        <img src="~/Content/Theme/Images/acc.jpg" class="img-responsive image"/>
+        <div class="thumnail-content">
+            <div class="feature">
+                <h6>--- User Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manager User</a></li>
+                    <li><a href="">Manage Group</a></li>
+                </ul>
             </div>
-        }
-    }
-}
+            <div class="feature">
+                <h6>--- Site Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manage Site</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Function Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manage Function</a></li>
+                    <li><a href="">Create Function</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Menu Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manage Function</a></li>
+                    <li><a href="">Create Function</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Log Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Execute SP Log</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 thumnail">
+        <div class="title-bar">Nap Settlement</div>
+        <img src="~/Content/Theme/Images/settlement.jpg" class="img-responsive image"/>
+        <div class="thumnail-content">
+            <div class="feature">
+                <h6>--- Main Report ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Match Win Loss (2a)</a></li>
+                    <li><a href="">Daily Win Loss (2h)</a></li>
+                    <li><a href="">Win Loss Summary (2d)</a></li>
+                    <li><a href="">Trader Perfomance Soccer</a></li>
+                    <li><a href="">Trader Perfomance Other Sports</a></li>
+                    <li><a href="">Credit Term</a></li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h6>--- Balance ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Master Balance</a></li>
+                    <li><a href="">Direct Balance</a></li>
+                    <li><a href="">Super Balance</a></li>
+                    <li><a href="">Company Balance Difference</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 thumnail" class="img-responsive image">
+        <div class="title-bar">Nap Special Delete</div>
+        <img src="~/Content/Theme/Images/spec.jpg"/>
+         <div class="thumnail-content">
+            <div class="feature">
+                <h6>--- Main Report ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Match Win Loss (2a)</a></li>
+                    <li><a href="">Daily Win Loss (2h)</a></li>
+                    <li><a href="">Win Loss Summary (2d)</a></li>
+                    <li><a href="">Trader Perfomance Soccer</a></li>
+                    <li><a href="">Trader Perfomance Other Sports</a></li>
+                    <li><a href="">Credit Term</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Balance ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Master Balance</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 thumnail">
+        <div class="title-bar">Nap Admin</div>
+        <img src="~/Content/Theme/Images/admin.jpg" class="img-responsive image"/>
+        <div class="thumnail-content">
+             <div class="feature">
+                <h6>--- Main Report ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Match Win Loss (2a)</a></li>
+                    <li><a href="">Daily Win Loss (2h)</a></li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h6>--- Balance ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Master Balance</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 thumnail" class="img-responsive image">
+        <div class="title-bar">MSite</div>
+        <img src="~/Content/Theme/Images/msite.jpg"/>
+        <div class="thumnail-content">
+            <div class="feature">
+                <h6>--- User Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manager User</a></li>
+                    <li><a href="">Manage Group</a></li>
+                </ul>
+            </div>
+            <div class="feature">
+                <h6>--- Site Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manage Site</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Function Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manage Function</a></li>
+                    <li><a href="">Create Function</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Menu Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Manage Function</a></li>
+                    <li><a href="">Create Function</a></li>
+                </ul>
+            </div>
+             <div class="feature">
+                <h6>--- Log Management ---</h6>
+                <ul class="function list-unstyled">
+                    <li><a href="">Execute SP Log</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-3 thumnail">
+        <div class="title-bar">Nap Live Chart</div>
+        <img src="~/Content/Theme/Images/lcadmin.jpg" class="img-responsive image"/>
+        <div class="thumnail-content">
+            <div class="feature">
+                <ul class="function list-unstyled">
+                    <li><a href="">Home Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 @section Foot 
 {
     @Scripts.Render("~/scripts/userSites")

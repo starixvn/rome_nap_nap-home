@@ -26,10 +26,13 @@
           <a class="navbar-brand logo" href="@Url.Content("~/")">@ViewResources.NAP</a>
         </div>
         <div class="collapse navbar-collapse" id="divMenuContent">
+          <form class="navbar-form navbar-left form-search" role="search">
+            <div class="form-group search-bar">
+                <input type="text" class="form-control txtSearch" placeholder="text goes here..." />
+                <span class="icon-search"></span>
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="@Url.Content("~/Sites/FavoriteFunctions?PageIndex=1")" class="icon-favourite-large" title="@ViewLang.FavoriteFunctions"></a>
-            </li>
             <li class="user-info">
                 <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
                 <ul class="user-dropdown">
@@ -42,18 +45,10 @@
         </div>
       </div>
     </nav>
-    <div class="title-bar">
-        <div class="title-content">
-            <ul class="breadcrumb title">
-                @if (!isHomePage)
-                {
-                    <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
-                }
-                <li>@ViewBag.Title</li>
-            </ul>
-            @RenderSection("SearchBar", false)
-        </div>
-    </div>
+    <ol class="breadcrumb breadcrumb-bar">
+       <li><a href="">Home</a></li>
+       <li><a href="" class="active">Sites</a></li>
+    </ol>
     <div class="container-fluid content">
         @RenderBody()
     </div>
