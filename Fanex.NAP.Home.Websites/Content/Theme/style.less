@@ -153,11 +153,11 @@ a, a:hover, a:active, a:focus {
                 top: 13px;
                 right: 5px;
                 cursor: pointer;
-				&.search-disabled {
-					opacity: 0.3;
-					cursor: auto;
-					pointer-events: none;
-				}
+                &.search-disabled {
+                    opacity: 0.3;
+                    cursor: auto;
+                    pointer-events: none;
+                }
             }
         }
     }
@@ -170,18 +170,18 @@ a, a:hover, a:active, a:focus {
     background: transparent;
     font-size: 14px;
     padding: 15px 46px;
-	margin-bottom: 0;
-	> li {
-		+ li:before {
-			color: @link-color;
-		}
-		a {
-			color: @link-color;
-		}
-	}
-	.active {
-		color: @link-active-color;
-	}
+    margin-bottom: 0;
+    > li {
+        + li:before {
+            color: @link-color;
+        }
+        a {
+            color: @link-color;
+        }
+    }
+    .active {
+        color: @link-active-color;
+    }
 }
 
 /********************************************************/
@@ -193,66 +193,67 @@ a, a:hover, a:active, a:focus {
 
 .content {
     padding: 0 46px;
+    position: absolute;
 
     .thumnail {
         height: 400px;
         padding: 0;
-		border-top-left-radius: 3px;
-		border-top-right-radius: 3px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
         border: 1px solid @thumb-border;
         border-right: none;
         background: #fff;
         margin-bottom: 10px;
 
         .title-bar {
-			position: relative;
+            position: relative;
              .bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);
              padding: 5px;
-			 .title-name {
-				font-family: @thumb-title-font-family;
-				 font-size: @font-size + 1;
-				 color: @thumb-title-color;
-				 cursor: pointer;
-				 &:hover {
-					color: @funtion-hover-color;
-				 }
-			 }
-			 .icon-down {
-				margin-top: 6px;
-				cursor: pointer;
-				&.disabled {
-					cursor: auto;
-					opacity: 0.35;
-				}
-			 } 
-			 .site-domain {
-				position: absolute;
-				min-width: 296px;
-				z-index: 999;
-				left: 0;
-				top: 30px;
-				background: @white;
-				display: none;
-				margin: 0;
-				border: 1px solid @domain-site-border-color;
-				border-left: none;
-				border-right: none;
-				.box-shadow(0 1px 2px 1px rgba(0,0,0,0.25));
-				li {
-					text-align: right;
-					padding: 3px 5px;
-					a {
-						font-family: @font-family;
-						color: @domain-site-color;
-					}
-					&:hover {
-						background: @domain-site-sub-bgcolor;
-						a {
-							color: @white;
-						}
-					}
-				}
-			 }
+             .title-name {
+                font-family: @thumb-title-font-family;
+                 font-size: @font-size + 1;
+                 color: @thumb-title-color;
+                 cursor: pointer;
+                 &:hover {
+                    color: @funtion-hover-color;
+                 }
+             }
+             .icon-down {
+                margin-top: 6px;
+                cursor: pointer;
+                &.disabled {
+                    cursor: auto;
+                    opacity: 0.35;
+                }
+             } 
+             .site-domain {
+                position: absolute;
+                min-width: 296px;
+                z-index: 999;
+                left: 0;
+                top: 30px;
+                background: @white;
+                display: none;
+                margin: 0;
+                border: 1px solid @domain-site-border-color;
+                border-left: none;
+                border-right: none;
+                .box-shadow(0 1px 2px 1px rgba(0,0,0,0.25));
+                li {
+                    text-align: right;
+                    padding: 3px 5px;
+                    a {
+                        font-family: @font-family;
+                        color: @domain-site-color;
+                    }
+                    &:hover {
+                        background: @domain-site-sub-bgcolor;
+                        a {
+                            color: @white;
+                        }
+                    }
+                }
+             }
 
         }
 
@@ -281,15 +282,15 @@ a, a:hover, a:active, a:focus {
                     margin: 0;
                     padding: 10px 0;
                 }
-				.single-function {
-					padding: 5px 0;
+                .single-function {
+                    padding: 5px 0;
                     border-bottom: 1px dashed @funtion-border-color;
-					color: @function-color;
-					display: block;
-					&:hover {
-						color: @funtion-hover-color;
-					}
-				}
+                    color: @function-color;
+                    display: block;
+                    &:hover {
+                        color: @funtion-hover-color;
+                    }
+                }
                 .function {
                     margin-bottom: 0;
 
@@ -306,9 +307,9 @@ a, a:hover, a:active, a:focus {
                         }
                     }
                 }
-				&:last-child {
-					padding-bottom: 10px;
-				}
+                &:last-child {
+                    padding-bottom: 10px;
+                }
             }
         }
         
@@ -326,9 +327,9 @@ a, a:hover, a:active, a:focus {
     display: inline-block;
 }
 .icon-down {
-	background: url(Images/arrow-down.png) no-repeat;
-	height: 10px;
-	width: 11px;
+    background: url(Images/arrow-down.png) no-repeat;
+    height: 10px;
+    width: 11px;
 }
 /********************************************************/
 /*                      Block UI                        */
@@ -430,13 +431,13 @@ a, a:hover, a:active, a:focus {
     .container-fluid {
         width: 1024px;
     }
-	.center-block { 
-		margin: 0;
-	}
+    .center-block { 
+        margin: 0;
+    }
 
 }
 @media(max-width: 768px) {
-	.custom-navbar .container-fluid .search-bar {
-		width: 300px;
-	}
+    .custom-navbar .container-fluid .search-bar {
+        width: 300px;
+    }
 }

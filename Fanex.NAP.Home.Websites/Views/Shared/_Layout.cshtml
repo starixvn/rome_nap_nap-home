@@ -46,10 +46,14 @@
         </div>
       </div>
     </nav>
-    <ol class="breadcrumb breadcrumb-bar">
-       <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
-       <li>@ViewBag.Title</li>
-    </ol>
+    @if (!isHomePage)
+    {
+        <ol class="breadcrumb breadcrumb-bar">
+           <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
+           <li>@ViewBag.Title</li>
+        </ol>
+    }
+    @RenderSection("CustomBreadcrumb", false)
     <div class="container-fluid content">
         @RenderBody()
     </div>

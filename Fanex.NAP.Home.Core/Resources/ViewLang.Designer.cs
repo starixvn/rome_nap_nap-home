@@ -79,6 +79,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to Home..
+        /// </summary>
+        public static string BackToHome {
+            get {
+                return ResourceManager.GetString("BackToHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Domains.
         /// </summary>
         public static string Domains {
@@ -178,7 +187,7 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are {0} results matched..
+        ///   Looks up a localized string similar to There are {0} results..
         /// </summary>
         public static string SearchResult {
             get {

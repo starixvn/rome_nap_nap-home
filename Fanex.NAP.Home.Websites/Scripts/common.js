@@ -164,7 +164,7 @@ Fanex.NAP.Home.Common = function () {
         }
 
         if ($.fn.niceScroll) {
-            $('.thumnail-content').niceScroll({
+            $('div.thumnail-content').niceScroll({
                 autohidemode: false,
                 cursorcolor: "#ccc",
                 cursorwidth: '8px',

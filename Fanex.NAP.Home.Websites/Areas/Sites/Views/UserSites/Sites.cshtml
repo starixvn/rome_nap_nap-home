@@ -12,7 +12,11 @@
 
     if (totalFunctionCount > 0)
     {
-        <p>@string.Format(ViewLang.SearchResult, totalFunctionCount)</p>
+        @section CustomBreadcrumb
+        {
+            <p>@string.Format(ViewLang.SearchResult, totalFunctionCount)</p>
+            <p>@ViewLang.BackToHome</p>
+        }
     }
 
     foreach (SiteItem site in Model)
@@ -22,7 +26,7 @@
 
         <div class="col-xs-3 thumnail">
             <div class="title-bar">
-                <a class="title-name" data-strict-link="@defaultLinkParameters">@site.SiteName</a>
+                <a class="title-name" title="@site.SiteName" data-strict-link="@defaultLinkParameters">@site.SiteName.Truncate(30)</a>
                 <span class="icon-down pull-right @(!hasDomains ? "disabled" : string.Empty)"></span>
                 @if (hasDomains)
                 {

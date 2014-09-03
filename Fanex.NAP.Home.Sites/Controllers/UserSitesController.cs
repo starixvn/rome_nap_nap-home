@@ -70,6 +70,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             IEnumerable<SiteItem> sites = this._siteService.LoadUserSitesAndFunctions(filter);
 
             ViewBag.SearchedFunctionName = searchFunction;
+            ViewBag.IsHomePage = true;
 
             return View(sites);
         }

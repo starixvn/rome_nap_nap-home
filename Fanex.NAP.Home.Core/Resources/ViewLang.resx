@@ -123,6 +123,9 @@
   <data name="AccessDeniedMessage" xml:space="preserve">
     <value>You are not authorized to access this link.</value>
   </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Back to Home.</value>
+  </data>
   <data name="Domains" xml:space="preserve">
     <value>Domains</value>
   </data>
@@ -157,7 +160,7 @@
     <value>Please input function name</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
-    <value>There are {0} results matched.</value>
+    <value>There are {0} results.</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>
