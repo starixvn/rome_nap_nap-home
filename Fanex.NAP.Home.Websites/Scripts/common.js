@@ -23,16 +23,15 @@ Fanex.NAP.Home.Common = function () {
     var domElements = {
         // For _SitesLayout.cshtml.
         txtSearchedFunctionName: null,
-        hdnCurrentPageIndex: null,
-        btnSearch: null,
+        spanSearch: null,
 
         // For _Layout.cshtml.
         divMsgBox: null
     };
     var cachedValues = {
         RootURL: '',
-        SearchSitesUrl: 'Sites/SearchFunctions?FunctionName={0}&PageIndex={1}',
-        ForwardUrl: 'Sites/SiteBase/Forward'
+        SearchSitesUrl: 'Sites/UserSites/Sites?searchFunction={0}',
+        ForwardUrl: 'Sites/UserSites/Forward'
     };
 
     $this.HandleAjaxError = function (xhr) {
@@ -129,8 +128,7 @@ Fanex.NAP.Home.Common = function () {
         cachedValues.RootURL = appSettings.RootUrl;
 
         if (domElements.txtSearchedFunctionName.length > 0) {
-            domElements.hdnCurrentPageIndex = $('#hdnCurrentPageIndex');
-            domElements.btnSearch = $('#btnSearch');
+            domElements.spanSearch = $('#spanSearch');
 
             $(document).on('keydown.nap-home', function () {
                 if (!domElements.txtSearchedFunctionName.is(':focus')) {
@@ -140,44 +138,45 @@ Fanex.NAP.Home.Common = function () {
 
             domElements.txtSearchedFunctionName.on('keyup.nap-home', function (event) {
                 if (event.keyCode === 13) {
-                    domElements.btnSearch.click();
+                    domElements.spanSearch.click();
                 }
 
-                if (domElements.txtSearchedFunctionName.val().length >= 2) {
-                    if (!domElements.btnSearch.hasClass('button-green')) {
-                        domElements.btnSearch.removeClass('button-disabled').addClass('button-green');
+                if (domElements.txtSearchedFunctionName.val().length < 2) {
+                    if (!domElements.spanSearch.hasClass('disabled')) {
+                        domElements.spanSearch.addClass('disabled');
                     }
                 } else {
-                    domElements.btnSearch.removeClass('button-green').addClass('button-disabled');
+                    if (domElements.spanSearch.hasClass('disabled')) {
+                        domElements.spanSearch.removeClass('disabled');
+                    }
                 }
             });
 
-            domElements.btnSearch.on('click.nap-home', function () {
-                if (!domElements.btnSearch.hasClass('button-disabled')) {
-                    var pageIndex = domElements.hdnCurrentPageIndex.val();
+            domElements.spanSearch.on('click.nap-home', function () {
+                console.log(domElements.spanSearch.hasClass('disabled'));
+                if (!domElements.spanSearch.hasClass('disabled')) {
                     var functionName = domElements.txtSearchedFunctionName.val();
 
-                    $this.NavigateToRoot(cachedValues.SearchSitesUrl.format($.trim(functionName), pageIndex));
+                    $this.NavigateToRoot(cachedValues.SearchSitesUrl.format($.trim(functionName)));
                 }
             });
         }
 
         if ($.fn.niceScroll) {
+            $('.thumnail-content').niceScroll({
+                autohidemode: false,
+                cursorcolor: "#ccc",
+                cursorwidth: '8px',
+                background: '#fff',
+                cursorborderradius: '3px'
+            });
             $('html').niceScroll({
                 autohidemode: false,
                 cursorcolor: "#8C8C8C",
                 cursorwidth: '10px',
                 background: '#eee',
                 cursorborderradius: '3px',
-                zindex: 1031
-            });
-            $('.thumnail-content').niceScroll({
-                autohidemode: false,
-                cursorcolor: "#ccc",
-                cursorwidth: '8px',
-                background: '#fff',
-                cursorborderradius: '3px',
-                zindex: 1031
+                zindex: 1032
             });
         }
 

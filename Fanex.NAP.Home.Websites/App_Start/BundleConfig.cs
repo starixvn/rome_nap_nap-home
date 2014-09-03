@@ -65,7 +65,6 @@ namespace Fanex.NAP.Home.Websites
                 "~/Scripts/jQuery/jquery.blockUI.2.66.min.js",
                 "~/Scripts/jQuery/jquery.nicescroll.min.js",
                 "~/Scripts/Bootstrap/bootstrap.js",
-                "~/Scripts/Underscore/underscore-min.js",
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",
                 "~/Scripts/Resources/viewLang.js",
@@ -96,23 +95,9 @@ namespace Fanex.NAP.Home.Websites
         /// <param name="bundles">The bundle collection.</param>
         public static void RegisterUserSitesBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/scripts/userSites").Include(
-                "~/Areas/Sites/Resources/UserSites/user-sites.js"));
             bundles.AddAndInclude(
                 "~/styles/userSites",
                 "~/Areas/Sites/Resources/UserSites/user-sites.less");
-
-            bundles.Add(new ScriptBundle("~/scripts/searchFunctions").Include(
-                "~/Areas/Sites/Resources/SearchFunctions/search-functions.js"));
-            bundles.AddAndInclude(
-                "~/styles/searchFunctions",
-                "~/Areas/Sites/Resources/SearchFunctions/search-functions.less");
-
-            bundles.Add(new ScriptBundle("~/scripts/favoriteFunctions").Include(
-                "~/Areas/Sites/Resources/FavoriteFunctions/favorite-functions.js"));
-            bundles.AddAndInclude(
-                "~/styles/favoriteFunctions",
-                "~/Areas/Sites/Resources/FavoriteFunctions/favorite-functions.less");
         }
     }
 }

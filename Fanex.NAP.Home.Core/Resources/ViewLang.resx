@@ -126,12 +126,6 @@
   <data name="Domains" xml:space="preserve">
     <value>Domains</value>
   </data>
-  <data name="FavoriteFunctions" xml:space="preserve">
-    <value>Favorite Functions</value>
-  </data>
-  <data name="FunctionList" xml:space="preserve">
-    <value>Function List</value>
-  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -146,12 +140,6 @@
   </data>
   <data name="InvalidLink" xml:space="preserve">
     <value>Invalid link!</value>
-  </data>
-  <data name="MarkedAsYourFavorite" xml:space="preserve">
-    <value>Marked as your favorite!</value>
-  </data>
-  <data name="MarkingFavoriteInstruction" xml:space="preserve">
-    <value>Click to mark this function as your favorite.</value>
   </data>
   <data name="NotFoundError" xml:space="preserve">
     <value>Not found!</value>
@@ -179,11 +167,5 @@
   </data>
   <data name="ThereIsNoData" xml:space="preserve">
     <value>There is no data.</value>
-  </data>
-  <data name="UnmarkedSuccessfully" xml:space="preserve">
-    <value>Unmarked successfully!</value>
-  </data>
-  <data name="UnmarkingFavoriteInstruction" xml:space="preserve">
-    <value>Click to unmark this function as your favorite.</value>
   </data>
 </root>

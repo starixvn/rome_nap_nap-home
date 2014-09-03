@@ -189,33 +189,6 @@
   <ItemGroup>
     <Content Include="App_Data\NAPCoreSpNames.xml" />
     <Content Include="App_Data\NAPHomeSPNames.xml" />
-    <Content Include="Areas\Sites\Resources\FavoriteFunctions\favorite-functions.js" />
-    <Content Include="Areas\Sites\Resources\SearchFunctions\search-functions.js" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\invoice.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\tgrs.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\invoice.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\tgrs.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\user-sites.js" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\accounting.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\admin.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\cms.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\crm.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\default.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\dw.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\live-charts.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\msite.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\settlement.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\Favorite\special-delete.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\accounting.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\admin.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\cms.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\crm.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\default.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\dw.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\live-charts.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\msite.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\settlement.jpg" />
-    <Content Include="Areas\Sites\Resources\UserSites\Images\NonFavorite\special-delete.jpg" />
     <Content Include="Areas\User\Resources\Login\Images\bg.png" />
     <Content Include="Areas\User\Resources\Login\Images\down.png" />
     <Content Include="Areas\User\Resources\Login\Images\lock.png" />
@@ -238,27 +211,26 @@
     <Content Include="Content\Theme\Font\Heron_Sans\78096.png" />
     <Content Include="Content\Theme\Font\Heron_Sans\78097.jpg" />
     <Content Include="Content\Theme\Font\Roboto\LICENSE.txt" />
-    <Content Include="Content\Theme\Images\acc.jpg" />
-    <Content Include="Content\Theme\Images\admin.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\acc-report.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\admin.jpg" />
     <Content Include="Content\Theme\Images\arrow-down.png" />
-    <Content Include="Content\Theme\Images\cm.jpg" />
-    <Content Include="Content\Theme\Images\crm.jpg" />
-    <Content Include="Content\Theme\Images\dw.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\cm.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\crm.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\dw.jpg" />
     <Content Include="Content\Theme\Images\favicon.ico" />
-    <Content Include="Content\Theme\Images\is.jpg" />
-    <Content Include="Content\Theme\Images\lcadmin.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\invoice.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\live-charts.jpg" />
     <Content Include="Content\Theme\Images\loading.gif" />
-    <Content Include="Content\Theme\Images\msite.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\msite.jpg" />
     <Content Include="Content\Theme\Images\patern.jpg" />
     <Content Include="Content\Theme\Images\pattern-bg.jpg" />
     <Content Include="Content\Theme\Images\search.png" />
-    <Content Include="Content\Theme\Images\settlement.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\settlement.jpg" />
     <Content Include="Content\Theme\Images\shadow.png" />
-    <Content Include="Content\Theme\Images\spec.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\special-delete.jpg" />
     <Content Include="Content\Theme\Images\sprite.png" />
-    <Content Include="Content\Theme\Images\sprite1.png" />
-    <Content Include="Content\Theme\Images\TGR.jpg" />
-    <Content Include="Content\Theme\Images\thumbnail1.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\tgrs.jpg" />
+    <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\default.jpg" />
     <Content Include="Content\Theme\Images\user.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\common.js" />
@@ -279,7 +251,6 @@
       <DependentUpon>viewLang.tt</DependentUpon>
     </Content>
     <Content Include="Scripts\RespondJs\respond.min.js" />
-    <Content Include="Scripts\Underscore\underscore-min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -311,9 +282,6 @@
     <Content Include="Areas\User\Views\Web.config" />
     <Content Include="Areas\Sites\Views\Web.config" />
     <Content Include="Areas\Sites\Views\UserSites\Sites.cshtml" />
-    <Content Include="Areas\Sites\Views\Shared\_SitesLayout.cshtml" />
-    <Content Include="Areas\Sites\Views\SearchFunctions\Index.cshtml" />
-    <Content Include="Areas\Sites\Resources\UserSites\user-sites.less" />
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.local.xml">
       <DependentUpon>SiteThumbnails.xml</DependentUpon>
     </Content>
@@ -323,14 +291,9 @@
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.prod.xml">
       <DependentUpon>SiteThumbnails.xml</DependentUpon>
     </Content>
-    <Content Include="Areas\Sites\Resources\SearchFunctions\search-functions.less" />
-    <Content Include="Areas\Sites\Views\UserSites\FunctionList.cshtml" />
-    <Content Include="Areas\Sites\Views\UserSites\TopFavoriteFunctions.cshtml" />
     <Content Include="Areas\User\Views\Error\AccessDenied.cshtml" />
     <Content Include="Areas\User\Views\Error\Index.cshtml" />
     <Content Include="Areas\User\Views\Error\NotFound.cshtml" />
-    <Content Include="Areas\Sites\Resources\FavoriteFunctions\favorite-functions.less" />
-    <Content Include="Areas\Sites\Views\FavoriteFunctions\Index.cshtml" />
     <Content Include="Content\Bootstrap\CSS\bootstrap-theme.css.map" />
     <Content Include="Content\Bootstrap\CSS\bootstrap.css.map" />
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.eot" />
@@ -383,7 +346,6 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>
     </None>
-    <None Include="Scripts\Underscore\underscore-min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAP.Home.Core\Fanex.NAP.Home.Core.csproj">

@@ -88,24 +88,6 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favorite Functions.
-        /// </summary>
-        public static string FavoriteFunctions {
-            get {
-                return ResourceManager.GetString("FavoriteFunctions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Function List.
-        /// </summary>
-        public static string FunctionList {
-            get {
-                return ResourceManager.GetString("FunctionList", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -147,24 +129,6 @@ namespace Fanex.NAP.Home.Core.Resources {
         public static string InvalidLink {
             get {
                 return ResourceManager.GetString("InvalidLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Marked as your favorite!.
-        /// </summary>
-        public static string MarkedAsYourFavorite {
-            get {
-                return ResourceManager.GetString("MarkedAsYourFavorite", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click to mark this function as your favorite..
-        /// </summary>
-        public static string MarkingFavoriteInstruction {
-            get {
-                return ResourceManager.GetString("MarkingFavoriteInstruction", resourceCulture);
             }
         }
         
@@ -246,24 +210,6 @@ namespace Fanex.NAP.Home.Core.Resources {
         public static string ThereIsNoData {
             get {
                 return ResourceManager.GetString("ThereIsNoData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unmarked successfully!.
-        /// </summary>
-        public static string UnmarkedSuccessfully {
-            get {
-                return ResourceManager.GetString("UnmarkedSuccessfully", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Click to unmark this function as your favorite..
-        /// </summary>
-        public static string UnmarkingFavoriteInstruction {
-            get {
-                return ResourceManager.GetString("UnmarkingFavoriteInstruction", resourceCulture);
             }
         }
     }

@@ -38,7 +38,6 @@ namespace Fanex.NAP.Home.Sites.Criteria.UserSites
         public override bool IsValid()
         {
             return (this.UserId > 0) &&
-                   !string.IsNullOrEmpty(this.MenuItemName) &&
                    !string.IsNullOrEmpty(this.Environment);
         }
     }

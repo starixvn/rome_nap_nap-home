@@ -1,173 +1,53 @@
 ﻿@using Fanex.NAP.Home.Sites.ViewModels.UserSites
-@model IEnumerable<UserSiteItem>
+@model IEnumerable<SiteItem>
 @{
     ViewBag.Title = @ViewLang.Sites;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Head
+@if (Model != null && Model.Any())
 {
-    @Styles.Render("~/styles/userSites")
+    string thumbnailLink = "~/Areas/Sites/Resources/UserSites/Thumbnails/{0}";
+    string functionGroupFormat = "--- {0} ---";
+
+    foreach (SiteItem site in Model)
+    {
+        string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
+
+        <div class="col-xs-3 thumnail">
+            <div class="title-bar" data-strict-link="@defaultLinkParameters">@site.SiteName</div>
+            <img src="@Url.Content(string.Format(thumbnailLink, site.Thumbnail))" alt="@site.SiteName" class="img-responsive image"/>
+            <div class="thumnail-content">
+                @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
+                {
+                    <div class="feature">
+                        @if (functionGroup.FunctionList.Any())
+                        {
+                            <h6>@string.Format(functionGroupFormat, functionGroup.FunctionName)</h6>
+                            <ul class="function list-unstyled">
+                                @foreach (FunctionItem function in functionGroup.FunctionList)
+                                {
+                                    string linkParameters = string.Format(
+                                                   "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                   site.SiteId,
+                                                   site.DefaultLink,
+                                                   function.FunctionId,
+                                                   function.FunctionLink);
+                                    
+                                    <li><a href="javascript:void(0);" data-strict-link="@linkParameters">@function.FunctionName</a></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0);">@functionGroup.FunctionName</a>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
 }
-<div>
-    <div class="col-xs-3 thumnail">
-        <div class="title-bar">Nap Accounting Report</div>
-        <img src="~/Content/Theme/Images/acc.jpg" class="img-responsive image"/>
-        <div class="thumnail-content">
-            <div class="feature">
-                <h6>--- User Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manager User</a></li>
-                    <li><a href="">Manage Group</a></li>
-                </ul>
-            </div>
-            <div class="feature">
-                <h6>--- Site Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manage Site</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Function Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manage Function</a></li>
-                    <li><a href="">Create Function</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Menu Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manage Function</a></li>
-                    <li><a href="">Create Function</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Log Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Execute SP Log</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 thumnail">
-        <div class="title-bar">Nap Settlement</div>
-        <img src="~/Content/Theme/Images/settlement.jpg" class="img-responsive image"/>
-        <div class="thumnail-content">
-            <div class="feature">
-                <h6>--- Main Report ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Match Win Loss (2a)</a></li>
-                    <li><a href="">Daily Win Loss (2h)</a></li>
-                    <li><a href="">Win Loss Summary (2d)</a></li>
-                    <li><a href="">Trader Perfomance Soccer</a></li>
-                    <li><a href="">Trader Perfomance Other Sports</a></li>
-                    <li><a href="">Credit Term</a></li>
-                </ul>
-            </div>
-            <div class="feature">
-                <h6>--- Balance ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Master Balance</a></li>
-                    <li><a href="">Direct Balance</a></li>
-                    <li><a href="">Super Balance</a></li>
-                    <li><a href="">Company Balance Difference</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 thumnail">
-        <div class="title-bar">Nap Special Delete</div>
-        <img src="~/Content/Theme/Images/spec.jpg" class="img-responsive image"/>
-         <div class="thumnail-content">
-            <div class="feature">
-                <h6>--- Main Report ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Match Win Loss (2a)</a></li>
-                    <li><a href="">Daily Win Loss (2h)</a></li>
-                    <li><a href="">Win Loss Summary (2d)</a></li>
-                    <li><a href="">Trader Perfomance Soccer</a></li>
-                    <li><a href="">Trader Perfomance Other Sports</a></li>
-                    <li><a href="">Credit Term</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Balance ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Master Balance</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 thumnail">
-        <div class="title-bar">Nap Admin</div>
-        <img src="~/Content/Theme/Images/admin.jpg" class="img-responsive image"/>
-        <div class="thumnail-content">
-             <div class="feature">
-                <h6>--- Main Report ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Match Win Loss (2a)</a></li>
-                    <li><a href="">Daily Win Loss (2h)</a></li>
-                </ul>
-            </div>
-            <div class="feature">
-                <h6>--- Balance ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Master Balance</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 thumnail">
-        <div class="title-bar">MSite</div>
-        <img src="~/Content/Theme/Images/msite.jpg"  class="img-responsive image"/>
-        <div class="thumnail-content">
-            <div class="feature">
-                <h6>--- User Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manager User</a></li>
-                    <li><a href="">Manage Group</a></li>
-                </ul>
-            </div>
-            <div class="feature">
-                <h6>--- Site Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manage Site</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Function Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manage Function</a></li>
-                    <li><a href="">Create Function</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Menu Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Manage Function</a></li>
-                    <li><a href="">Create Function</a></li>
-                </ul>
-            </div>
-             <div class="feature">
-                <h6>--- Log Management ---</h6>
-                <ul class="function list-unstyled">
-                    <li><a href="">Execute SP Log</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 thumnail">
-        <div class="title-bar">Nap Live Chart</div>
-        <img src="~/Content/Theme/Images/lcadmin.jpg" class="img-responsive image"/>
-        <div class="thumnail-content">
-            <div class="feature">
-                <ul class="function list-unstyled">
-                    <li><a href="">Home Page</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-@section Foot 
+else
 {
-    @Scripts.Render("~/scripts/userSites")
+    <p>@ViewLang.ThereIsNoData</p>
 }

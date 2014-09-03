@@ -1,5 +1,6 @@
 ﻿@{
     bool isHomePage = ViewBag.IsHomePage ?? false;
+    string functionName = ViewBag.SearchedFunctionName != null ? (string)ViewBag.SearchedFunctionName : string.Empty;
 }
 <!DOCTYPE html>
 <!--[if (IE 7)]><html lang="en" class="ie7 oldie"><![endif]-->
@@ -23,15 +24,13 @@
     <nav class="navbar navbar-default navbar-fixed-top custom-navbar" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand logo" href="@Url.Content("~/")">@ViewResources.NAP</a>
+            <a class="navbar-brand logo" href="@Url.Content("~/")">@ViewResources.NAP</a>
         </div>
         <div class="collapse navbar-collapse" id="divMenuContent">
-          <form class="navbar-form navbar-left form-search" role="search">
-            <div class="form-group search-bar">
-                <input type="text" class="form-control txtSearch" placeholder="text goes here..." />
-                <span class="icon-search"></span>
-            </div>
-          </form>
+          <div class="nav center-block search-bar">
+            <input type="text" id="txtSearchedFunctionName" class="form-control txtSearch" placeholder="@ViewLang.SearchPlaceholder" value="@functionName"/>
+            <span id="spanSearch" class="icon-search"></span>
+          </div>
           <ul class="nav navbar-nav navbar-right">
             <li class="user-info">
                 <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
@@ -46,8 +45,8 @@
       </div>
     </nav>
     <ol class="breadcrumb breadcrumb-bar">
-       <li><a href="">Home</a></li>
-       <li><a href="" class="active">Sites</a></li>
+       <li><a href="@Url.Content("~/")">@ViewLang.Home</a></li>
+       <li>@ViewBag.Title</li>
     </ol>
     <div class="container-fluid content">
         @RenderBody()
