@@ -144,19 +144,18 @@ Fanex.NAP.Home.Common = function () {
                 }
 
                 if (domElements.txtSearchedFunctionName.val().length < 2) {
-                    if (!domElements.spanSearch.hasClass('disabled')) {
-                        domElements.spanSearch.addClass('disabled');
+                    if (!domElements.spanSearch.hasClass('search-disabled')) {
+                        domElements.spanSearch.addClass('search-disabled');
                     }
                 } else {
-                    if (domElements.spanSearch.hasClass('disabled')) {
-                        domElements.spanSearch.removeClass('disabled');
+                    if (domElements.spanSearch.hasClass('search-disabled')) {
+                        domElements.spanSearch.removeClass('search-disabled');
                     }
                 }
             });
 
             domElements.spanSearch.on('click.nap-home', function () {
-                console.log(domElements.spanSearch.hasClass('disabled'));
-                if (!domElements.spanSearch.hasClass('disabled')) {
+                if (!domElements.spanSearch.hasClass('search-disabled')) {
                     var functionName = domElements.txtSearchedFunctionName.val();
 
                     $this.NavigateToRoot(cachedValues.SearchSitesUrl.format($.trim(functionName)));
