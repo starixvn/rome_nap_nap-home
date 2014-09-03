@@ -23,24 +23,26 @@
 <body>
     <nav class="navbar navbar-default navbar-fixed-top custom-navbar" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="col-xs-2 navbar-header">
             <a class="navbar-brand logo" href="@Url.Content("~/")">@ViewResources.NAP</a>
         </div>
-        <div class="collapse navbar-collapse" id="divMenuContent">
-          <div class="nav center-block search-bar">
-            <input type="text" id="txtSearchedFunctionName" class="form-control txtSearch" placeholder="@ViewLang.SearchPlaceholder" value="@functionName"/>
-            <span id="spanSearch" class="icon-search"></span>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="user-info">
-                <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
-                <ul class="user-dropdown">
-                    <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>
-                    <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
-                    <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "User" }, new { })</li>
-                </ul>
-            </li>
-          </ul>
+        <div class="col-xs-8">
+            <div class=" center-block search-bar">
+                <input type="text" id="txtSearchedFunctionName" class="form-control txtSearch" placeholder="@ViewLang.SearchPlaceholder" value="@functionName"/>
+                <span id="spanSearch" class="icon-search"></span>
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <ul class="nav navbar-nav pull-right">
+                 <li class="user-info">
+                    <span class="info-bar" >@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
+                    <ul class="user-dropdown">
+                        <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "UserInfo", new { Area = "User" }, new { })</li>
+                        <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
+                        <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "User" }, new { })</li>
+                    </ul>
+                </li>
+            </ul>
         </div>
       </div>
     </nav>
