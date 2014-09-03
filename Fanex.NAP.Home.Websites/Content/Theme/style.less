@@ -153,6 +153,11 @@ a, a:hover, a:active, a:focus {
                 top: 13px;
                 right: 5px;
                 cursor: pointer;
+				&.search-disabled {
+					opacity: 0.3;
+					cursor: auto;
+					pointer-events: none;
+				}
             }
         }
     }
@@ -215,6 +220,10 @@ a, a:hover, a:active, a:focus {
 			 .icon-down {
 				margin-top: 6px;
 				cursor: pointer;
+				&.disabled {
+					cursor: auto;
+					opacity: 0.35;
+				}
 			 } 
 			 .site-domain {
 				position: absolute;
@@ -237,7 +246,7 @@ a, a:hover, a:active, a:focus {
 						color: @domain-site-color;
 					}
 					&:hover {
-						background: @domain-site-color;
+						background: @domain-site-sub-bgcolor;
 						a {
 							color: @white;
 						}
