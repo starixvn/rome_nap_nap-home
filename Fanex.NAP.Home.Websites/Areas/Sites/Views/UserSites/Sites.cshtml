@@ -8,6 +8,12 @@
 {
     string thumbnailLink = "~/Areas/Sites/Resources/UserSites/Thumbnails/{0}";
     string functionGroupFormat = "--- {0} ---";
+    int totalFunctionCount = string.IsNullOrEmpty(ViewBag.SearchedFunctionName) ? 0 : Model.Sum(site => site.FunctionGroupList.Count);
+
+    if (totalFunctionCount > 0)
+    {
+        <p>@string.Format(ViewLang.SearchResult, totalFunctionCount)</p>
+    }
 
     foreach (SiteItem site in Model)
     {
