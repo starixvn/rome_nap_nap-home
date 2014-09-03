@@ -130,8 +130,8 @@ Fanex.NAP.Home.Common = function () {
         if (domElements.txtSearchedFunctionName.length > 0) {
             domElements.spanSearch = $('#spanSearch');
 
-            $(document).on('keydown.nap-home', function () {
-                if (!domElements.txtSearchedFunctionName.is(':focus')) {
+            $(document).on('keydown.nap-home', function (event) {
+                if (!domElements.txtSearchedFunctionName.is(':focus') && !$(event.target).is('input')) {
                     domElements.txtSearchedFunctionName.val('').focus();
                 }
             });

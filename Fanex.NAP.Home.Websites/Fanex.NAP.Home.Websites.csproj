@@ -306,11 +306,11 @@
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Content\Theme\Font\Roboto\Roboto-Bold.ttf" />
-    <None Include="Content\Theme\Font\Roboto\Roboto-BoldItalic.ttf" />
-    <None Include="Content\Theme\Font\Roboto\Roboto-Italic.ttf" />
-    <None Include="Content\Theme\Font\Roboto\Roboto-Medium.ttf" />
-    <None Include="Content\Theme\Font\Roboto\Roboto-Regular.ttf" />
+    <Content Include="Content\Theme\Font\Roboto\Roboto-Bold.ttf" />
+    <Content Include="Content\Theme\Font\Roboto\Roboto-BoldItalic.ttf" />
+    <Content Include="Content\Theme\Font\Roboto\Roboto-Italic.ttf" />
+    <Content Include="Content\Theme\Font\Roboto\Roboto-Medium.ttf" />
+    <Content Include="Content\Theme\Font\Roboto\Roboto-Regular.ttf" />
     <None Include="Scripts\Resources\viewLang.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>

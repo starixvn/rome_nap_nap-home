@@ -63,7 +63,7 @@ namespace Fanex.NAP.Home.Sites.Services
 
             if (siteData != null)
             {
-                result = GroupUserSitesData(siteData);
+                result = GroupUserSitesData(siteData, string.IsNullOrEmpty(filter.SearchedFunctionName));
             }
 
             return result;
@@ -110,8 +110,9 @@ namespace Fanex.NAP.Home.Sites.Services
         /// Groups the user sites and functions data.
         /// </summary>
         /// <param name="siteData">The site data.</param>
+        /// <param name="isLoadAll">Boolean indicator checks if current request is using to load all functions or not.</param>
         /// <returns>Data are grouped by sites.</returns>
-        private IEnumerable<SiteItem> GroupUserSitesData(SitesInfo siteData)
+        private IEnumerable<SiteItem> GroupUserSitesData(SitesInfo siteData, bool isLoadAll = false)
         {
             List<SiteItem> sites = new List<SiteItem>();
 
@@ -132,7 +133,14 @@ namespace Fanex.NAP.Home.Sites.Services
                     if (siteData.MenuList != null && siteData.MenuList.Any(menu => menu.SiteId == siteUrlGroup.Key))
                     {
                         siteMenus = siteData.MenuList.Where(menu => menu.SiteId == siteUrlGroup.Key).ToList();
-                        functionGroups = ConvertFunctionList(siteMenus);
+                        if (isLoadAll)
+                        {
+                            functionGroups = ConvertFunctionList(siteMenus);
+                        }
+                        else
+                        {
+                            functionGroups = siteMenus.Select(menu => new FunctionGroup(menu)).ToList();
+                        }
                     }
 
                     sites.Add(new SiteItem(siteInfo, siteLinks, functionGroups));

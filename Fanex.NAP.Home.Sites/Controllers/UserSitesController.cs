@@ -91,7 +91,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             filter.SiteLink = filter.SiteLink ?? string.Empty;
             filter.FunctionLink = string.IsNullOrEmpty(filter.FunctionLink) ? string.Empty : "~" + filter.FunctionLink;
 
-            if (filter.FunctionId.HasValue)
+            if (filter.FunctionId.HasValue && filter.FunctionId > 0)
             {
                 checkPermissionResult = this._siteService.CheckUserPermissionOnFunction(filter);
             }
