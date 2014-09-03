@@ -34,7 +34,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.UserSites
         /// <returns>The setting key.</returns>
         public override string GetSettingKey()
         {
-            return "NAP_Home_CheckPermissionByMenuUserId";
+            return "NAP_Home_CheckUserPermissionByMenu";
         }
 
         /// <summary>
