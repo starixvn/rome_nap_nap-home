@@ -14,7 +14,7 @@
         string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
 
         <div class="col-xs-3 thumnail">
-            <div class="title-bar" data-strict-link="@defaultLinkParameters">@site.SiteName</div>
+            <div class="title-bar" data-strict-link="@defaultLinkParameters">@site.SiteName<span class="icon-down pull-right"></div>
             <img src="@Url.Content(string.Format(thumbnailLink, site.Thumbnail))" alt="@site.SiteName" class="img-responsive image"/>
             <div class="thumnail-content">
                 @foreach (FunctionGroup functionGroup in site.FunctionGroupList)

@@ -165,6 +165,17 @@ a, a:hover, a:active, a:focus {
     background: transparent;
     font-size: 14px;
     padding: 15px 46px;
+	> li {
+		+ li:before {
+			color: @link-color;
+		}
+		a {
+			color: @link-color;
+		}
+	}
+	.active {
+		color: @link-active-color;
+	}
 }
 
 /********************************************************/
@@ -180,7 +191,8 @@ a, a:hover, a:active, a:focus {
     .thumnail {
         height: 400px;
         padding: 0;
-        border-radius: 3px;
+		border-top-left-radius: 3px;
+		border-top-right-radius: 3px;
         border: 1px solid @thumb-border;
         border-right: none;
         background: #fff;
@@ -302,7 +314,12 @@ a, a:hover, a:active, a:focus {
     width: 15px;
     display: inline-block;
 }
-
+.icon-down {
+	background: url(Images/arrow-down.png) no-repeat;
+	height: 10px;
+	width: 11px;
+	margin-top: 6px;
+}
 /********************************************************/
 /*                      Block UI                        */
 /********************************************************/
