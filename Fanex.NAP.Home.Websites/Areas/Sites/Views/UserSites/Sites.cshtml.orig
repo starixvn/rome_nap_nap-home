@@ -1,0 +1,76 @@
+﻿@using Fanex.NAP.Home.Sites.ViewModels.UserSites
+@model IEnumerable<SiteItem>
+@{
+    ViewBag.Title = @ViewLang.Sites;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null && Model.Any())
+{
+    string thumbnailLink = "~/Areas/Sites/Resources/UserSites/Thumbnails/{0}";
+    string functionGroupFormat = "--- {0} ---";
+
+    foreach (SiteItem site in Model)
+    {
+        string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
+
+        <div class="col-xs-3 thumnail">
+<<<<<<< HEAD
+            <div class="title-bar" data-strict-link="@defaultLinkParameters">@site.SiteName<span class="icon-down pull-right"></span></div>
+=======
+            <div class="title-bar">
+                <a class="title-name" data-strict-link="@defaultLinkParameters">@site.SiteName</a>
+                <span class="icon-down pull-right"></span>
+                <ul class="site-domain list-unstyled">
+                    <li><a href="">http://10.18.200.209:8686/nap-cm</a></li>
+                    <li><a href="">http://10.18.200.209:8686/nap-cm</a></li>
+                    <li><a href="">http://10.18.200.209:8686/nap-cm</a></li>
+                </ul>
+            </div>
+>>>>>>> #21385 -  Support UI for new layout
+            <img src="@Url.Content(string.Format(thumbnailLink, site.Thumbnail))" alt="@site.SiteName" class="img-responsive image"/>
+            <div class="thumnail-content">
+                @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
+                {
+                    <div class="feature">
+                        @if (functionGroup.FunctionList.Any())
+                        {
+                            <h6>@string.Format(functionGroupFormat, functionGroup.FunctionName)</h6>
+                            <ul class="function list-unstyled">
+                                @foreach (FunctionItem function in functionGroup.FunctionList)
+                                {
+                                    string linkParameters = string.Format(
+                                                                "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                                site.SiteId,
+                                                                site.DefaultLink,
+                                                                function.FunctionId,
+                                                                function.FunctionLink);
+                                    
+                                    <li><a href="javascript:void(0);" data-strict-link="@linkParameters">@function.FunctionName</a></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            string linkParameters = string.Format(
+                                                       "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                       site.SiteId,
+                                                       site.DefaultLink,
+                                                       functionGroup.FunctionId,
+                                                       functionGroup.FunctionLink);
+                            <a class="single-function" href="javascript:void(0);" data-strict-link="@linkParameters">@functionGroup.FunctionName</a>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>@ViewLang.ThereIsNoData</p>
+}
+<script language="javascript" type="text/javascript">
+    $('.icon-down').click(function () {
+        $('.site-domain').css('display', 'block');
+    });
+</script>
