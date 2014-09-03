@@ -47,7 +47,7 @@ a, a:hover, a:active, a:focus {
                 text-transform: uppercase;
                 color: @white;
                 font-weight: bold;
-                padding: 12px 15px;
+                padding: 10px 15px;
 
                 span {
                     color: #c9d9f2;
@@ -200,15 +200,42 @@ a, a:hover, a:active, a:focus {
         margin-bottom: 10px;
 
         .title-bar {
+			position: relative;
              .bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);
              padding: 5px;
-             font-family: @thumb-title-font-family;
-             font-size: @font-size + 1;
-             color: @thumb-title-color;
-			 cursor: pointer;
-			 &:hover {
-				color: @funtion-hover-color;
+			 .title-name {
+				font-family: @thumb-title-font-family;
+				 font-size: @font-size + 1;
+				 color: @thumb-title-color;
+				 cursor: pointer;
+				 &:hover {
+					color: @funtion-hover-color;
+				 }
 			 }
+			 .icon-down {
+				margin-top: 6px;
+				cursor: pointer;
+			 } 
+			 .site-domain {
+				position: absolute;
+				min-width: 296px;
+				z-index: 999;
+				left: 0;
+				top: 30px;
+				background: @white;
+				display: none;
+				margin: 0;
+				border: 1px solid @domain-site-border-color;
+				li {
+					text-align: right;
+					padding: 3px 5px;
+					a {
+						font-family: @font-family;
+						color: @domain-site-color;
+					}
+				}
+			 }
+
         }
 
         .image {
@@ -237,7 +264,7 @@ a, a:hover, a:active, a:focus {
                     padding: 10px 0;
                 }
 				.single-function {
-					padding: 5px 0 5px 15px;
+					padding: 5px 0;
                     border-bottom: 1px dashed @funtion-border-color;
 					color: @function-color;
 					display: block;
@@ -284,7 +311,6 @@ a, a:hover, a:active, a:focus {
 	background: url(Images/arrow-down.png) no-repeat;
 	height: 10px;
 	width: 11px;
-	margin-top: 6px;
 }
 /********************************************************/
 /*                      Block UI                        */
@@ -302,6 +328,85 @@ a, a:hover, a:active, a:focus {
     background-color: transparent !important;
 }
 
+/********************************************************/
+/*                    Custom Form                       */
+/********************************************************/
+.form-custom {
+    background-color: @form-bg;
+    border: 1px solid @form-border;
+    .box-shadow(0 0 4px 1px rgba(0, 0, 0, 0.1));
+    padding: 20px;
+    margin-top: 15px;
+
+    label {
+        font-weight: normal;
+        line-height: 25px;
+    }
+
+    .form-control {
+        border-radius: 2px;
+        font-size: @font-size;
+        height: 30px;
+        padding: 4px 5px;
+    }
+
+    .lbl-field {
+        text-align: right;
+    }
+
+    .msg-box {
+        padding: 10px 30px;
+        line-height: 1.6em;
+        color: @msg-text;
+        .border-radius;
+        .box-shadow(1px 1px 3px rgba(0, 0, 0, 0.6));
+    }
+
+    .err {
+        background-color: @msg-err-bg;
+        border: solid 1px @msg-err-border;
+    }
+    .warn {
+        background-color: @msg-warn-bg;
+        border: solid 1px @msg-warn-border;
+    }
+    .info {
+        background-color: @msg-info-bg;
+        border: solid 1px @msg-info-border;
+    }
+
+    .validation-summary-valid.success, .validation-summary-errors {
+        ul {
+            .msg-box;
+            margin: 0 0 10px;
+            list-style-type: circle;
+            .transition;
+        }
+    }
+
+    .validation-summary-valid.success {
+        ul {
+            .info;
+
+            .msec {
+                vertical-align: baseline;
+            }
+        }
+    }
+
+    .validation-summary-errors {
+        ul {
+            .err;
+        }
+    }
+
+    input[type=text].input-validation-error,
+    input[type=password].input-validation-error,
+    select.input-validation-error {
+        border: solid 1px @msg-err-border !important;
+        background-color: @msg-err-bg + #444 !important;
+    }
+}
 
 @media(max-width: 1024px) {
     .container-fluid {

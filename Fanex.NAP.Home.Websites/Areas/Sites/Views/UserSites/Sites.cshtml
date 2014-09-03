@@ -14,7 +14,15 @@
         string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
 
         <div class="col-xs-3 thumnail">
-            <div class="title-bar" data-strict-link="@defaultLinkParameters">@site.SiteName<span class="icon-down pull-right"></span></div>
+            <div class="title-bar">
+                <a class="title-name" data-strict-link="@defaultLinkParameters">@site.SiteName</a>
+                <span class="icon-down pull-right"></span>
+                <ul class="site-domain list-unstyled">
+                    <li><a href="">http://10.18.200.209:8686/nap-cm</a></li>
+                    <li><a href="">http://10.18.200.209:8686/nap-cm</a></li>
+                    <li><a href="">http://10.18.200.209:8686/nap-cm</a></li>
+                </ul>
+            </div>
             <img src="@Url.Content(string.Format(thumbnailLink, site.Thumbnail))" alt="@site.SiteName" class="img-responsive image"/>
             <div class="thumnail-content">
                 @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
@@ -57,3 +65,8 @@ else
 {
     <p>@ViewLang.ThereIsNoData</p>
 }
+<script language="javascript" type="text/javascript">
+    $('.icon-down').click(function () {
+        $('.site-domain').css('display', 'block');
+    });
+</script>
