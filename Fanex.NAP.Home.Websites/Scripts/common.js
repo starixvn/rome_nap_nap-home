@@ -23,6 +23,7 @@ Fanex.NAP.Home.Common = function () {
     var domElements = {
         // For _SitesLayout.cshtml.
         txtSearchedFunctionName: null,
+        ulMenus: null,
         spanSearch: null,
 
         // For _Layout.cshtml.
@@ -111,6 +112,7 @@ Fanex.NAP.Home.Common = function () {
 
     $this.Initialize = function () {
         domElements.txtSearchedFunctionName = $('#txtSearchedFunctionName');
+        domElements.ulMenus = $('ul.site-domain');
         domElements.divMsgBox = $.msgbox({
             message: '',
             type: 'err',
@@ -180,6 +182,22 @@ Fanex.NAP.Home.Common = function () {
             });
         }
 
+        $('span.icon-down').on('click.nap-home', function () {
+            var $icon = $(this);
+            var $menu = $icon.next('ul.site-domain');
+
+            if ($menu && !$icon.hasClass('disabled')) {
+                if ($menu.is(':hidden')) {
+                    domElements.ulMenus.slideUp();
+                    $menu.slideDown();
+                } else {
+                    $menu.slideUp();
+                }
+
+                return false;
+            }
+        });
+
         $('body').on('click.nap-home', '[data-strict-link]', function () {
             var $link = $(this);
             var parameters = null;
@@ -200,6 +218,8 @@ Fanex.NAP.Home.Common = function () {
             } catch (error) {
                 $this.ShowErrorMessage(viewLang.InvalidLink);
             }
+        }).on('click.nap-home', function () {
+            domElements.ulMenus.slideUp();
         });
     };
 };
