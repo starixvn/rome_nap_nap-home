@@ -13,10 +13,7 @@
 
     if (totalFunctionCount > 0)
     {
-        @section CustomBreadcrumb
-        {
-            <p class="result">@string.Format(ViewLang.SearchResult, totalFunctionCount) <a href="@Url.Content("~/")">@ViewLang.BackToHome</a></p>
-        }
+        <p class="result">@string.Format(ViewLang.SearchResult, totalFunctionCount) <a href="@Url.Content("~/")">@ViewLang.BackToHome</a></p>
     }
 
     foreach (SiteItem site in Model)
