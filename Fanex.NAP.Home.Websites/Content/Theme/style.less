@@ -33,6 +33,7 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 /*              Customize navigation bar                */
 /********************************************************/
+
 .custom-navbar {
     .bg-linear-gradient(@nav-stop1 1px, @nav-stop2 1px, @nav-stop3 100%, @nav-direction);
     min-height: 40px;
@@ -201,12 +202,24 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 /*                      Content                         */
 /********************************************************/
-
+.custom-navbar .container-fluid .user-info-container,
+.custom-navbar .container-fluid .navbar-header {
+	width: 18.666%;
+}
+.search-container {
+	width: 62.6667%
+}
 .result {
     padding:  0 0 20px;
     font-family: @font-family;
     font-size: @font-size + 1;
     margin: 0;
+	a {
+		color: #2d57c7;
+		&:hover {
+			color: #e94b35;
+		}
+	}
 }
 
 .content {
@@ -501,11 +514,4 @@ a, a:hover, a:active, a:focus {
 			height: 450px;
 		}
     }
-	.custom-navbar .container-fluid .user-info-container,
-	.custom-navbar .container-fluid .navbar-header {
-		width: 18.666%;
-	}
-	.search-container {
-		width: 62.6667%
-	}
 }
