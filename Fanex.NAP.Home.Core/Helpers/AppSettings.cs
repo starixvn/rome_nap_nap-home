@@ -17,60 +17,18 @@ namespace Fanex.NAP.Home.Core.Helpers
     /// </summary>
     public static class AppSettings
     {
-        private static int? searchPageSize;
-        private static int? topFavorites;
-        private static int? favoritePageSize;
-        private static int? favoriteLinesOfColumn;
+        private static int? numberOfSitesPerRow;
 
-        public static int SearchPageSize
+        public static int NumberOfSitesPerRow
         {
             get
             {
-                if (searchPageSize == null)
+                if (numberOfSitesPerRow == null)
                 {
-                    searchPageSize = Converter.ToInt(GetValue("SearchPageSize"));
+                    numberOfSitesPerRow = Converter.ToInt(GetValue("NumberOfSitesPerRow"));
                 }
 
-                return searchPageSize.Value;
-            }
-        }
-
-        public static int TopFavorites
-        {
-            get
-            {
-                if (topFavorites == null)
-                {
-                    topFavorites = Converter.ToInt(GetValue("TopFavorites"));
-                }
-
-                return topFavorites.Value;
-            }
-        }
-
-        public static int FavoritePageSize
-        {
-            get
-            {
-                if (favoritePageSize == null)
-                {
-                    favoritePageSize = Converter.ToInt(GetValue("FavoritePageSize"));
-                }
-
-                return favoritePageSize.Value;
-            }
-        }
-
-        public static int FavoriteLinesOfColumn
-        {
-            get
-            {
-                if (favoriteLinesOfColumn == null)
-                {
-                    favoriteLinesOfColumn = Converter.ToInt(GetValue("FavoriteLinesOfColumn"));
-                }
-
-                return favoriteLinesOfColumn.Value;
+                return numberOfSitesPerRow.Value;
             }
         }
 

@@ -187,10 +187,10 @@ Fanex.NAP.Home.Common = function () {
 
             if ($menu && !$icon.hasClass('disabled')) {
                 if ($menu.is(':hidden')) {
-                    domElements.ulMenus.slideUp();
-                    $menu.slideDown();
+                    domElements.ulMenus.hide();
+                    $menu.show();
                 } else {
-                    $menu.slideUp();
+                    $menu.hide();
                 }
 
                 return false;
@@ -218,7 +218,7 @@ Fanex.NAP.Home.Common = function () {
                 $this.ShowErrorMessage(viewLang.InvalidLink);
             }
         }).on('click.nap-home', function () {
-            domElements.ulMenus.slideUp();
+            domElements.ulMenus.hide();
         });
     };
 };

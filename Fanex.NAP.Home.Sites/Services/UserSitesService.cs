@@ -170,6 +170,7 @@ namespace Fanex.NAP.Home.Sites.Services
                 foreach (FunctionTreeNode node in functionTree)
                 {
                     functionGroup = new FunctionGroup(node as FunctionItem);
+                    functionList = new List<FunctionItem>();
 
                     if (node.ChildFunctionNodeList != null && node.ChildFunctionNodeList.Count > 0)
                     {
