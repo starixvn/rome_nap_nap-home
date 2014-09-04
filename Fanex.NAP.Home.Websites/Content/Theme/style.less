@@ -60,7 +60,7 @@ a, a:hover, a:active, a:focus {
         }
 
         .navbar-nav {
-            margin-right: 15px;
+            margin-right: 14px;
 
             .icon-favourite-large {
                 padding: 0;
@@ -187,14 +187,17 @@ a, a:hover, a:active, a:focus {
 /********************************************************/
 /*                      Content                         */
 /********************************************************/
-.content .thumnail:last-child {
-    border-right: 1px solid @thumb-border;
-}
 
+.result {
+    padding: 20px 46px 0;
+	font-family: @font-family;
+	font-size: @font-size + 1;
+	margin: 0;
+}
 .content {
     padding: 0 46px;
     position: absolute;
-
+	margin-top: 20px;
     .thumnail {
         height: 400px;
         padding: 0;
@@ -228,7 +231,7 @@ a, a:hover, a:active, a:focus {
              } 
              .site-domain {
                 position: absolute;
-                min-width: 296px;
+				width: 100%;
                 z-index: 999;
                 left: 0;
                 top: 30px;
@@ -440,4 +443,14 @@ a, a:hover, a:active, a:focus {
     .custom-navbar .container-fluid .search-bar {
         width: 300px;
     }
+}
+
+@media(max-height: 768px)
+{
+	.content .thumnail {
+		height: 300px;
+	}
+	.content .thumnail .thumnail-content {
+		height: 208px;
+	}
 }
