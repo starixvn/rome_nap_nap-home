@@ -211,12 +211,10 @@ a, a:hover, a:active, a:focus {
 
 .content {
     padding: 0 46px;
-	bottom: 20px;
-	top: 60px;
     position: absolute;
     left: 0;
     right: 0;
-
+	margin-top: 20px;
     .thumnail {
         height: 400px;
         padding: 0;
@@ -228,7 +226,7 @@ a, a:hover, a:active, a:focus {
         margin-bottom: 10px;
 
         &.thumnail-4-columns {
-            height: 95%;
+            height: 85%;
         }
 
         .title-bar {
@@ -307,7 +305,7 @@ a, a:hover, a:active, a:focus {
             height: 308px;
 
             &.thumnail-content-4-coloums {
-                height: 88%;
+                height: 700px;
             }
 
             .feature {
@@ -492,9 +490,15 @@ a, a:hover, a:active, a:focus {
 @media(max-height: 768px) {
     .content .thumnail {
         height: 300px;
+		&.thumnail-4-columns {
+			height: 65%
+		}
     }
 
     .content .thumnail .thumnail-content {
         height: 208px;
+		&.thumnail-content-4-coloums {
+			height: 450px;
+		}
     }
 }
