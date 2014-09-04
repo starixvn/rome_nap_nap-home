@@ -110,6 +110,24 @@ Fanex.NAP.Home.Common = function () {
         });
     };
 
+    // Truncate sites' names and top favorites' names.
+    $this.TruncateTileTexts = function () {
+        $('[data-truncate-offset]').each(function () {
+            var $link = $(this);
+            var $parent = $link.closest('[data-truncate-parent]');
+            var text = $link.attr('title');
+            var offset = parseInt($link.attr('data-truncate-offset'));
+            var width = $parent.width() - offset;
+            var noOfChars = parseInt(width / 6);
+
+            if (text.length > noOfChars) {
+                text = text.substring(0, noOfChars - 3) + '...';
+            }
+
+            $link.text(text);
+        });
+    };
+
     $this.Initialize = function () {
         domElements.txtSearchedFunctionName = $('#txtSearchedFunctionName');
         domElements.ulMenus = $('ul.site-domain');
@@ -148,6 +166,14 @@ Fanex.NAP.Home.Common = function () {
                         domElements.spanSearch.addClass('search-disabled');
                     }
                 } else {
+                    if (domElements.spanSearch.hasClass('search-disabled')) {
+                        domElements.spanSearch.removeClass('search-disabled');
+                    }
+                }
+            });
+
+            domElements.txtSearchedFunctionName.on('focus.nap-home', function (event) {
+                if (domElements.txtSearchedFunctionName.val().length >= 2) {
                     if (domElements.spanSearch.hasClass('search-disabled')) {
                         domElements.spanSearch.removeClass('search-disabled');
                     }
@@ -197,7 +223,7 @@ Fanex.NAP.Home.Common = function () {
             }
         });
 
-        $('body').on('click.nap-home', '[data-strict-link]', function () {
+        $('html').on('click.nap-home', '[data-strict-link]', function () {
             var $link = $(this);
             var parameters = null;
             var invalid = false;
@@ -220,6 +246,10 @@ Fanex.NAP.Home.Common = function () {
         }).on('click.nap-home', function () {
             domElements.ulMenus.hide();
         });
+
+        // Truncate when the window is resizing.
+        $(window).on('resize', _.debounce($this.TruncateTileTexts, 100));
+        $this.TruncateTileTexts();
     };
 };
 

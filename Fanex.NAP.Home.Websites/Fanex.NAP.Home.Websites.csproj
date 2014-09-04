@@ -249,6 +249,7 @@
       <DependentUpon>viewLang.tt</DependentUpon>
     </Content>
     <Content Include="Scripts\RespondJs\respond.min.js" />
+    <Content Include="Scripts\Underscore\underscore-min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -317,6 +318,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>
     </None>
+    <None Include="Scripts\Underscore\underscore-min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAP.Home.Core\Fanex.NAP.Home.Core.csproj">
