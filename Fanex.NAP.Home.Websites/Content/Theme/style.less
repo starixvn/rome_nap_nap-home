@@ -4,7 +4,9 @@
 /********************************************************/
 /*                     Common CSS                       */
 /********************************************************/
-
+html, body {
+	height: 100%;
+}
 body {
     padding-top: 40px;
     font-size: @font-size;
@@ -36,32 +38,38 @@ a, a:hover, a:active, a:focus {
     min-height: 40px;
 
     .container-fluid {
-        .navbar-brand {
-            &.logo {
-                font-family: @font-Agency-FB;
-                height: 29px;
-                margin: 0;
-                font-size: @font-size + 23;
-                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
-                outline: none;
-                text-transform: uppercase;
-                color: @white;
-                font-weight: bold;
-                padding: 10px 15px;
+		&.navbar-content {
+			padding: 0 46px;
+		}
+		.navbar-header {
+			padding: 0;
+			.navbar-brand {
+				&.logo {
+					font-family: @font-Agency-FB;
+					height: 29px;
+					margin: 0;
+					font-size: @font-size + 23;
+					text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+					outline: none;
+					text-transform: uppercase;
+					color: @white;
+					font-weight: bold;
+					padding: 10px 0;
 
-                span {
-                    color: #c9d9f2;
-                }
+					span {
+						color: #c9d9f2;
+					}
 
-                &:hover {
-                    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 6px #8fb5c8, 0 0 30px rgba(143, 181, 200, 0.7);
-                }
-            }
-        }
-
+					&:hover {
+						text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6), 0 0 6px #8fb5c8, 0 0 30px rgba(143, 181, 200, 0.7);
+					}
+				}
+			}
+		}
+		.user-info-container {
+			padding: 0;
+		}
         .navbar-nav {
-            margin-right: 14px;
-
             .icon-favourite-large {
                 padding: 0;
                 margin: 10px 15px 0 0;
@@ -196,9 +204,11 @@ a, a:hover, a:active, a:focus {
 }
 .content {
     padding: 0 46px;
-    position: absolute;
 	margin-top: 20px;
-	height: 100%;
+	position: absolute;
+	height: 87%;
+	left: 0;
+	right: 0;
     .thumnail {
         height: 400px;
         padding: 0;
@@ -209,14 +219,14 @@ a, a:hover, a:active, a:focus {
         background: #fff;
         margin-bottom: 10px;
 		&.thumnail-4-columns {
-			height: 85%;
+			height: 97%;
 		}
         .title-bar {
             position: relative;
              .bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);
              padding: 5px;
              .title-name {
-                font-family: @thumb-title-font-family;
+                font-family: @thumb-title-font-family !important;
                  font-size: @font-size + 1;
                  color: @thumb-title-color;
                  cursor: pointer;
@@ -277,6 +287,9 @@ a, a:hover, a:active, a:focus {
 
         .thumnail-content {
             height: 308px;
+			&.thumnail-content-4-coloums {
+				height: 680px;
+			}
             .feature {
                 font-family: @feature-font-family;
                 font-size: @font-size - 1;
