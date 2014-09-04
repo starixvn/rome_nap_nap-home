@@ -311,6 +311,8 @@
     <Content Include="Content\Theme\Font\Roboto\Roboto-Italic.ttf" />
     <Content Include="Content\Theme\Font\Roboto\Roboto-Medium.ttf" />
     <Content Include="Content\Theme\Font\Roboto\Roboto-Regular.ttf" />
+    <None Include="Content\Theme\Font\Roboto\Roboto-Bold.eot" />
+    <None Include="Content\Theme\Font\Roboto\Roboto-Regular.eot" />
     <None Include="Scripts\Resources\viewLang.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>

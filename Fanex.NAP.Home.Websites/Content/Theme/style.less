@@ -198,6 +198,7 @@ a, a:hover, a:active, a:focus {
     padding: 0 46px;
     position: absolute;
 	margin-top: 20px;
+	height: 100%;
     .thumnail {
         height: 400px;
         padding: 0;
@@ -207,7 +208,9 @@ a, a:hover, a:active, a:focus {
         border-right: none;
         background: #fff;
         margin-bottom: 10px;
-
+		&.thumnail-4-columns {
+			height: 85%;
+		}
         .title-bar {
             position: relative;
              .bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);
