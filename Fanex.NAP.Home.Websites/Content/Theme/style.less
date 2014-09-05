@@ -7,6 +7,7 @@
 html, body {
     height: 100%;
 }
+
 body {
     padding-top: 40px;
     font-size: @font-size;
@@ -72,6 +73,7 @@ a, a:hover, a:active, a:focus {
         .user-info-container {
             padding: 0;
         }
+
         .navbar-nav {
             .icon-favourite-large {
                 padding: 0;
@@ -206,16 +208,20 @@ a, a:hover, a:active, a:focus {
 .custom-navbar .container-fluid .navbar-header {
     width: 18.666%;
 }
+
 .search-container {
     width: 62.6667%
 }
+
 .result {
     padding:  0 0 20px;
     font-family: @font-family;
     font-size: @font-size + 1;
     margin: 0;
+
     a {
         color: #2d57c7;
+
         &:hover {
             color: #e94b35;
         }
@@ -228,16 +234,18 @@ a, a:hover, a:active, a:focus {
     left: 0;
     right: 0;
     margin-top: 20px;
-	.custom-col-xs-2 {
-		width: 20%;
-	}
-    .thumnail {
+
+    .custom-col-xs-2 {
+        width: 20%;
+    }
+
+    .thumbnail-wrapper {
         height: 400px;
         padding: 0;
-        border-right: none;
         margin-bottom: 10px;
-		background: transparent;
-        &.thumnail-4-columns {
+        background: transparent;
+
+        &.one-row-thumbnail {
             height: 85%;
         }
 
@@ -245,20 +253,21 @@ a, a:hover, a:active, a:focus {
             position: relative;
             padding: 5px;
             /*.bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);*/
-			background: url(Images/thumnail_bg2.png) no-repeat;
-			background-size: 100% 30px;
-             .title-name {
+            background: url(Images/thumnail_bg2.png) no-repeat;
+            background-size: 100% 30px;
+
+            .title-name {
                 font-family: @thumb-title-font-family !important;
-                 font-size: @font-size + 1;
-                 color: @thumb-title-color;
-                 cursor: pointer;
+                font-size: @font-size + 1;
+                color: @thumb-title-color;
+                cursor: pointer;
 
-                 &:hover {
-                    color: @funtion-hover-color;
-                 }
-             }
+                &:hover {
+                   color: @funtion-hover-color;
+                }
+            }
 
-             .icon-down {
+            .icon-down {
                 margin-top: 6px;
                 cursor: pointer;
 
@@ -266,7 +275,7 @@ a, a:hover, a:active, a:focus {
                     cursor: auto;
                     opacity: 0.35;
                 }
-             } 
+             }
 
              .site-domain {
                 position: absolute;
@@ -306,50 +315,61 @@ a, a:hover, a:active, a:focus {
             height: 40px;
         }
 
-        .thumnail-content {
-            height: 328px;
-			border: 1px solid @thumb-border;
-			border-right: none;
-			background: @white;
-            &.thumnail-content-4-coloums {
-                height: 700px;
+        .thumbnail-content {
+            border: 1px solid @thumb-border;
+            border-right: none;
+            background: @white;
+            padding-right: 0.8px;
+
+            &.one-row-thumbnail-content {
+                .feature-list {
+                    height: 700px;
+                }
             }
-			 &.last-child, &.lastchild-4-columns {
-				border-right: 1px solid @thumb-border;
-			}
-            .feature {
-                font-family: @feature-font-family;
-                font-size: @font-size - 1;
-				padding: 0 8px;
-                h6 {
-                    font-weight: bold;
-                    border-bottom: 1px dashed @funtion-border-color;
-                    margin: 0;
-                    padding: 5px 0;
-                }
 
-                .single-function {
-                    padding: 5px 0;
-                    border-bottom: 1px dashed @funtion-border-color;
-                    color: @function-color;
-                    display: block;
+            &.last-child, &.lastchild-4-columns {
+                border-right: 1px solid @thumb-border;
+            }
 
-                    &:hover {
-                        color: @funtion-hover-color;
-                    }
-                }
+            .feature-list {
+                height: 328px;
 
-                .function {
-                    margin-bottom: 0;
-                    li {
-                        padding: 3px 0 3px 5px;
+                .feature {
+                    font-family: @feature-font-family;
+                    font-size: @font-size - 1;
+                    padding: 0 8px;
+
+                    h6 {
+                        font-weight: bold;
                         border-bottom: 1px dashed @funtion-border-color;
+                        margin: 0;
+                        padding: 5px 0;
+                    }
 
-                        a {
-                            color: @function-color;
+                    .single-function {
+                        padding: 5px 0;
+                        border-bottom: 1px dashed @funtion-border-color;
+                        color: @function-color;
+                        display: block;
 
-                            &:hover {
-                                color: @funtion-hover-color;
+                        &:hover {
+                            color: @funtion-hover-color;
+                        }
+                    }
+
+                    .function {
+                        margin-bottom: 0;
+
+                        li {
+                            padding: 3px 0 3px 5px;
+                            border-bottom: 1px dashed @funtion-border-color;
+
+                            a {
+                                color: @function-color;
+
+                                &:hover {
+                                    color: @funtion-hover-color;
+                                }
                             }
                         }
                     }
@@ -491,17 +511,21 @@ a, a:hover, a:active, a:focus {
 }
 
 @media(max-height: 768px) {
-    .content .thumnail {
+    .content .thumbnail {
         height: 300px;
-        &.thumnail-4-columns {
+
+        &.one-row-thumbnail {
             height: 65%
         }
     }
 
-    .content .thumnail .thumnail-content {
+    .content .thumbnail .thumbnail-content .feature-list {
         height: 208px;
-        &.thumnail-content-4-coloums {
-            height: 450px;
+
+        &.one-row-thumbnail-content {
+            .feature-list {
+                height: 450px;
+            }
         }
     }
 }

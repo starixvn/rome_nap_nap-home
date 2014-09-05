@@ -20,22 +20,23 @@
     foreach (SiteItem site in Model)
     {
         string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
-        string thumbnailClass = numberOfSites <= AppSettings.NumberOfSitesPerRow ? "thumnail-4-columns" : string.Empty;
+        string thumbnailClass = numberOfSites <= AppSettings.NumberOfSitesPerRow ? "one-row-thumbnail" : string.Empty;
+        string thumbnailContentClass = string.Empty;
         bool hasDomains = site.OtherLinkList != null && site.OtherLinkList.Count > 0;
 
         siteCounter++;
 
         if (siteCounter % AppSettings.NumberOfSitesPerRow == 0)
         {
-            thumbnailClass += " lastchild-4-columns";
+            thumbnailContentClass += " lastchild-4-columns";
         }
         
         if (siteCounter == numberOfSites)
         {
-            thumbnailClass += " last-child";
+            thumbnailContentClass += " last-child";
         }
 
-        <div class="col-xs-2 custom-col-xs-2 thumnail ">
+        <div class="col-xs-2 custom-col-xs-2 thumbnail-wrapper @thumbnailClass">
             <div class="title-bar img-responsive" data-truncate-parent="true">
                 <a class="title-name" title="@site.SiteName" data-strict-link="@defaultLinkParameters" data-truncate-offset="50">@site.SiteName</a>
                 <span class="icon-down pull-right @(!hasDomains ? "disabled" : string.Empty)"></span>
@@ -51,39 +52,41 @@
                 }
             </div>
             <img src="@Url.Content(string.Format(thumbnailLink, site.Thumbnail))" alt="@site.SiteName" class="img-responsive image"/>
-            <div class="thumnail-content @thumbnailClass @(numberOfSites <= AppSettings.NumberOfSitesPerRow ? "thumnail-content-4-coloums" : string.Empty)">
-                @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
-                {
-                    <div class="feature">
-                        @if (functionGroup.FunctionList.Any())
-                        {
-                            <h6>@string.Format(functionGroupFormat, functionGroup.FunctionName)</h6>
-                            <ul class="function list-unstyled">
-                                @foreach (FunctionItem function in functionGroup.FunctionList)
-                                {
-                                    string linkParameters = string.Format(
-                                                                "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
-                                                                site.SiteId,
-                                                                site.DefaultLink,
-                                                                function.FunctionId,
-                                                                function.FunctionLink);
+            <div class="thumbnail-content @thumbnailContentClass @(numberOfSites <= AppSettings.NumberOfSitesPerRow ? "one-row-thumbnail-content" : string.Empty)">
+                <div class="feature-list">
+                    @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
+                    {
+                        <div class="feature">
+                            @if (functionGroup.FunctionList.Any())
+                            {
+                                <h6>@string.Format(functionGroupFormat, functionGroup.FunctionName)</h6>
+                                <ul class="function list-unstyled">
+                                    @foreach (FunctionItem function in functionGroup.FunctionList)
+                                    {
+                                        string linkParameters = string.Format(
+                                                                    "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                                    site.SiteId,
+                                                                    site.DefaultLink,
+                                                                    function.FunctionId,
+                                                                    function.FunctionLink);
                                     
-                                    <li><a href="javascript:void(0);" data-strict-link="@linkParameters">@function.FunctionName</a></li>
-                                }
-                            </ul>
-                        }
-                        else
-                        {
-                            string linkParameters = string.Format(
-                                                       "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
-                                                       site.SiteId,
-                                                       site.DefaultLink,
-                                                       functionGroup.FunctionId,
-                                                       functionGroup.FunctionLink);
-                            <a class="single-function" href="javascript:void(0);" data-strict-link="@linkParameters">@functionGroup.FunctionName</a>
-                        }
-                    </div>
-                }
+                                        <li><a href="javascript:void(0);" data-strict-link="@linkParameters">@function.FunctionName</a></li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                string linkParameters = string.Format(
+                                                           "{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\", \"FunctionId\": {2}, \"FunctionLink\": \"{3}\" }}",
+                                                           site.SiteId,
+                                                           site.DefaultLink,
+                                                           functionGroup.FunctionId,
+                                                           functionGroup.FunctionLink);
+                                <a class="single-function" href="javascript:void(0);" data-strict-link="@linkParameters">@functionGroup.FunctionName</a>
+                            }
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     }
