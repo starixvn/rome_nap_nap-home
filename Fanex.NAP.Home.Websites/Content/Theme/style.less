@@ -228,16 +228,15 @@ a, a:hover, a:active, a:focus {
     left: 0;
     right: 0;
     margin-top: 20px;
+	.custom-col-xs-2 {
+		width: 20%;
+	}
     .thumnail {
         height: 400px;
         padding: 0;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        border: 1px solid @thumb-border;
         border-right: none;
-        background: #fff;
         margin-bottom: 10px;
-
+		background: transparent;
         &.thumnail-4-columns {
             height: 85%;
         }
@@ -245,8 +244,9 @@ a, a:hover, a:active, a:focus {
         .title-bar {
             position: relative;
             padding: 5px;
-            .bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);
-
+            /*.bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);*/
+			background: url(Images/thumnail_bg2.png) no-repeat;
+			background-size: 100% 30px;
              .title-name {
                 font-family: @thumb-title-font-family !important;
                  font-size: @font-size + 1;
@@ -303,30 +303,29 @@ a, a:hover, a:active, a:focus {
         }
 
         .image {
-            height: 60px;
-        }
-
-        &.last-child, &.lastchild-4-columns {
-            border-right: 1px solid @thumb-border;
+            height: 40px;
         }
 
         .thumnail-content {
-            height: 308px;
-
+            height: 328px;
+			border: 1px solid @thumb-border;
+			border-right: none;
+			background: @white;
             &.thumnail-content-4-coloums {
                 height: 700px;
             }
-
+			 &.last-child, &.lastchild-4-columns {
+				border-right: 1px solid @thumb-border;
+			}
             .feature {
                 font-family: @feature-font-family;
                 font-size: @font-size - 1;
-                padding: 0 8px;
-
+				padding: 0 8px;
                 h6 {
                     font-weight: bold;
                     border-bottom: 1px dashed @funtion-border-color;
                     margin: 0;
-                    padding: 10px 0;
+                    padding: 5px 0;
                 }
 
                 .single-function {
@@ -342,9 +341,8 @@ a, a:hover, a:active, a:focus {
 
                 .function {
                     margin-bottom: 0;
-
                     li {
-                        padding: 5px 0 5px 15px;
+                        padding: 3px 0 3px 5px;
                         border-bottom: 1px dashed @funtion-border-color;
 
                         a {

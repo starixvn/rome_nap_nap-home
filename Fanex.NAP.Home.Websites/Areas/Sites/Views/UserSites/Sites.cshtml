@@ -35,8 +35,8 @@
             thumbnailClass += " last-child";
         }
 
-        <div class="col-xs-3 thumnail @thumbnailClass">
-            <div class="title-bar" data-truncate-parent="true">
+        <div class="col-xs-2 custom-col-xs-2 thumnail ">
+            <div class="title-bar img-responsive" data-truncate-parent="true">
                 <a class="title-name" title="@site.SiteName" data-strict-link="@defaultLinkParameters" data-truncate-offset="50">@site.SiteName</a>
                 <span class="icon-down pull-right @(!hasDomains ? "disabled" : string.Empty)"></span>
                 @if (hasDomains)
@@ -51,7 +51,7 @@
                 }
             </div>
             <img src="@Url.Content(string.Format(thumbnailLink, site.Thumbnail))" alt="@site.SiteName" class="img-responsive image"/>
-            <div class="thumnail-content @(numberOfSites <= AppSettings.NumberOfSitesPerRow ? "thumnail-content-4-coloums" : string.Empty)">
+            <div class="thumnail-content @thumbnailClass @(numberOfSites <= AppSettings.NumberOfSitesPerRow ? "thumnail-content-4-coloums" : string.Empty)">
                 @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
                 {
                     <div class="feature">
