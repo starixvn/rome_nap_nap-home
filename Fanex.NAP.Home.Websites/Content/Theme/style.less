@@ -253,9 +253,8 @@ a, a:hover, a:active, a:focus {
             position: relative;
             padding: 5px;
             /*.bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);*/
-            background: url(Images/thumnail_bg2.png) no-repeat;
+            background: url(Images/thumnail_bg2.png) center no-repeat;
             background-size: 100% 30px;
-
             .title-name {
                 font-family: @thumb-title-font-family !important;
                 font-size: @font-size + 1;
@@ -533,4 +532,7 @@ a, a:hover, a:active, a:focus {
     .custom-navbar .container-fluid .search-bar {
         width: 300px;
     }
+	.ie8 {
+		overflow-x: hidden;
+	}
 }
