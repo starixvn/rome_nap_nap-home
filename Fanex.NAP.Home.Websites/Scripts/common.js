@@ -1,5 +1,5 @@
 ﻿/* File Created: July 25, 2014 */
-/* global Namespace, appSettings, viewLang */
+/* global Namespace, _, appSettings, viewLang */
 'use strict';
 
 /* jshint freeze: false */
@@ -130,6 +130,7 @@ Fanex.NAP.Home.Common = function () {
         });
     };
 
+    // Reset thumbnails' heights when resizing the window.
     $this.RefreshThumbnailHeight = function () {
         var windowHeight = $(window).height();
 
@@ -139,7 +140,7 @@ Fanex.NAP.Home.Common = function () {
             domElements.divContent.removeClass('max-height-768');
         }
 
-        domElements.divFeatureLists.getNiceScroll().resize();
+        //domElements.divFeatureLists.getNiceScroll().resize();
     };
 
     $this.Initialize = function () {
@@ -162,6 +163,10 @@ Fanex.NAP.Home.Common = function () {
         messages.NotFoundError = viewLang.NotFoundError;
 
         cachedValues.RootURL = appSettings.RootUrl;
+
+        // Truncate when the window is resizing.
+        $(window).on('resize', _.debounce(onResizeWindow, 100));
+        onResizeWindow();
 
         if (domElements.txtSearchedFunctionName.length > 0) {
             domElements.spanSearch = $('#spanSearch');
@@ -188,7 +193,7 @@ Fanex.NAP.Home.Common = function () {
                 }
             });
 
-            domElements.txtSearchedFunctionName.on('focus.nap-home', function (event) {
+            domElements.txtSearchedFunctionName.on('focus.nap-home', function () {
                 if (domElements.txtSearchedFunctionName.val().length >= 2) {
                     if (domElements.spanSearch.hasClass('search-disabled')) {
                         domElements.spanSearch.removeClass('search-disabled');
@@ -205,6 +210,7 @@ Fanex.NAP.Home.Common = function () {
             });
         }
 
+        // Customize default browsers' scrollbars with NiceScroll.
         if ($.fn.niceScroll) {
             domElements.divFeatureLists.niceScroll({
                 autohidemode: false,
@@ -215,6 +221,7 @@ Fanex.NAP.Home.Common = function () {
             });
             $('html').niceScroll({
                 autohidemode: false,
+                horizrailenabled: false,
                 cursorcolor: "#8C8C8C",
                 cursorwidth: '10px',
                 background: '#eee',
@@ -223,6 +230,7 @@ Fanex.NAP.Home.Common = function () {
             });
         }
 
+        // Handle domain menus behaviors.
         $('span.icon-down').on('click.nap-home', function () {
             var $icon = $(this);
             var $menu = $icon.next('ul.site-domain');
@@ -239,6 +247,7 @@ Fanex.NAP.Home.Common = function () {
             }
         });
 
+        // Force all strict link must call Forward service.
         $('html').on('click.nap-home', '[data-strict-link]', function () {
             var $link = $(this);
             var parameters = null;
@@ -254,7 +263,7 @@ Fanex.NAP.Home.Common = function () {
                 if (parameters && !invalid) {
                     $this.Forward(parameters);
                 } else {
-                    common.ShowErrorMessage(viewLang.InvalidLink);
+                    $this.ShowErrorMessage(viewLang.InvalidLink);
                 }
             } catch (error) {
                 $this.ShowErrorMessage(viewLang.InvalidLink);
@@ -263,9 +272,9 @@ Fanex.NAP.Home.Common = function () {
             domElements.ulMenus.hide();
         });
 
-        // Truncate when the window is resizing.
-        $(window).on('resize', _.debounce(onResizeWindow, 100));
-        onResizeWindow();
+        setTimeout(function () {
+            domElements.divFeatureLists.getNiceScroll().resize();
+        }, 200);
     };
 
     var onResizeWindow = function () {
