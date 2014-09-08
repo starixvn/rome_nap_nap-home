@@ -65,6 +65,7 @@ namespace Fanex.NAP.Home.Websites
                 "~/Scripts/jQuery/jquery.blockUI.2.66.min.js",
                 "~/Scripts/jQuery/jquery.nicescroll.min.js",
                 "~/Scripts/Bootstrap/bootstrap.js",
+                "~/Scripts/Bootstrap/bootstrap-tooltip-extension.js",
                 "~/Scripts/Underscore/underscore-min.js",
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",

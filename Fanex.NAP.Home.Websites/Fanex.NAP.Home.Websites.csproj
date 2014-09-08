@@ -222,7 +222,6 @@
     <Content Include="Content\MessageBox\msgbox-0.0.1.css" />
     <Content Include="Content\Theme\Font\Roboto\LICENSE.txt" />
     <Content Include="Content\Theme\Images\arrow-down.png" />
-    <Content Include="Content\Theme\Images\backgroundsize.min.htc" />
     <Content Include="Content\Theme\Images\favicon.ico" />
     <Content Include="Content\Theme\Images\loading.gif" />
     <Content Include="Content\Theme\Images\patern.jpg" />
@@ -234,6 +233,7 @@
     <Content Include="Content\Theme\Images\thumnail_bg2.png" />
     <Content Include="Content\Theme\Images\user.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Bootstrap\bootstrap-tooltip-extension.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\CryptoJs\CryptoJS.js" />

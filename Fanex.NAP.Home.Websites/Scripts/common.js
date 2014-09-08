@@ -140,7 +140,7 @@ Fanex.NAP.Home.Common = function () {
             domElements.divContent.removeClass('max-height-768');
         }
 
-        //domElements.divFeatureLists.getNiceScroll().resize();
+        domElements.divFeatureLists.getNiceScroll().resize();
     };
 
     $this.Initialize = function () {
@@ -177,36 +177,45 @@ Fanex.NAP.Home.Common = function () {
                 }
             });
 
-            domElements.txtSearchedFunctionName.on('keyup.nap-home', function (event) {
-                if (event.keyCode === 13) {
-                    domElements.spanSearch.click();
-                }
+            domElements.txtSearchedFunctionName.on('focusout.nap-home', function () {
+                var errorMessage = domElements.txtSearchedFunctionName.attr('data-original-title');
 
-                if (domElements.txtSearchedFunctionName.val().length < 2) {
-                    if (!domElements.spanSearch.hasClass('search-disabled')) {
-                        domElements.spanSearch.addClass('search-disabled');
-                    }
-                } else {
-                    if (domElements.spanSearch.hasClass('search-disabled')) {
-                        domElements.spanSearch.removeClass('search-disabled');
-                    }
+                if (errorMessage && errorMessage.length > 0) {
+                    domElements.txtSearchedFunctionName.attr('data-original-title', '');
+                    domElements.txtSearchedFunctionName.tooltip('hide');
+
+                    return false;
                 }
             });
 
-            domElements.txtSearchedFunctionName.on('focus.nap-home', function () {
-                if (domElements.txtSearchedFunctionName.val().length >= 2) {
-                    if (domElements.spanSearch.hasClass('search-disabled')) {
-                        domElements.spanSearch.removeClass('search-disabled');
-                    }
+            domElements.txtSearchedFunctionName.on('keyup.nap-home', function (event) {
+                if (event.keyCode === 13) {
+                    domElements.spanSearch.click();
+
+                    return false;
                 }
             });
 
             domElements.spanSearch.on('click.nap-home', function () {
-                if (!domElements.spanSearch.hasClass('search-disabled')) {
+                setTimeout(function () {
                     var functionName = domElements.txtSearchedFunctionName.val();
+                    var errorMessage = '';
 
-                    $this.NavigateToRoot(cachedValues.SearchSitesUrl.format($.trim(functionName)));
-                }
+                    if (functionName.length === 0) {
+                        errorMessage = viewLang.RequiredFieldError;
+                    } else if (functionName.length < 2) {
+                        errorMessage = viewLang.MinLengthSearchFieldError;
+                    } else {
+                        $this.NavigateToRoot(cachedValues.SearchSitesUrl.format($.trim(functionName)));
+                    }
+
+                    if (errorMessage.length > 0) {
+                        domElements.txtSearchedFunctionName.attr('data-original-title', errorMessage).tooltip({
+                            placement: 'bottom',
+                            trigger: 'manual'
+                        }).focus().tooltip('show');
+                    }
+                }, 50);
             });
         }
 
@@ -214,6 +223,7 @@ Fanex.NAP.Home.Common = function () {
         if ($.fn.niceScroll) {
             domElements.divFeatureLists.niceScroll({
                 autohidemode: false,
+                horizrailenabled: false,
                 cursorcolor: "#ccc",
                 cursorwidth: '8px',
                 background: '#fff',
@@ -221,7 +231,6 @@ Fanex.NAP.Home.Common = function () {
             });
             $('html').niceScroll({
                 autohidemode: false,
-                horizrailenabled: false,
                 cursorcolor: "#8C8C8C",
                 cursorwidth: '10px',
                 background: '#eee',

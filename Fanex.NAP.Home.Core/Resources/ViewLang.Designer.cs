@@ -142,6 +142,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search term must be at least 2 characters!.
+        /// </summary>
+        public static string MinLengthSearchFieldError {
+            get {
+                return ResourceManager.GetString("MinLengthSearchFieldError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not found!.
         /// </summary>
         public static string NotFoundError {
@@ -165,6 +174,15 @@ namespace Fanex.NAP.Home.Core.Resources {
         public static string Path {
             get {
                 return ResourceManager.GetString("Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Required field!.
+        /// </summary>
+        public static string RequiredFieldError {
+            get {
+                return ResourceManager.GetString("RequiredFieldError", resourceCulture);
             }
         }
         

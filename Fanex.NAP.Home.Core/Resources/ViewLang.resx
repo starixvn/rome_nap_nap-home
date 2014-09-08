@@ -144,6 +144,9 @@
   <data name="InvalidLink" xml:space="preserve">
     <value>Invalid link!</value>
   </data>
+  <data name="MinLengthSearchFieldError" xml:space="preserve">
+    <value>Search term must be at least 2 characters!</value>
+  </data>
   <data name="NotFoundError" xml:space="preserve">
     <value>Not found!</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="Path" xml:space="preserve">
     <value>Path</value>
+  </data>
+  <data name="RequiredFieldError" xml:space="preserve">
+    <value>Required field!</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>

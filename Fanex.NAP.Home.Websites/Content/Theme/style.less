@@ -159,6 +159,10 @@ a, a:hover, a:active, a:focus {
                 box-shadow: inset 0 0 3px 3px #eee;
                 //width: 468px;
                 border-radius: 3px;
+
+                &::-ms-clear {
+                    display: none;
+                }
             }
 
             .icon-search {
@@ -492,6 +496,56 @@ a, a:hover, a:active, a:focus {
     }
 }
 
+/********************************************************/
+/*                        Tooltip                       */
+/********************************************************/
+.tooltip  {
+    .tooltip-inner {
+        background: @tooltip-color;
+        max-width: 300px;
+        padding: 5px;
+    }
+
+    &.left .tooltip-arrow {
+        border-left-color: @tooltip-color;
+    }
+
+    &.right .tooltip-arrow {
+        border-right-color: @tooltip-color;
+    }
+
+    &.top .tooltip-arrow {
+        border-top-color: @tooltip-color;
+    }
+
+    &.bottom .tooltip-arrow {
+        border-bottom-color: @tooltip-color;
+    }
+
+    &.top-left .tooltip-arrow {
+        bottom: -5px;
+        left: 5px;
+        border-top-color: @tooltip-color;
+    }
+
+    &.top-right .tooltip-arrow {
+        bottom: -5px;
+        right: 5px;
+        border-top-color: @tooltip-color;
+    }
+
+    &.bottom-left .tooltip-arrow {
+        top: -5px;
+        left: 5px;
+        border-bottom-color: @tooltip-color;
+    }
+
+    &.bottom-right .tooltip-arrow {
+        top: -5px;
+        right: 5px;
+        border-bottom-color: @tooltip-color;
+    }
+}
 
 /********************************************************/
 /*                    Media Query                       */
@@ -519,7 +573,7 @@ a, a:hover, a:active, a:focus {
 
 @media(max-width: 1024px) {
     .container-fluid {
-        width: 1024px;
+        width: 1020px;
     }
 
     .center-block { 
@@ -532,8 +586,4 @@ a, a:hover, a:active, a:focus {
     .custom-navbar .container-fluid .search-bar {
         width: 300px;
     }
-}
-
-.ie8 {
-    overflow-x: hidden;
 }
