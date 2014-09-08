@@ -26,14 +26,9 @@
 
         siteCounter++;
 
-        if (siteCounter % AppSettings.NumberOfSitesPerRow == 0)
+        if (siteCounter % AppSettings.NumberOfSitesPerRow == 1)
         {
-            thumbnailContentClass += " lastchild-4-columns";
-        }
-        
-        if (siteCounter == numberOfSites)
-        {
-            thumbnailContentClass += " last-child";
+            thumbnailContentClass += "firstchild-of-row";
         }
 
         <div class="col-xs-2 custom-col-xs-2 thumbnail-wrapper @thumbnailClass">

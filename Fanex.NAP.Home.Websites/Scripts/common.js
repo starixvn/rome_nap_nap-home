@@ -25,6 +25,8 @@ Fanex.NAP.Home.Common = function () {
         txtSearchedFunctionName: null,
         ulMenus: null,
         spanSearch: null,
+        divContent: null,
+        divFeatureLists: null,
 
         // For _Layout.cshtml.
         divMsgBox: null
@@ -128,9 +130,23 @@ Fanex.NAP.Home.Common = function () {
         });
     };
 
+    $this.RefreshThumbnailHeight = function () {
+        var windowHeight = $(window).height();
+
+        if (windowHeight <= 768) {
+            domElements.divContent.addClass('max-height-768');
+        } else {
+            domElements.divContent.removeClass('max-height-768');
+        }
+
+        domElements.divFeatureLists.getNiceScroll().resize();
+    };
+
     $this.Initialize = function () {
         domElements.txtSearchedFunctionName = $('#txtSearchedFunctionName');
+        domElements.divContent = $('.content');
         domElements.ulMenus = $('ul.site-domain');
+        domElements.divFeatureLists = $('div.feature-list');
         domElements.divMsgBox = $.msgbox({
             message: '',
             type: 'err',
@@ -190,7 +206,7 @@ Fanex.NAP.Home.Common = function () {
         }
 
         if ($.fn.niceScroll) {
-            $('div.feature-list').niceScroll({
+            domElements.divFeatureLists.niceScroll({
                 autohidemode: false,
                 cursorcolor: "#ccc",
                 cursorwidth: '8px',
@@ -248,8 +264,13 @@ Fanex.NAP.Home.Common = function () {
         });
 
         // Truncate when the window is resizing.
-        $(window).on('resize', _.debounce($this.TruncateTileTexts, 100));
+        $(window).on('resize', _.debounce(onResizeWindow, 100));
+        onResizeWindow();
+    };
+
+    var onResizeWindow = function () {
         $this.TruncateTileTexts();
+        $this.RefreshThumbnailHeight();
     };
 };
 

@@ -317,7 +317,7 @@ a, a:hover, a:active, a:focus {
 
         .thumbnail-content {
             border: 1px solid @thumb-border;
-            border-right: none;
+            border-left: none;
             background: @white;
             padding-right: 0.8px;
 
@@ -327,8 +327,8 @@ a, a:hover, a:active, a:focus {
                 }
             }
 
-            &.last-child, &.lastchild-4-columns {
-                border-right: 1px solid @thumb-border;
+            &.firstchild-of-row {
+                border-left: 1px solid @thumb-border;
             }
 
             .feature-list {
@@ -493,6 +493,31 @@ a, a:hover, a:active, a:focus {
     }
 }
 
+
+/********************************************************/
+/*                    Media Query                       */
+/********************************************************/
+.max-height-768 {
+    .thumbnail-wrapper {
+        height: 300px;
+
+        .thumbnail-content {
+            .feature-list {
+                height: 208px;
+            }
+        }
+
+        &.one-row-thumbnail {
+            height: 65%;
+            .one-row-thumbnail-content {
+                .feature-list {
+                    height: 450px;
+                }
+            }
+        }
+    }
+}
+
 @media(max-width: 1024px) {
     .container-fluid {
         width: 1024px;
@@ -507,25 +532,5 @@ a, a:hover, a:active, a:focus {
 @media(max-width: 768px) {
     .custom-navbar .container-fluid .search-bar {
         width: 300px;
-    }
-}
-
-@media(max-height: 768px) {
-    .content .thumbnail {
-        height: 300px;
-
-        &.one-row-thumbnail {
-            height: 65%
-        }
-    }
-
-    .content .thumbnail .thumbnail-content .feature-list {
-        height: 208px;
-
-        &.one-row-thumbnail-content {
-            .feature-list {
-                height: 450px;
-            }
-        }
     }
 }
