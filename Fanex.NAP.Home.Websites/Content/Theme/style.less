@@ -12,18 +12,7 @@ body {
     padding-top: 40px;
     font-size: @font-size;
     font-family: @font-family;
-    background: url(Images/patern.jpg) repeat;
-}
-
-.sublayer {
-    position: absolute;
-    background-color: #fff;
-    min-width: 200px;
-    display: none;
-    font-size: @font-size - 1;
-    padding: 10px;
-    .border-radius(2px);
-    .box-shadow(0 0 2px #aaa);
+    background: url(Images/pattern.jpg) repeat;
 }
 
 a, a:hover, a:active, a:focus {
@@ -157,7 +146,6 @@ a, a:hover, a:active, a:focus {
                 height: 30px;
                 border: none;
                 box-shadow: inset 0 0 3px 3px #eee;
-                //width: 468px;
                 border-radius: 3px;
 
                 &::-ms-clear {
@@ -257,8 +245,9 @@ a, a:hover, a:active, a:focus {
             position: relative;
             padding: 5px;
             /*.bg-linear-gradient(@thumb-title-stop1 1px, @thumb-title-stop2 1px, @thumb-title-stop3 100%, @nav-direction);*/
-            background: url(Images/thumnail_bg2.png) center no-repeat;
+            background: url(Images/thumbnail_bg.png) center no-repeat;
             background-size: 100% 30px;
+
             .title-name {
                 font-family: @thumb-title-font-family !important;
                 font-size: @font-size + 1;
@@ -366,6 +355,10 @@ a, a:hover, a:active, a:focus {
                         li {
                             padding: 3px 0;
                             border-bottom: 1px dotted @funtion-border-color;
+
+                            &.last-function {
+                                border-bottom-color: @single-function-border-color;
+                            }
 
                             a {
                                 color: @function-color;

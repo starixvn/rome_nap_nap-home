@@ -21,7 +21,6 @@ Fanex.NAP.Home.Common = function () {
         AccessDeniedError: null
     };
     var domElements = {
-        // For _SitesLayout.cshtml.
         txtSearchedFunctionName: null,
         ulMenus: null,
         spanSearch: null,
@@ -164,7 +163,7 @@ Fanex.NAP.Home.Common = function () {
 
         cachedValues.RootURL = appSettings.RootUrl;
 
-        // Truncate when the window is resizing.
+        // Handle resizing event every 0.1s.
         $(window).on('resize', _.debounce(onResizeWindow, 100));
         onResizeWindow();
 
@@ -281,11 +280,13 @@ Fanex.NAP.Home.Common = function () {
             domElements.ulMenus.hide();
         });
 
+        // Hack for IE8 that does not set the exact position for thumbnails' scrollbar.
         setTimeout(function () {
             domElements.divFeatureLists.getNiceScroll().resize();
         }, 200);
     };
 
+    // Call once the browser's window is resizing.
     var onResizeWindow = function () {
         $this.TruncateTileTexts();
         $this.RefreshThumbnailHeight();

@@ -23,6 +23,7 @@
         string thumbnailClass = numberOfSites <= AppSettings.NumberOfSitesPerRow ? "one-row-thumbnail" : string.Empty;
         string thumbnailContentClass = string.Empty;
         bool hasDomains = site.OtherLinkList != null && site.OtherLinkList.Count > 0;
+        int functionCounter;
 
         siteCounter++;
 
@@ -51,6 +52,8 @@
                 <div class="feature-list">
                     @foreach (FunctionGroup functionGroup in site.FunctionGroupList)
                     {
+                        functionCounter = 0;
+
                         <div class="feature">
                             @if (functionGroup.FunctionList.Any())
                             {
@@ -64,8 +67,12 @@
                                                                     site.DefaultLink,
                                                                     function.FunctionId,
                                                                     function.FunctionLink);
-                                    
-                                        <li><a href="javascript:void(0);" data-strict-link="@linkParameters">@function.FunctionName</a></li>
+                                        string functionClass;
+
+                                        functionCounter++;
+                                        functionClass = functionCounter == functionGroup.FunctionList.Count ? "last-function" : string.Empty;
+
+                                        <li class="@functionClass"><a href="javascript:void(0);" data-strict-link="@linkParameters">@function.FunctionName</a></li>
                                     }
                                 </ul>
                             }

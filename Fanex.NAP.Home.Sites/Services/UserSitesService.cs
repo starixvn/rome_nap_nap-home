@@ -43,7 +43,7 @@ namespace Fanex.NAP.Home.Sites.Services
         /// <summary>
         /// Gets accessible sites and functions of an user.
         /// </summary>
-        /// <param name="filter">The filter object contains User ID and the Environment indicator.</param>
+        /// <param name="filter">The filter object contains User ID and the Environment indicators.</param>
         /// <returns>List of sites and sites' functions that the user can access.</returns>
         public IEnumerable<SiteItem> LoadUserSitesAndFunctions(SearchFunctionsFilter filter)
         {
@@ -107,7 +107,7 @@ namespace Fanex.NAP.Home.Sites.Services
         }
 
         /// <summary>
-        /// Groups the user sites and functions data.
+        /// Groups the user's sites and functions data.
         /// </summary>
         /// <param name="siteData">The site data.</param>
         /// <param name="isLoadAll">Boolean indicator checks if current request is using to load all functions or not.</param>
@@ -133,6 +133,7 @@ namespace Fanex.NAP.Home.Sites.Services
                     if (siteData.MenuList != null && siteData.MenuList.Any(menu => menu.SiteId == siteUrlGroup.Key))
                     {
                         siteMenus = siteData.MenuList.Where(menu => menu.SiteId == siteUrlGroup.Key).ToList();
+
                         if (isLoadAll)
                         {
                             functionGroups = ConvertFunctionList(siteMenus);

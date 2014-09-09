@@ -224,13 +224,11 @@
     <Content Include="Content\Theme\Images\arrow-down.png" />
     <Content Include="Content\Theme\Images\favicon.ico" />
     <Content Include="Content\Theme\Images\loading.gif" />
-    <Content Include="Content\Theme\Images\patern.jpg" />
-    <Content Include="Content\Theme\Images\pattern-bg.jpg" />
+    <Content Include="Content\Theme\Images\pattern.jpg" />
     <Content Include="Content\Theme\Images\search.png" />
     <Content Include="Content\Theme\Images\shadow.png" />
     <Content Include="Content\Theme\Images\sprite.png" />
-    <Content Include="Content\Theme\Images\thumnail_bg.png" />
-    <Content Include="Content\Theme\Images\thumnail_bg2.png" />
+    <Content Include="Content\Theme\Images\thumbnail_bg.png" />
     <Content Include="Content\Theme\Images\user.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Bootstrap\bootstrap-tooltip-extension.js" />
