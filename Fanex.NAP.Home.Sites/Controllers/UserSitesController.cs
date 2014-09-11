@@ -99,6 +99,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             else
             {
                 checkPermissionResult = this._siteService.CheckUserPermissionOnSite(filter);
+                filter.FunctionLink = string.Empty;
             }
 
             forwardResult = new ForwardResult(checkPermissionResult);
