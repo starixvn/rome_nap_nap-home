@@ -20,7 +20,7 @@ viewLang = {
 	RequiredFieldError : "Required field!",
 	Search : "Search",
 	SearchPlaceholder : "Please input function name",
-	SearchResult : "There are {0} results.",
+	SearchResult : "{0} result(s) found.",
 	SearchResults : "Search Results",
 	Sites : "Sites",
 	ThereIsNoData : "There is no data."

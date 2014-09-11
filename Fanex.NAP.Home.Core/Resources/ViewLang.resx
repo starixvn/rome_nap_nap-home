@@ -166,7 +166,7 @@
     <value>Please input function name</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
-    <value>There are {0} results.</value>
+    <value>{0} result(s) found.</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
     <value>Search Results</value>

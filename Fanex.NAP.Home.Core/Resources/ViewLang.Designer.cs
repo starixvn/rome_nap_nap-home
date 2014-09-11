@@ -205,7 +205,7 @@ namespace Fanex.NAP.Home.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are {0} results..
+        ///   Looks up a localized string similar to {0} result(s) found..
         /// </summary>
         public static string SearchResult {
             get {
