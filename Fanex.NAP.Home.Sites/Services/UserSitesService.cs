@@ -127,7 +127,7 @@ namespace Fanex.NAP.Home.Sites.Services
                 foreach (IGrouping<int?, SiteUrlInfo> siteUrlGroup in siteUrlGroups)
                 {
                     siteInfo = siteUrlGroup.ElementAt(0);
-                    siteLinks = siteUrlGroup.OrderBy(link => link.IsDefault).Select(link => link.SiteLink).ToList();
+                    siteLinks = siteUrlGroup.OrderByDescending(link => link.IsDefault).Select(link => link.SiteLink).ToList();
                     functionGroups = null;
 
                     if (siteData.MenuList != null && siteData.MenuList.Any(menu => menu.SiteId == siteUrlGroup.Key))
