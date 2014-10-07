@@ -57,18 +57,18 @@ namespace Fanex.NAP.Home.User.Controllers
         /// Index page.
         /// </summary>
         /// <param name="userId">The user ID.</param>
-        /// <param name="onlineUserId">The online user ID.</param>
+        /// <param name="onuserId">The online user ID.</param>
         /// <param name="time">The SSO time.</param>
         /// <returns>Action result.</returns>
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult Index(string userId, string onlineUserId, string time)
+        public ActionResult Index(string userId, string onuserId, string time)
         {
             string currentTime = this._userService.UserSSOGetTime();
             TimeSpan expiration = new TimeSpan();
 
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
-            onlineUserId = Cryptography.CfsDeCrypt(onlineUserId.Replace(" ", "+"));
+            onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
             expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
@@ -78,7 +78,7 @@ namespace Fanex.NAP.Home.User.Controllers
                 {
                     UserId = Convert.ToInt32(userId),
                     SiteId = SiteId,
-                    CheckOnUserId = Convert.ToInt32(onlineUserId),
+                    CheckOnUserId = Convert.ToInt32(onuserId),
                     OnUserId = 0,
                     IP = CurrentContext.IP,
                     NetSessionId = Session.SessionID,
