@@ -237,6 +237,7 @@
     <Content Include="Scripts\Bootstrap\bootstrap.js" />
     <Content Include="Scripts\CryptoJs\CryptoJS.js" />
     <Content Include="Scripts\HeadJs\head.min.js" />
+    <Content Include="Scripts\jQuery\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jQuery\jquery.blockUI.2.66.min.js" />
     <Content Include="Scripts\jQuery\jquery.nicescroll.min.js" />
     <Content Include="Scripts\jQuery\jquery.validate.unobtrusive.min.js" />

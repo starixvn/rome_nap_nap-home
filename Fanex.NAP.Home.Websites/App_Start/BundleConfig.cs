@@ -57,16 +57,14 @@ namespace Fanex.NAP.Home.Websites
                 "~/Content/Theme/style.less");
 
             bundles.Add(new ScriptBundle("~/scripts/html5hacks").Include(
-                "~/Scripts/Modernizr/modernizr.30715.min.js",
-                "~/Scripts/RespondJs/respond.min.js"));
+                "~/Scripts/Modernizr/modernizr.30715.min.js"));
 
             bundles.Add(new ScriptBundle("~/scripts/common").Include(
-                "~/Scripts/jQuery/jquery-1.11.1.min.js",
+                "~/Scripts/jQuery/jquery-1.8.2.min.js",
                 "~/Scripts/jQuery/jquery.blockUI.2.66.min.js",
                 "~/Scripts/jQuery/jquery.nicescroll.min.js",
                 "~/Scripts/Bootstrap/bootstrap.js",
                 "~/Scripts/Bootstrap/bootstrap-tooltip-extension.js",
-                "~/Scripts/Underscore/underscore-min.js",
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",
                 "~/Scripts/Resources/viewLang.js",

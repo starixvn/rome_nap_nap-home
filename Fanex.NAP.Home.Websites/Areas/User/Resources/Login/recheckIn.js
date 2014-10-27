@@ -1,6 +1,7 @@
 ﻿/* File Created: July 22, 2014 */
 /* global Namespace, appSettings */
-'use strict';
+// 'use strict';
+/* jshint strict: false */
 
 $(document).ready(function () {
     var reCheckIn = new Fanex.NAP.Home.RecheckIn();

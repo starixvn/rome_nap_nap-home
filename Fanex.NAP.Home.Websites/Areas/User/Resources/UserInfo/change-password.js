@@ -1,6 +1,7 @@
 ﻿/* File Created: July 24, 2014 */
 /* global Namespace, CryptoJS */
-'use strict';
+// 'use strict';
+/* jshint strict: false */
 
 $(document).ready(function () {
     var changePassword = new Fanex.NAP.Home.ChangePassword();

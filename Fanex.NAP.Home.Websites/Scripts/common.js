@@ -1,6 +1,7 @@
 ﻿/* File Created: July 25, 2014 */
-/* global Namespace, _, appSettings, viewLang */
-'use strict';
+/* global Namespace, appSettings, viewLang */
+// 'use strict';
+/* jshint strict: false */
 
 /* jshint freeze: false */
 // String Format
@@ -142,6 +143,21 @@ Fanex.NAP.Home.Common = function () {
         domElements.divFeatureLists.getNiceScroll().resize();
     };
 
+    // Check and resize container's width for IE8.
+    $this.RefreshContainerWidth = function () {
+        var windowWidth = 0;
+
+        if (!Modernizr.mq('only all')) {
+            windowWidth = $(window).width();
+
+            if (windowWidth < 1024) {
+                domElements.divContent.addClass('container-fluid-max-width-1024');
+            } else {
+                domElements.divContent.removeClass('container-fluid-max-width-1024');
+            }
+        }
+    };
+
     $this.Initialize = function () {
         domElements.txtSearchedFunctionName = $('#txtSearchedFunctionName');
         domElements.divContent = $('.content');
@@ -164,7 +180,7 @@ Fanex.NAP.Home.Common = function () {
         cachedValues.RootURL = appSettings.RootUrl;
 
         // Handle resizing event every 0.1s.
-        $(window).on('resize', _.debounce(onResizeWindow, 100));
+        $(window).on('resize', $this.Debounce(onResizeWindow, 100));
         onResizeWindow();
 
         if (domElements.txtSearchedFunctionName.length > 0) {
@@ -286,15 +302,64 @@ Fanex.NAP.Home.Common = function () {
         }, 200);
     };
 
+    // Execute function only once in a period of time.
+    $this.Debounce = function (func, wait, immediate) {
+        var timeout, args, context, timestamp, result;
+
+        var later = function () {
+            var last = now() - timestamp;
+
+            if (last < wait && last >= 0) {
+                timeout = setTimeout(later, wait - last);
+            } else {
+                timeout = null;
+
+                if (!immediate) {
+                    result = func.apply(context, args);
+
+                    if (!timeout) {
+                        context = args = null;
+                    }
+                }
+            }
+        };
+
+        return function () {
+            context = this;
+            args = arguments;
+            timestamp = now();
+
+            var callNow = immediate && !timeout;
+
+            if (!timeout) {
+                timeout = setTimeout(later, wait);
+            }
+
+            if (callNow) {
+                result = func.apply(context, args);
+                context = args = null;
+            }
+
+            return result;
+        };
+    };
+
     // Call once the browser's window is resizing.
     var onResizeWindow = function () {
         $this.TruncateTileTexts();
         $this.RefreshThumbnailHeight();
+        $this.RefreshContainerWidth();
+        domElements.divFeatureLists.getNiceScroll().resize();
+    };
+
+    // A (possibly faster) way to get the current timestamp as an integer.
+    var now = Date.now || function () {
+        return new Date().getTime();
     };
 };
 
-var common = new Fanex.NAP.Home.Common();
-
 $(document).ready(function () {
+    var common = new Fanex.NAP.Home.Common();
+
     common.Initialize();
 });
