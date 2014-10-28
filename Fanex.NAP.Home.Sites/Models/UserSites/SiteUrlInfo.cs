@@ -9,6 +9,8 @@
 
 namespace Fanex.NAP.Home.Sites.Models.UserSites
 {
+    using Fanex.NAP.Home.Core.Helpers;
+
     /// <summary>
     /// Model for basic site URLs' information.
     /// </summary>
@@ -24,8 +26,7 @@ namespace Fanex.NAP.Home.Sites.Models.UserSites
         {
             get
             {
-                return SiteId.HasValue && SiteId == 83 &&
-                    SiteLink == "http://10.18.200.202:8015/napcrm";
+                return IPHelper.IsLocalLink(SiteLink);
             }
         }
 

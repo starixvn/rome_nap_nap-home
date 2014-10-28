@@ -54,21 +54,17 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
                 return;
             }
 
-            if (!createSiteItemCriteria.IsWebVpnAccess && firstLink.IsLocalLink)
+            var nonLocalLinks = createSiteItemCriteria.SiteLinks.Where(siteLink => !siteLink.IsLocalLink).ToList();
+            if (nonLocalLinks == null || !nonLocalLinks.Any())
             {
-                createSiteItemCriteria.SiteLinks.RemoveAt(0);
-            }
-
-            if (createSiteItemCriteria.SiteLinks == null ||
-               !createSiteItemCriteria.SiteLinks.Any())
-            {
+                this.DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
+                this.OtherLinkList = null;
                 return;
             }
 
-            this.DefaultLink = StringExtensions.TrimOrEmpty(createSiteItemCriteria.SiteLinks[0].SiteLink);
-            createSiteItemCriteria.SiteLinks.RemoveAt(0);
-            this.OtherLinkList = createSiteItemCriteria.SiteLinks
-                .Select(link => StringExtensions.TrimOrEmpty(link.SiteLink))
+            this.DefaultLink = StringExtensions.TrimOrEmpty(nonLocalLinks[0].SiteLink);
+            nonLocalLinks.RemoveAt(0);
+            this.OtherLinkList = nonLocalLinks.Select(link => StringExtensions.TrimOrEmpty(link.SiteLink))
                 .ToList();
         }
 

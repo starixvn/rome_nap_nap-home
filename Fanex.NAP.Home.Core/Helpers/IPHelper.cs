@@ -9,6 +9,8 @@
 
 namespace Fanex.NAP.Home.Core.Helpers
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Web;
 
     /// <summary>
@@ -32,9 +34,9 @@ namespace Fanex.NAP.Home.Core.Helpers
         {
             var ipReturn = string.IsNullOrWhiteSpace(ip) ? string.Empty : ip;
             return ipReturn.Split('.').Length == 4 &&
-                (ipReturn.StartsWith("10.") ||
-                ipReturn.StartsWith("172.16.") ||
-                ipReturn.StartsWith("192.168."));
+                (ipReturn.StartsWith("10.", StringComparison.OrdinalIgnoreCase) ||
+                ipReturn.StartsWith("172.16.", StringComparison.OrdinalIgnoreCase) ||
+                ipReturn.StartsWith("192.168.", StringComparison.OrdinalIgnoreCase));
         }
     }
 }
