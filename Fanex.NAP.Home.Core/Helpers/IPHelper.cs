@@ -19,7 +19,6 @@ namespace Fanex.NAP.Home.Core.Helpers
     public static class IPHelper
     {
         public static bool IsWebVPNAccess()
-            try
         {
             try
             {
