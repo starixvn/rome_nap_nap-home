@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Helpers\AppSettings.cs" />
     <Compile Include="Helpers\BaseController.cs" />
+    <Compile Include="Helpers\IPHelper.cs" />
     <Compile Include="Helpers\PagerList.cs" />
     <Compile Include="Helpers\SessionManager.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />

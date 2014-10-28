@@ -20,6 +20,15 @@ namespace Fanex.NAP.Home.Sites.Models.UserSites
 
         public string SiteLink { get; set; }
 
+        public bool IsLocalLink
+        {
+            get
+            {
+                return SiteId.HasValue && SiteId == 83 &&
+                    SiteLink == "http://10.18.200.202:8015/napcrm";
+            }
+        }
+
         public bool? IsDefault { get; set; }
     }
 }

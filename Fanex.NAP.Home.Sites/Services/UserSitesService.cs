@@ -18,6 +18,7 @@ namespace Fanex.NAP.Home.Sites.Services
     using System.Linq;
     using Fanex.Common;
     using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Criteria.UserSites;
     using Fanex.NAP.Home.Sites.Models.UserSites;
     using Fanex.NAP.Home.Sites.Repositories;
@@ -115,37 +116,37 @@ namespace Fanex.NAP.Home.Sites.Services
         private IEnumerable<SiteItem> GroupUserSitesData(SitesInfo siteData, bool isLoadAll = false)
         {
             List<SiteItem> sites = new List<SiteItem>();
-
-            if (siteData.SiteUrlList != null && siteData.SiteUrlList.Any())
+            if (siteData.SiteUrlList == null || !siteData.SiteUrlList.Any())
             {
-                IEnumerable<IGrouping<int?, SiteUrlInfo>> siteUrlGroups = siteData.SiteUrlList.GroupBy(site => site.SiteId);
-                SiteUrlInfo siteInfo = null;
-                List<string> siteLinks = null;
-                List<MenuInfo> siteMenus = null;
-                List<FunctionGroup> functionGroups = null;
+                return sites;
+            }
 
-                foreach (IGrouping<int?, SiteUrlInfo> siteUrlGroup in siteUrlGroups)
+            var isWebVpnAccess = IPHelper.IsWebVPNAccess();
+            IEnumerable<IGrouping<int?, SiteUrlInfo>> siteUrlGroups =
+                siteData.SiteUrlList.GroupBy(site => site.SiteId);
+            List<MenuInfo> siteMenus = null;
+            foreach (IGrouping<int?, SiteUrlInfo> siteUrlGroup in siteUrlGroups)
+            {
+                var createSiteItemCriteria = new CreateSiteItemCriteria
                 {
-                    siteInfo = siteUrlGroup.ElementAt(0);
-                    siteLinks = siteUrlGroup.OrderByDescending(link => link.IsDefault).Select(link => link.SiteLink).ToList();
-                    functionGroups = null;
+                    SiteInfo = siteUrlGroup.ElementAt(0),
+                    SiteLinks = siteUrlGroup.OrderByDescending(link => link.IsDefault)
+                        .OrderByDescending(link => link.IsLocalLink)
+                        .ToList(),
+                    FunctionGroups = null,
+                    IsWebVpnAccess = isWebVpnAccess
+                };
 
-                    if (siteData.MenuList != null && siteData.MenuList.Any(menu => menu.SiteId == siteUrlGroup.Key))
-                    {
-                        siteMenus = siteData.MenuList.Where(menu => menu.SiteId == siteUrlGroup.Key).ToList();
-
-                        if (isLoadAll)
-                        {
-                            functionGroups = ConvertFunctionList(siteMenus);
-                        }
-                        else
-                        {
-                            functionGroups = siteMenus.Select(menu => new FunctionGroup(menu)).ToList();
-                        }
-                    }
-
-                    sites.Add(new SiteItem(siteInfo, siteLinks, functionGroups));
+                if (siteData.MenuList != null &&
+                    siteData.MenuList.Any(menu => menu.SiteId == siteUrlGroup.Key))
+                {
+                    siteMenus = siteData.MenuList.Where(menu => menu.SiteId == siteUrlGroup.Key).ToList();
+                    createSiteItemCriteria.FunctionGroups = isLoadAll ?
+                        ConvertFunctionList(siteMenus) :
+                        siteMenus.Select(menu => new FunctionGroup(menu)).ToList();
                 }
+
+                sites.Add(new SiteItem(createSiteItemCriteria));
             }
 
             return sites;
