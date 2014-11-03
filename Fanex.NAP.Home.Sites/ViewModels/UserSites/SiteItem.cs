@@ -14,7 +14,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
     using System.Linq;
     using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Configurations;
-    using Fanex.NAP.Home.Sites.Models.UserSites;
+    using Fanex.NAP.Home.Sites.Criteria.UserSites;
 
     /// <summary>
     /// View model contains information of a site.
@@ -26,23 +26,46 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
         {
         }
 
-        public SiteItem(SiteUrlInfo site, List<string> siteLinks, List<FunctionGroup> functionGroups)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SiteItem"/> class.
+        /// </summary>
+        /// <param name="createSiteItemCriteria">The create site item criteria.</param>
+        public SiteItem(CreateSiteItemCriteria createSiteItemCriteria)
         {
-            if (site != null && site.SiteId.HasValue)
+            if (createSiteItemCriteria.SiteInfo != null && createSiteItemCriteria.SiteInfo.SiteId.HasValue)
             {
-                this.SiteId = site.SiteId.Value;
-                this.SiteName = site.SiteName;
+                this.SiteId = createSiteItemCriteria.SiteInfo.SiteId.Value;
+                this.SiteName = createSiteItemCriteria.SiteInfo.SiteName;
                 this.Thumbnail = SiteThumbnailsManager.GetImageName(this.SiteId);
             }
 
-            if (siteLinks != null && siteLinks.Count > 0)
+            this.FunctionGroupList = createSiteItemCriteria.FunctionGroups ?? new List<FunctionGroup>();
+            if (createSiteItemCriteria.SiteLinks == null ||
+                !createSiteItemCriteria.SiteLinks.Any())
             {
-                this.DefaultLink = StringExtensions.TrimOrEmpty(siteLinks[0]);
-                siteLinks.RemoveAt(0);
-                this.OtherLinkList = siteLinks.Select(link => StringExtensions.TrimOrEmpty(link)).ToList();
+                return;
             }
 
-            this.FunctionGroupList = functionGroups ?? new List<FunctionGroup>();
+            var firstLink = createSiteItemCriteria.SiteLinks[0];
+            if (createSiteItemCriteria.IsWebVpnAccess && firstLink.IsLocalLink)
+            {
+                this.DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
+                this.OtherLinkList = null;
+                return;
+            }
+
+            var nonLocalLinks = createSiteItemCriteria.SiteLinks.Where(siteLink => !siteLink.IsLocalLink).ToList();
+            if (nonLocalLinks == null || !nonLocalLinks.Any())
+            {
+                this.DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
+                this.OtherLinkList = null;
+                return;
+            }
+
+            this.DefaultLink = StringExtensions.TrimOrEmpty(nonLocalLinks[0].SiteLink);
+            nonLocalLinks.RemoveAt(0);
+            this.OtherLinkList = nonLocalLinks.Select(link => StringExtensions.TrimOrEmpty(link.SiteLink))
+                .ToList();
         }
 
         public int SiteId { get; set; }

@@ -9,6 +9,8 @@
 
 namespace Fanex.NAP.Home.Sites.Models.UserSites
 {
+    using Fanex.NAP.Home.Core.Helpers;
+
     /// <summary>
     /// Model for basic site URLs' information.
     /// </summary>
@@ -19,6 +21,14 @@ namespace Fanex.NAP.Home.Sites.Models.UserSites
         public string SiteName { get; set; }
 
         public string SiteLink { get; set; }
+
+        public bool IsLocalLink
+        {
+            get
+            {
+                return IPHelper.IsLocalLink(SiteLink);
+            }
+        }
 
         public bool? IsDefault { get; set; }
     }

@@ -114,6 +114,7 @@
     <Compile Include="Controllers\UserSitesController.cs" />
     <Compile Include="Criteria\UserSites\CheckPermissionByMenuUserIdCriteria.cs" />
     <Compile Include="Criteria\UserSites\CheckUserPermissionBySiteCriteria.cs" />
+    <Compile Include="Criteria\UserSites\CreateSiteItemCriteria.cs" />
     <Compile Include="Criteria\UserSites\GetSiteMenusByUserIdCriteria.cs" />
     <Compile Include="Models\UserSites\SitesInfo.cs" />
     <Compile Include="Models\UserSites\SiteUrlInfo.cs" />
