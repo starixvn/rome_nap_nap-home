@@ -121,7 +121,7 @@ namespace Fanex.NAP.Home.Sites.Services
                 return sites;
             }
 
-            var isWebVpnAccess = IPHelper.IsWebVpnAccess();
+            var isWebVpnAccess = IPHelper.IsWebVPNAccess();
             IEnumerable<IGrouping<int?, SiteUrlInfo>> siteUrlGroups =
                 siteData.SiteUrlList.GroupBy(site => site.SiteId);
             List<MenuInfo> siteMenus = null;
