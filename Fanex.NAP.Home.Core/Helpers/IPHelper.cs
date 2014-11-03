@@ -18,7 +18,7 @@ namespace Fanex.NAP.Home.Core.Helpers
     /// </summary>
     public static class IPHelper
     {
-        public static bool IsWebVPNAccess()
+        public static bool IsWebVpnAccess()
         {
             return IsLocalLink(HttpContext.Current.Request.Headers["Host"]);
         }
