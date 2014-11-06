@@ -206,6 +206,7 @@
     <Content Include="Areas\User\Resources\Login\Images\down.png" />
     <Content Include="Areas\User\Resources\Login\Images\lock.png" />
     <Content Include="Areas\User\Resources\Login\Images\password.png" />
+    <Content Include="Areas\User\Resources\Login\Images\UnderMaintenance.gif" />
     <Content Include="Areas\User\Resources\Login\Images\username.png" />
     <Content Include="Areas\User\Resources\Login\Images\welcome.png" />
     <Content Include="Areas\User\Resources\Login\login.js" />
