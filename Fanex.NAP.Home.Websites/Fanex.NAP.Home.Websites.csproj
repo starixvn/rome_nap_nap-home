@@ -92,7 +92,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\JavaScriptEngineSwitcher.Msie.1.1.11\lib\net40\JavaScriptEngineSwitcher.Msie.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching">
       <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
     </Reference>
@@ -131,16 +133,28 @@
     <Reference Include="SPSRemoting">
       <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -164,7 +178,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
@@ -273,6 +289,7 @@
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +335,46 @@
     <Content Include="Content\Theme\Font\Roboto\Roboto-Regular.ttf" />
     <Content Include="Content\Theme\Font\Roboto\Roboto-Bold.eot" />
     <Content Include="Content\Theme\Font\Roboto\Roboto-Regular.eot" />
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.local.Debug.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.local.Release.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.uat.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.uat.Debug.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
+    <Content Include="Web.uat.Release.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
+    <Content Include="Web.pro.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.pro.Debug.config">
+      <DependentUpon>Web.pro.config</DependentUpon>
+    </Content>
+    <Content Include="Web.pro.Release.config">
+      <DependentUpon>Web.pro.config</DependentUpon>
+    </Content>
+    <Content Include="Web.master.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.master.Debug.config">
+      <DependentUpon>Web.master.config</DependentUpon>
+    </Content>
+    <Content Include="Web.master.Release.config">
+      <DependentUpon>Web.master.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionStrings.master.config" />
+    <Content Include="Web.ConnectionStrings.local.config" />
+    <Content Include="Web.ConnectionStrings.uat.config" />
+    <Content Include="Web.ConnectionStrings.pro.config" />
     <None Include="Scripts\Resources\viewLang.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>
