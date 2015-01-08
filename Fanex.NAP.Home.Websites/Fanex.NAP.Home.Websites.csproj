@@ -413,6 +413,16 @@
     <Content Include="Content\Areas\User\Views\UserInfo\ChangePassword.cshtml" />
     <Content Include="Content\Areas\User\Views\UserInfo\UserProfile.cshtml" />
     <Content Include="Content\Areas\User\Views\Web.config" />
+    <Content Include="Web.kbt67.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.kbt67.Debug.config">
+      <DependentUpon>Web.kbt67.config</DependentUpon>
+    </Content>
+    <Content Include="Web.kbt67.Release.config">
+      <DependentUpon>Web.kbt67.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionStrings.kbt67.config" />
     <None Include="Scripts\Resources\viewLang.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>
