@@ -10,6 +10,7 @@
 namespace Fanex.NAP.Home.User.Controllers
 {
     using System.Web.Mvc;
+    using System.Web.Security;
     using Fanex.NAP.Home.Core.Helpers;
 
     /// <summary>
@@ -41,6 +42,11 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <returns>Access Denied view.</returns>
         public ActionResult NotFound()
         {
+            if (this.CurrentSession.UserId == 0)
+            {
+                return this.Redirect(FormsAuthentication.LoginUrl);
+            }
+
             return View();
         }
     }
