@@ -41,12 +41,7 @@ namespace Fanex.NAP.Home.User.Controllers
         /// </summary>
         /// <returns>Access Denied view.</returns>
         public ActionResult NotFound()
-        {
-            if (this.CurrentSession.UserId == 0)
-            {
-                return this.Redirect(FormsAuthentication.LoginUrl);
-            }
-
+        {            
             return View();
         }
     }

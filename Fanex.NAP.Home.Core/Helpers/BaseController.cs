@@ -10,11 +10,10 @@
 namespace Fanex.NAP.Home.Core.Helpers
 {
     using System.Web.Mvc;
-    using Fanex.NAP.Core.Business;
+    using System.Web.Security;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
-    using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
 
@@ -74,6 +73,15 @@ namespace Fanex.NAP.Home.Core.Helpers
             get
             {
                 return this._serviceContext;
+            }
+        }
+
+        protected override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            if (this.CurrentSession.UserId == 0 && !Request.Url.ToString().ToLower().Contains("user/login"))
+            {
+                Response.Redirect(FormsAuthentication.LoginUrl);
+                Response.End();
             }
         }
     }
