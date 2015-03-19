@@ -22,7 +22,28 @@ namespace Fanex.NAP.Home.Core.Helpers
         {
             return IsLocalOrVpnRequest(HttpContext.Current.Request.Headers["Host"]);
         }
-        
+
+        /// <summary>
+        /// Determines whether [is local link] [the specified site link].
+        /// </summary>
+        /// <param name="siteLink">The site link.</param>
+        /// <returns>Is local link.</returns>
+        [SuppressMessage("Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public static bool IsLocalLink(string siteLink)
+        {
+            try
+            {
+                var uri = new Uri(siteLink);
+                return IsLocalOrVpnRequest(uri.Host);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private static bool IsLocalOrVpnRequest(string ip)
         {
             var ipReturn = string.IsNullOrWhiteSpace(ip) ? string.Empty : ip;

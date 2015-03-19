@@ -46,8 +46,8 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
                 return;
             }
 
-            var firstLink = createSiteItemCriteria.SiteLinks[0];
-            if (createSiteItemCriteria.IsWebVpnAccess && firstLink.IsLocalLink)
+            var firstLink = createSiteItemCriteria.SiteLinks.Where(link => link.IsLocalLink).FirstOrDefault();
+            if (createSiteItemCriteria.IsWebVpnAccess && firstLink != null && firstLink.IsLocalLink)
             {
                 this.DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
                 this.OtherLinkList = null;
