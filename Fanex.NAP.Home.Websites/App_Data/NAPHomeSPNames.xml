@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
   <Function Name="Common">
     <Setting Key="NAP_Home_CheckUserPermissionByMenu" SpName="NAP_Home_CheckUserPermissionByMenu" DbName="DBNAP.bodb_NAP.bodbAdminNet" />
