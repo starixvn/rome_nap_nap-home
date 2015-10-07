@@ -80,8 +80,11 @@ namespace Fanex.NAP.Home.Core.Helpers
         {
             if (this.CurrentSession.UserId == 0 && !Request.Url.ToString().ToLower().Contains("user/login"))
             {
-                Response.Redirect(FormsAuthentication.LoginUrl);
-                Response.End();
+                if (!Response.IsRequestBeingRedirected)
+                {
+                    Response.Redirect(FormsAuthentication.LoginUrl);
+                    Response.End();
+                }
             }
         }
     }
