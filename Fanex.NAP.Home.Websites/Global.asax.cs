@@ -11,6 +11,7 @@ namespace Fanex.NAP.Home.Websites
 {
     using System;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -52,13 +53,14 @@ namespace Fanex.NAP.Home.Websites
             string exceptionFormat = "{0}\r\nType: {1}" +
                                      "\r\nSource: {2}" +
                                      "\r\nDomain: {3}" +
-                                     "\r\nReferrer: {4}" +
-                                     "\r\nIP: {5}" +
-                                     "\r\nUserAgent: {6}" +
-                                     "\r\nForm Variable: {7}" +
-                                     "\r\nQueryString: {8}" +
-                                     "\r\nTargetSite: {9}" +
-                                     "\r\nStackTrace: {10}";
+                                     "\r\nURL: {4}" +
+                                     "\r\nReferrer: {5}" +
+                                     "\r\nIP: {6}" +
+                                     "\r\nUserAgent: {7}" +
+                                     "\r\nForm Variable: {8}" +
+                                     "\r\nQueryString: {9}" +
+                                     "\r\nTargetSite: {10}" +
+                                     "\r\nStackTrace: {11}";
 
             if (!Request.IsLocal)
             {
@@ -68,6 +70,7 @@ namespace Fanex.NAP.Home.Websites
                                             ex.GetType().ToString(),
                                             ex.Source,
                                             HttpContext.Current.Request.Headers["Host"],
+                                            HttpContext.Current.Request.Url.OriginalString,
                                             HttpContext.Current.Request.UrlReferrer,
                                             HttpContext.Current.Request.UserHostAddress,
                                             HttpContext.Current.Request.UserAgent,
@@ -86,7 +89,7 @@ namespace Fanex.NAP.Home.Websites
                                           sqlEx.Server);
                 }
 
-                LogService.Error(message);
+                this.WriteLog(message);
             }
         }
 
@@ -136,6 +139,25 @@ namespace Fanex.NAP.Home.Websites
             logOutUserCriteria.OnUserId = currentSession.OnUserId;
             userService.UserLogOut(logOutUserCriteria);
             currentSession.ClearAll();
+        }
+
+        private void WriteLog(string message)
+        {
+            var warningMessages = new System.Collections.Generic.List<string>();
+            warningMessages.Add("Cannot redirect");
+            warningMessages.Add("Server cannot set status");
+            warningMessages.Add("A public action method");
+            warningMessages.Add("The controller for path");
+            warningMessages.Add("The input is not a valid Base-64 string");
+
+            if (warningMessages.Any(msg => message.Contains(msg)))
+            {
+                LogService.Warn(message);
+            }
+            else
+            {
+                LogService.Error(message);
+            }
         }
     }
 }
