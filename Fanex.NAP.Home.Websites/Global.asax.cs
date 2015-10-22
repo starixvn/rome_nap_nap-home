@@ -10,15 +10,13 @@
 namespace Fanex.NAP.Home.Websites
 {
     using System;
-    using System.Data.SqlClient;
-    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
     using Fanex.Data.Configuration;
-    using Fanex.Logging;
+    using Fanex.Module.Logs.Services;
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Web.Auth;
@@ -49,48 +47,7 @@ namespace Fanex.NAP.Home.Websites
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
-            SqlException sqlEx = ex as SqlException;
-            string exceptionFormat = "{0}\r\nType: {1}" +
-                                     "\r\nSource: {2}" +
-                                     "\r\nDomain: {3}" +
-                                     "\r\nURL: {4}" +
-                                     "\r\nReferrer: {5}" +
-                                     "\r\nIP: {6}" +
-                                     "\r\nUserAgent: {7}" +
-                                     "\r\nForm Variable: {8}" +
-                                     "\r\nQueryString: {9}" +
-                                     "\r\nTargetSite: {10}" +
-                                     "\r\nStackTrace: {11}";
-
-            if (!Request.IsLocal)
-            {
-                string message = string.Format(
-                                            exceptionFormat,
-                                            ex.Message,
-                                            ex.GetType().ToString(),
-                                            ex.Source,
-                                            HttpContext.Current.Request.Headers["Host"],
-                                            HttpContext.Current.Request.Url.OriginalString,
-                                            HttpContext.Current.Request.UrlReferrer,
-                                            HttpContext.Current.Request.UserHostAddress,
-                                            HttpContext.Current.Request.UserAgent,
-                                            Request.Form.ToString(),
-                                            Request.QueryString.ToString(),
-                                            ex.TargetSite,
-                                            ex.StackTrace);
-
-                // Get additional exception data for SqlException.
-                if (sqlEx != null)
-                {
-                    message += string.Format(
-                                          "\r\nProcedure: {0}\r\nLine Number: {1}\r\nServer: {2}",
-                                          sqlEx.Procedure,
-                                          sqlEx.LineNumber,
-                                          sqlEx.Server);
-                }
-
-                this.WriteLog(message);
-            }
+            ex.Write();
         }
 
         /// <summary>
@@ -139,25 +96,6 @@ namespace Fanex.NAP.Home.Websites
             logOutUserCriteria.OnUserId = currentSession.OnUserId;
             userService.UserLogOut(logOutUserCriteria);
             currentSession.ClearAll();
-        }
-
-        private void WriteLog(string message)
-        {
-            var warningMessages = new System.Collections.Generic.List<string>();
-            warningMessages.Add("Cannot redirect");
-            warningMessages.Add("Server cannot set status");
-            warningMessages.Add("A public action method");
-            warningMessages.Add("The controller for path");
-            warningMessages.Add("The input is not a valid Base-64 string");
-
-            if (warningMessages.Any(msg => message.Contains(msg)))
-            {
-                LogService.Warn(message);
-            }
-            else
-            {
-                LogService.Error(message);
-            }
         }
     }
 }
