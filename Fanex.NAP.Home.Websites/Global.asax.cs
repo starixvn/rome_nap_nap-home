@@ -47,7 +47,10 @@ namespace Fanex.NAP.Home.Websites
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
-            ex.Write();
+            if (ex.GetType() != typeof(HttpException))
+            {
+                ex.Write();
+            }
         }
 
         /// <summary>
