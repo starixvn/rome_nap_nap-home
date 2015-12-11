@@ -438,6 +438,16 @@
     <Content Include="Web.local2.Release.config">
       <DependentUpon>Web.local2.config</DependentUpon>
     </Content>
+    <Content Include="Web.sit.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.sit.Debug.config">
+      <DependentUpon>Web.sit.config</DependentUpon>
+    </Content>
+    <Content Include="Web.sit.Release.config">
+      <DependentUpon>Web.sit.config</DependentUpon>
+    </Content>
+    <Content Include="Web.ConnectionStrings.sit.config" />
     <None Include="Scripts\Resources\viewLang.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>viewLang.js</LastGenOutput>
