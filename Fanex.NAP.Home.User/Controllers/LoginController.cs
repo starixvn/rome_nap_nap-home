@@ -100,9 +100,9 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
+            var umservice = new ONEbook.UM.Services.Impl.MaintenanceService();
 
-            if (maintenanceInfo.IsDowntime)
+            if (umservice.IsUnderMaintenance() && !umservice.IsPassUnderMaintenance())
             {
                 return this.RedirectToAction("Offline", "Common");
             }
@@ -216,11 +216,11 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpPost]
         public ActionResult RecheckLogin()
         {
-            var maintenanceInfo = this._maintenanceService.GetDowntimeInfo();
-
-            if (maintenanceInfo.IsDowntime)
+            var umservice = new ONEbook.UM.Services.Impl.MaintenanceService();
+                        
+            if (umservice.IsUnderMaintenance() && !umservice.IsPassUnderMaintenance())
             {
-                return this.Json("-1");
+                return this.Json("-1"); // Under maintenance
             }
 
             // check if not nap hub

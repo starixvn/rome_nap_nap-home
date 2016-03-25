@@ -21,6 +21,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -367,15 +368,6 @@
     <Content Include="Content\Theme\Font\Roboto\Roboto-Regular.ttf" />
     <Content Include="Content\Theme\Font\Roboto\Roboto-Bold.eot" />
     <Content Include="Content\Theme\Font\Roboto\Roboto-Regular.eot" />
-    <Content Include="Web.local.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.local.Debug.config">
-      <DependentUpon>Web.local.config</DependentUpon>
-    </Content>
-    <Content Include="Web.local.Release.config">
-      <DependentUpon>Web.local.config</DependentUpon>
-    </Content>
     <Content Include="Web.uat.config">
       <SubType>Designer</SubType>
     </Content>
@@ -393,15 +385,6 @@
     </Content>
     <Content Include="Web.pro.Release.config">
       <DependentUpon>Web.pro.config</DependentUpon>
-    </Content>
-    <Content Include="Web.master.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.master.Debug.config">
-      <DependentUpon>Web.master.config</DependentUpon>
-    </Content>
-    <Content Include="Web.master.Release.config">
-      <DependentUpon>Web.master.config</DependentUpon>
     </Content>
     <Content Include="Web.ConnectionStrings.master.config" />
     <Content Include="Web.ConnectionStrings.local.config" />
@@ -430,15 +413,6 @@
     </Content>
     <Content Include="Web.ConnectionStrings.kbt67.config" />
     <Content Include="Web.ConnectionStrings.local2.config" />
-    <Content Include="Web.local2.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.local2.Debug.config">
-      <DependentUpon>Web.local2.config</DependentUpon>
-    </Content>
-    <Content Include="Web.local2.Release.config">
-      <DependentUpon>Web.local2.config</DependentUpon>
-    </Content>
     <Content Include="Web.sit.config">
       <SubType>Designer</SubType>
     </Content>

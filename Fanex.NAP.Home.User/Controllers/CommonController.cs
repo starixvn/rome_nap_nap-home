@@ -37,15 +37,16 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <returns>Return status of maintenance.</returns>
         public ActionResult Offline()
         {
-            var downTime = this._maintenanceService.GetDowntimeInfo();
+            var umservice = new ONEbook.UM.Services.Impl.MaintenanceService();
 
-            if (!downTime.IsDowntime)
+            if (!umservice.IsUnderMaintenance() && !umservice.IsPassUnderMaintenance())
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
 
-            ViewBag.UmtFrom = downTime.From;
-            ViewBag.UmtTo = downTime.To;
+            var timeInfo = umservice.GetUnderMaintenanceTime();
+            ViewBag.UmtFrom = timeInfo.From;
+            ViewBag.UmtTo = timeInfo.To;
 
             return this.View();
         }
