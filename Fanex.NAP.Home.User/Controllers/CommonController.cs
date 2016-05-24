@@ -7,13 +7,13 @@
 //   <change who="Jason.Ly" date="2014.7.22">Created</change>
 // </history>
 
+using System.Web.Mvc;
+using System.Web.Security;
+using ONEbook.UM.Services;
+using ONEbook.UM.Services.Impl;
+
 namespace Fanex.NAP.Home.User.Controllers
 {
-    using System.Web.Mvc;
-    using System.Web.Security;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
-
     /// <summary>
     /// Common controller.
     /// </summary>
@@ -28,7 +28,7 @@ namespace Fanex.NAP.Home.User.Controllers
 
         public CommonController(IMaintenanceService maintenanceService)
         {
-            this._maintenanceService = maintenanceService ?? new MaintenanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService();
         }
 
         /// <summary>
@@ -37,18 +37,16 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <returns>Return status of maintenance.</returns>
         public ActionResult Offline()
         {
-            var umservice = new ONEbook.UM.Services.Impl.MaintenanceService();
-
-            if (!umservice.IsUnderMaintenance() && !umservice.IsPassUnderMaintenance())
+            if (!_maintenanceService.IsUnderMaintenance())
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
 
-            var timeInfo = umservice.GetUnderMaintenanceTime();
+            var timeInfo = _maintenanceService.GetUnderMaintenanceTime();
             ViewBag.UmtFrom = timeInfo.From;
             ViewBag.UmtTo = timeInfo.To;
 
-            return this.View();
+            return View();
         }
     }
 }
