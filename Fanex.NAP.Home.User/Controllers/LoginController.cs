@@ -7,6 +7,10 @@
 //   <change who="Jason.Ly" date="2014.7.22">Create</change>
 // </history>
 
+using Fanex.NAP.Core.Service.Impl;
+using Fanex.NAP.Core.Service.Interface;
+using ONEbook.UM.Models;
+
 namespace Fanex.NAP.Home.User.Controllers
 {
     using System;
@@ -20,8 +24,6 @@ namespace Fanex.NAP.Home.User.Controllers
     using Fanex.Common.Extensions;
     using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Model;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
@@ -40,7 +42,7 @@ namespace Fanex.NAP.Home.User.Controllers
         private IGroupService _groupService;
         private ISiteService _siteService;
         private ICurrentSession _currentSession;
-        private IMaintenanceService _maintenanceService;
+        private ONEbook.UM.Services.IMaintenanceService _maintenanceService;
         private HashAlgorithm _hashAlgorithm;
 
         #endregion Members
@@ -57,13 +59,13 @@ namespace Fanex.NAP.Home.User.Controllers
             IGroupService groupService,
             ISiteService siteService,
             ICurrentSession currentSession,
-            IMaintenanceService maintenanceService)
+            ONEbook.UM.Services.IMaintenanceService maintenanceService)
         {
             this._userService = userService ?? new UserService();
             this._groupService = groupService ?? new GroupService();
             this._siteService = siteService ?? new SiteService();
             this._currentSession = currentSession ?? new CurrentSession();
-            this._maintenanceService = maintenanceService ?? new MaintenanceService();
+            this._maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
             this._hashAlgorithm = new SHA256Managed();
         }
 
@@ -100,11 +102,9 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var umservice = new ONEbook.UM.Services.Impl.MaintenanceService();
-
-            if (umservice.IsUnderMaintenance() && !umservice.IsPassUnderMaintenance())
+            if (_maintenanceService.IsUnderMaintenance())
             {
-                return this.RedirectToAction("Offline", "Common");
+                return RedirectToAction("Offline", "Common");
             }
 
             GenerateToken();
@@ -216,29 +216,27 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpPost]
         public ActionResult RecheckLogin()
         {
-            var umservice = new ONEbook.UM.Services.Impl.MaintenanceService();
-                        
-            if (umservice.IsUnderMaintenance() && !umservice.IsPassUnderMaintenance())
+            if (_maintenanceService.IsUnderMaintenance())
             {
-                return this.Json("-1"); // Under maintenance
+                return Json("-1");
             }
 
             // check if not nap hub
-            if (this.SiteId != 0)
+            if (SiteId != 0)
             {
-                var siteStatus = this._siteService.GetStatusById(this.SiteId);
+                var siteStatus = _siteService.GetStatusById(SiteId);
 
                 if (!siteStatus)
                 {
-                    return this.Json("1");
+                    return Json("1");
                 }
             }
 
             UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-            criteria.OnUserId = Convert.ToInt32(this._currentSession.OnUserId);
-            this._userService.ReUserCheckIn(ref criteria);
+            criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
+            _userService.ReUserCheckIn(ref criteria);
 
-            return this.Json(criteria.IsKickedOut ? "1" : "0");
+            return Json(criteria.IsKickedOut ? "1" : "0");
         }
 
         #endregion Recheck in

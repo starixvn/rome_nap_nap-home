@@ -104,9 +104,6 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="UMControllerLibrary">
-      <HintPath>..\packages\UMControllerLibrary.1.0.0\lib\net40\UMControllerLibrary.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\SiteThumbnail.cs" />
