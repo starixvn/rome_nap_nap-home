@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="FunctionTreeNode.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// <copyright file="FunctionTreeNode.cs">
+// Copyright (c). All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>

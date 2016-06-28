@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------
-// <copyright file="SitesAreaRegistration.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// <copyright file="SitesAreaRegistration.cs">
+// Copyright (c). All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------
 // <history>
