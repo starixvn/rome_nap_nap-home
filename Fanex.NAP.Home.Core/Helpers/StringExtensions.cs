@@ -23,10 +23,12 @@ namespace Fanex.NAP.Home.Core.Helpers
         /// <returns>Truncated string.</returns>
         public static string Truncate(this string value, int length)
         {
+#pragma warning disable S1226 // Method parameters and caught exceptions should not be reassigned
             length -= 3;
             value = value ?? string.Empty;
             value = value.Trim();
             value = value.Length > length ? value.Substring(0, length) + "..." : value;
+#pragma warning restore S1226 // Method parameters and caught exceptions should not be reassigned
 
             return value;
         }
@@ -38,14 +40,7 @@ namespace Fanex.NAP.Home.Core.Helpers
         /// <returns>The trimmed string.</returns>
         public static string TrimOrEmpty(string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                return string.Empty;
-            }
-            else
-            {
-                return value.Trim();
-            }
+            return string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
         }
     }
 }

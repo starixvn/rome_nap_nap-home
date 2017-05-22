@@ -20,7 +20,6 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
     public class FunctionTreeNode : FunctionItem
     {
         public FunctionTreeNode()
-            : base()
         {
             this.ChildFunctionNodeList = new List<FunctionTreeNode>();
         }

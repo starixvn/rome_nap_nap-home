@@ -9,7 +9,6 @@
 
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
-using ONEbook.UM.Models;
 
 namespace Fanex.NAP.Home.User.Controllers
 {
@@ -38,12 +37,12 @@ namespace Fanex.NAP.Home.User.Controllers
 
         private const string LoginFormToken = "_SecureLoginFormToken";
 
-        private IUserService _userService;
-        private IGroupService _groupService;
-        private ISiteService _siteService;
-        private ICurrentSession _currentSession;
-        private ONEbook.UM.Services.IMaintenanceService _maintenanceService;
-        private HashAlgorithm _hashAlgorithm;
+        private readonly IUserService _userService;
+        private readonly IGroupService _groupService;
+        private readonly ISiteService _siteService;
+        private readonly ICurrentSession _currentSession;
+        private readonly ONEbook.UM.Services.IMaintenanceService _maintenanceService;
+        private readonly HashAlgorithm _hashAlgorithm;
 
         #endregion Members
 
@@ -122,7 +121,9 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
+#pragma warning disable S1541 // Methods and properties should not be too complex
         public ActionResult Index(string username, string password, string loginToken)
+#pragma warning restore S1541 // Methods and properties should not be too complex
         {
             if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty() && CheckValidToken(loginToken))
             {
@@ -139,7 +140,9 @@ namespace Fanex.NAP.Home.User.Controllers
 
                         ClearToken();
 
-                        if ((group == null || group.IsActive) && siteLevelList.Where(x => x.IsActive).Any())
+#pragma warning disable S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
+                        if ((group == null || group.IsActive) && siteLevelList.Any(x => x.IsActive))
+#pragma warning restore S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
                         {
                             // check-in user
                             this.CheckInUser(user);
@@ -157,15 +160,9 @@ namespace Fanex.NAP.Home.User.Controllers
                         else
                         {
                             // user account was suspended on all sites
-                            if (siteLevelList.Count() > 0)
-                            {
-                                ViewBag.Message = ViewResources.Your_account_was_suspended;
-                            }
-                            else
-                            {
-                                // logging-in user belongs to no site
-                                ViewBag.Message = ViewResources.You_have_no_authorization;
-                            }
+                            ViewBag.Message = siteLevelList.Any() ?
+                                ViewResources.Your_account_was_suspended : 
+                                ViewResources.You_have_no_authorization;
                         }
                     }
                     else
@@ -270,7 +267,7 @@ namespace Fanex.NAP.Home.User.Controllers
             this._currentSession.UserId = user.Id;
             this._currentSession.Username = user.Username;
             this._currentSession.OnUserId = criteria.OnUserId;
-            this._currentSession.SessionId = Session.SessionID.ToString();
+            this._currentSession.SessionId = Session.SessionID;
         }
 
         /// <summary>
@@ -382,7 +379,7 @@ namespace Fanex.NAP.Home.User.Controllers
             {
                 var hashData = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLower();
+                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLowerInvariant();
             }
 
             return encrypted;

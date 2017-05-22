@@ -31,8 +31,8 @@ namespace Fanex.NAP.Home.User.Controllers
 
         private readonly int _timeExipration = 30;
 
-        private IUserService _userService;
-        private ICurrentSession _currentSession;
+        private readonly IUserService _userService;
+        private readonly ICurrentSession _currentSession;
 
         #endregion Members
 
@@ -65,12 +65,13 @@ namespace Fanex.NAP.Home.User.Controllers
         public ActionResult Index(string userId, string onuserId, string time)
         {
             string currentTime = this._userService.UserSSOGetTime();
-            TimeSpan expiration = new TimeSpan();
 
+#pragma warning disable S1226 // Method parameters and caught exceptions should not be reassigned
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
             onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
-            expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
+#pragma warning restore S1226 // Method parameters and caught exceptions should not be reassigned
+            TimeSpan expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
             if (expiration.TotalSeconds <= this._timeExipration)
             {
@@ -99,7 +100,7 @@ namespace Fanex.NAP.Home.User.Controllers
                     this._currentSession.UserId = user.Id;
                     this._currentSession.Username = user.Username;
                     this._currentSession.OnUserId = criteria.OnUserId;
-                    this._currentSession.SessionId = Session.SessionID.ToString();
+                    this._currentSession.SessionId = Session.SessionID;
                     this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
                     this.CreateAuthInfo(user);
 

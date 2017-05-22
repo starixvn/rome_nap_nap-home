@@ -20,7 +20,6 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
     public class FunctionGroup : FunctionItem
     {
         public FunctionGroup()
-            : base()
         {
             this.FunctionList = new List<FunctionItem>();
         }

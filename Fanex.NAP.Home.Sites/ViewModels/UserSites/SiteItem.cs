@@ -26,11 +26,13 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
         {
         }
 
+#pragma warning disable S1541 // Methods and properties should not be too complex
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteItem"/> class.
         /// </summary>
         /// <param name="createSiteItemCriteria">The create site item criteria.</param>
         public SiteItem(CreateSiteItemCriteria createSiteItemCriteria)
+#pragma warning restore S1541 // Methods and properties should not be too complex
         {
             if (createSiteItemCriteria.SiteInfo != null && createSiteItemCriteria.SiteInfo.SiteId.HasValue)
             {
@@ -46,7 +48,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
                 return;
             }
 
-            var firstLink = createSiteItemCriteria.SiteLinks.Where(link => link.IsLocalLink).FirstOrDefault();
+            var firstLink = createSiteItemCriteria.SiteLinks.FirstOrDefault(link => link.IsLocalLink);
             if (createSiteItemCriteria.IsWebVpnAccess && firstLink != null && firstLink.IsLocalLink)
             {
                 this.DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
@@ -57,7 +59,9 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
             var nonLocalLinks = createSiteItemCriteria.SiteLinks.Where(siteLink => !siteLink.IsLocalLink).ToList();
             if (nonLocalLinks == null || !nonLocalLinks.Any())
             {
+#pragma warning disable S2259 // Null pointers should not be dereferenced
                 this.DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
+#pragma warning restore S2259 // Null pointers should not be dereferenced
                 this.OtherLinkList = null;
                 return;
             }

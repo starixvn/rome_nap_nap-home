@@ -27,11 +27,10 @@ namespace Fanex.NAP.Home.Sites.Controllers
     [NapSuperAuth]
     public class UserSitesController : BaseController
     {
-        private const string CachedDefaultSiteLinks = "Fanex.NAP.Home.DefaultSiteLinks";
         private const string ForwardLink = "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl={4}";
 
-        private IUserSitesService _siteService;
-        private IUserService _userService;
+        private readonly IUserSitesService _siteService;
+        private readonly IUserService _userService;
 
         public UserSitesController() :
             this(null, null)
@@ -59,7 +58,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
         /// <param name="searchFunction">Searched function name.</param>
         /// <returns>Return Sites page.</returns>
         [HttpGet]
-        public ActionResult Sites(string searchFunction = null)
+        public ActionResult Sites(string searchFunction)
         {
             var filter = new SearchFunctionsFilter
             {
@@ -84,8 +83,8 @@ namespace Fanex.NAP.Home.Sites.Controllers
         public JsonResult Forward(ForwardFilter filter)
         {
             string time = this._userService.UserSSOGetTime();
-            ICommandResult checkPermissionResult = null;
-            ForwardResult forwardResult = null;
+            ICommandResult checkPermissionResult;
+            ForwardResult forwardResult;
 
             filter.UserId = this.CurrentSession.UserId;
             filter.Environment = this.Environment;
