@@ -28,10 +28,12 @@ namespace Fanex.NAP.Home.Websites
     [System.Runtime.InteropServices.GuidAttribute("A695642F-3A07-4718-AAEC-AB470117E10B")]
     public class MvcApplication : System.Web.HttpApplication
     {
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
         /// <summary>
         /// Sets all needed configuration when the application starts.
         /// </summary>
         protected void Application_Start()
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
             DbSettingProviderManager.Current.Start();
             AreaRegistration.RegisterAllAreas();
@@ -60,37 +62,39 @@ namespace Fanex.NAP.Home.Websites
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-            if (HttpContext.Current.User != null)
+            var user = HttpContext.Current.User;
+
+            if (user != null &&
+                user.Identity is FormsIdentity &&
+                user.Identity.IsAuthenticated)
             {
-                if (HttpContext.Current.User.Identity is FormsIdentity
-                    && HttpContext.Current.User.Identity.IsAuthenticated)
+                HttpCookie httpCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+
+                if (httpCookie != null)
                 {
-                    HttpCookie httpCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(httpCookie.Value);
 
-                    if (httpCookie != null)
+                    if (ticket == null || ticket.Expired || string.IsNullOrEmpty(ticket.UserData))
                     {
-                        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(httpCookie.Value);
-
-                        if (ticket == null || ticket.Expired || string.IsNullOrEmpty(ticket.UserData))
-                        {
-                            return;
-                        }
-
-                        var identity = new FormsIdentity(ticket);
-                        var udata = AuthInfo.CreateUserData(ticket.UserData);
-
-                        Context.User = new NapPrincipal(identity, udata);
+                        return;
                     }
+
+                    var identity = new FormsIdentity(ticket);
+                    var udata = AuthInfo.CreateUserData(ticket.UserData);
+
+                    Context.User = new NapPrincipal(identity, udata);
                 }
             }
         }
 
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
         /// <summary>
         /// Handles the End event of the Session control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Session_End(object sender, EventArgs e)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
             var currentSession = new CurrentSession();
             var userService = new UserService();

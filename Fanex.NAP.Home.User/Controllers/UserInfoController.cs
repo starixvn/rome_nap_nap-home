@@ -30,7 +30,7 @@ namespace Fanex.NAP.Home.User.Controllers
     {
         private const string FormTokenKey = "_SecureChangePasswordFormToken";
         private readonly IUserService _userService;
-        private HashAlgorithm _hashAlgorithm;
+        private readonly HashAlgorithm _hashAlgorithm;
 
         public UserInfoController()
             : this(null)
@@ -234,26 +234,10 @@ namespace Fanex.NAP.Home.User.Controllers
             {
                 var hashData = _hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLower();
+                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLowerInvariant();
             }
 
             return encrypted;
-        }
-
-        /// <summary>
-        /// Clears the token.
-        /// </summary>
-        private void ClearToken()
-        {
-            Session.Remove(FormTokenKey);
-
-            if (Request.Cookies[FormTokenKey] != null)
-            {
-                HttpCookie cookie = new HttpCookie(FormTokenKey);
-
-                cookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(cookie);
-            }
         }
 
         #endregion Helpers

@@ -29,7 +29,7 @@ namespace Fanex.NAP.Home.Sites.Services
     /// </summary>
     public class UserSitesService : IUserSitesService
     {
-        private IUserSitesRepository _repository;
+        private readonly IUserSitesRepository _repository;
 
         public UserSitesService() :
             this(null)
@@ -124,7 +124,7 @@ namespace Fanex.NAP.Home.Sites.Services
             var isWebVpnAccess = IPHelper.IsWebVpnAccess();
             IEnumerable<IGrouping<int?, SiteUrlInfo>> siteUrlGroups =
                 siteData.SiteUrlList.GroupBy(site => site.SiteId);
-            List<MenuInfo> siteMenus = null;
+            List<MenuInfo> siteMenus;
             foreach (IGrouping<int?, SiteUrlInfo> siteUrlGroup in siteUrlGroups)
             {
                 var createSiteItemCriteria = new CreateSiteItemCriteria
@@ -164,8 +164,8 @@ namespace Fanex.NAP.Home.Sites.Services
             if (menus != null && menus.Any())
             {
                 List<FunctionTreeNode> functionTree = RestructureFunctions(menus);
-                FunctionGroup functionGroup = null;
-                List<FunctionItem> functionList = null;
+                FunctionGroup functionGroup;
+                List<FunctionItem> functionList;
 
                 functionGroups = new List<FunctionGroup>();
 
@@ -196,7 +196,7 @@ namespace Fanex.NAP.Home.Sites.Services
         private List<FunctionTreeNode> RestructureFunctions(List<MenuInfo> menus, int parentId = 0)
         {
             var functionNodes = new List<FunctionTreeNode>();
-            FunctionTreeNode functionNode = null;
+            FunctionTreeNode functionNode;
 
             foreach (MenuInfo menu in menus)
             {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Websites", "Fanex.NAP.Home.Websites\Fanex.NAP.Home.Websites.csproj", "{049C09A7-8FDB-48BF-94D1-607A6E3C3954}"
 EndProject
@@ -16,6 +16,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Sites", "Fanex.NAP.Home.Sites\Fanex.NAP.Home.Sites.csproj", "{867A2935-7F25-4516-A39B-844D12020951}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Core", "Fanex.NAP.Home.Core\Fanex.NAP.Home.Core.csproj", "{CD2EE38E-36B8-451D-86CA-DE96F089FB73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{4331DD87-ECBB-4181-B207-805C6BE81CDF}"
+	ProjectSection(SolutionItems) = preProject
+		SonarQube\Fanex.NAP.HomeCSharp.ruleset = SonarQube\Fanex.NAP.HomeCSharp.ruleset
+		SonarQube\SolutionBinding.sqconfig = SonarQube\SolutionBinding.sqconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

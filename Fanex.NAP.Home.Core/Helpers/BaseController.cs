@@ -78,13 +78,12 @@ namespace Fanex.NAP.Home.Core.Helpers
 
         protected override void OnResultExecuting(ResultExecutingContext filterContext)
         {
-            if (this.CurrentSession.UserId == 0 && !Request.Url.ToString().ToLower().Contains("user/login"))
+            if (this.CurrentSession.UserId == 0 &&
+                !Request.Url.ToString().ToLowerInvariant().Contains("user/login") &&
+                !Response.IsRequestBeingRedirected)
             {
-                if (!Response.IsRequestBeingRedirected)
-                {
-                    Response.Redirect(FormsAuthentication.LoginUrl);
-                    Response.End();
-                }
+                Response.Redirect(FormsAuthentication.LoginUrl);
+                Response.End();
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Fanex.NAP.Home.Websites
                 name: "UserLogin",
                 url: "UserLogin/Login/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Fanex.NAP.Home.User.Controllers" });
+                namespaces: new [] { "Fanex.NAP.Home.User.Controllers" });
 
             routes.MapRoute(
                 name: "Default",

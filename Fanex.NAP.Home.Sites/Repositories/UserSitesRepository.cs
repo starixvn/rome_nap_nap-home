@@ -52,7 +52,7 @@ namespace Fanex.NAP.Home.Sites.Repositories
         /// <returns>Returns if can access the function or not.</returns>
         public ICommandResult CheckUserPermissionOnFunction(CheckPermissionByMenuUserIdCriteria criteria)
         {
-            CommandResult result = null;
+            CommandResult result;
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -73,7 +73,7 @@ namespace Fanex.NAP.Home.Sites.Repositories
         /// <returns>Returns if can access the site or not.</returns>
         public ICommandResult CheckUserPermissionOnSite(CheckUserPermissionBySiteCriteria criteria)
         {
-            CommandResult result = null;
+            CommandResult result;
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
