@@ -115,6 +115,7 @@
     <Compile Include="Criteria\UserSites\CheckUserPermissionBySiteCriteria.cs" />
     <Compile Include="Criteria\UserSites\CreateSiteItemCriteria.cs" />
     <Compile Include="Criteria\UserSites\GetSiteMenusByUserIdCriteria.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\UserSites\SitesInfo.cs" />
     <Compile Include="Models\UserSites\SiteUrlInfo.cs" />
     <Compile Include="Models\UserSites\MenuInfo.cs" />
@@ -146,9 +147,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.9.0.1001\analyzers\Google.Protobuf.dll" />
-    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.9.0.1001\analyzers\SonarAnalyzer.CSharp.dll" />
-    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.9.0.1001\analyzers\SonarAnalyzer.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.10.1.1411\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.10.1.1411\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.5.10.1.1411\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -121,9 +121,7 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpPost]
         [ValidateInput(false)]
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
-#pragma warning disable S1541 // Methods and properties should not be too complex
         public ActionResult Index(string username, string password, string loginToken)
-#pragma warning restore S1541 // Methods and properties should not be too complex
         {
             if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty() && CheckValidToken(loginToken))
             {
@@ -140,9 +138,7 @@ namespace Fanex.NAP.Home.User.Controllers
 
                         ClearToken();
 
-#pragma warning disable S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
                         if ((group == null || group.IsActive) && siteLevelList.Any(x => x.IsActive))
-#pragma warning restore S134 // Control flow statements "if", "switch", "for", "foreach", "while", "do"  and "try" should not be nested too deeply
                         {
                             // check-in user
                             this.CheckInUser(user);
