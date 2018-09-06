@@ -403,6 +403,7 @@
     <Content Include="Web.ConnectionStrings.master.config" />
     <Content Include="Web.ConnectionStrings.local.config" />
     <Content Include="Web.ConnectionStrings.uat.config" />
+	<Content Include="Web.ConnectionStrings.mnl.config" />
     <Content Include="Web.ConnectionStrings.pro.config" />
     <Content Include="Content\Areas\Sites\Views\UserSites\Sites.cshtml" />
     <Content Include="Content\Areas\Sites\Views\Web.config" />
@@ -416,16 +417,15 @@
     <Content Include="Content\Areas\User\Views\UserInfo\ChangePassword.cshtml" />
     <Content Include="Content\Areas\User\Views\UserInfo\UserProfile.cshtml" />
     <Content Include="Content\Areas\User\Views\Web.config" />
-    <Content Include="Web.kbt67.config">
+    <Content Include="Web.mnl.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.kbt67.Debug.config">
-      <DependentUpon>Web.kbt67.config</DependentUpon>
+    <Content Include="Web.mnl.Debug.config">
+      <DependentUpon>Web.mnl.config</DependentUpon>
     </Content>
-    <Content Include="Web.kbt67.Release.config">
-      <DependentUpon>Web.kbt67.config</DependentUpon>
+    <Content Include="Web.mnl.Release.config">
+      <DependentUpon>Web.mnl.config</DependentUpon>
     </Content>
-    <Content Include="Web.ConnectionStrings.kbt67.config" />
     <Content Include="Web.ConnectionStrings.local2.config" />
     <Content Include="Web.sit.config">
       <SubType>Designer</SubType>
