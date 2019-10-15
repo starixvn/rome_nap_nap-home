@@ -15,12 +15,14 @@ namespace Fanex.NAP.Home.Websites
     using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
+    using Core.Web;
     using Fanex.Data.Configuration;
-    using Fanex.Module.Logs.Services;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Web.Auth;
-    using Fanex.NAP.Core.Web.Session;
+    using Logging.Extensions.Database;
+    using Logging.Extensions.Web;
+    using NAP.Core.Auth;
+    using NAP.Core.Service.Impl;
+    using NAP.Core.Web.Auth;
+    using NAP.Core.Web.Session;
 
     /// <summary>
     /// MVC application configuration.
@@ -35,6 +37,10 @@ namespace Fanex.NAP.Home.Websites
         protected void Application_Start()
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
+            LoggingConfig.Init(
+               new[] { "password", "OldUserPwd", "UserPwd", "ConfirmUserPwd" },
+               getDbExceptionInfo: DatabaseInfoGetters.GetDbExceptionInfo);
+
             DbSettingProviderManager.Current.Start();
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
@@ -49,9 +55,10 @@ namespace Fanex.NAP.Home.Websites
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError().GetBaseException();
+
             if (ex.GetType() != typeof(HttpException))
             {
-                ex.Write();
+                ExceptionHandler.Handle(ex);
             }
         }
 
@@ -97,11 +104,9 @@ namespace Fanex.NAP.Home.Websites
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
             var currentSession = new CurrentSession();
-            var userService = new UserService();
-            var logOutUserCriteria = new LogOutUserCriteria();
+            var securityService = new SecurityService();
 
-            logOutUserCriteria.OnUserId = currentSession.OnUserId;
-            userService.UserLogOut(logOutUserCriteria);
+            securityService.Logout(currentSession.OnUserId);
             currentSession.ClearAll();
         }
     }
