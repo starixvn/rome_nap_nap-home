@@ -21,12 +21,13 @@ namespace Fanex.NAP.Home.User.Controllers
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.Common.Extensions;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
     using Fanex.NAP.Home.Core.Helpers;
+    using NAP.Core.Configuration;
+    using NAP.Core.Models.ParameterObject;
 
     /// <summary>
     /// Login controller.
@@ -43,13 +44,14 @@ namespace Fanex.NAP.Home.User.Controllers
         private readonly ICurrentSession _currentSession;
         private readonly ONEbook.UM.Services.IMaintenanceService _maintenanceService;
         private readonly HashAlgorithm _hashAlgorithm;
+        private readonly ISecurityService _securityService;
 
         #endregion Members
 
         #region Constructors
 
         public LoginController()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null, null, null)
         {
         }
 
@@ -58,14 +60,16 @@ namespace Fanex.NAP.Home.User.Controllers
             IGroupService groupService,
             ISiteService siteService,
             ICurrentSession currentSession,
-            ONEbook.UM.Services.IMaintenanceService maintenanceService)
+            ONEbook.UM.Services.IMaintenanceService maintenanceService,
+            ISecurityService securityService)
         {
-            this._userService = userService ?? new UserService();
-            this._groupService = groupService ?? new GroupService();
-            this._siteService = siteService ?? new SiteService();
-            this._currentSession = currentSession ?? new CurrentSession();
-            this._maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
-            this._hashAlgorithm = new SHA256Managed();
+            _userService = userService ?? new UserService();
+            _groupService = groupService ?? new GroupService();
+            _siteService = siteService ?? new SiteService();
+            _currentSession = currentSession ?? new CurrentSession();
+            _maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
+            _hashAlgorithm = new SHA256Managed();
+            _securityService = securityService ?? new SecurityService();
         }
 
         #endregion Constructors
@@ -125,7 +129,7 @@ namespace Fanex.NAP.Home.User.Controllers
         {
             if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty() && CheckValidToken(loginToken))
             {
-                var user = this._userService.GetByUsername(username.Trim()) as User;
+                var user = _userService.Get(username.Trim());
 
                 if (user != null)
                 {
@@ -133,16 +137,16 @@ namespace Fanex.NAP.Home.User.Controllers
 
                     if (password == hashPassword)
                     {
-                        var group = user.Group == null ? null : this._groupService.GetById(user.Group.Id);
-                        var siteLevelList = this._siteService.GetSiteLevelByUser(user.Id, this.Environment); // gets all sites of logging-in user
+                        var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
+                        var siteLevelList = _userService.GetSiteLevel(user.Id, Environment); // gets all sites of logging-in user
 
                         ClearToken();
 
                         if ((group == null || group.IsActive) && siteLevelList.Any(x => x.IsActive))
                         {
                             // check-in user
-                            this.CheckInUser(user);
-                            this.CreateAuthInfo(user);
+                            CheckInUser(user);
+                            CreateAuthInfo(user, HttpContext);
 
                             // Check if the login user can access Home or not.
                             if (siteLevelList.Any())
@@ -157,7 +161,7 @@ namespace Fanex.NAP.Home.User.Controllers
                         {
                             // user account was suspended on all sites
                             ViewBag.Message = siteLevelList.Any() ?
-                                ViewResources.Your_account_was_suspended : 
+                                ViewResources.Your_account_was_suspended :
                                 ViewResources.You_have_no_authorization;
                         }
                     }
@@ -180,7 +184,7 @@ namespace Fanex.NAP.Home.User.Controllers
 
             GenerateToken();
 
-            return this.View();
+            return View();
         }
 
         #endregion Sign in
@@ -193,9 +197,9 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <returns>Return to login page.</returns>
         public ActionResult LogOut()
         {
-            this.DoSignOut();
+            DoSignOut();
 
-            return this.Redirect(FormsAuthentication.LoginUrl);
+            return Redirect(FormsAuthentication.LoginUrl);
         }
 
         #endregion Sign out
@@ -217,7 +221,7 @@ namespace Fanex.NAP.Home.User.Controllers
             // check if not nap hub
             if (SiteId != 0)
             {
-                var siteStatus = _siteService.GetStatusById(SiteId);
+                var siteStatus = _siteService.IsActivated(SiteId);
 
                 if (!siteStatus)
                 {
@@ -225,11 +229,10 @@ namespace Fanex.NAP.Home.User.Controllers
                 }
             }
 
-            UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-            criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
-            _userService.ReUserCheckIn(ref criteria);
+            var isKickedOut = NapSettings.Settings.EnableReCheckIn
+                && _securityService.ReCheckIn(_currentSession.OnUserId, SiteId) > 0;
 
-            return Json(criteria.IsKickedOut ? "1" : "0");
+            return Json(isKickedOut ? "1" : "0");
         }
 
         #endregion Recheck in
@@ -242,11 +245,11 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <param name="user">The user information.</param>
         private void CheckInUser(User user)
         {
-            // check-in user
-            var criteria = new UserCheckInUserCriteria
+            int onlineUserId = 0;
+            var loginParameter = new LoginParameter
             {
                 UserId = user.Id,
-                SiteId = this.SiteId,
+                SiteId = SiteId,
                 NetSessionId = Session.SessionID,
                 Ip = CurrentContext.IP,
                 LoginDate = DateTime.Now,
@@ -258,38 +261,39 @@ namespace Fanex.NAP.Home.User.Controllers
 
             try
             {
-                this._userService.UserCheckIn(ref criteria);
+                onlineUserId = _securityService.Login(loginParameter);
             }
             catch (Exception ex)
             {
-                if (criteria.OnUserId == 0)
+                if (onlineUserId == 0)
                 {
                     throw;
                 }
+
                 Logging.LogService.Error(ex.Message);
             }
 
             // saves user session
-            this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
-            this._currentSession.UserId = user.Id;
-            this._currentSession.Username = user.Username;
-            this._currentSession.OnUserId = criteria.OnUserId;
-            this._currentSession.SessionId = Session.SessionID;
+            _currentSession.Level = _userService.GetUserLevel(user.Id, SiteId);
+            _currentSession.UserId = user.Id;
+            _currentSession.Username = user.Username;
+            _currentSession.OnUserId = onlineUserId;
+            _currentSession.SessionId = Session.SessionID;
         }
 
         /// <summary>
         /// Creates the authentication information.
         /// </summary>
         /// <param name="user">The user object.</param>
-        private void CreateAuthInfo(User user)
+        private void CreateAuthInfo(User user, HttpContextBase httpContext)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
+            var authInfo = new AuthInfo
+            {
+                UserId = user.Id,
+                OnUserId = _currentSession.OnUserId
+            };
 
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
+            var cookiePath = httpContext.Request.ApplicationPath;
             var authTicket = new FormsAuthenticationTicket(
                  1,
                 user.Username,
@@ -297,13 +301,13 @@ namespace Fanex.NAP.Home.User.Controllers
                 DateTime.Now.AddMinutes(20000),
                 false,
                 authInfo.ToXml(),
-                currentDomain.Path);
+                cookiePath);
 
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = currentDomain.Path,
+                Path = cookiePath,
                 Name = FormsAuthentication.FormsCookieName
             };
 
@@ -315,13 +319,10 @@ namespace Fanex.NAP.Home.User.Controllers
         /// </summary>
         private void DoSignOut()
         {
-            this._userService.UserLogOut(new LogOutUserCriteria
-            {
-                OnUserId = this._currentSession.OnUserId
-            });
+            _securityService.Logout(_currentSession.OnUserId);
 
             FormsAuthentication.SignOut();
-            this._currentSession.ClearAll();
+            _currentSession.ClearAll();
         }
 
         /// <summary>

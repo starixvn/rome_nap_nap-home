@@ -30,17 +30,19 @@ namespace Fanex.NAP.Home.Sites.Controllers
         private const string ForwardLink = "{0}/userlogin/sso?userid={1}&onuserid={2}&time={3}&redirectUrl={4}";
 
         private readonly IUserSitesService _siteService;
-        private readonly IUserService _userService;
+        private readonly ISecurityService _securityService;
 
         public UserSitesController() :
             this(null, null)
         {
         }
 
-        public UserSitesController(IUserSitesService siteService, IUserService userService)
+        public UserSitesController(
+            IUserSitesService siteService,
+            ISecurityService securityService)
         {
-            this._siteService = siteService ?? new UserSitesService();
-            this._userService = userService ?? new UserService();
+            _siteService = siteService ?? new UserSitesService();
+            _securityService = securityService ?? new SecurityService();
         }
 
         /// <summary>
@@ -62,11 +64,11 @@ namespace Fanex.NAP.Home.Sites.Controllers
         {
             var filter = new SearchFunctionsFilter
             {
-                UserId = this.CurrentSession.UserId,
+                UserId = CurrentSession.UserId,
                 SearchedFunctionName = searchFunction ?? string.Empty,
-                Environment = this.Environment
+                Environment = Environment
             };
-            IEnumerable<SiteItem> sites = this._siteService.LoadUserSitesAndFunctions(filter);
+            IEnumerable<SiteItem> sites = _siteService.LoadUserSitesAndFunctions(filter);
 
             ViewBag.SearchedFunctionName = searchFunction;
             ViewBag.IsHomePage = true;
@@ -82,22 +84,22 @@ namespace Fanex.NAP.Home.Sites.Controllers
         [HttpPost]
         public JsonResult Forward(ForwardFilter filter)
         {
-            string time = this._userService.UserSSOGetTime();
+            string time = _securityService.GetTime();
             ICommandResult checkPermissionResult;
             ForwardResult forwardResult;
 
-            filter.UserId = this.CurrentSession.UserId;
-            filter.Environment = this.Environment;
+            filter.UserId = CurrentSession.UserId;
+            filter.Environment = Environment;
             filter.SiteLink = filter.SiteLink ?? string.Empty;
             filter.FunctionLink = string.IsNullOrEmpty(filter.FunctionLink) ? string.Empty : "~" + filter.FunctionLink;
 
             if (filter.FunctionId.HasValue && filter.FunctionId > 0)
             {
-                checkPermissionResult = this._siteService.CheckUserPermissionOnFunction(filter);
+                checkPermissionResult = _siteService.CheckUserPermissionOnFunction(filter);
             }
             else
             {
-                checkPermissionResult = this._siteService.CheckUserPermissionOnSite(filter);
+                checkPermissionResult = _siteService.CheckUserPermissionOnSite(filter);
                 filter.FunctionLink = string.Empty;
             }
 
@@ -108,8 +110,8 @@ namespace Fanex.NAP.Home.Sites.Controllers
                 forwardResult.Link = string.Format(
                                          ForwardLink,
                                          filter.SiteLink.Trim(),
-                                         Cryptography.CfsEnCrypt(this.CurrentSession.UserId.ToString()),
-                                         Cryptography.CfsEnCrypt(this.CurrentSession.OnUserId.ToString()),
+                                         Cryptography.CfsEnCrypt(CurrentSession.UserId.ToString()),
+                                         Cryptography.CfsEnCrypt(CurrentSession.OnUserId.ToString()),
                                          Cryptography.CfsEnCrypt(time),
                                          filter.FunctionLink);
             }

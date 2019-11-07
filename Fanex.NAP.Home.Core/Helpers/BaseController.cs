@@ -12,10 +12,9 @@ namespace Fanex.NAP.Home.Core.Helpers
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
+    using NAP.Core.Context;
 
     /// <summary>
     /// Base controller.
@@ -25,15 +24,11 @@ namespace Fanex.NAP.Home.Core.Helpers
         private readonly string _environment = NapSettings.Settings.Environment;
         private readonly int _siteId = NapSettings.Settings.SiteId;
         private readonly ICurrentContext _currentContext = new CurrentContext();
-        private readonly IServiceContext _serviceContext = new ServiceContext();
         private readonly ICurrentSession _currentSession = new CurrentSession();
 
         public BaseController()
         {
             ViewBag.IsReCheckin = NapSettings.Settings.EnableReCheckIn;
-            this.ServiceContext.UserId = this.CurrentSession.UserId;
-            this.ServiceContext.SiteId = this._siteId;
-            this.ServiceContext.Ip = this.CurrentContext.IP;
         }
 
         public string Environment
@@ -65,14 +60,6 @@ namespace Fanex.NAP.Home.Core.Helpers
             get
             {
                 return this._currentSession;
-            }
-        }
-
-        public IServiceContext ServiceContext
-        {
-            get
-            {
-                return this._serviceContext;
             }
         }
 

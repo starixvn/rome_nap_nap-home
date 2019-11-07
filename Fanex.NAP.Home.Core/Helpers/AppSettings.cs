@@ -17,6 +17,20 @@ namespace Fanex.NAP.Home.Core.Helpers
     /// </summary>
     public static class AppSettings
     {
+        public static string LoggingDefaultCategory => GetValue("Fanex.Logging:DefaultCategory");
+
+        public static string LogLibs => GetValue("LogLibs");
+
+#pragma warning disable S100 // Methods and properties should be named in camel case
+        public static string RabbitMQConnectionStrings => GetValue("Fanex.Logging:RabbitMQConnectionStrings");
+#pragma warning restore S100 // Methods and properties should be named in camel case
+
+        public static string SentryBackendUrl => GetValue("Fanex.Logging:SentryBackendUrl");
+
+        public static string SentryUrl => GetValue("Fanex.Logging:SentryUrl");
+
+        public static string RavenLibPath => GetValue("RavenLibPath");
+
         private static int? numberOfSitesPerRow;
 
         public static int NumberOfSitesPerRow

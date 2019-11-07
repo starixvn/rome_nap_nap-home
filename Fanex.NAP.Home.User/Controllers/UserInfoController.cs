@@ -15,13 +15,13 @@ namespace Fanex.NAP.Home.User.Controllers
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Domain;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
-    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Core.Helpers;
+    using NAP.Core.Configuration;
+    using NAP.Core.Models.ParameterObject;
+    using ViewModels;
 
     /// <summary>
     /// User controller.
@@ -29,17 +29,19 @@ namespace Fanex.NAP.Home.User.Controllers
     public class UserInfoController : BaseController
     {
         private const string FormTokenKey = "_SecureChangePasswordFormToken";
+        private readonly ISecurityService _securityService;
         private readonly IUserService _userService;
         private readonly HashAlgorithm _hashAlgorithm;
 
         public UserInfoController()
-            : this(null)
+            : this(null, null)
         {
         }
 
-        public UserInfoController(IUserService userService)
+        public UserInfoController(IUserService userService, ISecurityService securityService)
         {
-            _userService = userService ?? new UserService { ServiceContext = new ServiceContext() };
+            _userService = userService ?? new UserService();
+            _securityService = securityService ?? new SecurityService();
             _hashAlgorithm = new SHA256Managed();
         }
 
@@ -70,9 +72,9 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpGet]
         public ActionResult ChangePassword()
         {
-            GenerateToken();
+            var viewModel = new ChangePasswordViewModel { Token = GenerateToken() };
 
-            return View(new UpdatePasswordCustCriteria { Username = CurrentSession.Username });
+            return View(viewModel);
         }
 
         /// <summary>
@@ -82,7 +84,7 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <param name="token">Changing password token.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult ChangePassword(UpdatePasswordCustCriteria criteria, string token)
+        public ActionResult ChangePassword(ChangePasswordViewModel viewModel)
         {
             // The password values are encoded at client side by calling CryptoJS.CfsEnCode.
             // The result of this action is the encrypted strings which totally break the password valiadtion rules.
@@ -92,21 +94,14 @@ namespace Fanex.NAP.Home.User.Controllers
 
             ModelState.Clear();
 
-            if (CheckValidToken(token))
+            if (CheckValidToken(viewModel.Token))
             {
-                IUser user = _userService.GetById(CurrentSession.UserId);
-                string hashPassword = GetHash(user.Password + token);
+                var user = _userService.Get(CurrentSession.UserId);
+                string hashPassword = GetHash(user.Password + viewModel.Token);
 
-                if (hashPassword == criteria.OldUserPwd)
+                if (hashPassword == viewModel.OldUserPwd)
                 {
-                    criteria.CustId = user.Id;
-
-                    ICommandResult result = this._userService.InsertOrUpdate(criteria);
-
-                    if (result != null && result.IsSuccessful)
-                    {
-                        ViewBag.Success = true;
-                    }
+                    ViewBag.Success = _securityService.UpdatePassword(NapSettings.Settings.SiteId, user.Id, viewModel.UserPwd);
                 }
                 else
                 {
@@ -114,9 +109,9 @@ namespace Fanex.NAP.Home.User.Controllers
                 }
             }
 
-            GenerateToken();
+            viewModel.Token = GenerateToken();
 
-            return View(criteria);
+            return View(viewModel);
         }
 
         #endregion Change Password
@@ -130,16 +125,17 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpGet]
         public ActionResult UserProfile()
         {
-            var criteria = new UpdateCustCriteria();
-            var user = this._userService.GetById(CurrentSession.UserId);
+            var user = this._userService.Get(CurrentSession.UserId);
+            var viewModel = new ProfileViewModel
+            {
+                CustId = user.Id,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email
+            };
 
-            criteria.CustId = user.Id;
-            criteria.Username = user.Username;
-            criteria.FirstName = user.FirstName;
-            criteria.LastName = user.LastName;
-            criteria.Email = user.Email;
-
-            return View(criteria);
+            return View(viewModel);
         }
 
         /// <summary>
@@ -148,25 +144,23 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <param name="criteria">Criteria using to update user profile.</param>
         /// <returns>Action result.</returns>
         [HttpPost]
-        public ActionResult UserProfile(UpdateCustCriteria criteria)
+        public ActionResult UserProfile(ProfileViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                criteria.CustId = CurrentSession.UserId;
-                criteria.Username = CurrentSession.Username;
-                criteria.FirstName = criteria.FirstName ?? string.Empty;
-                criteria.LastName = criteria.LastName ?? string.Empty;
-                criteria.Email = criteria.Email ?? string.Empty;
-
-                ICommandResult result = this._userService.InsertOrUpdate(criteria);
-
-                if (result != null && result.IsSuccessful)
-                {
-                    ViewBag.Success = true;
-                }
+                ViewBag.Success = _securityService.UpdateProfile(
+                    NapSettings.Settings.SiteId,
+                    new UpdateUserInfoParameter
+                    {
+                        CustId = CurrentSession.UserId,
+                        Username = CurrentSession.Username,
+                        FirstName = viewModel.FirstName ?? string.Empty,
+                        LastName = viewModel.LastName ?? string.Empty,
+                        Email = viewModel.Email ?? string.Empty
+                    });
             }
 
-            return View(criteria);
+            return View(viewModel);
         }
 
         #endregion Profile
@@ -176,13 +170,14 @@ namespace Fanex.NAP.Home.User.Controllers
         /// <summary>
         /// Generates the token for login form.
         /// </summary>
-        private void GenerateToken()
+        private string GenerateToken()
         {
             string token = Guid.NewGuid().ToString("N");
 
             FormToken = token;
-            ViewBag.ChangePasswordToken = token;
             AddTokenToCookie(token);
+
+            return token;
         }
 
         /// <summary>

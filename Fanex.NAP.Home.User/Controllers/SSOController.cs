@@ -14,13 +14,13 @@ namespace Fanex.NAP.Home.User.Controllers
     using System.Web.Mvc;
     using System.Web.Security;
     using Fanex.Common;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Model;
+    using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
     using Fanex.NAP.Home.Core.Helpers;
+    using NAP.Core.Models.ParameterObject;
 
     /// <summary>
     /// SSO controller.
@@ -33,20 +33,25 @@ namespace Fanex.NAP.Home.User.Controllers
 
         private readonly IUserService _userService;
         private readonly ICurrentSession _currentSession;
+        private readonly ISecurityService _securityService;
 
         #endregion Members
 
         #region Constructors
 
         public SSOController()
-            : this(null, null)
+            : this(null, null, null)
         {
         }
 
-        public SSOController(IUserService userService, ICurrentSession currentSession)
+        public SSOController(
+            IUserService userService,
+            ICurrentSession currentSession,
+            ISecurityService securityService)
         {
-            this._userService = userService ?? new UserService();
-            this._currentSession = currentSession ?? new CurrentSession();
+            _userService = userService ?? new UserService();
+            _currentSession = currentSession ?? new CurrentSession();
+            _securityService = securityService ?? new SecurityService();
         }
 
         #endregion Constructors
@@ -64,7 +69,7 @@ namespace Fanex.NAP.Home.User.Controllers
         [HttpGet]
         public ActionResult Index(string userId, string onuserId, string time)
         {
-            string currentTime = this._userService.UserSSOGetTime();
+            string currentTime = _securityService.GetTime();
 
 #pragma warning disable S1226 // Method parameters and caught exceptions should not be reassigned
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
@@ -73,9 +78,9 @@ namespace Fanex.NAP.Home.User.Controllers
 #pragma warning restore S1226 // Method parameters and caught exceptions should not be reassigned
             TimeSpan expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
-            if (expiration.TotalSeconds <= this._timeExipration)
+            if (expiration.TotalSeconds <= _timeExipration)
             {
-                var criteria = new UserSSOCheckInUserCriteria
+                var ssoLoginParam = new SSOLoginParameter
                 {
                     UserId = Convert.ToInt32(userId),
                     SiteId = SiteId,
@@ -90,25 +95,25 @@ namespace Fanex.NAP.Home.User.Controllers
                     Platform = CurrentContext.Platform
                 };
 
-                this._userService.UserSSOCheckIn(ref criteria);
+                var onlineUserId =_securityService.SSOLogin(ssoLoginParam);
 
-                if (criteria.OnUserId != 0)
+                if (onlineUserId != 0)
                 {
-                    var user = this._userService.GetById(criteria.UserId) as User;
+                    var user = _userService.Get(ssoLoginParam.UserId);
 
                     // Saves user session & auth info.
-                    this._currentSession.UserId = user.Id;
-                    this._currentSession.Username = user.Username;
-                    this._currentSession.OnUserId = criteria.OnUserId;
-                    this._currentSession.SessionId = Session.SessionID;
-                    this._currentSession.Level = this._userService.GetUserSiteLevel(user.Id, this.SiteId);
-                    this.CreateAuthInfo(user);
+                    _currentSession.UserId = user.Id;
+                    _currentSession.Username = user.Username;
+                    _currentSession.OnUserId = onlineUserId;
+                    _currentSession.SessionId = Session.SessionID;
+                    _currentSession.Level = _userService.GetUserLevel(user.Id, SiteId);
+                    CreateAuthInfo(user, HttpContext);
 
-                    return this.Redirect(FormsAuthentication.DefaultUrl);
+                    return Redirect(FormsAuthentication.DefaultUrl);
                 }
             }
 
-            return this.Redirect(FormsAuthentication.LoginUrl);
+            return Redirect(FormsAuthentication.LoginUrl);
         }
 
         #endregion Actions
@@ -119,15 +124,15 @@ namespace Fanex.NAP.Home.User.Controllers
         /// Create authorize information.
         /// </summary>
         /// <param name="user">The user object.</param>
-        private void CreateAuthInfo(User user)
+        private void CreateAuthInfo(User user, HttpContextBase httpContext)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
+            var authInfo = new AuthInfo
+            {
+                UserId = user.Id,
+                OnUserId = _currentSession.OnUserId
+            };
 
-            var authInfo = new AuthInfo();
-
-            authInfo.UserId = user.Id;
-            authInfo.OnUserId = this._currentSession.OnUserId;
-
+            var cookiePath = httpContext.Request.ApplicationPath;
             var authTicket = new FormsAuthenticationTicket(
                  1,
                 user.Username,
@@ -135,13 +140,13 @@ namespace Fanex.NAP.Home.User.Controllers
                 DateTime.Now.AddMinutes(20000),
                 false,
                 authInfo.ToXml(),
-                currentDomain.Path);
+                cookiePath);
 
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = currentDomain.Path,
+                Path = cookiePath,
                 Name = FormsAuthentication.FormsCookieName
             };
 

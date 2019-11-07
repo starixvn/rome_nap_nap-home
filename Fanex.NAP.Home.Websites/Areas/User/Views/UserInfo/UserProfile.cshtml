@@ -1,5 +1,4 @@
-﻿@using Fanex.NAP.Core.Criteria.User
-@model UpdateCustCriteria
+﻿@model Fanex.NAP.Home.User.ViewModels.ProfileViewModel
 @{
     bool success = ViewBag.Success != null && ViewBag.Success;
 
@@ -34,10 +33,10 @@
     <div class="form-group">
         <div class="col-sm-offset-3 col-md-8 col-sm-8 col-xs-12">
             <input type="submit" class="button-blue" value="@ViewResources.Save" />
-            <input type="button" class="button-red" value="@ViewResources.Cancel" onclick="common.NavigateToRoot(''); return false;" />
+            <input type="button" class="button-red" value="@ViewResources.Cancel" onclick="location.href='@Url.Content("~")'; return false;" />
         </div>
     </div>
-    
+
     @Html.HiddenFor(m => m.GroupId)
 }
 @section Foot {
