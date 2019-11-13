@@ -46,8 +46,10 @@ namespace Fanex.NAP.Home.Core.Helpers
 
         private static bool IsLocalOrVpnRequest(string ip)
         {
+            const int noPartOfIP = 4;
+
             var ipReturn = string.IsNullOrWhiteSpace(ip) ? string.Empty : ip;
-            return ipReturn.Split('.').Length == 4 &&
+            return ipReturn.Split('.').Length == noPartOfIP &&
                 (ipReturn.StartsWith("10.", StringComparison.OrdinalIgnoreCase) ||
                 ipReturn.StartsWith("172.16.", StringComparison.OrdinalIgnoreCase) ||
                 ipReturn.StartsWith("192.168.", StringComparison.OrdinalIgnoreCase));
