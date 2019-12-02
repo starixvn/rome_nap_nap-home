@@ -46,6 +46,8 @@ namespace Fanex.NAP.Home.Core.Helpers
             }
         }
 
+        public static string UMToken => GetValue("UMToken");
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>

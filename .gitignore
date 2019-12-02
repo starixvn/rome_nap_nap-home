@@ -21,3 +21,9 @@ Fanex.NAP.Home.Websites/Fanex.NAP.Home.Websites.Publish.xml
 .vs/config/applicationhost.config
 .vs/Fanex.NAP.Home.Site/v14/.suo
 packages/
+.vs/Fanex.NAP.Home.Site/DesignTimeBuild/.dtbcache
+.vs/Fanex.NAP.Home.Site/v15/.suo
+.vs/Fanex.NAP.Home.Site/v15/Server/sqlite3/db.lock
+.vs/Fanex.NAP.Home.Site/v15/Server/sqlite3/storage.ide
+.vs/Fanex.NAP.Home.Site/v15/Server/sqlite3/storage.ide-shm
+.vs/Fanex.NAP.Home.Site/v15/Server/sqlite3/storage.ide-wal
