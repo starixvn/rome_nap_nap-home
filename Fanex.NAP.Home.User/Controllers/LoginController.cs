@@ -419,7 +419,7 @@ namespace Fanex.NAP.Home.User.Controllers
             if (Request.Cookies[LoginFormToken] != null)
             {
                 HttpCookie cookie = new HttpCookie(LoginFormToken);
-
+                cookie.HttpOnly = true;
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);
             }
