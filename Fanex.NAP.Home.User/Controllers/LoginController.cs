@@ -110,6 +110,7 @@ namespace Fanex.NAP.Home.User.Controllers
                 return RedirectToAction("Offline", "Common");
             }
 
+            Session[AppSettings.UMToken] = Request.QueryString[AppSettings.UMToken] ?? string.Empty;
             GenerateToken();
 
             return View();
