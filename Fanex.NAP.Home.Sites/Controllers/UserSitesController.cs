@@ -114,6 +114,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
                                          Cryptography.CfsEnCrypt(CurrentSession.OnUserId.ToString()),
                                          Cryptography.CfsEnCrypt(time),
                                          filter.FunctionLink);
+                forwardResult.Link += $"&{AppSettings.UMToken}={Session[AppSettings.UMToken]}";
             }
 
             return Json(forwardResult);

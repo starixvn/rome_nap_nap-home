@@ -382,9 +382,13 @@
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\Theme\style.less" />
+    <Content Include="Content\Theme\style.less">
+      <SonarQubeExclude>true</SonarQubeExclude>
+	</Content>  
     <Content Include="Content\Theme\variables.less" />
-    <Content Include="Content\Theme\mixins.less" />
+    <Content Include="Content\Theme\mixins.less">
+      <SonarQubeExclude>true</SonarQubeExclude>
+	</Content>  
     <Content Include="Scripts\HeadJs\head.min.js.map" />
     <Content Include="Web.ConnectionStrings.config" />
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.xml" />

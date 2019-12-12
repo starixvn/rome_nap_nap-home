@@ -24,7 +24,8 @@ namespace Fanex.NAP.Home.Core.Helpers
         public static string Truncate(this string value, int length)
         {
 #pragma warning disable S1226 // Method parameters and caught exceptions should not be reassigned
-            length -= 3;
+            const string ect = "...";
+            length -= ect.Length;
             value = value ?? string.Empty;
             value = value.Trim();
             value = value.Length > length ? value.Substring(0, length) + "..." : value;

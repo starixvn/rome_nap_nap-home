@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
     font-family: 'Lucida Sans';
     font-style: normal;
     font-weight: 400;
@@ -10,6 +10,14 @@ body {
     background: #D8D6D8 url(Images/bg.png);
     margin: 0;
     padding: 0;
+}
+
+.ie8, .ie9 {
+    .username, .password {
+        text-transform: lowercase;
+        padding: 10px 20px 0 60px;
+        height: 35px;
+    }
 }
 
 .login-box {
@@ -39,7 +47,7 @@ body {
     }
 
     .header {
-        background: #5C7CBE ;
+        background: #5C7CBE;
         background: -moz-linear-gradient(#6C8CCD, #5C7CBE) #5C7CBE;
         background: -ms-linear-gradient(#6C8CCD, #5C7CBE) #5C7CBE;
         background: -webkit-linear-gradient(#6C8CCD, #5C7CBE) #5C7CBE;
@@ -63,9 +71,17 @@ body {
     }
 
     .auth {
-        background: #3B5998 ;
+        background: #3B5998;
         border-radius: 0 0 5px 5px;
         padding: 30px 46px;
+
+        .username {
+            background: #fff url(Images/username.png) no-repeat left center;
+        }
+
+        .password {
+            background: #fff url(Images/password.png) no-repeat left center;
+        }
 
         .username, .password {
             position: relative;
@@ -94,13 +110,6 @@ body {
             }
         }
 
-        .username {
-            background: #fff url(Images/username.png) no-repeat left center;
-        }
-
-        .password {
-            background: #fff url(Images/password.png) no-repeat left center;
-        }
 
         .submit {
             display: block;
@@ -117,7 +126,7 @@ body {
             letter-spacing: 0.1px;
             text-transform: uppercase;
             font-weight: bold;
-            
+
             &:disabled {
                 border: solid 1px #999;
                 background: #aaa;
@@ -127,14 +136,6 @@ body {
                 cursor: default;
             }
         }
-    }
-}
-
-.ie8, .ie9 {
-    .username, .password {
-        text-transform: lowercase;
-        padding: 10px 20px 0 60px;
-        height: 35px;
     }
 }
 
