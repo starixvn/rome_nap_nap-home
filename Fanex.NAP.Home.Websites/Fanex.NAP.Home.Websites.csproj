@@ -174,6 +174,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web">
       <Private>True</Private>
     </Reference>
@@ -181,6 +185,10 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
@@ -384,11 +392,11 @@
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Theme\style.less">
       <SonarQubeExclude>true</SonarQubeExclude>
-	</Content>  
+    </Content>
     <Content Include="Content\Theme\variables.less" />
     <Content Include="Content\Theme\mixins.less">
       <SonarQubeExclude>true</SonarQubeExclude>
-	</Content>  
+    </Content>
     <Content Include="Scripts\HeadJs\head.min.js.map" />
     <Content Include="Web.ConnectionStrings.config" />
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.xml" />
@@ -446,7 +454,9 @@
     <Content Include="Web.mnl.Release.config">
       <DependentUpon>Web.mnl.config</DependentUpon>
     </Content>
-    <Content Include="Web.ConnectionStrings.local2.config" />
+    <Content Include="Web.ConnectionStrings.local2.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.sit.config">
       <SubType>Designer</SubType>
     </Content>
@@ -463,6 +473,12 @@
       <LastGenOutput>viewLang.js</LastGenOutput>
     </None>
     <None Include="Scripts\Underscore\underscore-min.map" />
+    <Content Include="Web.local2.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAP.Home.Core\Fanex.NAP.Home.Core.csproj">

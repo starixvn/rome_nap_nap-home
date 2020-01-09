@@ -23,6 +23,7 @@ namespace Fanex.NAP.Home.Sites.Services
     using Fanex.NAP.Home.Sites.Models.UserSites;
     using Fanex.NAP.Home.Sites.Repositories;
     using Fanex.NAP.Home.Sites.ViewModels.UserSites;
+    using System;
 
     /// <summary>
     /// User sites service.
@@ -60,6 +61,9 @@ namespace Fanex.NAP.Home.Sites.Services
             if (criteria.IsValid())
             {
                 siteData = this._repository.GetSitesAndMenus(criteria);
+                siteData.SiteUrlList = siteData.SiteUrlList
+                    .Where(s => AppSettings.ShowSiteEnvironments.Any(se => se.Equals(s.Environment, StringComparison.CurrentCultureIgnoreCase)))
+                    .ToList();
             }
 
             if (siteData != null)
