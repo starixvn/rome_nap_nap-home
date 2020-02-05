@@ -37,8 +37,7 @@ namespace Fanex.NAP.Home.Sites.Criteria.UserSites
         /// <returns>Whether this criteria is valid or not.</returns>
         public override bool IsValid()
         {
-            return (this.UserId > 0) &&
-                   !string.IsNullOrEmpty(this.Environment);
+            return (this.UserId > 0);
         }
     }
 }

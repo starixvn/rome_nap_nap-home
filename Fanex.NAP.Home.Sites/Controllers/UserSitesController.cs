@@ -66,7 +66,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
             {
                 UserId = CurrentSession.UserId,
                 SearchedFunctionName = searchFunction ?? string.Empty,
-                Environment = Environment
+                Environment = string.Empty
             };
             IEnumerable<SiteItem> sites = _siteService.LoadUserSitesAndFunctions(filter);
 

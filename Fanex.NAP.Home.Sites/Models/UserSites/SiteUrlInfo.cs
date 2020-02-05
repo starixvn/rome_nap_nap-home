@@ -22,6 +22,8 @@ namespace Fanex.NAP.Home.Sites.Models.UserSites
 
         public string SiteLink { get; set; }
 
+        public string Environment { get; set; }
+
         public bool IsLocalLink
         {
             get

@@ -48,6 +48,22 @@ namespace Fanex.NAP.Home.Core.Helpers
 
         public static string UMToken => GetValue("UMToken");
 
+        private static string[] showSiteEnvironments;
+        public static string[] ShowSiteEnvironments
+        {
+            get
+            {
+                if (showSiteEnvironments == null)
+                {
+                    showSiteEnvironments = GetValue("ShowSiteEnvironments").Split(',');
+                }
+                
+                return showSiteEnvironments;
+            }
+
+        }
+
+
         /// <summary>
         /// Gets the value from web configuration.
         /// </summary>
