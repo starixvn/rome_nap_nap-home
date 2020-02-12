@@ -28,6 +28,33 @@ a, a:hover, a:active, a:focus {
     .bg-linear-gradient(@nav-stop1 1px, @nav-stop2 1px, @nav-stop3 100%, @nav-direction);
     min-height: 40px;
 
+    &.pro {
+    }
+
+    &.dev {
+        background: @header_dev;
+    }
+
+    &.sit {
+        background: @header_sit;
+    }
+
+    &.uat {
+        background: @header_uat;
+    }
+
+    &.mnl {
+        background: @header_mnl;
+    }
+
+    .env {
+        color: #fff;
+        margin-top: 20px;
+        font-size: 12px;
+        position: absolute;
+        text-transform: uppercase;
+    }
+
     .container-fluid {
         &.navbar-content {
             padding: 0 46px;
@@ -35,6 +62,7 @@ a, a:hover, a:active, a:focus {
 
         .navbar-header {
             padding: 0;
+
             .navbar-brand {
                 &.logo {
                     font-family: @font-Agency-FB;
@@ -114,12 +142,12 @@ a, a:hover, a:active, a:focus {
                             font-size: 0.9em;
                         }
 
-                        &:hover{
-                            background-color:@sub-menu-bg-hover;
+                        &:hover {
+                            background-color: @sub-menu-bg-hover;
 
                             a {
                                 text-decoration: none;
-                                color:@sub-menu-text-hover;
+                                color: @sub-menu-text-hover;
                             }
                         }
                     }
