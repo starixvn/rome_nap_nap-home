@@ -1,6 +1,8 @@
-﻿@{
+﻿@using System.Configuration;
+@{
     bool isHomePage = ViewBag.IsHomePage ?? false;
     string functionName = ViewBag.SearchedFunctionName != null ? (string)ViewBag.SearchedFunctionName : string.Empty;
+    string env = ConfigurationManager.AppSettings["Environment"].ToString();  
 }
 <!DOCTYPE html>
 <!--[if (IE 7)]><html lang="en" class="ie7 oldie"><![endif]-->
@@ -20,11 +22,15 @@
     @RenderSection("Head", false)
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top custom-navbar" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top custom-navbar @env" role="navigation">
       <div class="container-fluid navbar-content">
-        <div class="col-xs-2 navbar-header">
-            <a class="navbar-brand logo" href="@Url.Content("~/")">@ViewResources.NAP</a>
-        </div>
+          <div class="col-xs-2 navbar-header">
+              <a class="navbar-brand logo" href="@Url.Content("~/")">@ViewResources.NAP</a>
+              @if (!string.IsNullOrEmpty(env))
+              {
+                 @Html.Raw(string.Format("<span class='env'>({0})</span>", env));
+              }
+          </div>
         <div class="col-xs-8 search-container ">
             <div class="center-block search-bar">
                 <input type="text" id="txtSearchedFunctionName" class="form-control txtSearch" placeholder="@ViewLang.SearchPlaceholder" value="@functionName"/>
