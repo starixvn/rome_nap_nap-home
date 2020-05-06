@@ -17,7 +17,7 @@ Fanex.NAP.Home.RecheckIn = function () {
         HeadlineMsgBox: null,
         RootURL: '',
         KickedOutMessage: 'You have logged in from another session or your login session has expired!',
-        ReCheckInterval: 5000
+        ReCheckInterval: 30000
     };
 
     var initializeData = function () {
