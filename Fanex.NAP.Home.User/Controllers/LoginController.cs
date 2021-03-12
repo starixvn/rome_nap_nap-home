@@ -28,6 +28,8 @@ namespace Fanex.NAP.Home.User.Controllers
     using Fanex.NAP.Home.Core.Helpers;
     using NAP.Core.Configuration;
     using NAP.Core.Models.ParameterObject;
+    using ONEbook.UM;
+    using ONEbook.UM.Services;
 
     /// <summary>
     /// Login controller.
@@ -42,7 +44,7 @@ namespace Fanex.NAP.Home.User.Controllers
         private readonly IGroupService _groupService;
         private readonly ISiteService _siteService;
         private readonly ICurrentSession _currentSession;
-        private readonly ONEbook.UM.Services.IMaintenanceService _maintenanceService;
+        private readonly IMaintenanceService _maintenanceService;
         private readonly HashAlgorithm _hashAlgorithm;
         private readonly ISecurityService _securityService;
 
@@ -67,7 +69,11 @@ namespace Fanex.NAP.Home.User.Controllers
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
             _currentSession = currentSession ?? new CurrentSession();
-            _maintenanceService = maintenanceService ?? new ONEbook.UM.Services.Impl.MaintenanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService(
+               UMClientManager.RestClient,
+               UMClientManager.CacheService,
+               UMClientManager.UMClientConfigs,
+               UMClientManager.HttpContext);
             _hashAlgorithm = new SHA256Managed();
             _securityService = securityService ?? new SecurityService();
         }

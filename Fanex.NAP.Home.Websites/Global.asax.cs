@@ -16,6 +16,7 @@ namespace Fanex.NAP.Home.Websites
     using System.Web.Routing;
     using System.Web.Security;
     using Core.Web;
+    using Fanex.Caching;
     using Fanex.Data.Configuration;
     using Logging.Extensions.Database;
     using Logging.Extensions.Web;
@@ -23,6 +24,11 @@ namespace Fanex.NAP.Home.Websites
     using NAP.Core.Service.Impl;
     using NAP.Core.Web.Auth;
     using NAP.Core.Web.Session;
+    using ONEbook.UM;
+    using ONEbook.UM.Configurations;
+    using ONEbook.UM.Helpers;
+    using ONEbook.UM.NETFramework;
+    using ONEbook.UM.Transport;
 
     /// <summary>
     /// MVC application configuration.
@@ -45,6 +51,14 @@ namespace Fanex.NAP.Home.Websites
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var umConfig = new UMClientConfiguration().Initialize();
+            UMClientManager
+                .UseConfig(umConfig)
+                .UseCacheService(new UMCacheService(new CacheService()))
+                .UseRestClient(new UMRestClient(umConfig))
+                .UseHttpContext(new HttpContextHelper());
+
         }
 
         /// <summary>
