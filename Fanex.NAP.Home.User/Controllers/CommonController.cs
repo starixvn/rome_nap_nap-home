@@ -9,8 +9,8 @@
 
 using System.Web.Mvc;
 using System.Web.Security;
+using ONEbook.UM;
 using ONEbook.UM.Services;
-using ONEbook.UM.Services.Impl;
 
 namespace Fanex.NAP.Home.User.Controllers
 {
@@ -28,7 +28,11 @@ namespace Fanex.NAP.Home.User.Controllers
 
         public CommonController(IMaintenanceService maintenanceService)
         {
-            _maintenanceService = maintenanceService ?? new MaintenanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService(
+               UMClientManager.RestClient,
+               UMClientManager.CacheService,
+               UMClientManager.UMClientConfigs,
+               UMClientManager.HttpContext);
         }
 
         /// <summary>
