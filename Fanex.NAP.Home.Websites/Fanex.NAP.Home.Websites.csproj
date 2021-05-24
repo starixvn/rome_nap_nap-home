@@ -524,6 +524,16 @@
     <Content Include="Web.local.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Web.ConnectionStrings.aws.config" />
+    <Content Include="Web.aws.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.aws.Debug.config">
+      <DependentUpon>Web.aws.config</DependentUpon>
+    </None>
+    <None Include="Web.aws.Release.config">
+      <DependentUpon>Web.aws.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.NAP.Home.Core\Fanex.NAP.Home.Core.csproj">
