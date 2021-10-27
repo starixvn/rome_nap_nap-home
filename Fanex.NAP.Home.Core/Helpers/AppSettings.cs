@@ -37,10 +37,7 @@ namespace Fanex.NAP.Home.Core.Helpers
         {
             get
             {
-                if (numberOfSitesPerRow == null)
-                {
-                    numberOfSitesPerRow = Converter.ToInt(GetValue("NumberOfSitesPerRow"));
-                }
+                numberOfSitesPerRow = numberOfSitesPerRow ?? Converter.ToInt(GetValue("NumberOfSitesPerRow"));
 
                 return numberOfSitesPerRow.Value;
             }
@@ -53,11 +50,8 @@ namespace Fanex.NAP.Home.Core.Helpers
         {
             get
             {
-                if (showSiteEnvironments == null)
-                {
-                    showSiteEnvironments = GetValue("ShowSiteEnvironments").Split(',');
-                }
-                
+                showSiteEnvironments = showSiteEnvironments ?? GetValue("ShowSiteEnvironments").Split(',');
+
                 return showSiteEnvironments;
             }
 
