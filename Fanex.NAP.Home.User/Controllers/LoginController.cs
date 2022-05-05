@@ -144,7 +144,7 @@ namespace Fanex.NAP.Home.User.Controllers
 
                     if (password == hashPassword)
                     {
-                        var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
+                        var group = user.GroupId == 0 ? null : _groupService.Get(user.GroupId);
                         var siteLevelList = _userService.GetSiteLevel(user.Id, Environment); // gets all sites of logging-in user
 
                         ClearToken();
@@ -223,17 +223,6 @@ namespace Fanex.NAP.Home.User.Controllers
             if (_maintenanceService.IsUnderMaintenance())
             {
                 return Json("-1");
-            }
-
-            // check if not nap hub
-            if (SiteId != 0)
-            {
-                var siteStatus = _siteService.IsActivated(SiteId);
-
-                if (!siteStatus)
-                {
-                    return Json("1");
-                }
             }
 
             if (_currentSession.OnUserId <= 0)
