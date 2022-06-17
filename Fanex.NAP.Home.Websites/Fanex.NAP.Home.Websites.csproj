@@ -106,6 +106,9 @@
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.NAP.Core.SignIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.SignIn.2.0.0.1-beta1\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
+    </Reference>
     <Reference Include="HandHistoryLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CasinoLibrary.1.0.2.17\lib\net40\HandHistoryLibrary.dll</HintPath>
       <Private>True</Private>
@@ -300,15 +303,6 @@
     <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\settlement.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\special-delete.jpg" />
     <Content Include="Areas\Sites\Resources\UserSites\Thumbnails\tgrs.jpg" />
-    <Content Include="Areas\User\Resources\Login\Images\bg.png" />
-    <Content Include="Areas\User\Resources\Login\Images\down.png" />
-    <Content Include="Areas\User\Resources\Login\Images\lock.png" />
-    <Content Include="Areas\User\Resources\Login\Images\password.png" />
-    <Content Include="Areas\User\Resources\Login\Images\UnderMaintenance.gif" />
-    <Content Include="Areas\User\Resources\Login\Images\username.png" />
-    <Content Include="Areas\User\Resources\Login\Images\welcome.png" />
-    <Content Include="Areas\User\Resources\Login\login.js" />
-    <Content Include="Areas\User\Resources\Login\recheckIn.js" />
     <Content Include="Areas\User\Resources\UserInfo\change-password.js" />
     <Content Include="Content\Areas\Sites\Configurations\SiteThumbnails.local.xml" />
     <Content Include="Content\Areas\Sites\Configurations\SiteThumbnails.prod.xml" />
@@ -326,15 +320,6 @@
     <Content Include="Content\Areas\Sites\Resources\UserSites\Thumbnails\settlement.jpg" />
     <Content Include="Content\Areas\Sites\Resources\UserSites\Thumbnails\special-delete.jpg" />
     <Content Include="Content\Areas\Sites\Resources\UserSites\Thumbnails\tgrs.jpg" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\bg.png" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\down.png" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\lock.png" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\password.png" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\UnderMaintenance.gif" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\username.png" />
-    <Content Include="Content\Areas\User\Resources\Login\Images\welcome.png" />
-    <Content Include="Content\Areas\User\Resources\Login\login.js" />
-    <Content Include="Content\Areas\User\Resources\Login\recheckIn.js" />
     <Content Include="Content\Areas\User\Resources\UserInfo\change-password.js" />
     <Content Include="Content\Bootstrap\CSS\bootstrap-theme.css" />
     <Content Include="Content\Bootstrap\CSS\bootstrap.css" />
@@ -392,6 +377,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="wwwroot\nap-auth\auth-sample.css" />
+    <Content Include="wwwroot\nap-auth\auth.css" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -403,10 +390,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\User\Resources\Login\Fonts\Lucida_Sans.ttf" />
-    <Content Include="Areas\User\Resources\Login\login.less" />
-    <Content Include="Areas\User\Views\Common\Offline.cshtml" />
-    <Content Include="Areas\User\Views\Login\Index.cshtml" />
     <Content Include="Areas\User\Views\UserInfo\ChangePassword.cshtml" />
     <Content Include="Areas\User\Views\UserInfo\UserProfile.cshtml" />
     <Content Include="Areas\User\Views\Web.config" />
@@ -421,9 +404,6 @@
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.prod.xml">
       <DependentUpon>SiteThumbnails.xml</DependentUpon>
     </Content>
-    <Content Include="Areas\User\Views\Error\AccessDenied.cshtml" />
-    <Content Include="Areas\User\Views\Error\Index.cshtml" />
-    <Content Include="Areas\User\Views\Error\NotFound.cshtml" />
     <Content Include="Content\Bootstrap\CSS\bootstrap-theme.css.map" />
     <Content Include="Content\Bootstrap\CSS\bootstrap.css.map" />
     <Content Include="Content\Bootstrap\Fonts\glyphicons-halflings-regular.eot" />
@@ -478,13 +458,6 @@
     <Content Include="Web.ConnectionStrings.pro.config" />
     <Content Include="Content\Areas\Sites\Views\UserSites\Sites.cshtml" />
     <Content Include="Content\Areas\Sites\Views\Web.config" />
-    <None Include="Content\Areas\User\Resources\Login\Fonts\Lucida_Sans.ttf" />
-    <None Include="Content\Areas\User\Resources\Login\login.less" />
-    <Content Include="Content\Areas\User\Views\Common\Offline.cshtml" />
-    <Content Include="Content\Areas\User\Views\Error\AccessDenied.cshtml" />
-    <Content Include="Content\Areas\User\Views\Error\Index.cshtml" />
-    <Content Include="Content\Areas\User\Views\Error\NotFound.cshtml" />
-    <Content Include="Content\Areas\User\Views\Login\Index.cshtml" />
     <Content Include="Content\Areas\User\Views\UserInfo\ChangePassword.cshtml" />
     <Content Include="Content\Areas\User\Views\UserInfo\UserProfile.cshtml" />
     <Content Include="Content\Areas\User\Views\Web.config" />
@@ -526,6 +499,12 @@
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Auth\Offline.cshtml" />
+    <Content Include="Views\Auth\NotFound.cshtml" />
+    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Auth\Error.cshtml" />
+    <Content Include="Views\Auth\ChangePassword.cshtml" />
+    <Content Include="Views\Auth\AccessDenied.cshtml" />
     <None Include="Web.aws.Debug.config">
       <DependentUpon>Web.aws.config</DependentUpon>
     </None>
