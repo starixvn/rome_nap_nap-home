@@ -25,9 +25,11 @@ namespace Fanex.NAP.Home.Websites
     using NAP.Core.Web.Auth;
     using NAP.Core.Web.Session;
     using ONEbook.UM;
+    using ONEbook.UM.AspNetMVC.Filters;
     using ONEbook.UM.Configurations;
     using ONEbook.UM.Helpers;
     using ONEbook.UM.NETFramework;
+    using ONEbook.UM.Services;
     using ONEbook.UM.Transport;
 
     /// <summary>
@@ -59,6 +61,8 @@ namespace Fanex.NAP.Home.Websites
                 .UseRestClient(new UMRestClient(umConfig))
                 .UseHttpContext(new HttpContextHelper());
 
+            GlobalFilters.Filters.Add(new CheckUMFilterAttribute(
+                new MaintenanceService(UMClientManager.RestClient, UMClientManager.CacheService, UMClientManager.UMClientConfigs, UMClientManager.HttpContext), null));
         }
 
         /// <summary>

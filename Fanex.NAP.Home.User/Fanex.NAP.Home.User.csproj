@@ -166,7 +166,6 @@
   <ItemGroup>
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SSOController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
