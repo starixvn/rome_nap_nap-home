@@ -104,7 +104,10 @@
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0.1-beta4\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0.1-beta5\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core.SignIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.SignIn.2.0.0.1-beta3\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
     </Reference>
     <Reference Include="HandHistoryLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CasinoLibrary.1.0.2.17\lib\net40\HandHistoryLibrary.dll</HintPath>
@@ -375,6 +378,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="wwwroot\nap-auth\auth-sample.css" />
+    <Content Include="wwwroot\nap-auth\otp.css" />
     <Content Include="wwwroot\nap-auth\auth.css" />
   </ItemGroup>
   <ItemGroup>
@@ -496,6 +500,7 @@
     <Content Include="Web.aws.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Auth\OtpLoginFlow.cshtml" />
     <Content Include="Views\Auth\Offline.cshtml" />
     <Content Include="Views\Auth\NotFound.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
