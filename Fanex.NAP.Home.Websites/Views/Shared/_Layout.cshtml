@@ -43,7 +43,7 @@
                         <span class="info-bar">@(ViewResources.Howdy), <span class="account-name">@HttpContext.Current.User.Identity.Name</span><span class="caret"></span></span>
                         <ul class="user-dropdown">
                             <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
-                            <li><a href="/Auth/LogOut">@ViewResources.Sign_Out</a></li>
+                            <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Auth", new { Area = "" }, new { })</li>
                         </ul>
                     </li>
                 </ul>
