@@ -26,12 +26,6 @@ namespace Fanex.NAP.Home.Websites
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "UserLogin",
-                url: "UserLogin/Login/{action}/{id}",
-                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional },
-                namespaces: new [] { "Fanex.NAP.Home.User.Controllers" });
-
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "UserSites", action = "Index", id = UrlParameter.Optional });

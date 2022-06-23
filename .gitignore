@@ -21,3 +21,4 @@ Fanex.NAP.Home.Websites/Fanex.NAP.Home.Websites.Publish.xml
 packages/
 .vs/*
 *.sh
+*.ncrunchsolution.*

@@ -9,12 +9,11 @@
 
 namespace Fanex.NAP.Home.Core.Helpers
 {
-    using System.Web.Mvc;
-    using System.Web.Security;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
     using NAP.Core.Context;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Base controller.
@@ -69,7 +68,7 @@ namespace Fanex.NAP.Home.Core.Helpers
                 !Request.Url.ToString().ToLowerInvariant().Contains("user/login") &&
                 !Response.IsRequestBeingRedirected)
             {
-                Response.Redirect(FormsAuthentication.LoginUrl);
+                Response.Redirect("~/Auth");
                 Response.End();
             }
         }

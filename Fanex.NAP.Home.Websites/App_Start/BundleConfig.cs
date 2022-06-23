@@ -22,25 +22,9 @@ namespace Fanex.NAP.Home.Websites
         /// <param name="bundles">The bundle collections.</param>
         public static void RegisterBundles(BundleCollection bundles)
         {
-            RegisterLoginBundles(bundles);
             RegisterCommonBundles(bundles);
             RegisterUserBundles(bundles);
             RegisterUserSitesBundles(bundles);
-        }
-
-        /// <summary>
-        /// Registers the login bundles.
-        /// </summary>
-        /// <param name="bundles">The bundle collection.</param>
-        public static void RegisterLoginBundles(BundleCollection bundles)
-        {
-            bundles.AddAndInclude(
-                "~/styles/login",
-                "~/Areas/User/Resources/Login/login.less");
-
-            bundles.Add(new ScriptBundle("~/scripts/login").Include(
-                "~/Scripts/CryptoJs/CryptoJS.js",
-                "~/Areas/User/Resources/Login/login.js"));
         }
 
         /// <summary>
@@ -68,8 +52,7 @@ namespace Fanex.NAP.Home.Websites
                 "~/Scripts/MessageBox/msgbox-0.0.1.js",
                 "~/Scripts/Others/namespace.js",
                 "~/Scripts/Resources/viewLang.js",
-                "~/Scripts/common.js",
-                "~/Areas/User/Resources/Login/recheckIn.js"));
+                "~/Scripts/common.js"));
         }
 
         /// <summary>
