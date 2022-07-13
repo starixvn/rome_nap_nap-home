@@ -10,7 +10,7 @@
 
 namespace Fanex.NAP.Home.Sites.Controllers
 {
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Mvc;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
@@ -68,7 +68,8 @@ namespace Fanex.NAP.Home.Sites.Controllers
                 SearchedFunctionName = searchFunction ?? string.Empty,
                 Environment = string.Empty
             };
-            IEnumerable<SiteItem> sites = _siteService.LoadUserSitesAndFunctions(filter);
+
+            var sites = _siteService.LoadUserSitesAndFunctions(filter).ToList();
 
             ViewBag.SearchedFunctionName = searchFunction;
             ViewBag.IsHomePage = true;
