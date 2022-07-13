@@ -422,6 +422,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Sites\Configurations\SiteThumbnails.xml" />
+    <Content Include="Areas\Sites\Views\UserSites\_NormalSite.cshtml" />
+    <Content Include="Areas\Sites\Views\UserSites\_HiddenMenuSite.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
