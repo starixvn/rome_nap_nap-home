@@ -505,10 +505,10 @@
     <None Include="Web.aws.Release.config">
       <DependentUpon>Web.aws.config</DependentUpon>
     </None>
-    <None Include="Web.ConnectionStrings.dr.config" />
-    <None Include="Web.dr.config">
+    <Content Include="Web.ConnectionStrings.dr.config" />
+    <Content Include="Web.dr.config">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <None Include="Web.dr.Debug.config">
       <DependentUpon>Web.dr.config</DependentUpon>
     </None>
