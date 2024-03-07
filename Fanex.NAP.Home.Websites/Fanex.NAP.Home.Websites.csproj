@@ -457,22 +457,12 @@
     </Content>
     <Content Include="Web.ConnectionStrings.local.config" />
     <Content Include="Web.ConnectionStrings.uat.config" />
-    <Content Include="Web.ConnectionStrings.mnl.config" />
     <Content Include="Web.ConnectionStrings.pro.config" />
     <Content Include="Content\Areas\Sites\Views\UserSites\Sites.cshtml" />
     <Content Include="Content\Areas\Sites\Views\Web.config" />
     <Content Include="Content\Areas\User\Views\UserInfo\ChangePassword.cshtml" />
     <Content Include="Content\Areas\User\Views\UserInfo\UserProfile.cshtml" />
     <Content Include="Content\Areas\User\Views\Web.config" />
-    <Content Include="Web.mnl.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.mnl.Debug.config">
-      <DependentUpon>Web.mnl.config</DependentUpon>
-    </Content>
-    <Content Include="Web.mnl.Release.config">
-      <DependentUpon>Web.mnl.config</DependentUpon>
-    </Content>
     <Content Include="Web.ConnectionStrings.local2.config">
       <SubType>Designer</SubType>
     </Content>
@@ -514,6 +504,16 @@
     </None>
     <None Include="Web.aws.Release.config">
       <DependentUpon>Web.aws.config</DependentUpon>
+    </None>
+    <Content Include="Web.ConnectionStrings.dr.config" />
+    <Content Include="Web.dr.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.dr.Debug.config">
+      <DependentUpon>Web.dr.config</DependentUpon>
+    </None>
+    <None Include="Web.dr.Release.config">
+      <DependentUpon>Web.dr.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
