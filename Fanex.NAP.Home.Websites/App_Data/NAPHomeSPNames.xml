@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions SiteId="101" SiteName="NAP - Home">
   <Function Name="Common">
-    <Setting Key="NAP_Home_CheckUserPermissionByMenu" SpName="NAP_Home_CheckUserPermissionByMenu" DbName="DBPOL.Nap_UserControl.bodbAdminNet" />
-    <Setting Key="NAP_Home_CheckUserPermissionBySite" SpName="NAP_Home_CheckUserPermissionBySite" DbName="DBPOL.Nap_UserControl.bodbAdminNet" />
+    <Setting Key="NAP_Home_CheckUserPermissionByMenu" SpName="NAP_Home_CheckUserPermissionByMenu" DbName="DBPOL.Nap_UserControl.wsv_nap" />
+    <Setting Key="NAP_Home_CheckUserPermissionBySite" SpName="NAP_Home_CheckUserPermissionBySite" DbName="DBPOL.Nap_UserControl.wsv_nap" />
   </Function>
   <Function Name="UserSites">
-    <Setting Key="NAP_Home_MainPage" SpName="NAP_Home_MainPage" DbName="DBPOL.Nap_UserControl.bodbAdminNet">
+    <Setting Key="NAP_Home_MainPage" SpName="NAP_Home_MainPage" DbName="DBPOL.Nap_UserControl.wsv_nap">
       <Mapping DataField="MenuURL" ObjectProperty="MenuLink" />
       <Mapping DataField="SiteURL" ObjectProperty="SiteLink" />
     </Setting>
