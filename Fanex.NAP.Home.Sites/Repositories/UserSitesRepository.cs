@@ -33,13 +33,11 @@ namespace Fanex.NAP.Home.Sites.Repositories
             SitesInfo siteData = new SitesInfo();
             Hashtable param = criteria.GetSpParams();
 
-            using (IObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                using (GridReader mult = db.QueryMultiple(param))
-                {
-                    siteData.SiteUrlList = mult.Read<SiteUrlInfo>();
-                    siteData.MenuList = mult.Read<MenuInfo>();
-                }
+                var mult = db.QueryMultiple(param);
+                siteData.SiteUrlList = mult.Read<SiteUrlInfo>();
+                siteData.MenuList = mult.Read<MenuInfo>();
             }
 
             return siteData;
@@ -54,7 +52,7 @@ namespace Fanex.NAP.Home.Sites.Repositories
         {
             CommandResult result;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 Hashtable param = criteria.GetSpParams();
 
@@ -75,7 +73,7 @@ namespace Fanex.NAP.Home.Sites.Repositories
         {
             CommandResult result;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 Hashtable param = criteria.GetSpParams();
 

@@ -10,6 +10,7 @@
 namespace Fanex.NAP.Home.Websites
 {
     using System;
+    using System.Configuration;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -17,8 +18,8 @@ namespace Fanex.NAP.Home.Websites
     using System.Web.Security;
     using Core.Web;
     using Fanex.Caching;
-    using Fanex.Data.Configuration;
-    using Logging.Extensions.Database;
+    using Fanex.Data;
+    using Fanex.Data.SqlServer;
     using Logging.Extensions.Web;
     using NAP.Core.Auth;
     using NAP.Core.Service.Impl;
@@ -46,10 +47,14 @@ namespace Fanex.NAP.Home.Websites
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
             LoggingConfig.Init(
-               new[] { "password", "OldUserPwd", "UserPwd", "ConfirmUserPwd" },
-               getDbExceptionInfo: DatabaseInfoGetters.GetDbExceptionInfo);
+               new[] { "password", "OldUserPwd", "UserPwd", "ConfirmUserPwd" });
 
-            DbSettingProviderManager.Current.Start();
+            DbSettingProviderManager.StartNewSession()
+                .WithSqlServer()
+                .UseDefaultDbSettingProvider("App_Data", true)
+                .UseDefaultConnectionStringProvider()
+                .Run();
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
