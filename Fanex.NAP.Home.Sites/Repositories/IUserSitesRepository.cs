@@ -10,8 +10,8 @@
 
 namespace Fanex.NAP.Home.Sites.Repositories
 {
-    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Sites.Criteria.UserSites;
+    using Fanex.NAP.Home.Sites.Models;
     using Fanex.NAP.Home.Sites.Models.UserSites;
 
     public interface IUserSitesRepository
@@ -28,13 +28,13 @@ namespace Fanex.NAP.Home.Sites.Repositories
         /// </summary>
         /// <param name="criteria">The criteria contain function's information.</param>
         /// <returns>Returns if can access the function or not.</returns>
-        ICommandResult CheckUserPermissionOnFunction(CheckPermissionByMenuUserIdCriteria criteria);
+        CommandResult CheckUserPermissionOnFunction(CheckPermissionByMenuUserIdCriteria criteria);
 
         /// <summary>
         /// Checks if an user has permission on a site or not.
         /// </summary>
         /// <param name="criteria">The criteria contain site's information.</param>
         /// <returns>Returns if can access the site or not.</returns>
-        ICommandResult CheckUserPermissionOnSite(CheckUserPermissionBySiteCriteria criteria);
+        CommandResult CheckUserPermissionOnSite(CheckUserPermissionBySiteCriteria criteria);
     }
 }

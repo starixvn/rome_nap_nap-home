@@ -7,10 +7,10 @@
 //   <change who="Jason.Ly" date="2014.8.8">Create</change>
 // </history>
 
+using Fanex.NAP.Home.Sites.Models;
+
 namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
 {
-    using Fanex.NAP.Framework.Command;
-
     /// <summary>
     /// Object indicates that user can access a specific function or not and contains a valid SSO link.
     /// </summary>
@@ -20,7 +20,7 @@ namespace Fanex.NAP.Home.Sites.ViewModels.UserSites
         {
         }
 
-        public ForwardResult(ICommandResult result)
+        public ForwardResult(CommandResult result)
         {
             if (result != null)
             {

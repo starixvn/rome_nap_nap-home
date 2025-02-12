@@ -10,12 +10,9 @@
 
 namespace Fanex.NAP.Home.Sites.Repositories
 {
-    using System;
-    using System.Collections;
-    using Fanex.Common;
-    using Fanex.Data;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Home.Sites.Criteria.UserSites;
+    using Fanex.NAP.Home.Sites.Models;
     using Fanex.NAP.Home.Sites.Models.UserSites;
 
     /// <summary>
@@ -23,6 +20,11 @@ namespace Fanex.NAP.Home.Sites.Repositories
     /// </summary>
     public class UserSitesRepository : IUserSitesRepository
     {
+        private readonly IDynamicRepository dynamicRepository;
+
+        public UserSitesRepository(IDynamicRepository dynamicRepository = null)
+            => this.dynamicRepository = dynamicRepository ?? new DynamicRepository();
+
         /// <summary>
         /// Gets all sites and their menus of an user.
         /// </summary>
@@ -30,17 +32,13 @@ namespace Fanex.NAP.Home.Sites.Repositories
         /// <returns>SitesInfo object contains a list of site URLs and a list of sites' menus.</returns>
         public SitesInfo GetSitesAndMenus(GetSiteMenusByUserIdCriteria criteria)
         {
-            SitesInfo siteData = new SitesInfo();
-            Hashtable param = criteria.GetSpParams();
+            var data = dynamicRepository.FetchMultiple<SiteUrlInfo, MenuInfo>(criteria);
 
-            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
+            return new SitesInfo
             {
-                var mult = db.QueryMultiple(param);
-                siteData.SiteUrlList = mult.Read<SiteUrlInfo>();
-                siteData.MenuList = mult.Read<MenuInfo>();
-            }
-
-            return siteData;
+                SiteUrlList = data.Item1,
+                MenuList = data.Item2
+            };
         }
 
         /// <summary>
@@ -48,20 +46,11 @@ namespace Fanex.NAP.Home.Sites.Repositories
         /// </summary>
         /// <param name="criteria">The criteria contain function's information.</param>
         /// <returns>Returns if can access the function or not.</returns>
-        public ICommandResult CheckUserPermissionOnFunction(CheckPermissionByMenuUserIdCriteria criteria)
+        public CommandResult CheckUserPermissionOnFunction(CheckPermissionByMenuUserIdCriteria criteria)
         {
-            CommandResult result;
+            dynamicRepository.Execute(criteria);
 
-            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-            {
-                Hashtable param = criteria.GetSpParams();
-
-                db.ExecuteNonQuery(param);
-
-                result = GetCommandResult(param);
-            }
-
-            return result;
+            return new CommandResult(criteria.ErrCode, criteria.ErrMsg);
         }
 
         /// <summary>
@@ -69,37 +58,11 @@ namespace Fanex.NAP.Home.Sites.Repositories
         /// </summary>
         /// <param name="criteria">The criteria contain site's information.</param>
         /// <returns>Returns if can access the site or not.</returns>
-        public ICommandResult CheckUserPermissionOnSite(CheckUserPermissionBySiteCriteria criteria)
+        public CommandResult CheckUserPermissionOnSite(CheckUserPermissionBySiteCriteria criteria)
         {
-            CommandResult result;
+            dynamicRepository.Execute(criteria);
 
-            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
-            {
-                Hashtable param = criteria.GetSpParams();
-
-                db.ExecuteNonQuery(param);
-
-                result = GetCommandResult(param);
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Gets the command result.
-        /// </summary>
-        /// <param name="hash">The hash table.</param>
-        /// <returns>CommandResult object contains error code and error message.</returns>
-        private CommandResult GetCommandResult(Hashtable hash)
-        {
-            var errCode = hash["errcode"];
-            var errMsg = hash["errmsg"];
-
-            return new CommandResult
-            {
-                Code = (errCode is DBNull) ? 0 : Converter.ToInt(errCode),
-                Message = (errMsg is DBNull) ? string.Empty : Converter.ToString2(errMsg)
-            };
+            return new CommandResult(criteria.ErrCode, criteria.ErrMsg);
         }
     }
 }

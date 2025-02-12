@@ -18,7 +18,7 @@
 /Fanex.NAP.Home.sln.docstates.suo
 /StyleCop.Cache
 Fanex.NAP.Home.Websites/Fanex.NAP.Home.Websites.Publish.xml
-packages/
+/packages/*
 .vs/*
 *.sh
 *.ncrunchsolution.*

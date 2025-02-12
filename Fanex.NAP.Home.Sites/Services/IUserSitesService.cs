@@ -10,7 +10,7 @@
 namespace Fanex.NAP.Home.Sites.Services
 {
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Command;
+    using Fanex.NAP.Home.Sites.Models;
     using Fanex.NAP.Home.Sites.ViewModels.UserSites;
 
     public interface IUserSitesService
@@ -27,13 +27,13 @@ namespace Fanex.NAP.Home.Sites.Services
         /// </summary>
         /// <param name="filter">The filter contains function's information.</param>
         /// <returns>Returns if can access the function or not.</returns>
-        ICommandResult CheckUserPermissionOnFunction(ForwardFilter filter);
+        CommandResult CheckUserPermissionOnFunction(ForwardFilter filter);
 
         /// <summary>
         /// Checks if an user has permission on a site or not.
         /// </summary>
         /// <param name="filter">The filter contains site's information.</param>
         /// <returns>Returns if can access the site or not.</returns>
-        ICommandResult CheckUserPermissionOnSite(ForwardFilter filter);
+        CommandResult CheckUserPermissionOnSite(ForwardFilter filter);
     }
 }

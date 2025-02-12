@@ -17,6 +17,8 @@ namespace Fanex.NAP.Home.Core.Helpers
     /// </summary>
     public static class AppSettings
     {
+        public static string FanexDataServiceApi => GetValue("FanexDataServiceApi");
+
         public static string LoggingDefaultCategory => GetValue("Fanex.Logging:DefaultCategory");
 
         public static string LogLibs => GetValue("LogLibs");

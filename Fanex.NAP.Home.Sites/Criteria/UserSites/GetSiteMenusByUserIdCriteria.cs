@@ -7,10 +7,10 @@
 //   <change who="Jason.Ly" date="2014.9.1">Created</change>
 // </history>
 
+using Fanex.Data.Repository;
+
 namespace Fanex.NAP.Home.Sites.Criteria.UserSites
 {
-    using Fanex.NAP.Framework.Data;
-
     /// <summary>
     /// Get list of sites and menus that an user can access.
     /// </summary>

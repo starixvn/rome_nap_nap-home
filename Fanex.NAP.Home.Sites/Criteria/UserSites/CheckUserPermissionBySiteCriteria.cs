@@ -7,14 +7,14 @@
 //   <change who="Jason.Ly" date="2014.8.8">Created</change>
 // </history>
 
+using Fanex.Data.Repository;
+
 namespace Fanex.NAP.Home.Sites.Criteria.UserSites
 {
-    using Fanex.NAP.Framework.Data;
-
     /// <summary>
     /// Check user's permission on site.
     /// </summary>
-    public class CheckUserPermissionBySiteCriteria : CriteriaBase
+    public class CheckUserPermissionBySiteCriteria : NonQueryCommand
     {
         public int UserId { get; set; }
 

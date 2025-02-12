@@ -11,6 +11,7 @@ namespace Fanex.NAP.Home.Websites
 {
     using System;
     using System.Configuration;
+    using System.Linq;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
@@ -19,7 +20,7 @@ namespace Fanex.NAP.Home.Websites
     using Core.Web;
     using Fanex.Caching;
     using Fanex.Data;
-    using Fanex.Data.SqlServer;
+    using Fanex.NAP.Home.Core.Helpers;
     using Logging.Extensions.Web;
     using NAP.Core.Auth;
     using NAP.Core.Service.Impl;
@@ -49,10 +50,17 @@ namespace Fanex.NAP.Home.Websites
             LoggingConfig.Init(
                new[] { "password", "OldUserPwd", "UserPwd", "ConfirmUserPwd" });
 
-            DbSettingProviderManager.StartNewSession()
-                .WithSqlServer()
-                .UseDefaultDbSettingProvider("App_Data", true)
-                .UseDefaultConnectionStringProvider()
+            var connectionStrings = ConfigurationManager.ConnectionStrings
+                .Cast<ConnectionStringSettings>()
+                .ToDictionary(
+                    connection => connection.Name,
+                    connection => new ConnectionConfiguration(connection.Name, connection.ConnectionString, connection.ProviderName),
+                    StringComparer.OrdinalIgnoreCase);
+            DbSettingProviderManager
+                .StartNewSession()
+                .Use(connectionStrings)
+                .Use(AppSettings.FanexDataServiceApi)
+                .UseDefaultDbSettingProvider("App_Data")
                 .Run();
 
             AreaRegistration.RegisterAllAreas();

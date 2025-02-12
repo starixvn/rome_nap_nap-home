@@ -7,14 +7,14 @@
 //   <change who="Jason.Ly" date="2014.8.8">Created</change>
 // </history>
 
+using Fanex.Data.Repository;
+
 namespace Fanex.NAP.Home.Sites.Criteria.UserSites
 {
-    using Fanex.NAP.Framework.Data;
-
     /// <summary>
     /// The criteria that are used to check if an user has permission on a specific menu or not.
     /// </summary>
-    public class CheckPermissionByMenuUserIdCriteria : CriteriaBase
+    public class CheckPermissionByMenuUserIdCriteria : NonQueryCommand
     {
         public int UserId { get; set; }
 

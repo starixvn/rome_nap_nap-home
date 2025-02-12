@@ -16,13 +16,13 @@ namespace Fanex.NAP.Home.Sites.Services
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.Common;
-    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Core.Helpers;
     using Fanex.NAP.Home.Sites.Criteria.UserSites;
     using Fanex.NAP.Home.Sites.Models.UserSites;
     using Fanex.NAP.Home.Sites.Repositories;
     using Fanex.NAP.Home.Sites.ViewModels.UserSites;
     using System;
+    using Fanex.NAP.Home.Sites.Models;
 
     /// <summary>
     /// User sites service.
@@ -78,7 +78,7 @@ namespace Fanex.NAP.Home.Sites.Services
         /// </summary>
         /// <param name="filter">The filter contains function's information.</param>
         /// <returns>Returns if can access the function or not.</returns>
-        public ICommandResult CheckUserPermissionOnFunction(ForwardFilter filter)
+        public CommandResult CheckUserPermissionOnFunction(ForwardFilter filter)
         {
             var criteria = new CheckPermissionByMenuUserIdCriteria
             {
@@ -87,9 +87,8 @@ namespace Fanex.NAP.Home.Sites.Services
                 UserId = filter.UserId,
                 Environment = filter.Environment
             };
-            ICommandResult result = this._repository.CheckUserPermissionOnFunction(criteria);
 
-            return result;
+            return  this._repository.CheckUserPermissionOnFunction(criteria);
         }
 
         /// <summary>
@@ -97,7 +96,7 @@ namespace Fanex.NAP.Home.Sites.Services
         /// </summary>
         /// <param name="filter">The filter contains site's information.</param>
         /// <returns>Returns if can access the site or not.</returns>
-        public ICommandResult CheckUserPermissionOnSite(ForwardFilter filter)
+        public CommandResult CheckUserPermissionOnSite(ForwardFilter filter)
         {
             var criteria = new CheckUserPermissionBySiteCriteria
             {
@@ -105,9 +104,8 @@ namespace Fanex.NAP.Home.Sites.Services
                 UserId = filter.UserId,
                 Environment = filter.Environment
             };
-            ICommandResult result = this._repository.CheckUserPermissionOnSite(criteria);
 
-            return result;
+            return this._repository.CheckUserPermissionOnSite(criteria);
         }
 
         /// <summary>

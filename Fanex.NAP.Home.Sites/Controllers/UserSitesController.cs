@@ -10,16 +10,16 @@
 
 namespace Fanex.NAP.Home.Sites.Controllers
 {
-    using System.Linq;
-    using System.Web.Mvc;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Framework.Command;
     using Fanex.NAP.Home.Core.Helpers;
+    using Fanex.NAP.Home.Sites.Models;
     using Fanex.NAP.Home.Sites.Services;
     using Fanex.NAP.Home.Sites.ViewModels.UserSites;
     using Fanex.Security;
+    using System.Linq;
+    using System.Web.Mvc;
 
     /// <summary>
     /// User sites controller.
@@ -86,7 +86,7 @@ namespace Fanex.NAP.Home.Sites.Controllers
         public JsonResult Forward(ForwardFilter filter)
         {
             string time = _securityService.GetTime();
-            ICommandResult checkPermissionResult;
+            CommandResult checkPermissionResult;
             ForwardResult forwardResult;
 
             filter.UserId = CurrentSession.UserId;
