@@ -1,0 +1,58 @@
+﻿@using Fanex.NAP.Home.Sites.Resources
+@using Fanex.NAP.Home.Sites.ViewModels.UserSites
+@model UserSiteViewModel
+@{
+    var hiddenMenuSites = new List<string> { };
+    ViewBag.Title = @ViewLang.Sites;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null && Model.Sites.Any())
+{
+    int totalFunctionCount = string.IsNullOrEmpty(ViewBag.SearchedFunctionName) ? 0 : Model.Sites.Sum(site => site.FunctionGroupList.Count);
+    int numberOfSites = Model.Sites.Count();
+    int siteCounter = 0;
+
+    if (totalFunctionCount > 0)
+    {
+        <p class="result">@string.Format(ViewLang.SearchResult, totalFunctionCount) <a href="@Url.Content("~/")">@ViewLang.BackToHome</a></p>
+    }
+
+    foreach (SiteItem site in Model.Sites)
+    {
+        string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
+        string thumbnailClass = numberOfSites <= Model.NumberOfSitesPerRow ? "one-row-thumbnail" : string.Empty;
+        string thumbnailContentClass = string.Empty;
+        bool hasDomains = site.OtherLinkList != null && site.OtherLinkList.Count > 0;
+
+
+        siteCounter++;
+
+        if (siteCounter % Model.NumberOfSitesPerRow == 1)
+        {
+            thumbnailContentClass += "firstchild-of-row";
+        }
+
+        ViewData["thumbnailContentClass"] = thumbnailContentClass;
+        ViewData["numberOfSites"] = numberOfSites;
+        ViewData["numberOfSitesPerRow"] = Model.NumberOfSitesPerRow;
+
+        var isHiddenMenuSite = hiddenMenuSites.Any(s => site.SiteName.Contains(s));
+        if (isHiddenMenuSite)
+        {
+            <div>
+                @Html.Partial("_HiddenMenuSite.cshtml", site)
+            </div>
+        }
+        else
+        {
+            <div>
+                @Html.Partial("_NormalSite.cshtml", site)
+            </div>
+        }
+
+    }
+}
+else
+{
+    <p class="result">@ViewLang.ThereIsNoData <a href="@Url.Content("~/")">@ViewLang.BackToHome</a></p>
+}

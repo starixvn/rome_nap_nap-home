@@ -1,0 +1,349 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\CSS\\bootstrap-theme.css",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\CSS\\bootstrap-theme.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\CSS\\bootstrap-theme.css.map",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\CSS\\bootstrap-theme.css.map"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\CSS\\bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\CSS\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\CSS\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\CSS\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.eot",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.eot"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.svg",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.svg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.ttf",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.ttf"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.woff",
+      "PackagePath": "staticwebassets\\Content\\Bootstrap\\Fonts\\glyphicons-halflings-regular.woff"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\Images\\alert.png",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\Images\\alert.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\Images\\btn-close.png",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\Images\\btn-close.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\Images\\confirm.png",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\Images\\confirm.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\Images\\error.png",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\Images\\error.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\Images\\info.png",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\Images\\info.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\Images\\question.png",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\Images\\question.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\MessageBox\\msgbox-0.0.1.css",
+      "PackagePath": "staticwebassets\\Content\\MessageBox\\msgbox-0.0.1.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-Bold.eot",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-Bold.eot"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-Bold.ttf",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-Bold.ttf"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-BoldItalic.ttf",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-BoldItalic.ttf"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-Italic.ttf",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-Italic.ttf"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-Medium.ttf",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-Medium.ttf"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-Regular.eot",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-Regular.eot"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Font\\Roboto\\Roboto-Regular.ttf",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Font\\Roboto\\Roboto-Regular.ttf"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\arrow-down.png",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\arrow-down.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\favicon.ico",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\loading.gif",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\loading.gif"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\pattern.jpg",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\pattern.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\search.png",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\search.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\shadow.png",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\shadow.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\sprite.png",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\sprite.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\thumbnail_bg.png",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\thumbnail_bg.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\Images\\user.png",
+      "PackagePath": "staticwebassets\\Content\\Theme\\Images\\user.png"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\mixins.less",
+      "PackagePath": "staticwebassets\\Content\\Theme\\mixins.less"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\style.css",
+      "PackagePath": "staticwebassets\\Content\\Theme\\style.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\style.less",
+      "PackagePath": "staticwebassets\\Content\\Theme\\style.less"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Content\\Theme\\variables.less",
+      "PackagePath": "staticwebassets\\Content\\Theme\\variables.less"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\acc-report.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\acc-report.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\admin.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\admin.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\cm.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\cm.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\crm.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\crm.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\default.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\default.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\dw.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\dw.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\invoice.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\invoice.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\live-charts.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\live-charts.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\msite.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\msite.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\settlement.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\settlement.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\special-delete.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\special-delete.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Images\\UserSites\\Thumbnails\\tgrs.jpg",
+      "PackagePath": "staticwebassets\\Images\\UserSites\\Thumbnails\\tgrs.jpg"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Bootstrap\\bootstrap-tooltip-extension.js",
+      "PackagePath": "staticwebassets\\Scripts\\Bootstrap\\bootstrap-tooltip-extension.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Bootstrap\\bootstrap.js",
+      "PackagePath": "staticwebassets\\Scripts\\Bootstrap\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\CryptoJs\\CryptoJS.js",
+      "PackagePath": "staticwebassets\\Scripts\\CryptoJs\\CryptoJS.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\HeadJs\\head.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\HeadJs\\head.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\HeadJs\\head.min.js.map",
+      "PackagePath": "staticwebassets\\Scripts\\HeadJs\\head.min.js.map"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\MessageBox\\msgbox-0.0.1.js",
+      "PackagePath": "staticwebassets\\Scripts\\MessageBox\\msgbox-0.0.1.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Modernizr\\modernizr.30715.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\Modernizr\\modernizr.30715.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Others\\namespace.js",
+      "PackagePath": "staticwebassets\\Scripts\\Others\\namespace.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Resources\\viewLang.js",
+      "PackagePath": "staticwebassets\\Scripts\\Resources\\viewLang.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Resources\\viewLang.tt",
+      "PackagePath": "staticwebassets\\Scripts\\Resources\\viewLang.tt"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\RespondJs\\respond.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\RespondJs\\respond.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Underscore\\underscore-min.js",
+      "PackagePath": "staticwebassets\\Scripts\\Underscore\\underscore-min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\Underscore\\underscore-min.map",
+      "PackagePath": "staticwebassets\\Scripts\\Underscore\\underscore-min.map"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\common.js",
+      "PackagePath": "staticwebassets\\Scripts\\common.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\jQuery\\jquery-1.11.1.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\jQuery\\jquery-1.11.1.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\jQuery\\jquery-1.8.2.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\jQuery\\jquery-1.8.2.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\jQuery\\jquery.blockUI.2.66.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\jQuery\\jquery.blockUI.2.66.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\jQuery\\jquery.nicescroll.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\jQuery\\jquery.nicescroll.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\jQuery\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\jQuery\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\jQuery\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\jQuery\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\raven\\raven.js",
+      "PackagePath": "staticwebassets\\Scripts\\raven\\raven.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\Scripts\\raven\\raven.min.js",
+      "PackagePath": "staticwebassets\\Scripts\\raven\\raven.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\accessdenied.css",
+      "PackagePath": "staticwebassets\\nap-auth\\accessdenied.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\auth-sample.css",
+      "PackagePath": "staticwebassets\\nap-auth\\auth-sample.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\auth.css",
+      "PackagePath": "staticwebassets\\nap-auth\\auth.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\changepassword.css",
+      "PackagePath": "staticwebassets\\nap-auth\\changepassword.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\cryptojs.js",
+      "PackagePath": "staticwebassets\\nap-auth\\cryptojs.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\error.css",
+      "PackagePath": "staticwebassets\\nap-auth\\error.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\jquery-1.8.0.min.js",
+      "PackagePath": "staticwebassets\\nap-auth\\jquery-1.8.0.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\nap-auth\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\nap-auth\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\otp.css",
+      "PackagePath": "staticwebassets\\nap-auth\\otp.css"
+    },
+    {
+      "Id": "D:\\Working\\_Rome\\nap-home\\Upgrade\\Fanex.NAP.Home.Sites\\wwwroot\\nap-auth\\re-checkin.js",
+      "PackagePath": "staticwebassets\\nap-auth\\re-checkin.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Fanex.NAP.Home.Sites.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Fanex.NAP.Home.Sites.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Fanex.NAP.Home.Sites.props",
+      "PackagePath": "build\\Fanex.NAP.Home.Sites.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Fanex.NAP.Home.Sites.props",
+      "PackagePath": "buildMultiTargeting\\Fanex.NAP.Home.Sites.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Fanex.NAP.Home.Sites.props",
+      "PackagePath": "buildTransitive\\Fanex.NAP.Home.Sites.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
