@@ -19,6 +19,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Upgrade", "Upgrade", "{F3F8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Sites", "Upgrade\Fanex.NAP.Home.Sites\Fanex.NAP.Home.Sites.csproj", "{920FD181-D88C-5E4C-40F2-BA7E9A9F2DC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Core", "Fanex.NAP.Home.Core\Fanex.NAP.Home.Core.csproj", "{CD2EE38E-36B8-451D-86CA-DE96F089FB73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Sites", "Fanex.NAP.Home.Sites\Fanex.NAP.Home.Sites.csproj", "{867A2935-7F25-4516-A39B-844D12020951}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.User", "Fanex.NAP.Home.User\Fanex.NAP.Home.User.csproj", "{9C0F5C00-772D-4DCE-8FBB-966654EDFF30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fanex.NAP.Home.Websites", "Fanex.NAP.Home.Websites\Fanex.NAP.Home.Websites.csproj", "{049C09A7-8FDB-48BF-94D1-607A6E3C3954}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +37,22 @@ Global
 		{920FD181-D88C-5E4C-40F2-BA7E9A9F2DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{920FD181-D88C-5E4C-40F2-BA7E9A9F2DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{920FD181-D88C-5E4C-40F2-BA7E9A9F2DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2EE38E-36B8-451D-86CA-DE96F089FB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2EE38E-36B8-451D-86CA-DE96F089FB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2EE38E-36B8-451D-86CA-DE96F089FB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2EE38E-36B8-451D-86CA-DE96F089FB73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{867A2935-7F25-4516-A39B-844D12020951}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867A2935-7F25-4516-A39B-844D12020951}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867A2935-7F25-4516-A39B-844D12020951}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867A2935-7F25-4516-A39B-844D12020951}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C0F5C00-772D-4DCE-8FBB-966654EDFF30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0F5C00-772D-4DCE-8FBB-966654EDFF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0F5C00-772D-4DCE-8FBB-966654EDFF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0F5C00-772D-4DCE-8FBB-966654EDFF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049C09A7-8FDB-48BF-94D1-607A6E3C3954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049C09A7-8FDB-48BF-94D1-607A6E3C3954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049C09A7-8FDB-48BF-94D1-607A6E3C3954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049C09A7-8FDB-48BF-94D1-607A6E3C3954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
