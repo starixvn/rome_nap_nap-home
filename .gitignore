@@ -22,3 +22,11 @@ Fanex.NAP.Home.Websites/Fanex.NAP.Home.Websites.Publish.xml
 .vs/*
 *.sh
 *.ncrunchsolution.*
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/Nap.Home.Sites.AssemblyInfo.cs
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/Nap.Home.Sites.AssemblyInfoInputs.cache
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/Nap.Home.Sites.GeneratedMSBuildEditorConfig.editorconfig
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/Nap.Home.Sites.GlobalUsings.g.cs
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/Nap.Home.Sites.RazorAssemblyInfo.cache
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/Nap.Home.Sites.RazorAssemblyInfo.cs
+/Upgrade/Nap.Home.Sites/obj/Debug/net8.0/staticwebassets.removed.txt

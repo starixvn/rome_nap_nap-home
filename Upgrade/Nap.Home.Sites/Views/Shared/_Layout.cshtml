@@ -1,0 +1,72 @@
+﻿@using System.Configuration;
+@{
+    bool isHomePage = true;//ViewBag.IsHomePage ?? false;
+    string functionName = "";// ViewBag.SearchedFunctionName != null ? (string)ViewBag.SearchedFunctionName : string.Empty;
+    string env = ConfigurationManager.AppSettings["Environment"].ToString();  
+}
+<!DOCTYPE html>
+<!--[if (IE 7)]><html lang="en" class="ie7 oldie"><![endif]-->
+<!--[if (IE 8)]><html lang="en" class="ie8 oldie"><![endif]-->
+<!--[if (IE 9)]><html lang="en" class="ie9"><![endif]-->
+<!--[if (gt IE 9)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>NAP &mdash; @ViewBag.Title</title>
+    <link type="image/x-icon" rel="shortcut icon" href="~/Content/Theme/Images/favicon.ico">    
+    @RenderSection("Head", false)
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top custom-navbar @env" role="navigation">
+        <div class="container-fluid navbar-content">
+            <div class="col-xs-2 navbar-header">
+                <a class="navbar-brand logo" href="@Url.Content("~/")">NAP</a>
+                @if (!string.IsNullOrEmpty(env))
+                {
+                    @Html.Raw(string.Format("<span class='env'>({0})</span>", env));
+                }
+            </div>
+            <div class="col-xs-8 search-container ">
+                <div class="center-block search-bar">
+                    <input type="text" id="txtSearchedFunctionName" class="form-control txtSearch" placeholder="SearchPlaceholder" value="@functionName" />
+                    <span id="spanSearch" class="icon-search"></span>
+                </div>
+            </div>
+            <div class="col-xs-2 user-info-container">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="user-info">
+                        <span class="info-bar">Howdy, <span class="account-name">@Context.User.Identity.Name</span><span class="caret"></span></span>
+                        <ul class="user-dropdown">
+                            <li>@Html.ActionLink("Change Password", "ChangePassword", "UserInfo", new { Area = "User" }, new { })</li>
+                            <li>@Html.ActionLink("Sign Out", "LogOut", "Auth", new { Area = "" }, new { })</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @if (!isHomePage)
+    {
+        <ol class="breadcrumb breadcrumb-bar">
+            <li><a href="@Url.Content("~/")">Home</a></li>
+            <li>@ViewBag.Title</li>
+        </ol>
+    }
+    @RenderSection("CustomBreadcrumb", false)
+    <div class="container-fluid content">
+        @RenderBody()
+    </div>
+    <script type="text/javascript">
+        var appSettings = {
+            RootUrl: '@Url.Content("~/")',
+            AllowReCheckIn: '@(ViewBag.IsReCheckin != null && ViewBag.IsReCheckin)' === 'True'
+        };
+    </script>
+    
+    @RenderSection("Foot", false)
+    <script src="@Url.Content("~/auth/recheckinscript")" type="text/javascript"></script>
+</body>
+</html>

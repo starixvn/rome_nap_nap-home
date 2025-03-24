@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "New Accounting Portal";
+    Layout = "~/Views/Shared/_OldLayout.cshtml";
+}
+@section Head {
+	<link rel="stylesheet" type="text/css" href="~/themes/base/common.css" />
+    <link rel="stylesheet" type="text/css" href="/most-visited-pages/styles/most-visited-pages.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <div>Most Visited Pages</div>
+        </div>
+    </div>
+	
+}
+<div class="contentBox">
+	@await Component.InvokeAsync("MostVisitedPages")
+</div>
+@section scripts {
+    <script type="text/javascript">
+        var maxPages = 9;
+        var isDisableMostvisitedPage = @ViewBag.IsDisableMostvisitedPage.ToString().ToLower();
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/jquery.fixedsortable.js"></script>
+    <script type="text/javascript" src="~/most-visited-pages/scripts/MostVisitedPages.js"></script>
+}

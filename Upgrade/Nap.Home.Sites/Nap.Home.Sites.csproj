@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Nap.Home.Sites</RootNamespace>
+    <UserSecretsId>f8486ce7-66af-4ef6-951b-f4a54515339e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="codeessentials.WebOptimizer.Dotless" Version="3.1.0" />    
+    <PackageReference Include="Fanex.Caching.AspNetCore" Version="2.2.5" />
+    <PackageReference Include="Fanex.Data.ProxyClient" Version="1.0.1" />
+    <PackageReference Include="Fanex.Logging" Version="2.0.1.1" />
+    <PackageReference Include="Fanex.Logging.Extensions" Version="1.1.0" />
+    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.1.0" />
+    <PackageReference Include="Fanex.NAP.Client" Version="2.0.2" />
+    <PackageReference Include="Fanex.NAP.Signin" Version="2.0.2.7" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.405" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="ONEbook.UM" Version="3.2.4" />
+    <PackageReference Include="ONEbook.UM.AspNetCore" Version="3.1.1.1" />
+    <PackageReference Include="ONEbook.UM.AspNetCore.Filters" Version="3.1.1.1" />
+    <PackageReference Include="ONEbook.UM.Transport" Version="3.1.2" />
+   
+   
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Remove="wwwroot\scripts\ThirdParties\Numeral\numeral.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="app\house-win-loss\app.config.js" />
+    <Content Include="app\house-win-loss\app.js" />    
+    <Content Include="App_Data\SpName.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>    
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\Components\Menu\Default.cshtml" />
+    <None Include="wwwroot\themes\reset.css" />
+    <None Include="wwwroot\themes\Site.css" />
+  </ItemGroup>
+
+
+</Project>

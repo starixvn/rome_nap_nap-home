@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<SiteThumbnails>
+  <Site name="default" siteId="0" imageName="default.jpg" />
+  <Site name="NAP Admin" siteId="1" imageName="admin.jpg" />
+  <Site name="NAP Accounting Reports" siteId="4" imageName="acc-report.jpg" />
+  <Site name="mSite" siteId="8" imageName="msite.jpg" />
+  <Site name="NAP Data Warehouse" siteId="10" imageName="dw.jpg" />
+  <Site name="NAP IMS" siteId="14" imageName="invoice.jpg" />
+  <Site name="NAP Special Delete" siteId="16" imageName="special-delete.jpg" />
+  <Site name="NAP Live Charts" siteId="17" imageName="live-charts.jpg" />
+  <Site name="NAP Settlement" siteId="18" imageName="settlement.jpg" />
+  <Site name="NAP Customer Relationship Management" siteId="19" imageName="crm.jpg" />
+  <Site name="NAP Customer Management" siteId="20" imageName="cm.jpg" />
+  <Site name="NAP TGRS" siteId="21" imageName="tgrs.jpg" />
+</SiteThumbnails>
