@@ -1,3 +1,7 @@
+*.orig
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
 *.obj
 *.exe
 *.pdb
@@ -14,7 +18,6 @@
 *.bak
 *.cache
 *.ilk
-*.log
 [Bb]in
 [Dd]ebug*/
 *.lib
@@ -23,14 +26,39 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-.vs/
-#Nuget packages folder
+*.suo
 packages/
-node_modules/
-*.map
-*.js
-*.css
-wwwroot/assets/bundles/
-wwwroot/
-*.bat
+Fanex.Oneyed.WebService/*.xml
+*.GhostDoc.xml
+*.pubxml
+.sass-cache
+.vs/
+_Chutzpah*
 *.orig
+OpenCover/*
+**/node_modules/
+*.BASE
+*.LOCAL
+*.REMOTE
+/package-lock.json
+/Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/Fanex.Nap.Home.Sites.assets.cache
+/Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/Fanex.NAP.Home.Sites.GeneratedMSBuildEditorConfig.editorconfig
+/Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/Fanex.NAP.Home.Sites.MvcApplicationPartsAssemblyInfo.cs
+/Upgrade/Fanex.NAP.Home.Sites/obj/Fanex.NAP.Home.Sites.csproj.nuget.dgspec.json
+/Upgrade/Fanex.NAP.Home.Sites/obj/project.assets.json
+/Upgrade/Fanex.NAP.Home.Sites/obj/project.nuget.cache
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/Fanex.NAP.Client.dll
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/Fanex.NAP.Home.Sites.deps.json
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/Fanex.NAP.Home.Sites.staticwebassets.runtime.json
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/Fanex.NAP.SignIn.dll
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/ONEbook.UM.AspNetCore.dll
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/ONEbook.UM.AspNetCore.Filters.dll
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/ONEbook.UM.dll
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/ONEbook.UM.Transport.dll
+/Upgrade/Fanex.NAP.Home.Sites/obj/Container/OperatingSystemName.cache
+/Upgrade/Fanex.NAP.Home.Sites/obj/Container/TargetFramework.cache
+/Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/staticwebassets.development.json
+/Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/staticwebassets.pack.json
+/Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt
+/Upgrade/Fanex.NAP.Home.Sites/obj/Fanex.Nap.Home.Sites.csproj.nuget.g.targets
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll

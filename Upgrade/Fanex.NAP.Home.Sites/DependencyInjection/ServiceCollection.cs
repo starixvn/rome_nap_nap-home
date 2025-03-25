@@ -3,7 +3,8 @@
 using Fanex.Data.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Fanex.NAP.Home.Sites.Services;
-
+using StackExchange.Redis;
+using Microsoft.AspNetCore.DataProtection;
 
 public static class ServiceCollection
 {
@@ -38,9 +39,24 @@ public static class ServiceCollection
 
         services.AddSession(options =>
         {
+            var timeout = int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value ?? "2880");
             options.Cookie.IsEssential = true;
             options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
             options.Cookie.Name = "Nap-Home.Session";
+        });
+
+        var redisConfig = configuration.GetSection("AuthSettings:RedisConfig").Value;
+        var redisMultiplexer = ConnectionMultiplexer.Connect(redisConfig);
+
+        services.AddDataProtection()
+            .PersistKeysToStackExchangeRedis(redisMultiplexer, "Fanex.Reports-ProtectionKeys");
+
+        services.AddSingleton<IConnectionMultiplexer>(redisMultiplexer);
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisConfig;
+            options.InstanceName = "Fanex.Reports.Session-";
         });
     }
 

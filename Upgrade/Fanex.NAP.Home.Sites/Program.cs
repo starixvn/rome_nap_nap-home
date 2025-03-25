@@ -6,7 +6,9 @@ using Fanex.NAP.Home.Sites.DependencyInjection;
 using Fanex.NAP.Home.Sites.Middleware;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using ONEbook.UM.AspNetCore.Filters;
+using ONEbook.UM.DependencyInjection;
+using ONEbook.UM.Filters;
+using Fanex.NAP.Client;
 
 internal class Program
 {
@@ -18,7 +20,7 @@ internal class Program
         
         services.RegisterAuthentication(configuration);
         services.RegisterServices();
-        OnebookUMInjection.RegisterServices(services, configuration);
+        services.AddOneBookUmForWeb(configuration);
         services.ProcessWebOptimizer();
 
         // Add services to the container.
