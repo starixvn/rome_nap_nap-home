@@ -62,3 +62,4 @@ OpenCover/*
 /Upgrade/Fanex.NAP.Home.Sites/obj/Debug/net8.0/staticwebassets.upToDateCheck.txt
 /Upgrade/Fanex.NAP.Home.Sites/obj/Fanex.Nap.Home.Sites.csproj.nuget.g.targets
 /Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Upgrade/Fanex.NAP.Home.Sites/bin/Debug/net8.0/App_Data/SpName.xml
