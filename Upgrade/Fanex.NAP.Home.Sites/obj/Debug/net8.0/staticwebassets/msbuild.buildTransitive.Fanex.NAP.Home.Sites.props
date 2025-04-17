@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Fanex.NAP.Home.Sites.props" />
-</Project>

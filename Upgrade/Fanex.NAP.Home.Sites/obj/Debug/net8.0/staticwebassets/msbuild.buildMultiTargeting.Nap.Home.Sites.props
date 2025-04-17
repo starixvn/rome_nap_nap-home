@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Nap.Home.Sites.props" />
-</Project>

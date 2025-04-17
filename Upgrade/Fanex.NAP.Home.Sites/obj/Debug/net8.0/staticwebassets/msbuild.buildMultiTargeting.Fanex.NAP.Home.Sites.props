@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Fanex.NAP.Home.Sites.props" />
-</Project>
