@@ -8,6 +8,7 @@ using Fanex.NAP.Home.Sites.Models;
 using Fanex.Common;
 using Fanex.NAP.Client.Services;
 using Fanex.NAP.Client.Configuration;
+using Microsoft.AspNetCore.Http;
 
 public class UserSitesController(
     IUserSitesService siteService,
@@ -42,6 +43,11 @@ public class UserSitesController(
         ViewBag.SearchedFunctionName = searchFunction;
         ViewBag.IsHomePage = true;
         ViewBag.Environment = _configurationService.Environment;
+        if (HttpContext.Request.Query.ContainsKey(_configurationService.UMToken))
+        {
+            HttpContext.Session.SetString(_configurationService.UMToken, HttpContext.Request.Query[_configurationService.UMToken]);
+        }
+
 
         return View(new UserSiteViewModel(sites, _configurationService.NumberOfSitesPerRow));
     }
@@ -66,7 +72,7 @@ public class UserSitesController(
             checkPermissionResult = _siteService.CheckUserPermissionOnSite(filter);
             filter.FunctionLink = string.Empty;
         }
-
+        var token = HttpContext.Session.GetString(_configurationService.UMToken);
         var forwardResult = new ForwardResult(checkPermissionResult);
 
         if (checkPermissionResult.IsSuccessful)
@@ -78,7 +84,7 @@ public class UserSitesController(
                                      Cryptography.CfsEnCrypt(napSession.OnUserId.ToString()),
                                      Cryptography.CfsEnCrypt(time),
                                      filter.FunctionLink);
-            //forwardResult.Link += $"&{configurationService.UMToken}={Session[configurationService.UMToken]}";
+            forwardResult.Link += $"&{_configurationService.UMToken}={token}";
         }
 
         return Json(forwardResult);
