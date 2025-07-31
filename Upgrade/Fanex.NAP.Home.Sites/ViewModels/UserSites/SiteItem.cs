@@ -5,57 +5,88 @@ using System.Linq;
 using Fanex.NAP.Home.Core.Helpers;
 using Fanex.NAP.Home.Sites.Criteria.UserSites;
 using Fanex.NAP.Home.Sites.Models;
+using NAP.Home.Sites.Models.UserSites;
 
 [Serializable]
 public class SiteItem
 {
     public SiteItem(CreateSiteItemCriteria createSiteItemCriteria)
     {
-        if (createSiteItemCriteria.SiteInfo != null && createSiteItemCriteria.SiteInfo.SiteId.HasValue)
-        {
-            SiteId = createSiteItemCriteria.SiteInfo.SiteId.Value;
-            SiteName = createSiteItemCriteria.SiteInfo.SiteName;
-            Thumbnail = SiteThumbnailsManager.GetImageName(SiteId);
-        }
+        InitializeSiteInfo(createSiteItemCriteria);
+        InitializeFunctionGroups(createSiteItemCriteria);
+        InitializeLinks(createSiteItemCriteria);
+    }
 
+    private void InitializeSiteInfo(CreateSiteItemCriteria createSiteItemCriteria)
+    {
+        if (createSiteItemCriteria.SiteInfo?.SiteId == null)
+        {
+            return;
+        }
+        
+        SiteId = createSiteItemCriteria.SiteInfo.SiteId.Value;
+        SiteName = createSiteItemCriteria.SiteInfo.SiteName;
+        Thumbnail = SiteThumbnailsManager.GetImageName(SiteId);
+    }
+
+    private void InitializeFunctionGroups(CreateSiteItemCriteria createSiteItemCriteria)
+    {
         FunctionGroupList = createSiteItemCriteria.FunctionGroups ?? new List<FunctionGroup>();
-        if (createSiteItemCriteria.SiteLinks == null ||
-            !createSiteItemCriteria.SiteLinks.Any())
+    }
+
+    private void InitializeLinks(CreateSiteItemCriteria createSiteItemCriteria)
+    {
+        if (createSiteItemCriteria.SiteLinks?.Any() != true)
         {
             return;
         }
 
-        var firstLink = createSiteItemCriteria.SiteLinks.FirstOrDefault(link => link.IsLocalLink);
-        if (createSiteItemCriteria.IsWebVpnAccess && firstLink != null && firstLink.IsLocalLink)
+        var firstLink = createSiteItemCriteria.SiteLinks.Find(link => link.IsLocalLink);
+        
+        if (ShouldUseLocalLink(createSiteItemCriteria, firstLink))
         {
-            DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
-            OtherLinkList = null;
+            SetDefaultLink(firstLink);
             return;
         }
 
         var nonLocalLinks = createSiteItemCriteria.SiteLinks.Where(siteLink => !siteLink.IsLocalLink).ToList();
-        if (nonLocalLinks == null || !nonLocalLinks.Any())
+        
+        if (!nonLocalLinks.Any())
         {
-            DefaultLink = StringExtensions.TrimOrEmpty(firstLink.SiteLink);
-            OtherLinkList = null;
+            SetDefaultLink(firstLink);
             return;
         }
 
-        DefaultLink = StringExtensions.TrimOrEmpty(nonLocalLinks[0].SiteLink);
-        nonLocalLinks.RemoveAt(0);
-        OtherLinkList = nonLocalLinks.Select(link => StringExtensions.TrimOrEmpty(link.SiteLink))
-            .ToList();
+        SetLinksFromNonLocal(nonLocalLinks);
     }
 
-    public int SiteId { get; init; }
+    private static bool ShouldUseLocalLink(CreateSiteItemCriteria createSiteItemCriteria, SiteUrlInfo? firstLink)
+    {
+        return createSiteItemCriteria.IsWebVpnAccess && firstLink?.IsLocalLink == true;
+    }
 
-    public string SiteName { get; init; }
+    private void SetDefaultLink(SiteUrlInfo? link)
+    {
+        DefaultLink = StringExtensions.TrimOrEmpty(link?.SiteLink);
+        OtherLinkList = null;
+    }
 
-    public string DefaultLink { get; init; }
+    private void SetLinksFromNonLocal(List<SiteUrlInfo> nonLocalLinks)
+    {
+        DefaultLink = StringExtensions.TrimOrEmpty(nonLocalLinks[0].SiteLink);
+        nonLocalLinks.RemoveAt(0);
+        OtherLinkList = nonLocalLinks.Select(link => StringExtensions.TrimOrEmpty(link.SiteLink)).ToList();
+    }
 
-    public string Thumbnail { get; init; }
+    public int SiteId { get; set; }
 
-    public List<string> OtherLinkList { get; init; }
+    public string SiteName { get; set; }
 
-    public List<FunctionGroup> FunctionGroupList { get; init; }
+    public string DefaultLink { get; set; }
+
+    public string Thumbnail { get; set; }
+
+    public List<string> OtherLinkList { get; set; }
+
+    public List<FunctionGroup> FunctionGroupList { get; set; }
 }

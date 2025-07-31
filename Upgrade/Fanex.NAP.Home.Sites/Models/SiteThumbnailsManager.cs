@@ -19,9 +19,9 @@ public static class SiteThumbnailsManager
 
     public static string GetImageName(int siteId)
     {
-        var thumbnail = Thumbnails.FirstOrDefault(obj => obj.SiteId == siteId);
-        thumbnail = thumbnail ?? Thumbnails.FirstOrDefault(obj => obj.SiteId == 0);
-        return thumbnail.ImageName;
+        var thumbnail = Thumbnails.Find(obj => obj.SiteId == siteId);
+        thumbnail ??= Thumbnails.Find(obj => obj.SiteId == 0);
+        return thumbnail?.ImageName;
     }
 
     private static void LoadSiteThumbnails()

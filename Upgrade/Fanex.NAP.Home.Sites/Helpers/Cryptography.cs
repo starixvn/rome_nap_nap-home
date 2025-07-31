@@ -12,26 +12,18 @@ public static class Cryptography
     public static string CfsEnCrypt(string plainText)
     {
         var encryptedText = string.Empty;
-        try
+        byte[] rgbIV = Encoding.UTF8.GetBytes(CfsKey);
+        byte[] rgbKey = [0x21, 0x63, 0x54, 0x5a, 0x91, 0xac, 110, 0xcc];
+        var provider = new DESCryptoServiceProvider();
+        byte[] bytes = Encoding.UTF8.GetBytes(plainText);
+        using (MemoryStream stream = new MemoryStream())
         {
-            byte[] rgbIV = new byte[0];
-            byte[] rgbKey = new byte[] { 0x21, 0x63, 0x54, 0x5a, 0x91, 0xac, 110, 0xcc };
-            rgbIV = Encoding.UTF8.GetBytes(CfsKey);
-            var provider = new DESCryptoServiceProvider();
-            byte[] bytes = Encoding.UTF8.GetBytes(plainText);
-            using (MemoryStream stream = new MemoryStream())
+            using (CryptoStream stream2 = new CryptoStream(stream, provider.CreateEncryptor(rgbKey, rgbIV), CryptoStreamMode.Write))
             {
-                using (CryptoStream stream2 = new CryptoStream(stream, provider.CreateEncryptor(rgbKey, rgbIV), CryptoStreamMode.Write))
-                {
-                    stream2.Write(bytes, 0, bytes.Length);
-                    stream2.FlushFinalBlock();
-                    encryptedText = Convert.ToBase64String(stream.ToArray());
-                }
+                stream2.Write(bytes, 0, bytes.Length);
+                stream2.FlushFinalBlock();
+                encryptedText = Convert.ToBase64String(stream.ToArray());
             }
-        }
-        catch
-        {
-            throw;
         }
 
         return encryptedText;

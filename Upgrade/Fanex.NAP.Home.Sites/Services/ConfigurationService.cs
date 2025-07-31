@@ -3,7 +3,7 @@
 using Microsoft.Extensions.Configuration;
 public interface ConfigurationService
 {
-    List<string> ShowSiteEnvironments { get; }
+    List<string> GetShowSiteEnvironments();
     string UMToken { get; }
 
     string CurrentDirectory { get; }
@@ -15,7 +15,7 @@ public interface ConfigurationService
 
 public class ConfigurationServiceImp(IConfiguration configuration) : ConfigurationService
 {
-    public List<string> ShowSiteEnvironments => configuration.GetValue<string>("ShowSiteEnvironments").Split(",").ToList();
+    public List<string> GetShowSiteEnvironments() => [.. configuration.GetValue<string>("ShowSiteEnvironments").Split(",")];
 
     public string UMToken => configuration.GetValue<string>("UMToken");
 

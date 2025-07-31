@@ -41,7 +41,7 @@ public static class ServiceCollection
         {
             var timeout = int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value ?? "2880");
             options.Cookie.IsEssential = true;
-            options.IdleTimeout = TimeSpan.FromMinutes(int.Parse(configuration.GetSection("AuthSettings:SessionTimeOut").Value));
+            options.IdleTimeout = TimeSpan.FromMinutes(timeout);
             options.Cookie.Name = "Nap-Home.Session";
         });
 
