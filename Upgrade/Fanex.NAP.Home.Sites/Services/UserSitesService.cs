@@ -39,7 +39,7 @@ public class UserSitesService(IDynamicRepository repository, ConfigurationServic
             i.IsLocalLink = ipHelper.IsLocalLink(i.SiteLink);
             return i;
         })
-        .Where(s => configuration.ShowSiteEnvironments.Any(se => se.Equals(s.Environment, StringComparison.CurrentCultureIgnoreCase))).ToList();
+        .Where(s => configuration.GetShowSiteEnvironments().Exists(se => se.Equals(s.Environment, StringComparison.CurrentCultureIgnoreCase))).ToList();
         if (siteData != null)
         {
             result = GroupUserSitesData(siteData, string.IsNullOrEmpty(filter.SearchedFunctionName));
@@ -149,7 +149,7 @@ public class UserSitesService(IDynamicRepository repository, ConfigurationServic
 
     private void GetLeafNodeFunctions(List<FunctionTreeNode> functionNodes, ref List<FunctionItem> functionList)
     {
-        functionList = functionList ?? new List<FunctionItem>();
+        functionList ??= [];
 
         foreach (FunctionTreeNode node in functionNodes)
         {

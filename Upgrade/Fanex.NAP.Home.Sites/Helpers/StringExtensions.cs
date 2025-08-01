@@ -5,7 +5,7 @@ public static class StringExtensions
     {
         const string ect = "...";
         length -= ect.Length;
-        value = value ?? string.Empty;
+        value ??= string.Empty;
         value = value.Trim();
         value = value.Length > length ? value.Substring(0, length) + "..." : value;
 
