@@ -1,5 +1,5 @@
 using Fanex.Data;
-using Fanex.Logging.Sentry.RavenClient;
+using Fanex.Logging.Sentry;
 using Fanex.NAP.Client.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Fanex.NAP.Home.Sites.DependencyInjection;
