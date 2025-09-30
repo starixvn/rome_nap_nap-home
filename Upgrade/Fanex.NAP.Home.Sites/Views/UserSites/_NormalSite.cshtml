@@ -11,8 +11,8 @@
     var thumbnailContentClass = ViewData["thumbnailContentClass"].ToString();
     var numberOfSitesPerRow = (int)ViewData["numberOfSitesPerRow"];
 
-    string thumbnailLink = "~/Images/UserSites/Thumbnails/{0}";
-    string functionGroupFormat = "--- {0} ---";
+    const string thumbnailLink = "~/Images/UserSites/Thumbnails/{0}";
+    const string functionGroupFormat = "--- {0} ---";
     string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
     bool hasDomains = site.OtherLinkList != null && site.OtherLinkList.Count > 0;
     int functionCounter;

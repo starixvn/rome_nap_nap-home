@@ -34,8 +34,8 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
   </Content>
   </ItemGroup>
-  
 
+  
   <ItemGroup>
     <None Update="Areas\Sites\Configurations\SiteThumbnails.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
