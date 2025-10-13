@@ -10,7 +10,7 @@
 {
     int totalFunctionCount = string.IsNullOrEmpty(ViewBag.SearchedFunctionName) ? 0 : Model.Sites.Sum(site => site.FunctionGroupList.Count);
     int numberOfSites = Model.Sites.Count();
-    int siteCounter = 0;
+    uint siteCounter = 0;
 
     if (totalFunctionCount > 0)
     {
@@ -19,15 +19,10 @@
 
     foreach (SiteItem site in Model.Sites)
     {
-        string defaultLinkParameters = string.Format("{{ \"SiteId\": {0}, \"SiteLink\": \"{1}\" }}", site.SiteId, site.DefaultLink);
-        string thumbnailClass = numberOfSites <= Model.NumberOfSitesPerRow ? "one-row-thumbnail" : string.Empty;
         string thumbnailContentClass = string.Empty;
-        bool hasDomains = site.OtherLinkList != null && site.OtherLinkList.Count > 0;
-
-
         siteCounter++;
 
-        if (siteCounter % Model.NumberOfSitesPerRow == 1)
+        if (Model.NumberOfSitesPerRow > 0 && siteCounter % (uint)Model.NumberOfSitesPerRow == 1)
         {
             thumbnailContentClass += "firstchild-of-row";
         }
@@ -36,7 +31,7 @@
         ViewData["numberOfSites"] = numberOfSites;
         ViewData["numberOfSitesPerRow"] = Model.NumberOfSitesPerRow;
 
-        var isHiddenMenuSite = hiddenMenuSites.Any(s => site.SiteName.Contains(s));
+        var isHiddenMenuSite = hiddenMenuSites.Exists(s => site.SiteName.Contains(s));
         if (isHiddenMenuSite)
         {
             <div>

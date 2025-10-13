@@ -1,9 +1,8 @@
 ﻿@using Fanex.NAP.Home.Sites.Resources;
-﻿@using WebOptimizer;
 @{
-    bool isHomePage = true;//ViewBag.IsHomePage ?? false;
-    string functionName = "";// ViewBag.SearchedFunctionName != null ? (string)ViewBag.SearchedFunctionName : string.Empty;
-    string env = ViewBag.Environment;  
+    bool isHomePage = true;
+    const string functionName = "";
+    string env = ViewBag.Environment;
 }
 <!DOCTYPE html>
 <!--[if (IE 7)]><html lang="en" class="ie7 oldie"><![endif]-->
@@ -28,7 +27,7 @@
                 <a class="navbar-brand logo" href="@Url.Content("~/")">NAP</a>
                 @if (!string.IsNullOrEmpty(env))
                 {
-                    @Html.Raw(string.Format("<span class='env'>({0})</span>", env));
+                    @Html.Raw(string.Format("<span class='env'>({0})</span>", env))
                 }
             </div>
             <div class="col-xs-8 search-container ">
